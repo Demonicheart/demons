@@ -1,0 +1,41 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# TEAM
+                            
+Manuel.B
+
+                            
+Site: Email, Link zum Kontaktformular, etc.
+
+                            
+Twitter: Dein Twitter Name.
+
+                           
+
+  <name> -- <role> -- <twitter>
+
+# THANKS
+
+  <name>
+
+# TECHNOLOGY COLOPHON
+
+  HTML5, CSS3
+
+                            
+/* SITE */
+
+                            
+Last update:2017/08/17
+
+                         
+Standards: Doctype:HTML5, CSS3,..
+
+                            
+Components: Modernizr, jQuery, MDB, Bootstrap, Paralax, Animate,
+
+                            
+Software: Sublime Text, Notepad++, FileZilla, Photoshop
+
+Language: Deutsch / English
