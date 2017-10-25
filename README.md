@@ -34,6 +34,7 @@ Several quick start options are available:
 
 ## Status
 
+[![](https://data.jsdelivr.com/v1/package/gh/demonicheart/demons/badge)](https://www.jsdelivr.com/package/gh/demonicheart/demons)
 [![CSS gzip size]()]
 [![JS gzip size]()]
 [![Build Status]()]
