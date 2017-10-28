@@ -89,7 +89,7 @@ Several quick start options are available:
 
 ## Copyright and license
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE) file for details
 
 [Bootstrap.](https://getbootstrap.com/)
 [Animate.css.](https://daneden.github.io/animate.css/)
