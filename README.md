@@ -94,3 +94,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE) f
 [Bootstrap.](https://getbootstrap.com/)
 [Animate.css.](https://daneden.github.io/animate.css/)
 [WOW.js.](https://github.com/matthieua/WOW)
+[Granim.js.](https://github.com/sarcadass/granim.js)
