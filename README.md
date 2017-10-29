@@ -22,6 +22,45 @@
 - [Copyright and license](#copyright-and-license)
 
 
+## What's included
+
+
+```
+demons/
+├── css/
+│   └── images/ 
+│       ├── arrows.png
+│       ├── grid.png
+│       └── map.png
+├── css/
+│   ├── bootstrap.css
+│   ├── font-awesome.css
+│   ├── font-awesome.min.css
+│   └── fonts.css
+├── font/
+│   ├── font-awesome
+│   ├── glyphicons
+│   └── roboto
+├── images/
+│   ├── arrows.png
+│   ├── grid.png
+│   └── map.png
+├── img/
+│   ├── bg
+│   └── icons
+├── js/
+│    ├── analytics.js
+│    ├── bootstrap.min.js
+│    ├── cookieconsent.js
+│    ├── cookieconsent.min.js
+│    ├── granim.min.js
+│    ├── jq3.2.1.popper.js
+│    ├── webfontloader.min.js
+│    └── wow.min.js
+└── scss/    
+     └── FontAwesome
+```
+
 ## Quick start
 
 Several quick start options are available:
@@ -34,6 +73,7 @@ Several quick start options are available:
 
 ## Status
 
+[![](https://data.jsdelivr.com/v1/package/gh/demonicheart/demons/badge)](https://www.jsdelivr.com/package/gh/demonicheart/demons)
 [![CSS gzip size]()]
 [![JS gzip size]()]
 [![Build Status]()]
@@ -49,8 +89,9 @@ Several quick start options are available:
 
 ## Copyright and license
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE) file for details
 
 [Bootstrap.](https://getbootstrap.com/)
 [Animate.css.](https://daneden.github.io/animate.css/)
 [WOW.js.](https://github.com/matthieua/WOW)
+[Granim.js.](https://github.com/sarcadass/granim.js)
