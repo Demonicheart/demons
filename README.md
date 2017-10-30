@@ -72,6 +72,7 @@ Several quick start options are available:
 
 
 ## Status
+
 [![](https://data.jsdelivr.com/v1/package/gh/demonicheart/demons/badge?style=rounded)](https://www.jsdelivr.com/package/gh/demonicheart/demons)
 [![CSS gzip size](https://img.shields.io/badge/gzip-size-blue.svg)](https://github.com/Demonicheart/demons)
 [![JS gzip size](https://img.shields.io/badge/gzip-size-blue.svg)](https://github.com/Demonicheart/demons)
