@@ -73,8 +73,8 @@ Several quick start options are available:
 
 ## Status
 [![](https://data.jsdelivr.com/v1/package/gh/demonicheart/demons/badge?style=rounded)](https://www.jsdelivr.com/package/gh/demonicheart/demons)
-[![CSS gzip size]()]
-[![JS gzip size]()]
+[![CSS gzip size](https://img.shields.io/badge/gzip-size-blue.svg)](https://github.com/Demonicheart/demons)
+[![JS gzip size](https://img.shields.io/badge/gzip-size-blue.svg)](https://github.com/Demonicheart/demons)
 [![Scrutinizer Build](https://img.shields.io/badge/Build-35%25%20--%20UP-green.svg)](https://github.com/Demonicheart/demons)
 [![Packagist](https://img.shields.io/packagist/l/doctrine/orm.svg)](https://github.com/Demonicheart/demons/blob/master/LICENSE)
 
@@ -90,7 +90,7 @@ Several quick start options are available:
 
 This project is licensed under the MIT License - see the [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](LICENSE) file for details
 
-[![Bootstrap.](https://img.shields.io/badge/Bootstrap- 4 -blue.svg)](https://getbootstrap.com/)
+[![Bootstrap](https://img.shields.io/badge/Bootstrap-4-blue.svg)](https://getbootstrap.com/)
 [![animate.css](https://img.shields.io/badge/Animate-.css-orange.svg)](https://daneden.github.io/animate.css/)
-[![WOW.js.](https://img.shields.io/badge/WOW - .js -orange.svg)](https://github.com/matthieua/WOW)
-[![Granim.js.](https://img.shields.io/badge/Granim -.js-orange.svg)](https://github.com/sarcadass/granim.js)
+[![WOW.js](https://img.shields.io/badge/WOW-.js-orange.svg)](https://github.com/matthieua/WOW)
+[![Granim.js](https://img.shields.io/badge/Granim-.js-orange.svg)](https://github.com/sarcadass/granim.js)
