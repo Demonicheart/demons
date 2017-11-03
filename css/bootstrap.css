@@ -114,7 +114,7 @@ html{box-sizing:border-box}
 *::after{box-sizing:inherit}
 @-ms-viewport{width:device-width}
 html{-ms-overflow-style:scrollbar;-webkit-tap-highlight-color:rgba(0, 0, 0, 0)}
-body{font-family:-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;font-size:1rem;font-weight:400;line-height:1.5;color:#292b2c;background-color:#fff}
+body{font-family:-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";font-size:1rem;font-weight:400;line-height:1.5;color:#292b2c;background-color:#fff}
 [tabindex="-1"]:focus{outline:none!important}
 h1, h2, h3, h4, h5, h6{margin-top:0;margin-bottom:.5rem}
 p{margin-top:0;margin-bottom:1rem}
