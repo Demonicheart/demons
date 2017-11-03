@@ -89,7 +89,7 @@ Several quick start options are available:
 
 ## Copyright and license
 
-This project is licensed under the MIT License - see the [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](LICENSE) file for details
+This project is licensed under the MIT License - see the [![license](https://img.shields.io/packagist/l/doctrine/orm.svg)](LICENSE) file for details
 
 [![Bootstrap](https://img.shields.io/badge/Bootstrap-4-blue.svg)](https://getbootstrap.com/)
 [![animate.css](https://img.shields.io/badge/Animate-.css-orange.svg)](https://daneden.github.io/animate.css/)
