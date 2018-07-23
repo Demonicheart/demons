@@ -1,0 +1,91 @@
+/*=========================================================
+-----            ** 18. demon gradient **             -----
+=========================================================*/
+.orange-gradient {
+  background: linear-gradient(40deg, #FFD86F, #FC6262);
+}
+.btn {
+  &.purple-gradient {
+    background: linear-gradient(40deg, #ff6ec4, #7873f5);
+    transition: .5s ease;
+    &:active {
+      background: linear-gradient(40deg, #ff88ce, #8f8bf7);
+      &:focus .btn.purple-gradient.active {
+        background: linear-gradient(40deg, #ff88ce, #8f8bf7);
+      }
+    }
+    &:focus, &:hover {
+      background: linear-gradient(40deg, #ff88ce, #8f8bf7);
+    }
+  }
+  &.peach-gradient {
+    background: linear-gradient(40deg, #FFD86F, #FC6262);
+    transition: .5s ease;
+    &:active {
+      background: linear-gradient(40deg, #ffdf89, #fc7b7b);
+      &:focus .btn.peach-gradient.active {
+        background: linear-gradient(40deg, #ffdf89, #fc7b7b);
+      }
+    }
+    &:focus, &:hover {
+      background: linear-gradient(40deg, #ffdf89, #fc7b7b);
+    }
+  }
+  &.aqua-gradient {
+    background: linear-gradient(40deg, #2096ff, #05ffa3);
+    transition: .5s ease;
+    &:active {
+      background: linear-gradient(40deg, #3aa2ff, #1fffac);
+      &:focus .btn.aqua-gradient.active {
+        background: linear-gradient(40deg, #3aa2ff, #1fffac);
+      }
+    }
+    &:focus, &:hover {
+      background: linear-gradient(40deg, #3aa2ff, #1fffac);
+    }
+  }
+  &.blue-gradient {
+    background: linear-gradient(40deg, #45cafc, #303f9f);
+    transition: .5s ease;
+    &:active {
+      background: linear-gradient(40deg, #5ed1fc, #3647b3);
+      &:focus .btn.blue-gradient.active {
+        background: linear-gradient(40deg, #5ed1fc, #3647b3);
+      }
+    }
+    &:focus, &:hover {
+      background: linear-gradient(40deg, #5ed1fc, #3647b3);
+    }
+  }
+}
+.purple-gradient {
+  background: linear-gradient(40deg, #ff6ec4, #7873f5);
+}
+.blue-gradient {
+  background: linear-gradient(40deg, #45cafc, #303f9f);
+}
+.purple-gradient {
+  background: linear-gradient(40deg, #ff6ec4, #7873f5);
+}
+.peach-gradient {
+  background: linear-gradient(40deg, #FFD86F, #FC6262);
+}
+.gradienbgb {
+  background: linear-gradient(45deg, #1f69d2 0, teal 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='teal',endColorstr='#1f69d2',GradientType=1);
+}
+.gradienbgg {
+  background: linear-gradient(to left, #ff8585, #5ebcb3);
+  background-color: #ff8585;
+}
+h1.method1 {
+  background: linear-gradient(right, red, #ff0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.gradient-divider {
+  height: 2px;
+  margin-top: 30px;
+  background-image: -webkit-linear-gradient(0deg, #3c8dc5, #6fb7e9 36%, #3bc4b4 65%, #7ef7a9);
+  background-image: linear-gradient(90deg, #3c8dc5, #6fb7e9 36%, #3bc4b4 65%, #7ef7a9);
+}

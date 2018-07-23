@@ -1,0 +1,62 @@
+/*=========================================================
+-----      ** 14. demon footerLinks footerBox **     -----
+=========================================================*/
+footer .footerLinks a {
+  display: inline-block;
+  color: #1976d2;
+  text-shadow: 10px 10px 0 #d32f2f;
+  font-family: Impact;
+  font-size: 30px;
+  margin: 0 5px;
+  padding: 0 15px;
+  position: relative;
+  top: 0;
+  left: 0;
+  text-decoration: none;
+  transition: all 250ms ease-in-out;
+  &:hover {
+    top: 5px;
+    left: 5px;
+    text-shadow: 0 0 0 rgba(0, 0, 0, 0.12);
+    color: #d32f2f;
+    text-decoration: none;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  footer.page-footer .footer-copyright {
+    font-size: 1rem;
+  }
+}
+
+.footerBox {
+  margin: 40px 0 50px;
+  color: #4D6879;
+  font-size: 12px;
+  padding: 0 10px;
+  p {
+    margin-bottom: 20px;
+    line-height: 34px;
+  }
+  a {
+    color: #4D6879;
+    text-decoration: none;
+  }
+}
+
+.ml {
+  margin: 0 .3rem;
+}
+
+.min.container-fluid {
+  /*background:url(https://demon-style.de/images/shadows/shadow5.png) center top no-repeat*/
+  background: url("data:image/png;base64,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") center top no-repeat;
+  width: 100%;
+  height: 40px;
+  z-index: 0;
+  vertical-align: middle;
+}
+
+.pt-22, .py-22 {
+  padding: 0.8rem 0 0.8rem 0 !important;
+}

@@ -1,0 +1,48 @@
+/*=========================================================
+-----           ** 07. demon animbrand **             -----
+=========================================================*/
+.animbrand {
+  display: inherit;
+  a {
+    &::after, &::before {
+      display: inline-block;
+      opacity: 0;
+      transition: -webkit-transform .3s,opacity .2s;
+      transition: transform .3s,opacity .2s;
+      transition: -webkit-transform .3s,opacity .2s,-webkit-transform .3s;
+      transition: transform .3s,opacity .2s,-webkit-transform .3s;
+      color: #039be5;
+      font-size: inherit;
+      line-height: inherit;
+    }
+    &:before, &:after {
+      font-family: fontawesome;
+    }
+    &::before {
+      margin-right: 3px;
+      content: "\f104";
+      -webkit-transform: translateX(50px);
+      transform: translateX(50px);
+    }
+    &::after {
+      margin-left: 3px;
+      content: "\f105";
+      -webkit-transform: translateX(-50px);
+      transform: translateX(-50px);
+    }
+    &:focus {
+      &::after, &::before {
+        opacity: 1;
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+      }
+    }
+    &:hover {
+      &::after, &::before {
+        opacity: 1;
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+      }
+    }
+  }
+}

@@ -1,5 +1,4 @@
 @charset "utf-8";
-
 /*------------------------------------------------------------------*
  * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! *
  *      ! This project is licensed under the MIT License !          *
@@ -14,8 +13,8 @@
 /*---------------------------------------------------------
  * Name       :    Demonic [M.B]
  * Project    :    demon-style
- * Version    :    1
- * Last change:    23.07.18
+ * Version    :    0.5
+ * Last change:    20.07.18
  * Copyright  :    Demonicheart
  * Contact    :    https://demonicheart.github.io/demons/kontakt.php
  * GitHub     :    https://github.com/Demonicheart/demons
@@ -53,26 +52,3 @@
 18. screen-reader-text
 19. scrollbar + selection
 =========================================================*/
-
-// Demons Core
-@import "style/_typography";
-@import "style/_preloader";
-@import "style/_jarallax";
-@import "style/_helpers";
-// @import "animate";
-@import "_coocieconsent";
-@import "style/_animbrand";
-@import "style/_navbar-togglerx";
-@import "style/_arrow";
-@import "style/_footerLinks-footerBox";
-@import "style/_social-icons2img";
-@import "style/_footer-social-icons";
-@import "style/_gradient";
-@import "style/_border-bottom";
-@import "style/_custom-gedoens";
-@import "style/_scrolltotop";
-@import "style/_screen-reader-text";
-@import "style/_scrollbar-selection";
-
-// Your custom variables
-@import "style/_custom";

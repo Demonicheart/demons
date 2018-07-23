@@ -1,0 +1,114 @@
+/*=========================================================
+-----             ** 10. demon arrow **               -----
+=========================================================*/
+.arrow-1, .arrow-2 {
+  background: #2196f3;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.arrow-1 {
+  position: absolute;
+}
+
+.arrow-2 {
+  position: absolute;
+  &:before {
+    position: absolute;
+  }
+}
+
+.arrow-container {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+  bottom: 25px;
+  left: 0;
+  right: 0;
+}
+
+.arrow-1 {
+  width: 100px;
+  height: 100px;
+  opacity: .5;
+}
+
+.arrow-2 {
+  width: 60px;
+  height: 60px;
+  top: 20px;
+  left: 20px;
+  z-index: 1;
+  display: table;
+  &:before {
+    width: 50px;
+    height: 50px;
+    content: "";
+    border: 2px solid #0d47a1;
+    border-radius: 50%;
+    top: 5px;
+    left: 5px;
+  }
+  a {
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    width: 46px;
+    height: 46px;
+    line-height: 46px;
+    box-sizing: border-box;
+    z-index: 3;
+    padding: 0;
+  }
+  i.fa {
+    font-size: 30px;
+    vertical-align: middle;
+    text-align: center;
+    color: #0d47a1;
+  }
+}
+
+.animated.hinge2 {
+  -webkit-animation-duration: 2s;
+  animation-duration: 2s;
+}
+
+@-webkit-keyframes zoomIn2 {
+  0% {
+    opacity: 0;
+    -webkit-transform: scale3d(0.4, 0.4, 0.4);
+    transform: scale3d(0.4, 0.4, 0.4);
+  }
+
+  50% {
+    opacity: .5;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+
+@keyframes zoomIn2 {
+  0% {
+    opacity: 0;
+    -webkit-transform: scale3d(0.4, 0.4, 0.4);
+    transform: scale3d(0.4, 0.4, 0.4);
+  }
+
+  50% {
+    opacity: .5;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+
+.zoomIn2 {
+  -webkit-animation-name: zoomIn2;
+  animation-name: zoomIn2;
+}

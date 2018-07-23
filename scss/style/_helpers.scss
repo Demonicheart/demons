@@ -1,0 +1,46 @@
+/*---------------------------------------------------------
+-----               ** 04. Helpers **                 -----
+----------------------------------------------------------*/
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.full-wid {
+  width: 100%;
+}
+
+.no-padd {
+  padding: 0px;
+}
+
+.no-margin {
+  margin: 0px;
+}
+
+.justify {
+  text-align: justify;
+}
+
+.svg-white {
+  fill: #fff;
+}
+
+.svg-f-btm {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 3;
+}
+
+.svg-abs {
+  position: absolute;
+}
+
+.hrone {
+  width: 170px;
+}
+
+.hrtwo {
+  width: 82px;
+}
