@@ -1,0 +1,1426 @@
+@charset "UTF-8";
+/*------------------------------------------------------------------*
+ * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! *
+ *      ! This project is licensed under the MIT License !          *
+ *                    📓 Read the license:👇                        *
+ * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! *
+ * !  https://github.com/Demonicheart/demons/blob/master/LICENSE  ! *
+ * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! *
+ */
+/*------------------------------------------------------------------*
+ * [Main Stylesheet]                                                *
+------------------------------------------------------------------- */
+/*---------------------------------------------------------
+ * Name       :    Demonic [M.B]
+ * Project    :    demon-style
+ * Version    :    0.5
+ * Last change:    20.07.18
+ * Copyright  :    Demonicheart
+ * Contact    :    https://demonicheart.github.io/demons/kontakt.php
+ * GitHub     :    https://github.com/Demonicheart/demons
+==================== Font Family Used ====================
+ * font-family:    'Roboto', sans-serif;
+ * [Typography]:
+ * Body    :       font-weight:400;
+ *                 line-height:1.5;
+ *                 font-size:1rem = 16px
+ * Icons:                 'FontAwesome;
+ * Paragraph:             'Roboto', 300;
+ * Section Title:         'Roboto', 700;
+ * Section Description:   'Roboto', 500;
+/*---------------------------------------------------------
+[Table of contents]
+---------------------------------------------------------*/
+/*=========================================================
+01. Typography
+02. preloader
+03. jarallax
+04. helpers
+05. animate.css
+06. cc cookieconsent
+07. animbrand
+08. navtogglerXanim
+09. navbarsocial
+10. arrow
+11. footerLinks footerBox
+12. social-icons-2-img
+13. footer-social-icons
+14. gradient
+15. BORDER BOTTOMS
+16. custom gedöns
+17. scrolltotop
+18. screen-reader-text
+19. scrollbar + selection
+=========================================================*/
+/*=========================================================
+-----          ** 01. demon Typography  **            -----
+=========================================================*/
+.wf-loading {
+  font-family: sans-serif; }
+  .wf-loading body {
+    font-family: sans-serif; }
+
+.wf-inactive {
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+  .wf-inactive body {
+    font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+
+.cf:before {
+  content: '';
+  display: table; }
+.cf:after {
+  content: '';
+  display: table;
+  clear: both; }
+
+html {
+  font-family: sans-serif;
+  font-size: 100%;
+  line-height: 1.15;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%; }
+
+.fonts-loaded body, .wf-active body {
+  font-family: Roboto ,sans-serif; }
+
+.fonts-loaded body .font-bold {
+  font-weight: 500; }
+.fonts-loaded h1, .fonts-loaded strong {
+  font-family: Roboto, sans-serif;
+  font-weight: 700; }
+
+.intro-subtext {
+  font-size: 1.75rem; }
+
+.hm-black-strong .full-bg-img {
+  background-color: rgba(0, 0, 0, 0.7); }
+
+.disabled {
+  cursor: not-allowed !important; }
+
+.divider-new, body, h1, h2, h3, h4, h5, h6 {
+  font-weight: 300; }
+
+img {
+  max-width: 100%;
+  border: none; }
+
+p {
+  margin: 0 0 10px;
+  font-size: 1em; }
+
+.lead {
+  margin-bottom: 20px;
+  font-size: 1em;
+  font-weight: 300;
+  line-height: 1.4; }
+
+@media (min-width: 768px) {
+  .lead {
+    font-size: 1.313em; } }
+hr {
+  box-sizing: content-box;
+  height: 0px;
+  overflow: visible; }
+
+small, .small {
+  font-size: 85%; }
+
+table td, .navbar {
+  font-weight: 300; }
+
+.blockquote .bq-title {
+  font-weight: 400;
+  font-size: 1.5rem;
+  margin-bottom: 0; }
+
+small, .small {
+  font-size: 80%;
+  font-weight: 400; }
+
+.font-weight-normal, .popover, .tooltip, .btn, .btn-link, .dropdown-item {
+  font-weight: 400; }
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .font-bold, .chip {
+  font-weight: 500; }
+
+.nav-pills .nav-item a.active {
+  background-color: transparent;
+  font-weight: 500; }
+  .nav-pills .nav-item a.active:active, .nav-pills .nav-item a.active:focus, .nav-pills .nav-item a.active:hover {
+    background-color: transparent;
+    font-weight: 500; }
+.nav-pills .nav-item a:hover {
+  background-color: transparent;
+  font-weight: 500; }
+
+.font-weight-bold, kbd kbd, .badge, .alert-link, .close, dt, .toast-title, .toast-close-button {
+  font-weight: 700; }
+
+hr {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border-width: 1px 0px 0px;
+  border-right-style: initial;
+  border-bottom-style: initial;
+  border-left-style: initial;
+  border-right-color: initial;
+  border-bottom-color: initial;
+  border-left-color: initial;
+  border-image: initial;
+  border-top-style: solid;
+  border-top-color: rgba(0, 0, 0, 0.1); }
+
+.hr-light {
+  border-top: 1px solid #fff; }
+
+h1, h2 {
+  font-weight: 300; }
+
+.purple-gradient {
+  background: linear-gradient(40deg, #ff6ec4, #7873f5); }
+
+.blue-gradient {
+  background: linear-gradient(40deg, #45cafc, #303f9f); }
+
+.ds-skin .navbar {
+  background-color: #243a51;
+  color: #fff; }
+  .ds-skin .navbar .navbar-nav .nav-item .dropdown-menu a:hover, .ds-skin .navbar .navbar-nav .nav-item .dropdown-menu a:focus, .ds-skin .navbar .navbar-nav .nav-item .dropdown-menu a:active {
+    background-color: #1dade2; }
+
+/*=========================================================
+-----           ** 02. demon preloader **             -----
+=========================================================*/
+#preloader {
+  background: #141E30;
+  background: linear-gradient(to right, #243B55, #141E30);
+  bottom: 0;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 99999; }
+
+.spinner {
+  width: 80px;
+  height: 80px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -22px 0 0 -22px;
+  font-size: 10px;
+  text-indent: -12345px;
+  border-top: 8px solid #1b1c29;
+  border-right: 8px solid #1b1c29;
+  border-bottom: 8px solid #1b1c29;
+  border-left: 8px solid #0cbb58;
+  border-radius: 50%;
+  -webkit-animation: spinner 700ms infinite linear;
+  animation: spinner 700ms infinite linear;
+  z-index: 10000; }
+
+@-webkit-keyframes spinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg); }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg); } }
+@keyframes spinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg); }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg); } }
+.page-loaded {
+  overflow: auto;
+  opacity: 1; }
+
+.wow {
+  visibility: hidden; }
+
+/*=========================================================
+-----            ** 03. demon jarallax **             -----
+=========================================================*/
+.jarallax {
+  position: relative;
+  z-index: 0; }
+  .jarallax > .jarallax-img {
+    position: absolute;
+    object-fit: cover;
+    /* support for plugin https://github.com/bfred-it/object-fit-images */
+    font-family: 'object-fit: cover;';
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; }
+
+/*---------------------------------------------------------
+-----               ** 04. Helpers **                 -----
+----------------------------------------------------------*/
+.overflow-hidden {
+  overflow: hidden; }
+
+.full-wid {
+  width: 100%; }
+
+.no-padd {
+  padding: 0px; }
+
+.no-margin {
+  margin: 0px; }
+
+.justify {
+  text-align: justify; }
+
+.svg-white {
+  fill: #fff; }
+
+.svg-f-btm {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 3; }
+
+.svg-abs {
+  position: absolute; }
+
+.hrone {
+  width: 170px; }
+
+.hrtwo {
+  width: 82px; }
+
+/*=========================================================
+-----          ** 05. demon animate.css **            -----
+=========================================================*/
+/*!
+ * cookieconsent Design Demonic
+ * Version: cookieconsent@3.0.4
+ *
+ * Custom: cookieconsent
+ * MIT License !
+ *
+ */
+/*=========================================================
+-----       ** 06. demon cc cookieconsent **         -----
+=========================================================*/
+.cc-window {
+  opacity: 1;
+  -webkit-transition: opacity 1s ease;
+  -moz-transition: opacity 1s ease;
+  -ms-transition: opacity 1s ease;
+  -o-transition: opacity 1s ease;
+  transition: opacity 1s ease; }
+  .cc-window.cc-invisible {
+    opacity: 0; }
+
+/* only animate ifhas class 'cc-animate' */
+.cc-animate.cc-revoke {
+  -webkit-transition: transform 1s ease;
+  -moz-transition: transform 1s ease;
+  -ms-transition: transform 1s ease;
+  -o-transition: transform 1s ease;
+  transition: transform 1s ease; }
+  .cc-animate.cc-revoke.cc-top {
+    transform: translateY(-2em); }
+  .cc-animate.cc-revoke.cc-bottom {
+    transform: translateY(2em); }
+  .cc-animate.cc-revoke.cc-active.cc-top, .cc-animate.cc-revoke.cc-active.cc-bottom {
+    transform: translateY(0); }
+
+.cc-revoke:hover {
+  transform: translateY(0); }
+
+.cc-grower {
+  /* Initially we don't want any height, and we want the contents to be hidden */
+  max-height: 0;
+  overflow: hidden;
+  /* Set our transitions up. */
+  -webkit-transition: max-height 1s;
+  -moz-transition: max-height 1s;
+  -ms-transition: max-height 1s;
+  -o-transition: max-height 1s;
+  transition: max-height 1s; }
+
+/* the popup window */
+.cc-window, .cc-revoke {
+  position: fixed;
+  overflow: hidden;
+  box-sizing: border-box;
+  /* exclude padding when dealing with width */
+  font-family: Helvetica, Calibri, Arial, sans-serif;
+  font-size: 16px;
+  /* by setting the base font here, we can size the rest of the popup using CSS `em` */
+  line-height: 1.5em;
+  display: flex;
+  flex-wrap: nowrap;
+  /* the following are random unjustified styles - just because - should probably be removed */
+  z-index: 9999; }
+
+.cc-window.cc-static {
+  position: static; }
+.cc-window.cc-floating {
+  padding: 2em;
+  max-width: 24em;
+  /* 1em == 16px therefore 24em == 384px */
+  flex-direction: column; }
+.cc-window.cc-banner {
+  padding: 1em 1.8em;
+  width: 100%;
+  flex-direction: row; }
+
+/* 2 basic types of window - floating / banner */
+.cc-revoke {
+  padding: .5em; }
+  .cc-revoke:hover {
+    text-decoration: none; }
+
+.cc-header {
+  font-size: 18px;
+  font-weight: 700; }
+
+/* clickable things */
+.cc-btn, .cc-link, .cc-close, .cc-revoke {
+  cursor: pointer; }
+
+.cc-link {
+  color: #2196f3 !important;
+  opacity: .8;
+  display: inline-block;
+  padding: .2em;
+  text-decoration: none; }
+  .cc-link:hover {
+    opacity: 1; }
+  .cc-link:active, .cc-link:visited {
+    color: initial; }
+
+.cc-btn {
+  color: #1976d2;
+  display: block;
+  padding: .4em .8em;
+  font-size: .9em;
+  font-weight: 700;
+  border-width: 2px;
+  border-style: solid;
+  text-align: center;
+  white-space: nowrap; }
+  .cc-btn:hover, .cc-btn:active, .cc-btn:focus {
+    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+    outline: 0; }
+
+.cc-banner .cc-btn:last-child {
+  min-width: 125px; }
+
+.cc-highlight .cc-btn:first-child {
+  background-color: transparent;
+  border-color: transparent; }
+  .cc-highlight .cc-btn:first-child:hover, .cc-highlight .cc-btn:first-child:focus {
+    background-color: transparent;
+    text-decoration: underline; }
+
+.cc-close {
+  display: block;
+  position: absolute;
+  top: .5em;
+  right: .5em;
+  font-size: 1.6em;
+  opacity: .9;
+  /* seeing as this contains text and not an image, the element taller than it is wide (because it is text) */
+  /*  - we want it to be a square, because it's acting as an icon */
+  /*  - setting the line height normalises the height */
+  line-height: .75; }
+  .cc-close:hover, .cc-close:focus {
+    opacity: 1; }
+
+/* This file should contain CSS that modifies the popup layout. */
+/* By layout, we mean the physical position of the elements on the popup window, and the margin / padding around those elements. */
+.cc-revoke.cc-top {
+  top: 0;
+  left: 3em;
+  border-bottom-left-radius: .5em;
+  border-bottom-right-radius: .5em; }
+.cc-revoke.cc-bottom {
+  bottom: 0;
+  left: 3em;
+  border-top-left-radius: .5em;
+  border-top-right-radius: .5em; }
+.cc-revoke.cc-left {
+  left: 3em;
+  right: unset; }
+.cc-revoke.cc-right {
+  right: 3em;
+  left: unset; }
+
+/**************************************** FLOATING ****************************************/
+/* these classes position the floating element */
+.cc-top {
+  top: 1em; }
+
+.cc-left {
+  left: 1em; }
+
+.cc-right {
+  right: 1em; }
+
+.cc-bottom {
+  bottom: 1em; }
+
+/* links that are direct decendants should be displayed as block */
+.cc-floating > .cc-link {
+  margin-bottom: 1em; }
+.cc-floating .cc-message {
+  display: block;
+  margin-bottom: 1em; }
+
+.cc-window.cc-floating .cc-compliance {
+  -ms-flex: 1;
+  flex: 1; }
+.cc-window.cc-banner {
+  align-items: center; }
+
+/**************************************** BANNER ****************************************/
+.cc-banner {
+  color: #fff;
+  background-color: #252e39; }
+  .cc-banner.cc-top {
+    left: 0;
+    right: 0;
+    top: 0; }
+  .cc-banner.cc-bottom {
+    left: 0;
+    right: 0;
+    bottom: 0; }
+  .cc-banner .cc-message {
+    flex: 1; }
+
+#cookieconsent\3a desc:before {
+  content: "\f05a";
+  font-family: FontAwesome;
+  font-weight: 400;
+  margin-right: 8px;
+  color: #29b6f6; }
+
+.cc-link:after {
+  content: "\f0a4";
+  font-family: FontAwesome;
+  /*   vertical-align: middle; */
+  margin-left: 5px; }
+
+/* COMPLIANCE BOX */
+.cc-compliance {
+  display: flex;
+  align-items: center;
+  align-content: space-between; }
+  .cc-compliance > .cc-btn {
+    flex: 1; }
+
+.cc-btn + .cc-btn {
+  margin-left: .5em; }
+
+@media print {
+  .cc-window, .cc-revoke {
+    display: none; } }
+@media screen and (max-width: 900px) {
+  .cc-btn {
+    white-space: normal; } }
+/* dimensions for 'iPhone6 Plus' and lower */
+@media screen and (max-width: 414px) and (orientation: portrait), screen and (max-width: 736px) and (orientation: landscape) {
+  .cc-window.cc-top {
+    top: 0; }
+  .cc-window.cc-bottom {
+    bottom: 0; }
+  .cc-window.cc-banner, .cc-window.cc-right, .cc-window.cc-left {
+    left: 0;
+    right: 0; }
+  .cc-window.cc-banner {
+    flex-direction: column; }
+    .cc-window.cc-banner .cc-compliance {
+      flex: 1; }
+  .cc-window.cc-floating {
+    max-width: none; }
+  .cc-window .cc-message {
+    margin-bottom: 1em; }
+  .cc-window.cc-banner {
+    align-items: unset; } }
+/* iPhone 6 */
+/* iPhone 6 plus */
+/* iPhone 5 & 5S */
+/* iPhone 2G - 4S */
+/* Classic */
+.cc-floating.cc-theme-classic {
+  padding: 1.2em;
+  border-radius: 5px; }
+.cc-floating.cc-type-info.cc-theme-classic .cc-compliance {
+  text-align: center;
+  display: inline;
+  flex: none; }
+
+.cc-theme-classic .cc-btn {
+  border-radius: 5px; }
+  .cc-theme-classic .cc-btn:last-child {
+    min-width: 125px; }
+
+.cc-floating.cc-type-info.cc-theme-classic .cc-btn {
+  display: inline-block; }
+
+/*=========================================================
+-----           ** 07. demon animbrand **             -----
+=========================================================*/
+.animbrand {
+  display: inherit; }
+  .animbrand a::after, .animbrand a::before {
+    display: inline-block;
+    opacity: 0;
+    transition: -webkit-transform .3s,opacity .2s;
+    transition: transform .3s,opacity .2s;
+    transition: -webkit-transform .3s,opacity .2s,-webkit-transform .3s;
+    transition: transform .3s,opacity .2s,-webkit-transform .3s;
+    color: #039be5;
+    font-size: inherit;
+    line-height: inherit; }
+  .animbrand a:before, .animbrand a:after {
+    font-family: fontawesome; }
+  .animbrand a::before {
+    margin-right: 3px;
+    content: "\f104";
+    -webkit-transform: translateX(50px);
+    transform: translateX(50px); }
+  .animbrand a::after {
+    margin-left: 3px;
+    content: "\f105";
+    -webkit-transform: translateX(-50px);
+    transform: translateX(-50px); }
+  .animbrand a:focus::after, .animbrand a:focus::before {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+    transform: translateX(0); }
+  .animbrand a:hover::after, .animbrand a:hover::before {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+    transform: translateX(0); }
+
+/*=========================================================
+-----   ** 08. demon navbar-toggler x animation **    -----
+=========================================================*/
+.icon-bar {
+  width: 25px;
+  height: 3px;
+  background-color: #039be5;
+  display: block;
+  transition: all 0.2s;
+  margin: 4px 0;
+  position: relative;
+  left: 0; }
+
+.navbar-toggler {
+  border: none;
+  background: transparent !important; }
+  .navbar-toggler .top-bar {
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+    transform-origin: 10% 10%; }
+  .navbar-toggler .middle-bar {
+    opacity: 0; }
+  .navbar-toggler .bottom-bar {
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    transform-origin: 10% 90%; }
+  .navbar-toggler.collapsed .top-bar {
+    -webkit-transform: rotate(0);
+    -moz-transform: rotate(0);
+    -o-transform: rotate(0);
+    transform: rotate(0); }
+  .navbar-toggler.collapsed .middle-bar {
+    opacity: 1; }
+  .navbar-toggler.collapsed .bottom-bar {
+    -webkit-transform: rotate(0);
+    -moz-transform: rotate(0);
+    -o-transform: rotate(0);
+    transform: rotate(0); }
+
+/*=========================================================
+-----            ** 09. navbar social **              -----
+=========================================================*/
+.navbar.navbar-dark .navbar-nav .nav-item .nav-link:hover {
+  color: #039be5; }
+
+nav li a.active {
+  color: #bce0ee !important;
+  background-color: #1976d2;
+  border-radius: .2rem; }
+
+#scrollspy-nav a {
+  transition: background-color .3s ease,border .3s ease,color .3s ease,opacity .3s ease-in-out,padding .3s ease; }
+  #scrollspy-nav a * {
+    transition: background-color .3s ease,border .3s ease,color .3s ease,opacity .3s ease-in-out,padding .3s ease; }
+
+.social_icon li a {
+  color: #fff;
+  width: 35px;
+  height: 35px;
+  line-height: 35px;
+  vertical-align: text-top;
+  margin: 0 5px;
+  padding: 0 5px;
+  font-size: 24px;
+  display: inline-block;
+  overflow: hidden; }
+  .social_icon li a i {
+    transition: transform 0.25s ease, opacity 0.2s linear !important;
+    -webkit-transition: -webkit-transform 0.25s ease, opacity 0.2s linear !important;
+    position: relative;
+    line-height: 35px; }
+    .social_icon li a i * {
+      transition: transform 0.25s ease, opacity 0.2s linear !important;
+      -webkit-transition: -webkit-transform 0.25s ease, opacity 0.2s linear !important;
+      position: relative;
+      line-height: 35px; }
+  .social_icon li a:hover i {
+    -webkit-transform: translateY(-100%);
+    transform: translateY(-100%); }
+  .social_icon li a i:after {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    color: #039be5;
+    font-size: 24px;
+    line-height: 35px; }
+.social_icon li .social_icon li a {
+  display: inline-block; }
+  .social_icon li .social_icon li a img {
+    display: inline-block; }
+.social_icon li .fa-facebook:after {
+  content: "\f09a";
+  color: #3b5998; }
+.social_icon li .fa-google-plus:after {
+  content: "\f0d5";
+  color: #dd4b39; }
+.social_icon li .fa-twitter:after {
+  content: "\f099";
+  color: #6795de; }
+.social_icon li .fa-maxcdn:after {
+  content: "\f136";
+  color: #ff5627; }
+.social_icon li .fa-instagram:after {
+  content: "\f16d"; }
+.social_icon li .fa-linkedin:after {
+  content: "\f0e1";
+  color: #0082ca; }
+.social_icon li .fa-github:after {
+  content: "\f09b";
+  color: #333333; }
+.social_icon li a i:before {
+  width: 100%; }
+.social_icon li a img {
+  display: inline-block; }
+
+.intro-page .navbar:not(.top-nav-collapse) {
+  background-color: transparent; }
+
+.navbar li a {
+  transition: color .5s linear; }
+
+.navbar-toggler-right:hover span {
+  background: linear-gradient(40deg, #ff6ec4, #7873f5); }
+
+.container-fluid > .row.mt-2.mb-1.text-center.wow.fadeIn > div > ul > li > a:hover {
+  margin-left: 15px;
+  color: #00cffe;
+  transition: all 250ms ease-in-out; }
+
+.row:before {
+  content: "\20";
+  display: table; }
+.row:after {
+  content: "\20";
+  display: table;
+  clear: both; }
+
+/*=========================================================
+-----             ** 10. demon arrow **               -----
+=========================================================*/
+.arrow-1, .arrow-2 {
+  background: #2196f3;
+  border-radius: 50%;
+  position: absolute; }
+
+.arrow-1 {
+  position: absolute; }
+
+.arrow-2 {
+  position: absolute; }
+  .arrow-2:before {
+    position: absolute; }
+
+.arrow-container {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+  bottom: 25px;
+  left: 0;
+  right: 0; }
+
+.arrow-1 {
+  width: 100px;
+  height: 100px;
+  opacity: .5; }
+
+.arrow-2 {
+  width: 60px;
+  height: 60px;
+  top: 20px;
+  left: 20px;
+  z-index: 1;
+  display: table; }
+  .arrow-2:before {
+    width: 50px;
+    height: 50px;
+    content: "";
+    border: 2px solid #0d47a1;
+    border-radius: 50%;
+    top: 5px;
+    left: 5px; }
+  .arrow-2 a {
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    width: 46px;
+    height: 46px;
+    line-height: 46px;
+    box-sizing: border-box;
+    z-index: 3;
+    padding: 0; }
+  .arrow-2 i.fa {
+    font-size: 30px;
+    vertical-align: middle;
+    text-align: center;
+    color: #0d47a1; }
+
+.animated.hinge2 {
+  -webkit-animation-duration: 2s;
+  animation-duration: 2s; }
+
+@-webkit-keyframes zoomIn2 {
+  0% {
+    opacity: 0;
+    -webkit-transform: scale3d(0.4, 0.4, 0.4);
+    transform: scale3d(0.4, 0.4, 0.4); }
+  50% {
+    opacity: .5; }
+  100% {
+    opacity: 0; } }
+@keyframes zoomIn2 {
+  0% {
+    opacity: 0;
+    -webkit-transform: scale3d(0.4, 0.4, 0.4);
+    transform: scale3d(0.4, 0.4, 0.4); }
+  50% {
+    opacity: .5; }
+  100% {
+    opacity: 0; } }
+.zoomIn2 {
+  -webkit-animation-name: zoomIn2;
+  animation-name: zoomIn2; }
+
+/*=========================================================
+-----      ** 14. demon footerLinks footerBox **     -----
+=========================================================*/
+footer .footerLinks a {
+  display: inline-block;
+  color: #1976d2;
+  text-shadow: 10px 10px 0 #d32f2f;
+  font-family: Impact;
+  font-size: 30px;
+  margin: 0 5px;
+  padding: 0 15px;
+  position: relative;
+  top: 0;
+  left: 0;
+  text-decoration: none;
+  transition: all 250ms ease-in-out; }
+  footer .footerLinks a:hover {
+    top: 5px;
+    left: 5px;
+    text-shadow: 0 0 0 rgba(0, 0, 0, 0.12);
+    color: #d32f2f;
+    text-decoration: none; }
+
+@media only screen and (max-width: 992px) {
+  footer.page-footer .footer-copyright {
+    font-size: 1rem; } }
+.footerBox {
+  margin: 40px 0 50px;
+  color: #4D6879;
+  font-size: 12px;
+  padding: 0 10px; }
+  .footerBox p {
+    margin-bottom: 20px;
+    line-height: 34px; }
+  .footerBox a {
+    color: #4D6879;
+    text-decoration: none; }
+
+.ml {
+  margin: 0 .3rem; }
+
+.min.container-fluid {
+  /*background:url(https://demon-style.de/images/shadows/shadow5.png) center top no-repeat*/
+  background: url("data:image/png;base64,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") center top no-repeat;
+  width: 100%;
+  height: 40px;
+  z-index: 0;
+  vertical-align: middle; }
+
+.pt-22, .py-22 {
+  padding: 0.8rem 0 0.8rem 0 !important; }
+
+/*---------------------------------------------------------
+-----           ** 17. Social Icons 2 img **          -----
+----------------------------------------------------------*/
+.align-right {
+  text-align: right !important; }
+
+.float-right {
+  float: right; }
+
+.ulti a {
+  -webkit-transition: all .2s ease 0;
+  -o-transition: all .2s ease 0;
+  transition: all .2s ease 0; }
+
+.footer_mini ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline; }
+
+.footer_mini_right {
+  font-size: 11px;
+  color: #888; }
+
+.social-icons ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
+  list-style: none;
+  text-align: left; }
+  .social-icons ul li {
+    width: 31px;
+    height: 31px;
+    display: inline-block;
+    position: relative;
+    float: none;
+    margin: 0;
+    padding: 0;
+    line-height: 31px !important; }
+    .social-icons ul li a {
+      -webkit-transition: all .3s ease 0s;
+      -o-transition: all .3s ease 0s;
+      transition: all .3s ease 0s;
+      text-indent: -9999px;
+      display: inline-block;
+      width: 31px;
+      height: 31px; }
+.social-icons li a {
+  background-color: transparent; }
+.social-icons li.facebook a:hover {
+  background-color: #3b5998; }
+.social-icons li.googleplus a:hover {
+  background-color: #dd4b39; }
+.social-icons li.linkedin a:hover {
+  background-color: #0082ca; }
+.social-icons li.pinterest a:hover {
+  background-color: #cb2027; }
+.social-icons li.rss a:hover {
+  background-color: #fe9900; }
+.social-icons li.twitter a:hover {
+  background-color: #6795de; }
+.social-icons ul li a {
+  background-position: -4px -4px !important; }
+.social-icons li {
+  margin-left: 4px !important; }
+  .social-icons li a:hover {
+    background-position: -4px -44px !important; }
+  .social-icons li:first-child {
+    margin-left: 0 !important; }
+.social-icons ul li a {
+  border-radius: 2px; }
+
+/*.social-icons li.facebook a{background:url(../img/facebook2.png) no-repeat 0 0}*/
+/*.social-icons li.googleplus a{background:url(../img/googleplus.png) no-repeat 0 0}*/
+/*.social-icons li.linkedin a{background:url(../img/linkedin.png) no-repeat 0 0}*/
+/*.social-icons li.pinterest a{background:url(../img/pinterest.png) no-repeat 0 0}*/
+/*.social-icons li.rss a{background:url(../img/rss.png) no-repeat 0 0}*/
+/*.social-icons li.twitter a{background:url(../img/twitter2.png) no-repeat 0 0}*/
+@media screen and (min-width: 800px) {
+  .one_half {
+    width: 48%; }
+
+  .last_col {
+    float: left;
+    clear: right;
+    margin-bottom: 0;
+    margin-right: 0 !important; }
+
+  .one_half {
+    position: relative;
+    float: left;
+    margin-right: 4%; } }
+@media only screen and (max-width: 799px) {
+  .social-icons ul {
+    text-align: center !important; }
+
+  .footer_mini_right {
+    margin-bottom: 20px; }
+    .footer_mini_right > .float-right {
+      float: none; } }
+/*---------------------------------------------------------
+-----           ** 19. footer-social-icons **         -----
+----------------------------------------------------------*/
+.footer-social-icons {
+  width: 350px;
+  display: block;
+  margin: 0 auto; }
+
+.social-icon {
+  color: #fff; }
+
+ul.social-icons {
+  margin-top: 10px; }
+
+.social-icons li {
+  vertical-align: top;
+  display: inline;
+  height: 100px; }
+.social-icons a {
+  color: #fff;
+  text-decoration: none; }
+
+.si.fa-facebook {
+  padding: 10px 14px;
+  -o-transition: .5s;
+  -ms-transition: .5s;
+  -moz-transition: .5s;
+  -webkit-transition: .5s;
+  transition: .5s;
+  background-color: #322f30; }
+  .si.fa-facebook:hover {
+    background-color: #3b5998; }
+.si.fa-twitter {
+  padding: 10px 12px;
+  -o-transition: .5s;
+  -ms-transition: .5s;
+  -moz-transition: .5s;
+  -webkit-transition: .5s;
+  transition: .5s;
+  background-color: #322f30; }
+  .si.fa-twitter:hover {
+    background-color: #6795de; }
+.si.fa-rss {
+  padding: 10px 14px;
+  -o-transition: .5s;
+  -ms-transition: .5s;
+  -moz-transition: .5s;
+  -webkit-transition: .5s;
+  transition: .5s;
+  background-color: #322f30; }
+  .si.fa-rss:hover {
+    background-color: #eb8231; }
+.si.fa-youtube {
+  padding: 10px 14px;
+  -o-transition: .5s;
+  -ms-transition: .5s;
+  -moz-transition: .5s;
+  -webkit-transition: .5s;
+  transition: .5s;
+  background-color: #322f30; }
+  .si.fa-youtube:hover {
+    background-color: #ed302f; }
+.si.fa-linkedin {
+  padding: 10px 14px;
+  -o-transition: .5s;
+  -ms-transition: .5s;
+  -moz-transition: .5s;
+  -webkit-transition: .5s;
+  transition: .5s;
+  background-color: #322f30; }
+  .si.fa-linkedin:hover {
+    background-color: #0082ca; }
+.si.fa-google-plus {
+  padding: 10px 9px;
+  -o-transition: .5s;
+  -ms-transition: .5s;
+  -moz-transition: .5s;
+  -webkit-transition: .5s;
+  transition: .5s;
+  background-color: #322f30; }
+  .si.fa-google-plus:hover {
+    background-color: #dd4b39; }
+.si.fa {
+  border: 1px solid transparent;
+  border-radius: 4px;
+  box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15); }
+.si:hover {
+  color: #fff; }
+
+/*=========================================================
+-----            ** 18. demon gradient **             -----
+=========================================================*/
+.orange-gradient {
+  background: linear-gradient(40deg, #FFD86F, #FC6262); }
+
+.btn.purple-gradient {
+  background: linear-gradient(40deg, #ff6ec4, #7873f5);
+  transition: .5s ease; }
+  .btn.purple-gradient:active {
+    background: linear-gradient(40deg, #ff88ce, #8f8bf7); }
+    .btn.purple-gradient:active:focus .btn.purple-gradient.active {
+      background: linear-gradient(40deg, #ff88ce, #8f8bf7); }
+  .btn.purple-gradient:focus, .btn.purple-gradient:hover {
+    background: linear-gradient(40deg, #ff88ce, #8f8bf7); }
+.btn.peach-gradient {
+  background: linear-gradient(40deg, #FFD86F, #FC6262);
+  transition: .5s ease; }
+  .btn.peach-gradient:active {
+    background: linear-gradient(40deg, #ffdf89, #fc7b7b); }
+    .btn.peach-gradient:active:focus .btn.peach-gradient.active {
+      background: linear-gradient(40deg, #ffdf89, #fc7b7b); }
+  .btn.peach-gradient:focus, .btn.peach-gradient:hover {
+    background: linear-gradient(40deg, #ffdf89, #fc7b7b); }
+.btn.aqua-gradient {
+  background: linear-gradient(40deg, #2096ff, #05ffa3);
+  transition: .5s ease; }
+  .btn.aqua-gradient:active {
+    background: linear-gradient(40deg, #3aa2ff, #1fffac); }
+    .btn.aqua-gradient:active:focus .btn.aqua-gradient.active {
+      background: linear-gradient(40deg, #3aa2ff, #1fffac); }
+  .btn.aqua-gradient:focus, .btn.aqua-gradient:hover {
+    background: linear-gradient(40deg, #3aa2ff, #1fffac); }
+.btn.blue-gradient {
+  background: linear-gradient(40deg, #45cafc, #303f9f);
+  transition: .5s ease; }
+  .btn.blue-gradient:active {
+    background: linear-gradient(40deg, #5ed1fc, #3647b3); }
+    .btn.blue-gradient:active:focus .btn.blue-gradient.active {
+      background: linear-gradient(40deg, #5ed1fc, #3647b3); }
+  .btn.blue-gradient:focus, .btn.blue-gradient:hover {
+    background: linear-gradient(40deg, #5ed1fc, #3647b3); }
+
+.purple-gradient {
+  background: linear-gradient(40deg, #ff6ec4, #7873f5); }
+
+.peach-gradient {
+  background: linear-gradient(40deg, #FFD86F, #FC6262); }
+
+.gradienbgb {
+  background: linear-gradient(45deg, #1f69d2 0, teal 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='teal',endColorstr='#1f69d2',GradientType=1); }
+
+.gradienbgg {
+  background: linear-gradient(to left, #ff8585, #5ebcb3);
+  background-color: #ff8585; }
+
+h1.method1 {
+  background: linear-gradient(right, red, #ff0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; }
+
+.gradient-divider {
+  height: 2px;
+  margin-top: 30px;
+  background-image: -webkit-linear-gradient(0deg, #3c8dc5, #6fb7e9 36%, #3bc4b4 65%, #7ef7a9);
+  background-image: linear-gradient(90deg, #3c8dc5, #6fb7e9 36%, #3bc4b4 65%, #7ef7a9); }
+
+/*---------------------------------------------------------
+-----           ** 19. BORDER BOTTOMS **              -----
+----------------------------------------------------------*/
+.white-border-bottom:before {
+  position: absolute;
+  margin: auto;
+  z-index: 1;
+  content: "";
+  width: 50%;
+  height: 2px;
+  background: #F5F5F5;
+  bottom: -9px;
+  left: 25%; }
+
+.dark-border-bottom:before {
+  position: absolute;
+  margin: auto;
+  z-index: 1;
+  content: "";
+  width: 50%;
+  height: 2px;
+  background: #404040;
+  bottom: -9px;
+  left: 25%; }
+
+.red-border-bottom:before {
+  position: absolute;
+  margin: auto;
+  z-index: 1;
+  content: "";
+  width: 75%;
+  height: 2px;
+  background: #e96656;
+  bottom: -9px;
+  left: 12.5%; }
+
+.green-border-bottom:before {
+  position: absolute;
+  margin: auto;
+  z-index: 1;
+  content: "";
+  width: 75%;
+  height: 2px;
+  background: #34d293;
+  bottom: -9px;
+  left: 12.5%; }
+
+.blue-border-bottom:before {
+  position: absolute;
+  margin: auto;
+  z-index: 1;
+  content: "";
+  width: 75%;
+  height: 2px;
+  background: #3ab0e2;
+  bottom: -9px;
+  left: 12.5%; }
+
+.yellow-border-bottom:before {
+  position: absolute;
+  margin: auto;
+  z-index: 1;
+  content: "";
+  width: 75%;
+  height: 2px;
+  background: #f7d861;
+  bottom: -9px;
+  left: 12.5%; }
+
+/*=========================================================
+-----         ** 23. demon custom gedöns **           -----
+=========================================================*/
+.section-padding {
+  position: relative;
+  display: block;
+  padding-top: 5rem;
+  padding-bottom: 3.125rem;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden; }
+
+.intro-page .navbar:not(.top-nav-collapse) {
+  background-color: transparent !important; }
+
+html, body, header, .jarallax {
+  height: 100%; }
+
+@media (min-width: 560px) and (max-width: 740px) {
+  html, body, header, .jarallax {
+    height: 500px; } }
+@media (min-width: 800px) and (max-width: 850px) {
+  .navbar {
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12) !important; }
+    .navbar:not(.top-nav-collapse) {
+      background: #3f51b5 !important; } }
+.font-small {
+  font-size: 0.9rem; }
+
+.intro h1 {
+  font-family: inherit;
+  font-size: 2.25em;
+  line-height: 1.1;
+  margin: .55em 0 .25em;
+  color: inherit; }
+
+@media screen and (max-width: 768px) {
+  header h3.display-4 {
+    font-size: 3rem; } }
+@media screen and (max-width: 542px) {
+  header h3.display-4 {
+    font-size: 2rem; } }
+#home .btn-blue:hover {
+  opacity: 1;
+  opacity: 0.6; }
+
+footer .list-unstyled li > a {
+  color: #2196f3; }
+  footer .list-unstyled li > a:hover {
+    margin-left: 10px;
+    color: #1976d2; }
+
+.social-icons ul {
+  text-align: center !important; }
+
+.navbar:not(.top-nav-collapse) {
+  background-color: transparent !important; }
+
+.accordion-5.accordion.accordion .card .fa-angle-down {
+  background-color: transparent !important;
+  color: white !important; }
+
+.contact-icons {
+  list-style: none; }
+
+#heading30 > a > h4 > i, #heading31 > a > h4 > i, #heading32 > a > h4 > i {
+  margin-right: 15px; }
+
+.navbar.navbar-dark .navbar-nav .nav-item .nav-link:hover {
+  color: #039be5;
+  text-shadow: 1px 1px 4px #ff3547; }
+
+.navbar-dark .navbar-brand:hover {
+  color: #007bff !important;
+  text-shadow: 1px 1px 4px #ff3547; }
+
+@media screen and (max-width: 768px) {
+  #contact .col-md-4.col-xl-3 {
+    padding-top: 50px;
+    text-align: center; } }
+#page-top > footer > .footer-copyright {
+  overflow: hidden;
+  height: 50px;
+  line-height: 50px;
+  color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(0, 0, 0, 0.2);
+  text-align: center;
+  font-size: .95rem; }
+
+.bg-gradient {
+  background-color: #5d33fb;
+  background-image: -webkit-linear-gradient(0deg, #5d33fb, #4eefed);
+  background-image: linear-gradient(90deg, #5d33fb, #4eefed); }
+
+.bg-parallax {
+  position: relative;
+  padding-top: 100px;
+  padding-bottom: 150px; }
+  .bg-parallax .parallax-overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-color: rgba(93, 51, 251, 0.5);
+    background-image: -webkit-linear-gradient(0deg, rgba(93, 51, 251, 0.75), rgba(78, 239, 237, 0.75));
+    background-image: linear-gradient(90deg, rgba(93, 51, 251, 0.75), rgba(78, 239, 237, 0.75)); }
+
+/*=========================================================
+-----         ** . demon scrolltotop **           -----
+=========================================================*/
+.scrolltotop {
+  cursor: pointer;
+  border: 1px solid #d32f2f;
+  padding: 8px 11px 10px;
+  position: fixed;
+  bottom: 1em;
+  right: 20px;
+  display: none;
+  text-decoration: none;
+  transition: all .5s ease-in-out;
+  font-size: 16px;
+  opacity: .75;
+  z-index: 9999;
+  background-color: transparent;
+  color: #d32f2f !important;
+  box-shadow: 0 5px 5px 0 rgba(64, 66, 72, 0.25); }
+  .scrolltotop:hover {
+    color: #1976d2 !important;
+    border: 1px solid #1976d2;
+    opacity: 1;
+    transition: all 250ms ease-in-out,opacity .2s linear; }
+
+/*=========================================================
+-----       ** 16. demon screen-reader-text **        -----
+=========================================================*/
+.screen-reader-text {
+  clip: rect(1px, 1px, 1px, 1px);
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden; }
+  .screen-reader-text:focus {
+    background-color: #f1f1f1;
+    border-radius: 3px;
+    box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
+    clip: auto !important;
+    color: #21759b;
+    display: block;
+    font-size: 14px;
+    font-size: .875rem;
+    font-weight: 700;
+    height: auto;
+    left: 5px;
+    line-height: normal;
+    padding: 15px 23px 14px;
+    text-decoration: none;
+    top: 5px;
+    width: auto;
+    z-index: 100000; }
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0; }
+
+.sr-only-focusable:active, .sr-only-focusable:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  clip: auto; }
+
+/*=========================================================
+-----     ** . demon scrollbar + selection  **       -----
+=========================================================*/
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  background-color: #F5F5F5;
+  border-radius: 10px; }
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+  background-color: #F5F5F5; }
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(40deg, #45cafc, #303f9f);
+  background-image: -webkit-linear-gradient(330deg, #45cafc 0%, #303f9f 100%);
+  background-image: linear-gradient(120deg, #45cafc 0%, #303f9f 100%); }
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(230deg, #a24bcf, #4b79cf, #4bc5cf);
+    background-image: -webkit-linear-gradient(330deg, #4bc5cf 0%, #4b79cf 100%);
+    background-image: linear-gradient(230deg, #4bc5cf 0%, #4b79cf 100%); }
+
+::-moz-selection, ::selection {
+  background-color: #f06565;
+  color: #fff; }
+
+/*# sourceMappingURL=style.css.map */

@@ -1,0 +1,48 @@
+# www.robotstxt.org/
+
+Sitemap: {{ site.url }}/sitemap.xml
+
+Crawl-delay: 60
+
+User-agent: *
+Disallow: /admin/
+Disallow: /cgi-bin/
+Disallow: /tmp/
+Disallow: /logfiles/
+
+User-agent: Googlebot
+Disallow: /admin/
+Disallow: /tmp/
+Disallow: /logfiles/
+
+User-agent: MediaPartners-Google
+Allow: / 
+
+User-agent: wget
+Disallow: /
+Disallow: /*?*
+
+User-agent: webzip
+Disallow: /
+Disallow: /*?*
+
+User-agent: webmirror
+Disallow: /
+Disallow: /*?*
+
+User-agent: webcopy
+Disallow: /
+Disallow: /*?*
+
+User-agent: HTTrack 
+Disallow: / 
+
+User-agent: dotbot
+Disallow: /
+Disallow: /*?*
+
+User-agent: 008
+Disallow: /
+Disallow: /sitemap.html
+Disallow: /*?*
+Disallow: /cgi-bin/

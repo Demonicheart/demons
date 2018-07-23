@@ -1,0 +1,21 @@
+<picture>
+<img
+sizes="(max-width: 3500px) 40vw, 1400px"
+srcset="
+img/bg/panime_hy57f7/panime_c_scale,w_200.jpg 200w,
+img/bg/panime_hy57f7/panime_c_scale,w_371.jpg 371w,
+img/bg/panime_hy57f7/panime_c_scale,w_503.jpg 503w,
+img/bg/panime_hy57f7/panime_c_scale,w_616.jpg 616w,
+img/bg/panime_hy57f7/panime_c_scale,w_712.jpg 712w,
+img/bg/panime_hy57f7/panime_c_scale,w_804.jpg 804w,
+img/bg/panime_hy57f7/panime_c_scale,w_899.jpg 899w,
+img/bg/panime_hy57f7/panime_c_scale,w_981.jpg 981w,
+img/bg/panime_hy57f7/panime_c_scale,w_1066.jpg 1066w,
+img/bg/panime_hy57f7/panime_c_scale,w_1147.jpg 1147w,
+img/bg/panime_hy57f7/panime_c_scale,w_1223.jpg 1223w,
+img/bg/panime_hy57f7/panime_c_scale,w_1302.jpg 1302w,
+img/bg/panime_hy57f7/panime_c_scale,w_1377.jpg 1377w,
+img/bg/panime_hy57f7/panime_c_scale,w_1400.jpg 1400w"
+src="img/bg/panime_hy57f7/panime_c_scale,w_1400.jpg"
+alt="">
+</picture>

@@ -1,0 +1,115 @@
+/* This file should contain CSS that modifies the popup layout. */
+/* By layout, we mean the physical position of the elements on the popup window, and the margin / padding around those elements. */
+
+.cc-revoke {
+  &.cc-top {
+    top: 0;
+    left: 3em;
+    border-bottom-left-radius: .5em;
+    border-bottom-right-radius: .5em;
+  }
+  &.cc-bottom {
+    bottom: 0;
+    left: 3em;
+    border-top-left-radius: .5em;
+    border-top-right-radius: .5em;
+  }
+  &.cc-left {
+    left: 3em;
+    right: unset;
+  }
+  &.cc-right {
+    right: 3em;
+    left: unset;
+  }
+}
+
+/**************************************** FLOATING ****************************************/
+
+/* these classes position the floating element */
+
+.cc-top {
+  top: 1em;
+}
+
+.cc-left {
+  left: 1em;
+}
+
+.cc-right {
+  right: 1em;
+}
+
+.cc-bottom {
+  bottom: 1em;
+}
+
+/* links that are direct decendants should be displayed as block */
+
+.cc-floating {
+  > .cc-link {
+    margin-bottom: 1em;
+  }
+  .cc-message {
+    display: block;
+    margin-bottom: 1em;
+  }
+}
+
+.cc-window {
+  &.cc-floating .cc-compliance {
+    -ms-flex: 1;
+    flex: 1;
+  }
+  &.cc-banner {
+    align-items: center;
+  }
+}
+
+/**************************************** BANNER ****************************************/
+
+.cc-banner {
+    color: #fff;
+    background-color: #252e39;
+  &.cc-top {
+    left: 0;
+    right: 0;
+    top: 0;
+  }
+  &.cc-bottom {
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  .cc-message {
+    flex: 1;
+  }
+}
+#cookieconsent\3a desc:before {
+  content: "\f05a";
+  font-family: FontAwesome;
+  font-weight: 400;
+  margin-right: 8px;
+  color: #29b6f6;
+}
+
+.cc-link:after {
+  content: "\f0a4";
+  font-family: FontAwesome;
+/*   vertical-align: middle; */
+  margin-left: 5px;
+}
+/* COMPLIANCE BOX */
+
+.cc-compliance {
+  display: flex;
+  align-items: center;
+  align-content: space-between;
+  > .cc-btn {
+    flex: 1;
+  }
+}
+
+.cc-btn + .cc-btn {
+  margin-left: .5em;
+}

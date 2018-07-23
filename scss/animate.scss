@@ -1,0 +1,103 @@
+/*!
+ * MIT Licence
+ * Demonic Shana 2017
+ * scss -v.1.3 animate v-3.5.2
+ */
+/* originally authored Copyright (c) 2015 Daniel Eden */
+
+// Core [Should not be removed]
+@import "aniscss/core";
+
+// Bounce
+@import "aniscss/bounce/bounce";
+@import "aniscss/bounce/bounceIn";
+@import "aniscss/bounce/bounceInDown";
+@import "aniscss/bounce/bounceInLeft";
+@import "aniscss/bounce/bounceInRight";
+@import "aniscss/bounce/bounceInUp";
+@import "aniscss/bounce/bounceOut";
+@import "aniscss/bounce/bounceOutDown";
+@import "aniscss/bounce/bounceOutLeft";
+@import "aniscss/bounce/bounceOutRight";
+@import "aniscss/bounce/bounceOutUp";
+
+// Fade
+@import "aniscss/fade/fadeIn";
+@import "aniscss/fade/fadeInDown";
+@import "aniscss/fade/fadeInDownBig";
+@import "aniscss/fade/fadeInLeft";
+@import "aniscss/fade/fadeInLeftBig";
+@import "aniscss/fade/fadeInRight";
+@import "aniscss/fade/fadeInRightBig";
+@import "aniscss/fade/fadeInUp";
+@import "aniscss/fade/fadeInUpBig";
+@import "aniscss/fade/fadeOut";
+@import "aniscss/fade/fadeOutDown";
+@import "aniscss/fade/fadeOutDownBig";
+@import "aniscss/fade/fadeOutLeft";
+@import "aniscss/fade/fadeOutLeftBig";
+@import "aniscss/fade/fadeOutRight";
+@import "aniscss/fade/fadeOutRightBig";
+@import "aniscss/fade/fadeOutUp";
+@import "aniscss/fade/fadeOutUpBig";
+
+// Flip
+@import "aniscss/flip/flip";
+@import "aniscss/flip/flipInX";
+@import "aniscss/flip/flipInY";
+@import "aniscss/flip/flipOutX";
+@import "aniscss/flip/flipOutY";
+
+// Light Speed
+@import "aniscss/lightSpeed/lightSpeedIn";
+@import "aniscss/lightSpeed/lightSpeedOut";
+
+// Roll
+@import "aniscss/roll/rollIn";
+@import "aniscss/roll/rollOut";
+
+// Rotate
+@import "aniscss/rotate/rotateIn";
+@import "aniscss/rotate/rotateInDownLeft";
+@import "aniscss/rotate/rotateInDownRight";
+@import "aniscss/rotate/rotateInUpLeft";
+@import "aniscss/rotate/rotateInUpRight";
+@import "aniscss/rotate/rotateOut";
+@import "aniscss/rotate/rotateOutDownLeft";
+@import "aniscss/rotate/rotateOutDownRight";
+@import "aniscss/rotate/rotateOutUpLeft";
+@import "aniscss/rotate/rotateOutUpRight";
+
+// Slide
+@import "aniscss/slide/slideInDown";
+@import "aniscss/slide/slideInLeft";
+@import "aniscss/slide/slideInRight";
+@import "aniscss/slide/slideInUp";
+@import "aniscss/slide/slideOutDown";
+@import "aniscss/slide/slideOutLeft";
+@import "aniscss/slide/slideOutRight";
+@import "aniscss/slide/slideOutUp";
+
+// Zoom
+@import "aniscss/zoom/zoomIn";
+@import "aniscss/zoom/zoomInDown";
+@import "aniscss/zoom/zoomInLeft";
+@import "aniscss/zoom/zoomInRIght";
+@import "aniscss/zoom/zoomInUp";
+@import "aniscss/zoom/zoomOut";
+@import "aniscss/zoom/zoomOutDown";
+@import "aniscss/zoom/zoomOutLeft";
+@import "aniscss/zoom/zoomOutRight";
+@import "aniscss/zoom/zoomOutUp";
+
+// Other
+@import "aniscss/flash";
+@import "aniscss/hinge";
+@import "aniscss/jello";
+@import "aniscss/pulse";
+@import "aniscss/rubberBand";
+@import "aniscss/shake";
+@import "aniscss/swing";
+@import "aniscss/tada";
+@import "aniscss/wobble";
+@import "aniscss/jackInTheBox";

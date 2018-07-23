@@ -1,0 +1,202 @@
+/* //
+ * //   ☞ Copyright © 2017 Demonicheart M.B
+ * //   📢 This project is licensed under the MIT License 
+ * //   🌍 https://github.com/Demonicheart/demons/blob/master/LICENSE 
+ */
+/** //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!** //
+ * // 
+ * //    ☞  Open+Sans:400,400italic,600,600italic,700,700italic,800,800italic | 
+ * //    ☞  Source+Sans+Pro:400,300,300italic,400italic,600,600italic,700,700italic,900,900italic | 
+ * //    ☞  Alegreya+Sans:400,300,300italic,400italic,500,500italic,700,700italic,800,800italic,900,900italic | 
+ * //    ☞  Poiret+One | Dosis:400,500,300,600,700,800 | Lobster+Two:400,400italic,700,700italic | 
+ * //    ☞  Raleway:400,300,300italic,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic | 
+ * //    ☞  Roboto+Condensed:400,300italic,300,400italic,700,700italic | 
+ * //    ☞  Roboto:400,300,300italic,400italic,500,500italic,700,700italic,900,900italic | Courgette
+ * //
+ * //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!** //
+
+/*  --------------------------------------------------
+  :: Alegreya Sans i3,i4,i5,i7,i8,i9
+  -------------------------------------------------- */
+
+@font-face {
+  font-family:'Alegreya Sans';font-style: italic;font-weight: 300;src: local('Alegreya Sans Light Italic'), local('AlegreyaSans-LightItalic'),
+  url(https://fonts.gstatic.com/s/alegreyasans/v6/WfiXipsmjqRqsDBQ1bA9CmbgPR6on8bw8ywXjDqMUr4.woff2) format('woff2')}
+
+@font-face { font-family: 'Alegreya Sans'; font-style: italic; font-weight: 400; src: local('Alegreya Sans Italic'), local('AlegreyaSans-Italic'), url(https://fonts.gstatic.com/s/alegreyasans/v6/TKyx_-JJ6MdpQruNk-t-PPOSZGZVnZh1qFL4FBVulds.woff2) format('woff2'); }
+
+@font-face { font-family: 'Alegreya Sans'; font-style: italic; font-weight: 500; src: local('Alegreya Sans Medium Italic'), local('AlegreyaSans-MediumItalic'), url(https://fonts.gstatic.com/s/alegreyasans/v6/WfiXipsmjqRqsDBQ1bA9Ct_IqBrMQJeb3btf4G2wJuM.woff2) format('woff2'); }
+
+@font-face { font-family: 'Alegreya Sans'; font-style: italic; font-weight: 700; src: local('Alegreya Sans Bold Italic'), local('AlegreyaSans-BoldItalic'), url(https://fonts.gstatic.com/s/alegreyasans/v6/WfiXipsmjqRqsDBQ1bA9CsYBCjQycNOg465W8lWeYjs.woff2) format('woff2'); }
+
+/*  --------------------------------------------------
+  :: Alegreya Sans N3,N4,N5,N7,N8,N9
+  -------------------------------------------------- */
+      
+@font-face { font-family: 'Alegreya Sans'; font-style: italic; font-weight: 800; src: local('Alegreya Sans ExtraBold Italic'), local('AlegreyaSans-ExtraBoldItalic'), url(https://fonts.gstatic.com/s/alegreyasans/v6/WfiXipsmjqRqsDBQ1bA9CtoLup_JzTqNKwLJ6RzBh8g.woff2) format('woff2'); }
+
+@font-face { font-family: 'Alegreya Sans'; font-style: italic; font-weight: 900; src: local('Alegreya Sans Black Italic'), local('AlegreyaSans-BlackItalic'), url(https://fonts.gstatic.com/s/alegreyasans/v6/WfiXipsmjqRqsDBQ1bA9CuNlVeDectUokiFkVZNBZa4.woff2) format('woff2'); }
+
+@font-face { font-family: 'Alegreya Sans'; font-style: normal; font-weight: 300; src: local('Alegreya Sans Light'), local('AlegreyaSans-Light'), url(https://fonts.gstatic.com/s/alegreyasans/v6/11EDm-lum6tskJMBbdy9aeNC-0xib1SK7Oln1iLdt4o.woff2) format('woff2'); }
+
+@font-face { font-family: 'Alegreya Sans'; font-style: normal; font-weight: 400; src: local('Alegreya Sans Regular'), local('AlegreyaSans-Regular'), url(https://fonts.gstatic.com/s/alegreyasans/v6/KYNzioYhDai7mTMnx_gDgsmBRJoLbs7X6hY7yFEc97Q.woff2) format('woff2'); }
+
+@font-face { font-family: 'Alegreya Sans'; font-style: normal; font-weight: 500; src: local('Alegreya Sans Medium'), local('AlegreyaSans-Medium'), url(https://fonts.gstatic.com/s/alegreyasans/v6/11EDm-lum6tskJMBbdy9aVZp3tKiB9YnYzAIdkxupX8.woff2) format('woff2'); }
+
+@font-face { font-family: 'Alegreya Sans'; font-style: normal; font-weight: 700; src: local('Alegreya Sans Bold'), local('AlegreyaSans-Bold'), url(https://fonts.gstatic.com/s/alegreyasans/v6/11EDm-lum6tskJMBbdy9acrysgx4XYXiGyd0rEkyLBs.woff2) format('woff2'); }
+
+@font-face { font-family: 'Alegreya Sans'; font-style: normal; font-weight: 800; src: local('Alegreya Sans ExtraBold'), local('AlegreyaSans-ExtraBold'), url(https://fonts.gstatic.com/s/alegreyasans/v6/11EDm-lum6tskJMBbdy9aVvTxhR-HurA7zKsTVg5Awk.woff2) format('woff2'); }
+
+@font-face { font-family: 'Alegreya Sans'; font-style: normal; font-weight: 900; src: local('Alegreya Sans Black'), local('AlegreyaSans-Black'), url(https://fonts.gstatic.com/s/alegreyasans/v6/11EDm-lum6tskJMBbdy9acttC1UWWH1Hne0t2gWY82A.woff2) format('woff2'); }
+
+/*  --------------------------------------------------
+  :: Courgette N4
+  -------------------------------------------------- */
+
+@font-face { font-family: 'Courgette'; font-style: normal; font-weight: 400; src: local('Courgette Regular'), local('Courgette-Regular'), url(https://fonts.gstatic.com/s/courgette/v5/BHG8ZtTfO0yYnp02--QxqltXRa8TVwTICgirnJhmVJw.woff2) format('woff2'); }
+
+/*  --------------------------------------------------
+  :: Dosis N3,N4,N5,N6,N8,N9
+  -------------------------------------------------- */
+
+@font-face { font-family: 'Dosis'; font-style: normal; font-weight: 300; src: local('Dosis Light'), local('Dosis-Light'), url(https://fonts.gstatic.com/s/dosis/v7/7aJzV14HzAOiwNTiPgucGfesZW2xOQ-xsNqO47m55DA.woff2) format('woff2'); }
+
+@font-face { font-family: 'Dosis'; font-style: normal; font-weight: 400; src: local('Dosis Regular'), local('Dosis-Regular'), url(https://fonts.gstatic.com/s/dosis/v7/4hYyXH_8WmbBLamf6WjLwg.woff2) format('woff2'); }
+
+@font-face { font-family: 'Dosis'; font-style: normal; font-weight: 500; src: local('Dosis Medium'), local('Dosis-Medium'), url(https://fonts.gstatic.com/s/dosis/v7/mAcLJWdPWDNiDJwJvcWKc_esZW2xOQ-xsNqO47m55DA.woff2) format('woff2'); }
+
+@font-face { font-family: 'Dosis'; font-style: normal; font-weight: 600; src: local('Dosis SemiBold'), local('Dosis-SemiBold'), url(https://fonts.gstatic.com/s/dosis/v7/O6SOu9hYsPHTU43R17NS5fesZW2xOQ-xsNqO47m55DA.woff2) format('woff2'); }
+
+@font-face { font-family: 'Dosis'; font-style: normal; font-weight: 700; src: local('Dosis Bold'), local('Dosis-Bold'), url(https://fonts.gstatic.com/s/dosis/v7/22aDRG5X9l7obljtz7tihvesZW2xOQ-xsNqO47m55DA.woff2) format('woff2'); }
+
+@font-face { font-family: 'Dosis'; font-style: normal; font-weight: 800; src: local('Dosis ExtraBold'), local('Dosis-ExtraBold'), url(https://fonts.gstatic.com/s/dosis/v7/nq3OPeKr7RUSF_YDJ1woxvesZW2xOQ-xsNqO47m55DA.woff2) format('woff2'); }
+
+/*  --------------------------------------------------
+  :: Lobster Two N4,N7,i4,i7
+  -------------------------------------------------- */
+
+@font-face { font-family: 'Lobster Two'; font-style: italic; font-weight: 400; src: local('Lobster Two Italic'), local('LobsterTwo-Italic'), url(https://fonts.gstatic.com/s/lobstertwo/v10/Ul_16MSbfayQv1I4QhLEoMu2Q0OS-KeTAWjgkS85mDg.woff2) format('woff2'); }
+
+@font-face { font-family: 'Lobster Two'; font-style: italic; font-weight: 700; src: local('Lobster Two Bold Italic'), local('LobsterTwo-BoldItalic'), url(https://fonts.gstatic.com/s/lobstertwo/v10/LEkN2_no_6kFvRfiBZ8xpI9ObOXPY1wUIXqKtDjSdsY.woff2) format('woff2'); }
+
+@font-face { font-family: 'Lobster Two'; font-style: normal; font-weight: 400; src: local('Lobster Two'), local('LobsterTwo'), url(https://fonts.gstatic.com/s/lobstertwo/v10/Law3VVulBOoxyKPkrNsAaI4P5ICox8Kq3LLUNMylGO4.woff2) format('woff2'); }
+
+@font-face { font-family: 'Lobster Two'; font-style: normal; font-weight: 700; src: local('Lobster Two Bold'), local('LobsterTwo-Bold'), url(https://fonts.gstatic.com/s/lobstertwo/v10/bmdxOflBqMqjEC0-kGsIiIlIZu-HDpmDIZMigmsroc4.woff2) format('woff2'); }
+
+/*  --------------------------------------------------
+  :: Open Sans N4,N6,N7,N8,i4,i6,i7,i8
+  -------------------------------------------------- */
+
+@font-face { font-family: 'Open Sans'; font-style: italic; font-weight: 400; src: local('Open Sans Italic'), local('OpenSans-Italic'), url(https://fonts.gstatic.com/s/opensans/v15/xjAJXh38I15wypJXxuGMBo4P5ICox8Kq3LLUNMylGO4.woff2) format('woff2'); }
+
+@font-face { font-family: 'Open Sans'; font-style: italic; font-weight: 600; src: local('Open Sans SemiBold Italic'), local('OpenSans-SemiBoldItalic'), url(https://fonts.gstatic.com/s/opensans/v15/PRmiXeptR36kaC0GEAetxl2umOyRU7PgRiv8DXcgJjk.woff2) format('woff2'); }
+
+@font-face { font-family: 'Open Sans'; font-style: italic; font-weight: 700; src: local('Open Sans Bold Italic'), local('OpenSans-BoldItalic'), url(https://fonts.gstatic.com/s/opensans/v15/PRmiXeptR36kaC0GEAetxolIZu-HDpmDIZMigmsroc4.woff2) format('woff2'); }
+
+@font-face { font-family: 'Open Sans'; font-style: italic; font-weight: 800; src: local('Open Sans ExtraBold Italic'), local('OpenSans-ExtraBoldItalic'), url(https://fonts.gstatic.com/s/opensans/v15/PRmiXeptR36kaC0GEAetxnibbpXgLHK_uTT48UMyjSM.woff2) format('woff2'); }
+
+@font-face { font-family: 'Open Sans'; font-style: normal; font-weight: 400; src: local('Open Sans Regular'), local('OpenSans-Regular'), url(https://fonts.gstatic.com/s/opensans/v15/cJZKeOuBrn4kERxqtaUH3VtXRa8TVwTICgirnJhmVJw.woff2) format('woff2'); }
+
+@font-face { font-family: 'Open Sans'; font-style: normal; font-weight: 600; src: local('Open Sans SemiBold'), local('OpenSans-SemiBold'), url(https://fonts.gstatic.com/s/opensans/v15/MTP_ySUJH_bn48VBG8sNSugdm0LZdjqr5-oayXSOefg.woff2) format('woff2'); }
+
+@font-face { font-family: 'Open Sans'; font-style: normal; font-weight: 700; src: local('Open Sans Bold'), local('OpenSans-Bold'), url(https://fonts.gstatic.com/s/opensans/v15/k3k702ZOKiLJc3WVjuplzOgdm0LZdjqr5-oayXSOefg.woff2) format('woff2'); }
+
+@font-face { font-family: 'Open Sans'; font-style: normal; font-weight: 800; src: local('Open Sans ExtraBold'), local('OpenSans-ExtraBold'), url(https://fonts.gstatic.com/s/opensans/v15/EInbV5DfGHOiMmvb1Xr-hugdm0LZdjqr5-oayXSOefg.woff2) format('woff2'); }
+
+/*  --------------------------------------------------
+  :: Poiret One N4
+  -------------------------------------------------- */
+
+@font-face { font-family: 'Poiret One'; font-style: normal; font-weight: 400; src: local('Poiret One'), local('PoiretOne-Regular'), url(https://fonts.gstatic.com/s/poiretone/v5/HrI4ZJpJ3Fh0wa5ofYMK8fk_vArhqVIZ0nv9q090hN8.woff2) format('woff2'); }
+
+/*  --------------------------------------------------
+  :: Raleway N3,N4,N5,N7,i3,i4,i5,i6,i7,i8,i9,
+  -------------------------------------------------- */
+
+@font-face { font-family: 'Raleway'; font-style: italic; font-weight: 300; src: local('Raleway Light Italic'), local('Raleway-LightItalic'), url(https://fonts.gstatic.com/s/raleway/v12/TVSB8ogXDKMcnAAJ5CqrUugdm0LZdjqr5-oayXSOefg.woff2) format('woff2'); }
+
+@font-face { font-family: 'Raleway'; font-style: italic; font-weight: 400; src: local('Raleway Italic'), local('Raleway-Italic'), url(https://fonts.gstatic.com/s/raleway/v12/IIm-lPOtfVKQy0GMiczF_1tXRa8TVwTICgirnJhmVJw.woff2) format('woff2'); }
+
+@font-face { font-family: 'Raleway'; font-style: italic; font-weight: 500; src: local('Raleway Medium Italic'), local('Raleway-MediumItalic'), url(https://fonts.gstatic.com/s/raleway/v12/S7vGLZZ40c85SJgiptJGV-gdm0LZdjqr5-oayXSOefg.woff2) format('woff2'); }
+
+@font-face { font-family: 'Raleway'; font-style: italic; font-weight: 600; src: local('Raleway SemiBold Italic'), local('Raleway-SemiBoldItalic'), url(https://fonts.gstatic.com/s/raleway/v12/OY22yoG8EJ3IN_muVWm29Ogdm0LZdjqr5-oayXSOefg.woff2) format('woff2'); }
+
+@font-face { font-family: 'Raleway'; font-style: italic; font-weight: 700; src: local('Raleway Bold Italic'), local('Raleway-BoldItalic'), url(https://fonts.gstatic.com/s/raleway/v12/lFxvRPuGFG5ktd7P0WRwKugdm0LZdjqr5-oayXSOefg.woff2) format('woff2'); }
+
+@font-face { font-family: 'Raleway'; font-style: italic; font-weight: 800; src: local('Raleway ExtraBold Italic'), local('Raleway-ExtraBoldItalic'), url(https://fonts.gstatic.com/s/raleway/v12/us4LjTCmlYgh3W8CKujEJugdm0LZdjqr5-oayXSOefg.woff2) format('woff2'); }
+
+@font-face { font-family: 'Raleway'; font-style: italic; font-weight: 900; src: local('Raleway Black Italic'), local('Raleway-BlackItalic'), url(https://fonts.gstatic.com/s/raleway/v12/oY2RadnkHfshu5f0FLsgVegdm0LZdjqr5-oayXSOefg.woff2) format('woff2'); }
+
+@font-face { font-family: 'Raleway'; font-style: normal; font-weight: 300; src: local('Raleway Light'), local('Raleway-Light'), url(https://fonts.gstatic.com/s/raleway/v12/-_Ctzj9b56b8RgXW8FArifk_vArhqVIZ0nv9q090hN8.woff2) format('woff2'); }
+
+@font-face { font-family: 'Raleway'; font-style: normal; font-weight: 400; src: local('Raleway'), local('Raleway-Regular'), url(https://fonts.gstatic.com/s/raleway/v12/0dTEPzkLWceF7z0koJaX1A.woff2) format('woff2'); }
+
+@font-face { font-family: 'Raleway'; font-style: normal; font-weight: 500; src: local('Raleway Medium'), local('Raleway-Medium'), url(https://fonts.gstatic.com/s/raleway/v12/CcKI4k9un7TZVWzRVT-T8_k_vArhqVIZ0nv9q090hN8.woff2) format('woff2'); }
+
+@font-face { font-family: 'Raleway'; font-style: normal; font-weight: 700; src: local('Raleway Bold'), local('Raleway-Bold'), url(https://fonts.gstatic.com/s/raleway/v12/JbtMzqLaYbbbCL9X6EvaI_k_vArhqVIZ0nv9q090hN8.woff2) format('woff2'); }
+
+@font-face { font-family: 'Raleway'; font-style: normal; font-weight: 900; src: local('Raleway Black'), local('Raleway-Black'), url(https://fonts.gstatic.com/s/raleway/v12/PKCRbVvRfd5n7BTjtGiFZPk_vArhqVIZ0nv9q090hN8.woff2) format('woff2'); }
+
+/*  --------------------------------------------------
+  :: Roboto N3,N4,N5,N7,N9,i3,i4,i5,i7,i9
+  -------------------------------------------------- */
+
+@font-face { font-family: 'Roboto'; font-style: italic; font-weight: 300; src: local('Roboto Light Italic'), local('Roboto-LightItalic'), url(https://fonts.gstatic.com/s/roboto/v18/7m8l7TlFO-S3VkhHuR0at44P5ICox8Kq3LLUNMylGO4.woff2) format('woff2'); }
+
+@font-face { font-family: 'Roboto'; font-style: italic; font-weight: 400; src: local('Roboto Italic'), local('Roboto-Italic'), url(https://fonts.gstatic.com/s/roboto/v18/vPcynSL0qHq_6dX7lKVByfesZW2xOQ-xsNqO47m55DA.woff2) format('woff2'); }
+
+@font-face { font-family: 'Roboto'; font-style: italic; font-weight: 500; src: local('Roboto Medium Italic'), local('Roboto-MediumItalic'), url(https://fonts.gstatic.com/s/roboto/v18/OLffGBTaF0XFOW1gnuHF0Y4P5ICox8Kq3LLUNMylGO4.woff2) format('woff2'); }
+
+@font-face { font-family: 'Roboto'; font-style: italic; font-weight: 700; src: local('Roboto Bold Italic'), local('Roboto-BoldItalic'), url(https://fonts.gstatic.com/s/roboto/v18/t6Nd4cfPRhZP44Q5QAjcC44P5ICox8Kq3LLUNMylGO4.woff2) format('woff2'); }
+
+@font-face { font-family: 'Roboto'; font-style: italic; font-weight: 900; src: local('Roboto Black Italic'), local('Roboto-BlackItalic'), url(https://fonts.gstatic.com/s/roboto/v18/bmC0pGMXrhphrZJmniIZpY4P5ICox8Kq3LLUNMylGO4.woff2) format('woff2'); }
+
+@font-face { font-family: 'Roboto'; font-style: normal; font-weight: 300; src: local('Roboto Light'), local('Roboto-Light'), url(https://fonts.gstatic.com/s/roboto/v18/Hgo13k-tfSpn0qi1SFdUfVtXRa8TVwTICgirnJhmVJw.woff2) format('woff2'); }
+
+@font-face { font-family: 'Roboto'; font-style: normal; font-weight: 400; src: local('Roboto'), local('Roboto-Regular'), url(https://fonts.gstatic.com/s/roboto/v18/CWB0XYA8bzo0kSThX0UTuA.woff2) format('woff2'); }
+
+@font-face { font-family: 'Roboto'; font-style: normal; font-weight: 500; src: local('Roboto Medium'), local('Roboto-Medium'), url(https://fonts.gstatic.com/s/roboto/v18/RxZJdnzeo3R5zSexge8UUVtXRa8TVwTICgirnJhmVJw.woff2) format('woff2'); }
+
+@font-face { font-family: 'Roboto'; font-style: normal; font-weight: 700; src: local('Roboto Bold'), local('Roboto-Bold'), url(https://fonts.gstatic.com/s/roboto/v18/d-6IYplOFocCacKzxwXSOFtXRa8TVwTICgirnJhmVJw.woff2) format('woff2'); }
+
+@font-face { font-family: 'Roboto'; font-style: normal; font-weight: 900; src: local('Roboto Black'), local('Roboto-Black'), url(https://fonts.gstatic.com/s/roboto/v18/mnpfi9pxYH-Go5UiibESIltXRa8TVwTICgirnJhmVJw.woff2) format('woff2'); }
+
+/*  --------------------------------------------------
+  :: Roboto Condensed N3,N4,N7,i3,i4,i7
+  -------------------------------------------------- */
+
+@font-face { font-family: 'Roboto Condensed'; font-style: italic; font-weight: 300; src: local('Roboto Condensed Light Italic'), local('RobotoCondensed-LightItalic'), url(https://fonts.gstatic.com/s/robotocondensed/v16/mg0cGfGRUERshzBlvqxeABN-SY3RXjKuKZR1RHIa0nw.woff2) format('woff2'); }
+
+@font-face { font-family: 'Roboto Condensed'; font-style: italic; font-weight: 400; src: local('Roboto Condensed Italic'), local('RobotoCondensed-Italic'), url(https://fonts.gstatic.com/s/robotocondensed/v16/BP5K8ZAJv9qEbmuFp8RpJdbvlX87CS9_IgWvysdluIM.woff2) format('woff2'); }
+
+@font-face { font-family: 'Roboto Condensed'; font-style: italic; font-weight: 700; src: local('Roboto Condensed Bold Italic'), local('RobotoCondensed-BoldItalic'), url(https://fonts.gstatic.com/s/robotocondensed/v16/mg0cGfGRUERshzBlvqxeADn8OlxV1N2WpeXfK2HtpfA.woff2) format('woff2'); }
+
+@font-face { font-family: 'Roboto Condensed'; font-style: normal; font-weight: 300; src: local('Roboto Condensed Light'), local('RobotoCondensed-Light'), url(https://fonts.gstatic.com/s/robotocondensed/v16/b9QBgL0iMZfDSpmcXcE8nBBQ_Gf4FfI8J4SYljBAylk.woff2) format('woff2'); }
+
+@font-face { font-family: 'Roboto Condensed'; font-style: normal; font-weight: 400; src: local('Roboto Condensed'), local('RobotoCondensed-Regular'), url(https://fonts.gstatic.com/s/robotocondensed/v16/Zd2E9abXLFGSr9G3YK2MsDAdhzWOYhqHvOZMRGaEyPo.woff2) format('woff2'); }
+
+@font-face { font-family: 'Roboto Condensed'; font-style: normal; font-weight: 700; src: local('Roboto Condensed Bold'), local('RobotoCondensed-Bold'), url(https://fonts.gstatic.com/s/robotocondensed/v16/b9QBgL0iMZfDSpmcXcE8nHm2hrkyco9jQ3NKMXpgOBg.woff2) format('woff2'); }
+
+/*  --------------------------------------------------
+  :: Source Sans Pro N3,N4,N6,N7,N9,i3,i4,i6,i7,i9
+  -------------------------------------------------- */
+
+@font-face { font-family: 'Source Sans Pro'; font-style: italic; font-weight: 300; src: local('Source Sans Pro Light Italic'), local('SourceSansPro-LightItalic'), url(https://fonts.gstatic.com/s/sourcesanspro/v11/fpTVHK8qsXbIeTHTrnQH6MAjkyiewWYrWZc50I8hK7I.woff2) format('woff2'); }
+
+@font-face { font-family: 'Source Sans Pro'; font-style: italic; font-weight: 400; src: local('Source Sans Pro Italic'), local('SourceSansPro-Italic'), url(https://fonts.gstatic.com/s/sourcesanspro/v11/M2Jd71oPJhLKp0zdtTvoMxgy2Fsj5sj3EzlXpqVXRKo.woff2) format('woff2'); }
+
+@font-face { font-family: 'Source Sans Pro'; font-style: italic; font-weight: 600; src: local('Source Sans Pro SemiBold Italic'), local('SourceSansPro-SemiBoldItalic'), url(https://fonts.gstatic.com/s/sourcesanspro/v11/fpTVHK8qsXbIeTHTrnQH6GQKuzMuncr0JB710wa2dPI.woff2) format('woff2'); }
+
+@font-face { font-family: 'Source Sans Pro'; font-style: italic; font-weight: 700; src: local('Source Sans Pro Bold Italic'), local('SourceSansPro-BoldItalic'), url(https://fonts.gstatic.com/s/sourcesanspro/v11/fpTVHK8qsXbIeTHTrnQH6Nnl6YROR5rHLkdLoHwoOWA.woff2) format('woff2'); }
+
+@font-face { font-family: 'Source Sans Pro'; font-style: italic; font-weight: 900; src: local('Source Sans Pro Black Italic'), local('SourceSansPro-BlackItalic'), url(https://fonts.gstatic.com/s/sourcesanspro/v11/fpTVHK8qsXbIeTHTrnQH6Kixy-5gtMP3-zP8S1pobIg.woff2) format('woff2'); }
+
+@font-face { font-family: 'Source Sans Pro'; font-style: normal; font-weight: 300; src: local('Source Sans Pro Light'), local('SourceSansPro-Light'), url(https://fonts.gstatic.com/s/sourcesanspro/v11/toadOcfmlt9b38dHJxOBGOode0-EuMkY--TSyExeINg.woff2) format('woff2'); }
+
+@font-face { font-family: 'Source Sans Pro'; font-style: normal; font-weight: 400; src: local('Source Sans Pro Regular'), local('SourceSansPro-Regular'), url(https://fonts.gstatic.com/s/sourcesanspro/v11/ODelI1aHBYDBqgeIAH2zlNV_2ngZ8dMf8fLgjYEouxg.woff2) format('woff2'); }
+
+@font-face { font-family: 'Source Sans Pro'; font-style: normal; font-weight: 600; src: local('Source Sans Pro SemiBold'), local('SourceSansPro-SemiBold'), url(https://fonts.gstatic.com/s/sourcesanspro/v11/toadOcfmlt9b38dHJxOBGCOFnW3Jk0f09zW_Yln67Ac.woff2) format('woff2'); }
+
+@font-face { font-family: 'Source Sans Pro'; font-style: normal; font-weight: 700; src: local('Source Sans Pro Bold'), local('SourceSansPro-Bold'), url(https://fonts.gstatic.com/s/sourcesanspro/v11/toadOcfmlt9b38dHJxOBGEo0As1BFRXtCDhS66znb_k.woff2) format('woff2'); }
+
+@font-face { font-family: 'Source Sans Pro'; font-style: normal; font-weight: 900; src: local('Source Sans Pro Black'), local('SourceSansPro-Black'), url(https://fonts.gstatic.com/s/sourcesanspro/v11/toadOcfmlt9b38dHJxOBGHZhYM0_6AejPZE-OqA592o.woff2) format('woff2'); }
