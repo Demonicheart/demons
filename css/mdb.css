@@ -1,6 +1,6 @@
 /*!
  * Material Design for Bootstrap 4
- * Version: MDB PRO 4.5.7
+ * Version: MDB PRO 4.5.8
  *
  *
  * Copyright: Material Design for Bootstrap
@@ -6364,7 +6364,7 @@ body.scrollable {
       display: flex;
       margin: 0;
       width: 400px;
-      height: 100%;
+      height: auto;
       top: 0;
       right: 0; }
       .modal .modal-full-height.modal-top, .modal .modal-full-height.modal-bottom {
@@ -6993,6 +6993,7 @@ table.table-sm td {
   margin: 10px;
   border-radius: 50%;
   padding: 0;
+  border: none;
   cursor: pointer; }
   .btn-floating i {
     font-size: 1.25rem;
@@ -8532,7 +8533,7 @@ button, html [type="button"], [type="reset"], [type="submit"] {
   .pswp--svg .pswp__button,
   .pswp--svg .pswp__button--arrow--left:before,
   .pswp--svg .pswp__button--arrow--right:before {
-    background-image: url(../../img//lightbox/default-skin.svg); }
+    background-image: url(../img//lightbox/default-skin.svg); }
   .pswp--svg .pswp__button--arrow--left,
   .pswp--svg .pswp__button--arrow--right {
     background: none; } }
@@ -9474,7 +9475,7 @@ select {
   .colorful-select .dropdown-content li a:hover, .colorful-select .dropdown-content li span:hover {
     box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     color: #fff !important;
-    transition: all 1s linear;
+    transition: all 0.15 linear;
     border-radius: 0.125rem; }
     .colorful-select .dropdown-content li a:hover [type="checkbox"] + label:before, .colorful-select .dropdown-content li span:hover [type="checkbox"] + label:before {
       border-color: #fff; }
