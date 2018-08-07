@@ -239,7 +239,7 @@
 </div>
   </div>
   <!--/.Streak -->
-            <!--Section: Contact v.2-->
+            <!--Section: Contact-->
             <section id="contact" class="section-padding pt-0 mb-5">
 <div class="container">
                 <!-- Section heading -->
@@ -253,7 +253,7 @@
 
                     <!--Grid column-->
                     <div class="col-md-8 col-xl-9">
-                        <form>
+                        <form id ="contact-form" name="contact-form" action="mail.php" method="POST"  onsubmit="return validateForm()" >
 
                             <!--Grid row-->
                             <div class="row wow fadeInLeft animated animated" data-wow-offset="30" data-wow-duration="1.5s" data-wow-delay=".15s">
@@ -262,8 +262,8 @@
                                 <div class="col-md-6">
                                     <div class="md-form">
                                         <div class="md-form"><i class="fa fa-user prefix blue-text"></i>
-                                            <input type="text" id="contact-name" class="form-control">
-                                            <label for="contact-name" class="">Your name</label>
+                                            <input type="text" id="name" name="name" class="form-control">
+                                            <label for="name" class="">Your name</label>
                                         </div>
                                     </div>
                                 </div>
@@ -273,8 +273,8 @@
                                 <div class="col-md-6">
                                     <div class="md-form">
                                         <div class="md-form"><i class="fa fa-envelope prefix blue-text"></i>
-                                            <input type="text" id="contact-email" class="form-control">
-                                            <label for="contact-email" class="">Your email</label>
+                                            <input type="text" id="email" name="email" class="form-control">
+                                            <label for="email" class="">Your email</label>
                                         </div>
                                     </div>
                                 </div>
@@ -287,8 +287,8 @@
                             <div class="row wow fadeInRight animated animated" data-wow-offset="30" data-wow-duration="1.5s" data-wow-delay=".15s">
                                 <div class="col-md-12">
                                     <div class="md-form"><i class="fa fa-tag prefix blue-text"></i>
-                                        <input type="text" id="contact-Subject" class="form-control">
-                                        <label for="contact-Subject" class="">Subject</label>
+                                        <input type="text" id="subject" name="subject" class="form-control">
+                                        <label for="subject" class="">Subject</label>
                                     </div>
                                 </div>
                             </div>
@@ -301,8 +301,8 @@
                                 <div class="col-md-12">
 
                                     <div class="md-form"><i class="fa fa-pencil prefix blue-text"></i>
-                                        <textarea data-type="text" id="contact-message" class="md-textarea form-control" rows="3"></textarea>
-                                        <label for="contact-message">Your message</label>
+                                        <textarea data-type="text" id="message" name="message" class="md-textarea form-control" rows="3"></textarea>
+                                        <label for="message">Your message</label>
                                     </div>
 
                                 </div>
@@ -313,7 +313,7 @@
 
                         <div class="text-center text-md-left mt-4 wow fadeInLeft animated animated" id="submit" data-wow-offset="30" data-wow-duration="1.5s" data-wow-delay=".15s">
                             <a class="btn btn-blue btn-rounded waves-effect waves-light" onclick="validateForm()">Send</a>
-                        </div>
+                        </div> <div class="status" id="status"></div>
                     </div>
                     <!--Grid column-->
 
@@ -322,7 +322,7 @@
                         <ul class="contact-icons">
                             <li class="wow fadeInUp" data-wow-delay=".2s">
                                 <i class="fa fa-map-marker fa-2x blue-text"></i>
-                                <p>NRW, 12345, Germany</p>
+                                <p>NRW, XXXXX, Germany</p>
                             </li>
 
                             <li class="wow fadeInUp" data-wow-delay=".4s">
@@ -332,7 +332,7 @@
 
                             <li class="wow fadeInUp" data-wow-delay=".6s">
                                 <i class="fa fa-envelope fa-2x blue-text"></i>
-                                <p>contact@demons.de</p>
+                                <p>contact@demon</p>
                             </li>
                         </ul>
                     </div>
@@ -341,7 +341,7 @@
                 </div>
                 </div>
             </section>
-            <!--Section: Contact v.2-->
+            <!--Section: Contact-->
     </main>
 <!--/.Main layout-->
 
