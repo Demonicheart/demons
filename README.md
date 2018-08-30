@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://demonicheart.github.io/demons/">
-    <img src="https://cdn.jsdelivr.net/gh/demonicheart/demons@0.8.3/img/icons/android-chrome-72x72.png" alt="" width=72 height=72>
+    <img src="https://cdn.jsdelivr.net/gh/demonicheart/demons@1/img/icons/android-chrome-72x72.png" alt="" width=72 height=72>
   </a>
 
   <h3 align="center">Projekt Demon</h3>
@@ -8,7 +8,7 @@
   <p align="center">
     custom, page.
     <br>
-    <a href="#">Blog</a>
+    <a href="https://demonicheart.github.io/demons/">Blog</a>
   </p>
 </p>
 
@@ -27,38 +27,79 @@
 
 ```
 demons/
+├── addons/
+│   ├── ds-lightbox-ui.html
+│   ├── mdb-lightbox-ui.html
+│   └── preloader.html
 ├── css/
-│   └── images/ 
-│       ├── arrows.png
-│       ├── grid.png
-│       └── map.png
-├── css/
+│   └── addons/
+│       ├── datatables.css
+│       └── datatables.min.css
+│   ├── animate.css
 │   ├── bootstrap.css
+│   ├── bootstrap.min.css
+│   ├── bootstrap-grid.css
+│   ├── bootstrap-reboot.css
+│   ├── coocieconsent.css
 │   ├── font-awesome.css
 │   ├── font-awesome.min.css
-│   └── fonts.css
+│   ├── fonts.css
+│   ├── kontaktfonts.css
+│   ├── mdb.css
+│   ├── mdb.min.css
+│   ├── style.css
+│   └── webfonts.css
 ├── font/
 │   ├── font-awesome
 │   ├── glyphicons
 │   └── roboto
 ├── images/
+│   └── icons/
+│   └── patterns/
+│   └── shadows/
+│   ├── ajax-loader.gif
 │   ├── arrows.png
 │   ├── grid.png
 │   └── map.png
 ├── img/
-│   ├── bg
-│   └── icons
+│   └── anime/
+│   └── bg/
+│   └── icons/
+│   └── lightbox/
+│   └── logo/
+│   └── overlays/
+│   └── Photos/
+│   └── svg/
 ├── js/
 │    ├── analytics.js
+│    ├── bootstrap.js
 │    ├── bootstrap.min.js
 │    ├── cookieconsent.js
 │    ├── cookieconsent.min.js
-│    ├── granim.min.js
-│    ├── jq3.2.1.popper.js
-│    ├── webfontloader.min.js
+│    ├── demons.js
+│    ├── demons.min.js
+│    ├── jquery-3.3.1.js
+│    ├── jquery-3.3.1.min.js
+│    ├── mdb.js
+│    ├── mdb.min.js
+│    ├── popper.js
+│    ├── popper.min.js
+│    ├── theme.js
 │    └── wow.min.js
-└── scss/    
-     └── FontAwesome
+└── scss/
+│   └── anicss/
+│   └── bootstrap/
+│   └── cookieconsent/
+│   └── icons/
+│   └── style/
+│   ├── _cookieconsent.scss
+│   ├── _custom.scss
+│   ├── animate.scss
+│   ├── bootstrap.scss
+│   ├── bootstrap-grid.scss
+│   ├── bootstrap-reboot.scss
+│   ├── font-awesome.scss
+│   └── style.scss
 ```
 
 ## Quick start
@@ -67,7 +108,7 @@ Several quick start options are available:
 
 - [Download the latest release.](https://github.com/Demonicheart/demons/archive/master.zip)
 - Clone the repo: `git clone https://github.com/Demonicheart/demons.git`
- 
+
  Upload and 🌟
 
 
@@ -83,7 +124,7 @@ Several quick start options are available:
 ## Documentation
 
 ```
-+
++  +
 ```
 
 ## Copyright and license
