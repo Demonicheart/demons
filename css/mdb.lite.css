@@ -1471,7 +1471,10 @@ body {
   font-size-adjust: .5;
   overflow: hidden; }
 
-.page-loaded, .fonts-loaded body, .wf-active body {
+.fonts-loaded body, .wf-active body {
+  font-family: Roboto ,sans-serif; }
+
+.page-loaded {
   font-family: Roboto ,sans-serif;
   overflow: auto;
   opacity: 1; }
