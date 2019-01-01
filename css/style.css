@@ -802,7 +802,7 @@ nav li a.active {
     box-sizing: border-box;
     z-index: 3;
     padding: 0; }
-  .arrow-2 i.fa {
+  .arrow-2 i {
     font-size: 30px;
     vertical-align: middle;
     text-align: center;
