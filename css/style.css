@@ -1019,7 +1019,7 @@ ul.social-icons {
   -webkit-transition: .5s;
   transition: .5s;
   background-color: #322f30; }
-  .si.fa-facebook:hover {
+  .si.fa-facebook-f:hover {
     background-color: #3b5998; }
 .si.fa-twitter {
   padding: 10px 12px;
@@ -1071,7 +1071,7 @@ ul.social-icons {
   background-color: #322f30; }
   .si.fa-google-plus:hover {
     background-color: #dd4b39; }
-.si.fab ,.si.far {
+.si {
   border: 1px solid transparent;
   border-radius: 4px;
   box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15); }
