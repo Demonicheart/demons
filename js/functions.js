@@ -107,8 +107,7 @@ function validateForm() {
     }
 });
 
-};
-
+}
 /* ================== ScrollToTop ================ */
 jQuery(document).ready(function() {
     var offset = 100;
