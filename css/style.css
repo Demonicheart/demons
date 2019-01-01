@@ -13,8 +13,8 @@
 /*---------------------------------------------------------
  * Name       :    Demonic [M.B]
  * Project    :    demon-style
- * Version    :    0.5
- * Last change:    20.07.18
+ * Version    :    0.6
+ * Last change:    31.12.18
  * Copyright  :    Demonicheart
  * Contact    :    https://demonicheart.github.io/demons/kontakt.php
  * GitHub     :    https://github.com/Demonicheart/demons
@@ -700,10 +700,10 @@ nav li a.active {
   display: inline-block; }
   .social_icon li .social_icon li a img {
     display: inline-block; }
-.social_icon li .fa-facebook:after {
-  content: "\f09a";
+.social_icon li .fa-facebook-f:after {
+  content: "\f39e";
   color: #3b5998; }
-.social_icon li .fa-google-plus:after {
+.social_icon li .fa-google-plus-g:after {
   content: "\f0d5";
   color: #dd4b39; }
 .social_icon li .fa-twitter:after {
@@ -1061,7 +1061,7 @@ ul.social-icons {
   background-color: #322f30; }
   .si.fa-linkedin:hover {
     background-color: #0082ca; }
-.si.fa-google-plus {
+.si.fa-google-plus-g {
   padding: 10px 9px;
   -o-transition: .5s;
   -ms-transition: .5s;
@@ -1071,7 +1071,7 @@ ul.social-icons {
   background-color: #322f30; }
   .si.fa-google-plus:hover {
     background-color: #dd4b39; }
-.si.fa {
+.si.fab {
   border: 1px solid transparent;
   border-radius: 4px;
   box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15); }
