@@ -1,27 +1,27 @@
 /*!
  * Material Design for Bootstrap 4
- * Version: MDB Lite 4.6.0
+ * Version: MDB Lite 4.7.0
  *
  *
  * Copyright: Material Design for Bootstrap
- * http://mdbootstrap.com/
+ * https://mdbootstrap.com/
  *
- * Read the license: http://mdbootstrap.com/license/
+ * Read the license: https://mdbootstrap.com/license/
  *
  *
- * Documentation: http://mdbootstrap.com/
+ * Documentation: https://mdbootstrap.com/
  *
- * Getting started: http://mdbootstrap.com/getting-started/
+ * Getting started: https://mdbootstrap.com/getting-started/
  *
- * Tutorials: http://mdbootstrap.com/bootstrap-tutorial/
+ * Tutorials: https://mdbootstrap.com/bootstrap-tutorial/
  *
- * Templates: http://mdbootstrap.com/templates/
+ * Templates: https://mdbootstrap.com/templates/
  *
- * Support: http://mdbootstrap.com/forums/forum/support/
+ * Support: https://mdbootstrap.com/forums/forum/support/
  *
  * Contact: office@mdbootstrap.com
  *
- * Atribution: Animate CSS, Twitter Bootstrap, Materialize CSS, Normalize CSS, Waves JS, WOW JS, Toastr, Chart.js , Hammer.js
+ * Attribution: Animate CSS, Twitter Bootstrap, Materialize CSS, Normalize CSS, Waves JS, WOW JS, Toastr, Chart.js , Hammer.js
  *
  */
 
@@ -1240,8 +1240,18 @@ var _this = void 0;
   $(textAreaSelector).each(textAreaAutoResize);
   $body.on('keyup keydown', textAreaSelector, textAreaAutoResize);
 })(jQuery);
-"use strict";
+// "use strict";
 
+// $(document).ready(function () {
+//   $('body').attr('aria-busy', true);
+//   $('#preloader-markup').load('mdb-addons/preloader.html', function () {
+//     $(window).on('load', function () {
+//       $('#mdb-preloader').fadeOut('slow');
+//       $('body').removeAttr('aria-busy');
+//     });
+//   });
+// });
+"use strict";
 $('body').attr('aria-busy', true);
 $(window).on('load', function() { // makes sure the whole site is loaded
   $('#status').fadeOut(); // will first fade out the loading animation
@@ -1293,17 +1303,18 @@ $(window).on('load', function() { // makes sure the whole site is loaded
     var cardId = $(this).attr('data-card');
     $("#".concat(cardId)).toggleClass('flipped');
   });
-  var frontHeight = $('.front').outerHeight();
-  var backHeight = $('.back').outerHeight();
+  $(window).on('load', function () {
+    var frontHeight = $('.front').outerHeight();
+    var backHeight = $('.back').outerHeight();
 
-  if (frontHeight > backHeight) {
-    $('.card-wrapper, .back').height(frontHeight);
-  } else if (frontHeight > backHeight) {
-    $('.card-wrapper, .front').height(backHeight);
-  } else {
-    $('.card-wrapper').height(backHeight);
-  }
-
+    if (frontHeight > backHeight) {
+      $('.card-wrapper, .back').height(frontHeight);
+    } else if (frontHeight > backHeight) {
+      $('.card-wrapper, .front').height(backHeight);
+    } else {
+      $('.card-wrapper').height(backHeight);
+    }
+  });
   $('.card-share > a').on('click', function (e) {
     e.preventDefault();
     $(this).toggleClass('share-expanded').parent().find('div').toggleClass('social-reveal-active');
@@ -1514,7 +1525,7 @@ $(window).on('load', function() { // makes sure the whole site is loaded
             function getDefaults() {
                 return {
                     tapToDismiss: true,
-                    toastClass: 'toast',
+                    toastClass: 'md-toast',
                     containerId: 'toast-container',
                     debug: false,
 
@@ -1529,16 +1540,16 @@ $(window).on('load', function() { // makes sure the whole site is loaded
 
                     extendedTimeOut: 1000,
                     iconClasses: {
-                        error: 'toast-error',
-                        info: 'toast-info',
-                        success: 'toast-success',
-                        warning: 'toast-warning'
+                        error: 'md-toast-error',
+                        info: 'md-toast-info',
+                        success: 'md-toast-success',
+                        warning: 'md-toast-warning'
                     },
-                    iconClass: 'toast-info',
-                    positionClass: 'toast-top-right',
+                    iconClass: 'md-toast-info',
+                    positionClass: 'md-toast-top-right',
                     timeOut: 5000, // Set timeOut and extendedTimeOut to 0 to make it sticky
-                    titleClass: 'toast-title',
-                    messageClass: 'toast-message',
+                    titleClass: 'md-toast-title',
+                    messageClass: 'md-toast-message',
                     target: 'body',
                     closeHtml: '<button type="button">&times;</button>',
                     newestOnTop: true,
@@ -1681,14 +1692,14 @@ $(window).on('load', function() { // makes sure the whole site is loaded
 
                 function setCloseButton() {
                     if (options.closeButton) {
-                        $closeElement.addClass('toast-close-button').attr('role', 'button');
+                        $closeElement.addClass('md-toast-close-button').attr('role', 'button');
                         $toastElement.prepend($closeElement);
                     }
                 }
 
                 function setProgressBar() {
                     if (options.progressBar) {
-                        $progressElement.addClass('toast-progress');
+                        $progressElement.addClass('md-toast-progress');
                         $toastElement.prepend($progressElement);
                     }
                 }
@@ -2041,8 +2052,8 @@ $('.smooth-scroll a').click(function() {
 
   $.fn.mdbDropSearch = function (options) {
     var $mdbInput = $(this).find('input');
-    this.filter(function (value) {
-      $(this).on('keyup', value, function () {
+    this.filter(function (value, index) {
+      $(index).on('keyup', function () {
         var $linksInDropMenu = $mdbInput.closest('div[id]').find('a, li');
 
         for (var i = 0; i < $linksInDropMenu.length; i++) {
@@ -2056,8 +2067,6 @@ $('.smooth-scroll a').click(function() {
             });
           }
         }
-
-        ;
       });
     });
     var settings = $.extend({
@@ -5165,6 +5174,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
             _this3.removeMenu();
           } else {
+            _this3.menuOut = true;
             _this3.$sidenavOverlay = $('<div id="sidenav-overlay"></div>');
 
             _this3.$body.append(_this3.$sidenavOverlay);
@@ -6208,7 +6218,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         for (var i = 0; i < itemsCount; i++) {
           var text = this.$nativeSelect.find('option').eq(this.valuesSelected[i]).text();
-          value += ", ".concat(text);
+          value += ",".concat(text);
         }
 
         if (itemsCount >= 5) {
@@ -6552,23 +6562,24 @@ $.fn.mdb_autocomplete = function (options) {
     office@mdbootstrap.com
 */
 
-$('body').on('shown.bs.modal', '.modal', function() {
-    if($('.modal-backdrop').length) {
-    } else {
+(function($){
+  $('body').on('shown.bs.modal', '.modal', function() {
+    if(!$('.modal-backdrop').length) {
 
-        $modal_dialog = $(this).children('.modal-dialog')
+      $modal_dialog = $(this).children('.modal-dialog')
 
-        if($modal_dialog.hasClass('modal-side')) {
-            $(this).addClass('modal-scrolling');
-            $('body').addClass('scrollable');
-        }
+      if($modal_dialog.hasClass('modal-side')) {
+        $(this).addClass('modal-scrolling');
+        $('body').addClass('scrollable');
+      }
 
-        if($modal_dialog.hasClass('modal-frame')) {
-            $(this).addClass('modal-content-clickable');
-            $('body').addClass('scrollable');
-        }
+      if($modal_dialog.hasClass('modal-frame')) {
+        $(this).addClass('modal-content-clickable');
+        $('body').addClass('scrollable');
+      }
     }
-});
-$('body').on('hidden.bs.modal', '.modal', function() {
+  });
+  $('body').on('hidden.bs.modal', '.modal', function() {
     $('body').removeClass('scrollable');
-});
+  });
+})(jQuery);

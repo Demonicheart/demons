@@ -1,27 +1,27 @@
 /*!
  * Material Design for Bootstrap 4
- * Version: MDB Pro 4.6.0
+ * Version: MDB Pro 4.7.0
  *
  *
  * Copyright: Material Design for Bootstrap
- * http://mdbootstrap.com/
+ * https://mdbootstrap.com/
  *
- * Read the license: http://mdbootstrap.com/license/
+ * Read the license: https://mdbootstrap.com/license/
  *
  *
- * Documentation: http://mdbootstrap.com/
+ * Documentation: https://mdbootstrap.com/
  *
- * Getting started: http://mdbootstrap.com/getting-started/
+ * Getting started: https://mdbootstrap.com/getting-started/
  *
- * Tutorials: http://mdbootstrap.com/bootstrap-tutorial/
+ * Tutorials: https://mdbootstrap.com/bootstrap-tutorial/
  *
- * Templates: http://mdbootstrap.com/templates/
+ * Templates: https://mdbootstrap.com/templates/
  *
- * Support: http://mdbootstrap.com/forums/forum/support/
+ * Support: https://mdbootstrap.com/forums/forum/support/
  *
  * Contact: office@mdbootstrap.com
  *
- * Atribution: Animate CSS, Twitter Bootstrap, Materialize CSS, Normalize CSS, Waves JS, WOW JS, Toastr, Chart.js , Hammer.js
+ * Attribution: Animate CSS, Twitter Bootstrap, Materialize CSS, Normalize CSS, Waves JS, WOW JS, Toastr, Chart.js , Hammer.js
  *
  */
 
@@ -60,7 +60,6 @@
   ofi.js
   jarallax.js
   jarallax-video.js
-  jarallax-elements.js
   mdb-autocomplete.js
   enhanced-modals.js
 
@@ -15708,8 +15707,18 @@ var _this = void 0;
   $(textAreaSelector).each(textAreaAutoResize);
   $body.on('keyup keydown', textAreaSelector, textAreaAutoResize);
 })(jQuery);
-"use strict";
+// "use strict";
 
+// $(document).ready(function () {
+//   $('body').attr('aria-busy', true);
+//   $('#preloader-markup').load('mdb-addons/preloader.html', function () {
+//     $(window).on('load', function () {
+//       $('#mdb-preloader').fadeOut('slow');
+//       $('body').removeAttr('aria-busy');
+//     });
+//   });
+// });
+"use strict";
 $('body').attr('aria-busy', true);
 $(window).on('load', function() { // makes sure the whole site is loaded
   $('#status').fadeOut(); // will first fade out the loading animation
@@ -15761,17 +15770,18 @@ $(window).on('load', function() { // makes sure the whole site is loaded
     var cardId = $(this).attr('data-card');
     $("#".concat(cardId)).toggleClass('flipped');
   });
-  var frontHeight = $('.front').outerHeight();
-  var backHeight = $('.back').outerHeight();
+  $(window).on('load', function () {
+    var frontHeight = $('.front').outerHeight();
+    var backHeight = $('.back').outerHeight();
 
-  if (frontHeight > backHeight) {
-    $('.card-wrapper, .back').height(frontHeight);
-  } else if (frontHeight > backHeight) {
-    $('.card-wrapper, .front').height(backHeight);
-  } else {
-    $('.card-wrapper').height(backHeight);
-  }
-
+    if (frontHeight > backHeight) {
+      $('.card-wrapper, .back').height(frontHeight);
+    } else if (frontHeight > backHeight) {
+      $('.card-wrapper, .front').height(backHeight);
+    } else {
+      $('.card-wrapper').height(backHeight);
+    }
+  });
   $('.card-share > a').on('click', function (e) {
     e.preventDefault();
     $(this).toggleClass('share-expanded').parent().find('div').toggleClass('social-reveal-active');
@@ -15982,7 +15992,7 @@ $(window).on('load', function() { // makes sure the whole site is loaded
             function getDefaults() {
                 return {
                     tapToDismiss: true,
-                    toastClass: 'toast',
+                    toastClass: 'md-toast',
                     containerId: 'toast-container',
                     debug: false,
 
@@ -15997,16 +16007,16 @@ $(window).on('load', function() { // makes sure the whole site is loaded
 
                     extendedTimeOut: 1000,
                     iconClasses: {
-                        error: 'toast-error',
-                        info: 'toast-info',
-                        success: 'toast-success',
-                        warning: 'toast-warning'
+                        error: 'md-toast-error',
+                        info: 'md-toast-info',
+                        success: 'md-toast-success',
+                        warning: 'md-toast-warning'
                     },
-                    iconClass: 'toast-info',
-                    positionClass: 'toast-top-right',
+                    iconClass: 'md-toast-info',
+                    positionClass: 'md-toast-top-right',
                     timeOut: 5000, // Set timeOut and extendedTimeOut to 0 to make it sticky
-                    titleClass: 'toast-title',
-                    messageClass: 'toast-message',
+                    titleClass: 'md-toast-title',
+                    messageClass: 'md-toast-message',
                     target: 'body',
                     closeHtml: '<button type="button">&times;</button>',
                     newestOnTop: true,
@@ -16149,14 +16159,14 @@ $(window).on('load', function() { // makes sure the whole site is loaded
 
                 function setCloseButton() {
                     if (options.closeButton) {
-                        $closeElement.addClass('toast-close-button').attr('role', 'button');
+                        $closeElement.addClass('md-toast-close-button').attr('role', 'button');
                         $toastElement.prepend($closeElement);
                     }
                 }
 
                 function setProgressBar() {
                     if (options.progressBar) {
-                        $progressElement.addClass('toast-progress');
+                        $progressElement.addClass('md-toast-progress');
                         $toastElement.prepend($progressElement);
                     }
                 }
@@ -16509,8 +16519,8 @@ $('.smooth-scroll a').click(function() {
 
   $.fn.mdbDropSearch = function (options) {
     var $mdbInput = $(this).find('input');
-    this.filter(function (value) {
-      $(this).on('keyup', value, function () {
+    this.filter(function (value, index) {
+      $(index).on('keyup', function () {
         var $linksInDropMenu = $mdbInput.closest('div[id]').find('a, li');
 
         for (var i = 0; i < $linksInDropMenu.length; i++) {
@@ -16524,8 +16534,6 @@ $('.smooth-scroll a').click(function() {
             });
           }
         }
-
-        ;
       });
     });
     var settings = $.extend({
@@ -19633,6 +19641,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
             _this3.removeMenu();
           } else {
+            _this3.menuOut = true;
             _this3.$sidenavOverlay = $('<div id="sidenav-overlay"></div>');
 
             _this3.$body.append(_this3.$sidenavOverlay);
@@ -19902,7 +19911,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
  * easy-pie-chart
  * Lightweight plugin to render simple, animated and retina optimized pie charts
  *
- * @license
+ * @license 
  * @author Robert Fleischmann <rendro87@gmail.com> (http://robert-fleischmann.de)
  * @version 2.1.7
  **/
@@ -21041,7 +21050,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         for (var i = 0; i < itemsCount; i++) {
           var text = this.$nativeSelect.find('option').eq(this.valuesSelected[i]).text();
-          value += ", ".concat(text);
+          value += ",".concat(text);
         }
 
         if (itemsCount >= 5) {
@@ -25841,7 +25850,7 @@ ClockPicker.prototype.parseInputValue = function(){
 
 var initPhotoSwipeFromDOM = function (gallerySelector) {
 
-    // parse slide data (url, title, size ...) from DOM elements
+    // parse slide data (url, title, size ...) from DOM elements 
     // (children of gallerySelector)
     var parseThumbnailElements = function (el) {
         var thumbElements = el.childNodes,
@@ -25856,7 +25865,7 @@ var initPhotoSwipeFromDOM = function (gallerySelector) {
 
             figureEl = thumbElements[i]; // <figure> element
 
-            // include only element nodes
+            // include only element nodes 
             if (figureEl.nodeType !== 1) {
                 continue;
             }
@@ -26001,7 +26010,7 @@ var initPhotoSwipeFromDOM = function (gallerySelector) {
         // PhotoSwipe opened from URL
         if (fromURL) {
             if (options.galleryPIDs) {
-                // parse real index when custom PIDs are used
+                // parse real index when custom PIDs are used 
                 // http://photoswipe.com/documentation/faq.html#custom-pid-in-url
                 for (var j = 0; j < items.length; j++) {
                     if (items[j].pid == index) {
@@ -29220,298 +29229,6 @@ function jarallaxVideo() {
 
 /***/ })
 /******/ ]);
-/*!
- * Name    : Elements Extension for Jarallax
- * Version : 1.0.0
- * Author  : nK <https://nkdev.info>
- * GitHub  : https://github.com/nk-o/jarallax
- */
-/******/ (function(modules) { // webpackBootstrap
-/******/ 	// The module cache
-/******/ 	var installedModules = {};
-/******/
-/******/ 	// The require function
-/******/ 	function __webpack_require__(moduleId) {
-/******/
-/******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId]) {
-/******/ 			return installedModules[moduleId].exports;
-/******/ 		}
-/******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = installedModules[moduleId] = {
-/******/ 			i: moduleId,
-/******/ 			l: false,
-/******/ 			exports: {}
-/******/ 		};
-/******/
-/******/ 		// Execute the module function
-/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/
-/******/ 		// Flag the module as loaded
-/******/ 		module.l = true;
-/******/
-/******/ 		// Return the exports of the module
-/******/ 		return module.exports;
-/******/ 	}
-/******/
-/******/
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__webpack_require__.m = modules;
-/******/
-/******/ 	// expose the module cache
-/******/ 	__webpack_require__.c = installedModules;
-/******/
-/******/ 	// define getter function for harmony exports
-/******/ 	__webpack_require__.d = function(exports, name, getter) {
-/******/ 		if(!__webpack_require__.o(exports, name)) {
-/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
-/******/ 		}
-/******/ 	};
-/******/
-/******/ 	// define __esModule on exports
-/******/ 	__webpack_require__.r = function(exports) {
-/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
-/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
-/******/ 		}
-/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
-/******/ 	};
-/******/
-/******/ 	// create a fake namespace object
-/******/ 	// mode & 1: value is a module id, require it
-/******/ 	// mode & 2: merge all properties of value into the ns
-/******/ 	// mode & 4: return value when already ns object
-/******/ 	// mode & 8|1: behave like require
-/******/ 	__webpack_require__.t = function(value, mode) {
-/******/ 		if(mode & 1) value = __webpack_require__(value);
-/******/ 		if(mode & 8) return value;
-/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
-/******/ 		var ns = Object.create(null);
-/******/ 		__webpack_require__.r(ns);
-/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
-/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
-/******/ 		return ns;
-/******/ 	};
-/******/
-/******/ 	// getDefaultExport function for compatibility with non-harmony modules
-/******/ 	__webpack_require__.n = function(module) {
-/******/ 		var getter = module && module.__esModule ?
-/******/ 			function getDefault() { return module['default']; } :
-/******/ 			function getModuleExports() { return module; };
-/******/ 		__webpack_require__.d(getter, 'a', getter);
-/******/ 		return getter;
-/******/ 	};
-/******/
-/******/ 	// Object.prototype.hasOwnProperty.call
-/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
-/******/
-/******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
-/******/
-/******/
-/******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
-/******/ })
-/************************************************************************/
-/******/ ([
-/* 0 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(1);
-
-
-/***/ }),
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _liteReady = __webpack_require__(2);
-
-var _liteReady2 = _interopRequireDefault(_liteReady);
-
-var _jarallaxElement = __webpack_require__(3);
-
-var _jarallaxElement2 = _interopRequireDefault(_jarallaxElement);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-(0, _jarallaxElement2.default)();
-
-// data-jarallax-element initialization
-(0, _liteReady2.default)(function () {
-    if (typeof jarallax !== 'undefined') {
-        jarallax(document.querySelectorAll('[data-jarallax-element]'));
-    }
-});
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-module.exports = function (callback) {
-
-	if (document.readyState === 'complete' || document.readyState === 'interactive') {
-		// Already ready or interactive, execute callback
-		callback.call();
-	} else if (document.attachEvent) {
-		// Old browsers
-		document.attachEvent('onreadystatechange', function () {
-			if (document.readyState === 'interactive') callback.call();
-		});
-	} else if (document.addEventListener) {
-		// Modern browsers
-		document.addEventListener('DOMContentLoaded', callback);
-	}
-};
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.default = jarallaxElement;
-
-var _global = __webpack_require__(4);
-
-var _global2 = _interopRequireDefault(_global);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function jarallaxElement() {
-    var jarallax = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _global2.default.jarallax;
-
-    if (typeof jarallax === 'undefined') {
-        return;
-    }
-
-    var Jarallax = jarallax.constructor;
-
-    // redefine default methods
-    ['initImg', 'canInitParallax', 'init', 'destroy', 'clipContainer', 'coverImage', 'isVisible', 'onScroll', 'onResize'].forEach(function (key) {
-        var def = Jarallax.prototype[key];
-        Jarallax.prototype[key] = function () {
-            var self = this;
-            var args = arguments || [];
-
-            if (key === 'initImg' && self.$item.getAttribute('data-jarallax-element') !== null) {
-                self.options.type = 'element';
-                self.pureOptions.speed = self.$item.getAttribute('data-jarallax-element') || self.pureOptions.speed;
-            }
-            if (self.options.type !== 'element') {
-                return def.apply(self, args);
-            }
-
-            self.pureOptions.threshold = self.$item.getAttribute('data-threshold') || '';
-
-            switch (key) {
-                case 'init':
-                    var speedArr = self.pureOptions.speed.split(' ');
-                    self.options.speed = self.pureOptions.speed || 0;
-                    self.options.speedY = speedArr[0] ? parseFloat(speedArr[0]) : 0;
-                    self.options.speedX = speedArr[1] ? parseFloat(speedArr[1]) : 0;
-
-                    var thresholdArr = self.pureOptions.threshold.split(' ');
-                    self.options.thresholdY = thresholdArr[0] ? parseFloat(thresholdArr[0]) : null;
-                    self.options.thresholdX = thresholdArr[1] ? parseFloat(thresholdArr[1]) : null;
-                    break;
-                case 'onResize':
-                    var defTransform = self.css(self.$item, 'transform');
-                    self.css(self.$item, { transform: '' });
-                    var rect = self.$item.getBoundingClientRect();
-                    self.itemData = {
-                        width: rect.width,
-                        height: rect.height,
-                        y: rect.top + self.getWindowData().y,
-                        x: rect.left
-                    };
-                    self.css(self.$item, { transform: defTransform });
-                    break;
-                case 'onScroll':
-                    var wnd = self.getWindowData();
-                    var centerPercent = (wnd.y + wnd.height / 2 - self.itemData.y - self.itemData.height / 2) / (wnd.height / 2);
-                    var moveY = centerPercent * self.options.speedY;
-                    var moveX = centerPercent * self.options.speedX;
-                    var my = moveY;
-                    var mx = moveX;
-                    if (self.options.thresholdY !== null && moveY > self.options.thresholdY) my = 0;
-                    if (self.options.thresholdX !== null && moveX > self.options.thresholdX) mx = 0;
-                    self.css(self.$item, { transform: 'translate3d(' + mx + 'px,' + my + 'px,0)' });
-                    break;
-                case 'initImg':
-                case 'isVisible':
-                case 'clipContainer':
-                case 'coverImage':
-                    return true;
-                // no default
-            }
-            return def.apply(self, args);
-        };
-    });
-} /* eslint no-case-declarations: "off" */
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(global) {
-
-var win;
-
-if (typeof window !== "undefined") {
-    win = window;
-} else if (typeof global !== "undefined") {
-    win = global;
-} else if (typeof self !== "undefined") {
-    win = self;
-} else {
-    win = {};
-}
-
-module.exports = win;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(5)))
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var g;
-
-// This works in non-strict mode
-g = function () {
-	return this;
-}();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1, eval)("this");
-} catch (e) {
-	// This works if the window reference is available
-	if ((typeof window === "undefined" ? "undefined" : _typeof(window)) === "object") g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-/***/ })
-/******/ ]);
 "use strict";
 
 $.fn.mdb_autocomplete = function (options) {
@@ -29582,26 +29299,28 @@ $.fn.mdb_autocomplete = function (options) {
     office@mdbootstrap.com
 */
 
-$('body').on('shown.bs.modal', '.modal', function() {
-    if($('.modal-backdrop').length) {
-    } else {
+(function($){
+  $('body').on('shown.bs.modal', '.modal', function() {
+    if(!$('.modal-backdrop').length) {
 
-        $modal_dialog = $(this).children('.modal-dialog')
+      $modal_dialog = $(this).children('.modal-dialog')
 
-        if($modal_dialog.hasClass('modal-side')) {
-            $(this).addClass('modal-scrolling');
-            $('body').addClass('scrollable');
-        }
+      if($modal_dialog.hasClass('modal-side')) {
+        $(this).addClass('modal-scrolling');
+        $('body').addClass('scrollable');
+      }
 
-        if($modal_dialog.hasClass('modal-frame')) {
-            $(this).addClass('modal-content-clickable');
-            $('body').addClass('scrollable');
-        }
+      if($modal_dialog.hasClass('modal-frame')) {
+        $(this).addClass('modal-content-clickable');
+        $('body').addClass('scrollable');
+      }
     }
-});
-$('body').on('hidden.bs.modal', '.modal', function() {
+  });
+  $('body').on('hidden.bs.modal', '.modal', function() {
     $('body').removeClass('scrollable');
-});
+  });
+})(jQuery);
+
 "use strict";
 
 (function ($) {
