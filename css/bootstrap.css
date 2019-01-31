@@ -6922,7 +6922,7 @@ a.text-dark:hover, a.text-dark:focus {
     border-color: #dee2e6; } }
 
 /*!
- * Font Awesome 5.6.3 by @fontawesome - https://fontawesome.com
+ * Font Awesome 5.7.0 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license (Commercial License)
  */
 .fa, .fab, .fal, .far, .fas {
@@ -6937,13 +6937,13 @@ a.text-dark:hover, a.text-dark:focus {
 .fa-lg {
   font-size: 1.33333em;
   line-height: .75em;
-  vertical-align: -.0667em; }
+  vertical-align: -0.0667em; }
 
 .fa-xs {
-  font-size: .75em; }
+  font-size: 0.75em; }
 
 .fa-sm {
-  font-size: .875em; }
+  font-size: 0.875em; }
 
 .fa-1x {
   font-size: 1em; }
@@ -6996,7 +6996,7 @@ a.text-dark:hover, a.text-dark:focus {
 .fa-border {
   border: .08em solid #eee;
   border-radius: .1em;
-  padding: .2em .25em .15em; }
+  padding: 0.2em 0.25em 0.15em; }
 
 .fa-pull-left {
   float: left; }
@@ -7005,10 +7005,10 @@ a.text-dark:hover, a.text-dark:focus {
   float: right; }
 
 .fa.fa-pull-left, .fab.fa-pull-left, .fal.fa-pull-left, .far.fa-pull-left, .fas.fa-pull-left {
-  margin-right: .3em; }
+  margin-right: 0.3em; }
 
 .fa.fa-pull-right, .fab.fa-pull-right, .fal.fa-pull-right, .far.fa-pull-right, .fas.fa-pull-right {
-  margin-left: .3em; }
+  margin-left: 0.3em; }
 
 .fa-spin {
   animation: fa-spin 2s infinite linear; }
@@ -7041,13 +7041,13 @@ a.text-dark:hover, a.text-dark:focus {
 .fa-flip-vertical {
   transform: scaleY(-1); }
 
-.fa-flip-horizontal.fa-flip-vertical, .fa-flip-vertical {
+.fa-flip-both, .fa-flip-horizontal.fa-flip-vertical, .fa-flip-vertical {
   -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1)"; }
 
-.fa-flip-horizontal.fa-flip-vertical {
+.fa-flip-both, .fa-flip-horizontal.fa-flip-vertical {
   transform: scale(-1); }
 
-:root .fa-flip-horizontal, :root .fa-flip-vertical, :root .fa-rotate-90, :root .fa-rotate-180, :root .fa-rotate-270 {
+:root .fa-flip-both, :root .fa-flip-horizontal, :root .fa-flip-vertical, :root .fa-rotate-90, :root .fa-rotate-180, :root .fa-rotate-270 {
   filter: none; }
 
 .fa-stack {
@@ -7445,6 +7445,9 @@ a.text-dark:hover, a.text-dark:focus {
 .fa-backward:before {
   content: "\f04a"; }
 
+.fa-bacon:before {
+  content: "\f7e5"; }
+
 .fa-badge:before {
   content: "\f335"; }
 
@@ -7661,6 +7664,9 @@ a.text-dark:hover, a.text-dark:focus {
 .fa-book-heart:before {
   content: "\f499"; }
 
+.fa-book-medical:before {
+  content: "\f7e6"; }
+
 .fa-book-open:before {
   content: "\f518"; }
 
@@ -7670,11 +7676,17 @@ a.text-dark:hover, a.text-dark:focus {
 .fa-book-spells:before {
   content: "\f6b8"; }
 
+.fa-book-user:before {
+  content: "\f7e7"; }
+
 .fa-bookmark:before {
   content: "\f02e"; }
 
 .fa-books:before {
   content: "\f5db"; }
+
+.fa-books-medical:before {
+  content: "\f7e8"; }
 
 .fa-boot:before {
   content: "\f782"; }
@@ -7730,11 +7742,23 @@ a.text-dark:hover, a.text-dark:focus {
 .fa-boxing-glove:before {
   content: "\f438"; }
 
+.fa-brackets:before {
+  content: "\f7e9"; }
+
+.fa-brackets-curly:before {
+  content: "\f7ea"; }
+
 .fa-braille:before {
   content: "\f2a1"; }
 
 .fa-brain:before {
   content: "\f5dc"; }
+
+.fa-bread-loaf:before {
+  content: "\f7eb"; }
+
+.fa-bread-slice:before {
+  content: "\f7ec"; }
 
 .fa-briefcase:before {
   content: "\f0b1"; }
@@ -7780,6 +7804,9 @@ a.text-dark:hover, a.text-dark:focus {
 
 .fa-buromobelexperte:before {
   content: "\f37f"; }
+
+.fa-burrito:before {
+  content: "\f7ed"; }
 
 .fa-bus:before {
   content: "\f207"; }
@@ -8030,6 +8057,9 @@ a.text-dark:hover, a.text-dark:focus {
 .fa-chart-pie-alt:before {
   content: "\f64e"; }
 
+.fa-chart-scatter:before {
+  content: "\f7ee"; }
+
 .fa-check:before {
   content: "\f00c"; }
 
@@ -8041,6 +8071,15 @@ a.text-dark:hover, a.text-dark:focus {
 
 .fa-check-square:before {
   content: "\f14a"; }
+
+.fa-cheese:before {
+  content: "\f7ef"; }
+
+.fa-cheese-swiss:before {
+  content: "\f7f0"; }
+
+.fa-cheeseburger:before {
+  content: "\f7f1"; }
 
 .fa-chess:before {
   content: "\f439"; }
@@ -8162,6 +8201,9 @@ a.text-dark:hover, a.text-dark:focus {
 .fa-claw-marks:before {
   content: "\f6c2"; }
 
+.fa-clinic-medical:before {
+  content: "\f7f2"; }
+
 .fa-clipboard:before {
   content: "\f328"; }
 
@@ -8176,6 +8218,9 @@ a.text-dark:hover, a.text-dark:focus {
 
 .fa-clipboard-prescription:before {
   content: "\f5e8"; }
+
+.fa-clipboard-user:before {
+  content: "\f7f3"; }
 
 .fa-clock:before {
   content: "\f017"; }
@@ -8330,6 +8375,9 @@ a.text-dark:hover, a.text-dark:focus {
 .fa-comment-alt-lines:before {
   content: "\f4a6"; }
 
+.fa-comment-alt-medical:before {
+  content: "\f7f4"; }
+
 .fa-comment-alt-minus:before {
   content: "\f4a7"; }
 
@@ -8362,6 +8410,9 @@ a.text-dark:hover, a.text-dark:focus {
 
 .fa-comment-lines:before {
   content: "\f4b0"; }
+
+.fa-comment-medical:before {
+  content: "\f7f5"; }
 
 .fa-comment-minus:before {
   content: "\f4b1"; }
@@ -8513,6 +8564,9 @@ a.text-dark:hover, a.text-dark:focus {
 .fa-critical-role:before {
   content: "\f6c9"; }
 
+.fa-croissant:before {
+  content: "\f7f6"; }
+
 .fa-crop:before {
   content: "\f125"; }
 
@@ -8530,6 +8584,12 @@ a.text-dark:hover, a.text-dark:focus {
 
 .fa-crown:before {
   content: "\f521"; }
+
+.fa-crutch:before {
+  content: "\f7f7"; }
+
+.fa-crutches:before {
+  content: "\f7f8"; }
 
 .fa-css3:before {
   content: "\f13c"; }
@@ -8569,6 +8629,9 @@ a.text-dark:hover, a.text-dark:focus {
 
 .fa-deaf:before {
   content: "\f2a4"; }
+
+.fa-debug:before {
+  content: "\f7f9"; }
 
 .fa-deer:before {
   content: "\f78e"; }
@@ -8677,6 +8740,9 @@ a.text-dark:hover, a.text-dark:focus {
 
 .fa-discourse:before {
   content: "\f393"; }
+
+.fa-disease:before {
+  content: "\f7fa"; }
 
 .fa-divide:before {
   content: "\f529"; }
@@ -8824,6 +8890,12 @@ a.text-dark:hover, a.text-dark:focus {
 
 .fa-edit:before {
   content: "\f044"; }
+
+.fa-egg:before {
+  content: "\f7fb"; }
+
+.fa-egg-fried:before {
+  content: "\f7fc"; }
 
 .fa-eject:before {
   content: "\f052"; }
@@ -9110,6 +9182,9 @@ a.text-dark:hover, a.text-dark:focus {
 .fa-file-word:before {
   content: "\f1c2"; }
 
+.fa-files-medical:before {
+  content: "\f7fd"; }
+
 .fa-fill:before {
   content: "\f575"; }
 
@@ -9161,6 +9236,9 @@ a.text-dark:hover, a.text-dark:focus {
 .fa-fish:before {
   content: "\f578"; }
 
+.fa-fish-cooked:before {
+  content: "\f7fe"; }
+
 .fa-fist-raised:before {
   content: "\f6de"; }
 
@@ -9194,6 +9272,15 @@ a.text-dark:hover, a.text-dark:focus {
 .fa-flipboard:before {
   content: "\f44d"; }
 
+.fa-flower:before {
+  content: "\f7ff"; }
+
+.fa-flower-daffodil:before {
+  content: "\f800"; }
+
+.fa-flower-tulip:before {
+  content: "\f801"; }
+
 .fa-flushed:before {
   content: "\f579"; }
 
@@ -9217,6 +9304,9 @@ a.text-dark:hover, a.text-dark:focus {
 
 .fa-folder-times:before {
   content: "\f65f"; }
+
+.fa-folder-tree:before {
+  content: "\f802"; }
 
 .fa-folders:before {
   content: "\f660"; }
@@ -9274,6 +9364,9 @@ a.text-dark:hover, a.text-dark:focus {
 
 .fa-freebsd:before {
   content: "\f3a4"; }
+
+.fa-french-fries:before {
+  content: "\f803"; }
 
 .fa-frog:before {
   content: "\f52e"; }
@@ -9370,6 +9463,9 @@ a.text-dark:hover, a.text-dark:focus {
 
 .fa-gitter:before {
   content: "\f426"; }
+
+.fa-glass:before {
+  content: "\f804"; }
 
 .fa-glass-champagne:before {
   content: "\f79e"; }
@@ -9563,6 +9659,9 @@ a.text-dark:hover, a.text-dark:focus {
 .fa-hackerrank:before {
   content: "\f5f7"; }
 
+.fa-hamburger:before {
+  content: "\f805"; }
+
 .fa-hammer:before {
   content: "\f6e3"; }
 
@@ -9598,6 +9697,9 @@ a.text-dark:hover, a.text-dark:focus {
 
 .fa-hand-lizard:before {
   content: "\f258"; }
+
+.fa-hand-middle-finger:before {
+  content: "\f806"; }
 
 .fa-hand-paper:before {
   content: "\f256"; }
@@ -9653,6 +9755,9 @@ a.text-dark:hover, a.text-dark:focus {
 .fa-hanukiah:before {
   content: "\f6e6"; }
 
+.fa-hard-hat:before {
+  content: "\f807"; }
+
 .fa-hashtag:before {
   content: "\f292"; }
 
@@ -9676,6 +9781,12 @@ a.text-dark:hover, a.text-dark:focus {
 
 .fa-head-side:before {
   content: "\f6e9"; }
+
+.fa-head-side-brain:before {
+  content: "\f808"; }
+
+.fa-head-side-medical:before {
+  content: "\f809"; }
 
 .fa-head-vr:before {
   content: "\f6ea"; }
@@ -9752,8 +9863,17 @@ a.text-dark:hover, a.text-dark:focus {
 .fa-home:before {
   content: "\f015"; }
 
+.fa-home-alt:before {
+  content: "\f80a"; }
+
 .fa-home-heart:before {
   content: "\f4c9"; }
+
+.fa-home-lg:before {
+  content: "\f80b"; }
+
+.fa-home-lg-alt:before {
+  content: "\f80c"; }
 
 .fa-hood-cloak:before {
   content: "\f6ef"; }
@@ -9779,8 +9899,17 @@ a.text-dark:hover, a.text-dark:focus {
 .fa-hospital-symbol:before {
   content: "\f47e"; }
 
+.fa-hospital-user:before {
+  content: "\f80d"; }
+
+.fa-hospitals:before {
+  content: "\f80e"; }
+
 .fa-hot-tub:before {
   content: "\f593"; }
+
+.fa-hotdog:before {
+  content: "\f80f"; }
 
 .fa-hotel:before {
   content: "\f594"; }
@@ -9826,6 +9955,9 @@ a.text-dark:hover, a.text-dark:focus {
 
 .fa-i-cursor:before {
   content: "\f246"; }
+
+.fa-ice-cream:before {
+  content: "\f810"; }
 
 .fa-ice-skate:before {
   content: "\f7ac"; }
@@ -9910,6 +10042,9 @@ a.text-dark:hover, a.text-dark:focus {
 
 .fa-ioxhost:before {
   content: "\f208"; }
+
+.fa-island-tropical:before {
+  content: "\f811"; }
 
 .fa-italic:before {
   content: "\f033"; }
@@ -10036,6 +10171,9 @@ a.text-dark:hover, a.text-dark:focus {
 
 .fa-laptop-code:before {
   content: "\f5fc"; }
+
+.fa-laptop-medical:before {
+  content: "\f812"; }
 
 .fa-laravel:before {
   content: "\f3bd"; }
@@ -10244,6 +10382,9 @@ a.text-dark:hover, a.text-dark:focus {
 .fa-mail-bulk:before {
   content: "\f674"; }
 
+.fa-mailbox:before {
+  content: "\f813"; }
+
 .fa-mailchimp:before {
   content: "\f59e"; }
 
@@ -10336,6 +10477,9 @@ a.text-dark:hover, a.text-dark:focus {
 
 .fa-maxcdn:before {
   content: "\f136"; }
+
+.fa-meat:before {
+  content: "\f814"; }
 
 .fa-medal:before {
   content: "\f5a2"; }
@@ -10628,6 +10772,9 @@ a.text-dark:hover, a.text-dark:focus {
 .fa-pagelines:before {
   content: "\f18c"; }
 
+.fa-pager:before {
+  content: "\f815"; }
+
 .fa-paint-brush:before {
   content: "\f1fc"; }
 
@@ -10745,6 +10892,9 @@ a.text-dark:hover, a.text-dark:focus {
 .fa-people-carry:before {
   content: "\f4ce"; }
 
+.fa-pepper-hot:before {
+  content: "\f816"; }
+
 .fa-percent:before {
   content: "\f295"; }
 
@@ -10835,6 +10985,12 @@ a.text-dark:hover, a.text-dark:focus {
 .fa-pinterest-square:before {
   content: "\f0d3"; }
 
+.fa-pizza:before {
+  content: "\f817"; }
+
+.fa-pizza-slice:before {
+  content: "\f818"; }
+
 .fa-place-of-worship:before {
   content: "\f67f"; }
 
@@ -10904,6 +11060,9 @@ a.text-dark:hover, a.text-dark:focus {
 .fa-poop:before {
   content: "\f619"; }
 
+.fa-popcorn:before {
+  content: "\f819"; }
+
 .fa-portrait:before {
   content: "\f3e0"; }
 
@@ -10933,6 +11092,9 @@ a.text-dark:hover, a.text-dark:focus {
 
 .fa-print:before {
   content: "\f02f"; }
+
+.fa-print-search:before {
+  content: "\f81a"; }
 
 .fa-print-slash:before {
   content: "\f686"; }
@@ -11132,6 +11294,9 @@ a.text-dark:hover, a.text-dark:focus {
 .fa-ring:before {
   content: "\f70b"; }
 
+.fa-rings-wedding:before {
+  content: "\f81b"; }
+
 .fa-road:before {
   content: "\f018"; }
 
@@ -11189,6 +11354,12 @@ a.text-dark:hover, a.text-dark:focus {
 .fa-rv:before {
   content: "\f7be"; }
 
+.fa-sack:before {
+  content: "\f81c"; }
+
+.fa-sack-dollar:before {
+  content: "\f81d"; }
+
 .fa-sad-cry:before {
   content: "\f5b3"; }
 
@@ -11198,6 +11369,12 @@ a.text-dark:hover, a.text-dark:focus {
 .fa-safari:before {
   content: "\f267"; }
 
+.fa-salad:before {
+  content: "\f81e"; }
+
+.fa-sandwich:before {
+  content: "\f81f"; }
+
 .fa-sass:before {
   content: "\f41e"; }
 
@@ -11206,6 +11383,9 @@ a.text-dark:hover, a.text-dark:focus {
 
 .fa-satellite-dish:before {
   content: "\f7c0"; }
+
+.fa-sausage:before {
+  content: "\f820"; }
 
 .fa-save:before {
   content: "\f0c7"; }
@@ -11339,6 +11519,9 @@ a.text-dark:hover, a.text-dark:focus {
 .fa-shirtsinbulk:before {
   content: "\f214"; }
 
+.fa-shish-kebab:before {
+  content: "\f821"; }
+
 .fa-shoe-prints:before {
   content: "\f54b"; }
 
@@ -11371,6 +11554,9 @@ a.text-dark:hover, a.text-dark:focus {
 
 .fa-shuttlecock:before {
   content: "\f45b"; }
+
+.fa-sickle:before {
+  content: "\f822"; }
 
 .fa-sigma:before {
   content: "\f68b"; }
@@ -11603,6 +11789,9 @@ a.text-dark:hover, a.text-dark:focus {
 .fa-soundcloud:before {
   content: "\f1be"; }
 
+.fa-soup:before {
+  content: "\f823"; }
+
 .fa-sourcetree:before {
   content: "\f7d3"; }
 
@@ -11702,6 +11891,9 @@ a.text-dark:hover, a.text-dark:focus {
 .fa-staylinked:before {
   content: "\f3f5"; }
 
+.fa-steak:before {
+  content: "\f824"; }
+
 .fa-steam:before {
   content: "\f1b6"; }
 
@@ -11758,6 +11950,9 @@ a.text-dark:hover, a.text-dark:focus {
 
 .fa-street-view:before {
   content: "\f21d"; }
+
+.fa-stretcher:before {
+  content: "\f825"; }
 
 .fa-strikethrough:before {
   content: "\f0cc"; }
@@ -11912,6 +12107,9 @@ a.text-dark:hover, a.text-dark:focus {
 .fa-tachometer-slowest:before {
   content: "\f62d"; }
 
+.fa-taco:before {
+  content: "\f826"; }
+
 .fa-tag:before {
   content: "\f02b"; }
 
@@ -11921,11 +12119,17 @@ a.text-dark:hover, a.text-dark:focus {
 .fa-tally:before {
   content: "\f69c"; }
 
+.fa-tanakh:before {
+  content: "\f827"; }
+
 .fa-tape:before {
   content: "\f4db"; }
 
 .fa-tasks:before {
   content: "\f0ae"; }
+
+.fa-tasks-alt:before {
+  content: "\f828"; }
 
 .fa-taxi:before {
   content: "\f1ba"; }
@@ -12167,6 +12371,12 @@ a.text-dark:hover, a.text-dark:focus {
 .fa-trash-alt:before {
   content: "\f2ed"; }
 
+.fa-trash-restore:before {
+  content: "\f829"; }
+
+.fa-trash-restore-alt:before {
+  content: "\f82a"; }
+
 .fa-treasure-chest:before {
   content: "\f723"; }
 
@@ -12184,6 +12394,9 @@ a.text-dark:hover, a.text-dark:focus {
 
 .fa-tree-large:before {
   content: "\f7dd"; }
+
+.fa-tree-palm:before {
+  content: "\f82b"; }
 
 .fa-trees:before {
   content: "\f724"; }
@@ -12371,6 +12584,12 @@ a.text-dark:hover, a.text-dark:focus {
 .fa-user-graduate:before {
   content: "\f501"; }
 
+.fa-user-hard-hat:before {
+  content: "\f82c"; }
+
+.fa-user-headset:before {
+  content: "\f82d"; }
+
 .fa-user-injured:before {
   content: "\f728"; }
 
@@ -12380,11 +12599,17 @@ a.text-dark:hover, a.text-dark:focus {
 .fa-user-md:before {
   content: "\f0f0"; }
 
+.fa-user-md-chat:before {
+  content: "\f82e"; }
+
 .fa-user-minus:before {
   content: "\f503"; }
 
 .fa-user-ninja:before {
   content: "\f504"; }
+
+.fa-user-nurse:before {
+  content: "\f82f"; }
 
 .fa-user-plus:before {
   content: "\f234"; }
@@ -12418,6 +12643,9 @@ a.text-dark:hover, a.text-dark:focus {
 
 .fa-users-crown:before {
   content: "\f6a5"; }
+
+.fa-users-medical:before {
+  content: "\f830"; }
 
 .fa-usps:before {
   content: "\f7e1"; }
@@ -12542,6 +12770,9 @@ a.text-dark:hover, a.text-dark:focus {
 .fa-vuejs:before {
   content: "\f41f"; }
 
+.fa-walker:before {
+  content: "\f831"; }
+
 .fa-walking:before {
   content: "\f554"; }
 
@@ -12574,6 +12805,12 @@ a.text-dark:hover, a.text-dark:focus {
 
 .fa-water-rise:before {
   content: "\f775"; }
+
+.fa-webcam:before {
+  content: "\f832"; }
+
+.fa-webcam-slash:before {
+  content: "\f833"; }
 
 .fa-weebly:before {
   content: "\f5cc"; }
