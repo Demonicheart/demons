@@ -1,4 +1,3 @@
-/* Jarallax Elements */
 /*!
  * Name    : Elements Extension for Jarallax
  * Version : 1.0.0
@@ -291,4 +290,3 @@ module.exports = g;
 
 /***/ })
 /******/ ]);
-/* ENDE Jarallax Elements */

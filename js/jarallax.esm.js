@@ -130,6 +130,7 @@ class Jarallax {
             videoStartTime: 0,
             videoEndTime: 0,
             videoVolume: 0,
+            videoLoop: true,
             videoPlayOnlyVisible: true,
 
             // events
@@ -568,6 +569,10 @@ class Jarallax {
             // scroll distance and height for image
             if (speed < 0) {
                 scrollDist = speed * Math.max(contH, wndH);
+
+                if (wndH < contH) {
+                    scrollDist -= speed * (contH - wndH);
+                }
             } else {
                 scrollDist = speed * (contH + wndH);
             }
@@ -578,7 +583,7 @@ class Jarallax {
             } else if (speed < 0) {
                 resultH = scrollDist / speed + Math.abs(scrollDist);
             } else {
-                resultH += Math.abs(wndH - contH) * (1 - speed);
+                resultH += (wndH - contH) * (1 - speed);
             }
 
             scrollDist /= 2;

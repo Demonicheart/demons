@@ -1,19 +1,15 @@
 /*!
  *#
  *#
- *#         /$$                                                                 /$$               /$$
- *#        | $$                                                                | $$              | $$
- *#    /$$$$$$$  /$$$$$$  /$$$$$$/$$$$   /$$$$$$  /$$$$$$$           /$$$$$$$ /$$$$$$   /$$   /$$| $$  /$$$$$$
- *#   /$$__  $$ /$$__  $$| $$_  $$_  $$ /$$__  $$| $$__  $$ /$$$$$$ /$$_____/|_  $$_/  | $$  | $$| $$ /$$__  $$
- *#  | $$  | $$| $$$$$$$$| $$ \ $$ \ $$| $$  \ $$| $$  \ $$|______/|  $$$$$$   | $$    | $$  | $$| $$| $$$$$$$$
- *#  | $$  | $$| $$_____/| $$ | $$ | $$| $$  | $$| $$  | $$         \____  $$  | $$ /$$| $$  | $$| $$| $$_____/
- *#  |  $$$$$$$|  $$$$$$$| $$ | $$ | $$|  $$$$$$/| $$  | $$         /$$$$$$$/  |  $$$$/|  $$$$$$$| $$|  $$$$$$$
- *#   \_______/ \_______/|__/ |__/ |__/ \______/ |__/  |__/        |_______/    \___/   \____  $$|__/ \_______/
- *#                                                                                     /$$  | $$
- *#                                                                                    |  $$$$$$/
- *#                                                                                     \______/
+ *#   __ \                                 ___|  |         |
+ *#   |   |  _ \ __ `__ \   _ \  __ \    \___ \  __| |   | |  _ \
+ *#   |   |  __/ |   |   | (   | |   |_____|   | |   |   | |  __/
+ *#  ____/ \___|_|  _|  _|\___/ _|  _|   _____/ \__|\__, |_|\___|
+ *#                                               ____/
  *#
- *# This project is licensed under the MIT License 🌍 https://github.com/Demonicheart/demons/blob/master/LICENSE
+ *#  This project is licensed under the MIT License
+ *#  🌍 https://github.com/Demonicheart/demons/blob/master/LICENSE
+ *#
  */
 
 /* ================================  lazyload  ============================ */
@@ -27,7 +23,7 @@ $(".jarallax").jarallax({speed:.2});
 $(document).click(function(a){var l=$(a.target),s=$(".navbar-collapse").hasClass("show");s!==!0||l.hasClass("navbar-toggler")||$("button.navbar-toggler").click()});
 
 /* ================================  toastr options  =========================== */
-$(document).ready(function(){toastr.options={closeButton:!0,debug:!1,newestOnTop:!1,progressBar:!1,positionClass:"toast-top-right",preventDuplicates:!1,onclick:null,showDuration:"300",hideDuration:"1000",timeOut:"5000",extendedTimeOut:"1000",showEasing:"swing",hideEasing:"linear",showMethod:"fadeIn",hideMethod:"fadeOut"}});
+$(document).ready(function(){toastr.options = {"closeButton": true,"debug": false,"newestOnTop": false,"progressBar": false,"positionClass": "md-toast-top-right","preventDuplicates": false,"onclick": null,"showDuration": 300,"hideDuration": 1000,"timeOut": 5000,"extendedTimeOut": 1000,"showEasing": "swing","hideEasing": "linear","showMethod": "fadeIn","hideMethod": "fadeOut"}});
 /* ================================  toastr alerts  ============================ */
 $("#alert-info").click(function () {toastr["info"]("Hi! Happy New Year!")});$("#alert-success").click(function () {toastr["success"]("Hi! still under construction!")});
 

@@ -1,7 +1,6 @@
-/* Jarallax */
 /*!
  * Name    : Just Another Parallax [Jarallax]
- * Version : 1.10.6
+ * Version : 1.10.7
  * Author  : nK <https://nkdev.info>
  * GitHub  : https://github.com/nk-o/jarallax
  */
@@ -394,6 +393,7 @@ var Jarallax = function () {
             videoStartTime: 0,
             videoEndTime: 0,
             videoVolume: 0,
+            videoLoop: true,
             videoPlayOnlyVisible: true,
 
             // events
@@ -1105,4 +1105,3 @@ exports.cancel = cancel;
 
 /***/ })
 /******/ ]);
-/* ENDE Jarallax */
