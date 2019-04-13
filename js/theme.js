@@ -81,7 +81,7 @@ $(document).ready(function(){
 });
 
 /* =======================  lightbox  ======================== */
-$(function(){$("#mdb-lightbox-ui").load("https://cdn.jsdelivr.net/gh/demonicheart/demons@1.8/addons/ds-lightbox-ui.html")});
+$(function(){$("#mdb-lightbox-ui").load("https://cdn.jsdelivr.net/gh/demonicheart/demons@1.9/addons/ds-lightbox-ui.html")});
 
 /* ===================== contact - form ====================== */
 function validateForm() {
