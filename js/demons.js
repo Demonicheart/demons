@@ -1,6 +1,6 @@
 /*!
  * Demons Java Snipsel Sammlung
- * Version: 2.8 + MDB
+ * Version: 2.8.5 + MDB
  *
  * Copyright: Demonicheart
  *
@@ -15682,7 +15682,17 @@ var _this = void 0;
   $(textAreaSelector).each(textAreaAutoResize);
   $body.on('keyup keydown', textAreaSelector, textAreaAutoResize);
 })(jQuery);
+// "use strict";
 
+// $(document).ready(function () {
+//   $('body').attr('aria-busy', true);
+//   $('#preloader-markup').load('mdb-addons/preloader.html', function () {
+//     $(window).on('load', function () {
+//       $('#mdb-preloader').fadeOut('slow');
+//       $('body').removeAttr('aria-busy');
+//     });
+//   });
+// });
 "use strict";
 $('body').attr('aria-busy', true);
 $(window).on('load', function() { // makes sure the whole site is loaded
@@ -15690,6 +15700,7 @@ $(window).on('load', function() { // makes sure the whole site is loaded
   $('#preloader').delay(350).fadeOut('slow'); // will fade out the white DIV that covers the website.
   $("body").delay(350).addClass("page-loaded animated fadeIn").removeAttr('aria-busy'); // $('body').delay(350).css({'overflow':'visible'});
 });
+
 "use strict";
 
 (function ($) {
@@ -16244,6 +16255,7 @@ $('.smooth-scroll').on('click', 'a', function () {
 $('.smooth-scroll a').click(function() {
   $('.navbar-collapse').collapse('hide');
 });
+
 "use strict";
 
 (function ($) {
@@ -16690,6 +16702,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
   var MENU_RIGHT_MIN_BORDER = -0.3;
   var MENU_RIGHT_MAX_BORDER = 0.5;
   var MENU_VELOCITY_OFFSET = 10;
+  var MENU_TIME_DURATION_OPEN = 300;
+  var MENU_TIME_DURATION_CLOSE = 200;
+  var MENU_TIME_DURATION_OVERLAY_OPEN = 50;
+  var MENU_TIME_DURATION_OVERLAY_CLOSE = 200;
+  var MENU_EASING_OPEN = 'easeOutQuad';
+  var MENU_EASING_CLOSE = 'easeOutCubic';
+  var SHOW_OVERLAY = true;
+  var SHOW_CLOSE_BUTTON = false;
 
   var SideNav =
   /*#__PURE__*/
@@ -16701,9 +16721,21 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         MENU_WIDTH: MENU_WIDTH,
         edge: 'left',
         closeOnClick: false,
-        breakpoint: SN_BREAKPOINT
+        breakpoint: SN_BREAKPOINT,
+        timeDurationOpen: MENU_TIME_DURATION_OPEN,
+        timeDurationClose: MENU_TIME_DURATION_CLOSE,
+        timeDurationOverlayOpen: MENU_TIME_DURATION_OVERLAY_OPEN,
+        timeDurationOverlayClose: MENU_TIME_DURATION_OVERLAY_CLOSE,
+        easingOpen: MENU_EASING_OPEN,
+        easingClose: MENU_EASING_CLOSE,
+        showOverlay: SHOW_OVERLAY,
+        showCloseButton: SHOW_CLOSE_BUTTON
       };
       this.$element = element;
+      this.$elementCloned = element.clone().css({
+        display: 'inline-block',
+        lineHeight: '24px'
+      });
       this.options = this.assignOptions(options);
       this.menuOut = false;
       this.lastTouchVelocity = {
@@ -16725,11 +16757,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     _createClass(SideNav, [{
       key: "init",
       value: function init() {
-        this.setMenuWidth();
+        this.setMENU_WIDTH();
         this.setMenuTranslation();
         this.closeOnClick();
         this.openOnClick();
         this.bindTouchEvents();
+        this.showCloseButton();
       }
     }, {
       key: "bindTouchEvents",
@@ -16737,6 +16770,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         var _this = this;
 
         this.$dragTarget.on('click', function () {
+          _this.removeMenu();
+        });
+        this.$elementCloned.on('click', function () {
           _this.removeMenu();
         });
         this.$dragTarget.on('touchstart', function (e) {
@@ -16842,7 +16878,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         }, {
           duration: 10,
           queue: false,
-          easing: 'easeOutQuad'
+          easing: this.options.easingOpen
         });
       }
     }, {
@@ -16850,11 +16886,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       value: function buildSidenavOverlay() {
         var _this2 = this;
 
-        this.$sidenavOverlay = $('<div id="sidenav-overlay"></div>');
-        this.$sidenavOverlay.css('opacity', 0).on('click', function () {
-          _this2.removeMenu();
-        });
-        this.$body.append(this.$sidenavOverlay);
+        if (this.options.showOverlay === true) {
+          this.$sidenavOverlay = $('<div id="sidenav-overlay"></div>');
+          this.$sidenavOverlay.css('opacity', 0).on('click', function () {
+            _this2.removeMenu();
+          });
+          this.$body.append(this.$sidenavOverlay);
+        }
       }
     }, {
       key: "disableScrolling",
@@ -16997,7 +17035,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         }, {
           duration: typeof duration === 'string' ? Number(duration) : duration,
           queue: false,
-          easing: 'easeOutQuad'
+          easing: this.options.easingOpen
         });
       }
     }, {
@@ -17006,9 +17044,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         this.$sidenavOverlay.velocity({
           opacity: 0
         }, {
-          duration: 200,
+          duration: this.options.timeDurationOverlayClose,
           queue: false,
-          easing: 'easeOutQuad',
+          easing: this.options.easingOpen,
           complete: function complete() {
             $(this).remove();
           }
@@ -17021,9 +17059,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         this.$sidenavOverlay.velocity({
           opacity: 1
         }, {
-          duration: 50,
+          duration: this.options.timeDurationOverlayOpen,
           queue: false,
-          easing: 'easeOutQuad'
+          easing: this.options.easingOpen
         });
       }
     }, {
@@ -17047,10 +17085,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
             _this3.removeMenu();
           } else {
-            _this3.menuOut = true;
-            _this3.$sidenavOverlay = $('<div id="sidenav-overlay"></div>');
+            if (_this3.options.showOverlay === true) {
+              _this3.$sidenavOverlay = $('<div id="sidenav-overlay"></div>');
 
-            _this3.$body.append(_this3.$sidenavOverlay);
+              _this3.$body.append(_this3.$sidenavOverlay);
+            } else {
+              _this3.showCloseButton();
+            }
 
             var translateX = [];
 
@@ -17063,9 +17104,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             _this3.$menu.velocity({
               translateX: translateX
             }, {
-              duration: 300,
+              duration: _this3.options.timeDurationOpen,
               queue: false,
-              easing: 'easeOutQuad'
+              easing: _this3.options.easingOpen
             });
 
             _this3.$sidenavOverlay.on('click', function () {
@@ -17082,6 +17123,16 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         if (this.options.closeOnClick === true) {
           this.$menu.on('click', 'a:not(.collapsible-header)', function () {
             _this4.removeMenu();
+          });
+        }
+      }
+    }, {
+      key: "showCloseButton",
+      value: function showCloseButton() {
+        if (this.options.showCloseButton === true) {
+          this.$menu.prepend(this.$elementCloned);
+          this.$menu.find('.logo-wrapper').css({
+            borderTop: '1px solid rgba(153,153,153,.3)'
           });
         }
       }
@@ -17123,8 +17174,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         }
       }
     }, {
-      key: "setMenuWidth",
-      value: function setMenuWidth() {
+      key: "setMENU_WIDTH",
+      value: function setMENU_WIDTH() {
         var $sidenavBg = $("#".concat(this.$menu.attr('id'))).find('> .sidenav-bg');
 
         if (this.options.MENU_WIDTH !== MENU_WIDTH) {
@@ -17149,9 +17200,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         this.$menu.velocity({
           translateX: this.options.edge === 'left' ? '-100%' : '100%'
         }, {
-          duration: 200,
+          duration: this.options.timeDurationClose,
           queue: false,
-          easing: 'easeOutCubic',
+          easing: this.options.easingClose,
           complete: function complete() {
             if (restoreMenu === true) {
               _this6.$menu.removeAttr('style');
@@ -17329,7 +17380,7 @@ $(function () {
  * easy-pie-chart
  * Lightweight plugin to render simple, animated and retina optimized pie charts
  *
- * @license
+ * @license 
  * @author Robert Fleischmann <rendro87@gmail.com> (http://robert-fleischmann.de)
  * @version 2.1.7
  **/
@@ -17694,7 +17745,7 @@ $.fn.easyPieChart = function(options) {
 
 (function ($) {
   var rangeWrapper = '.range-field';
-  var rangeType = 'input[type=range]:not(.custom-range)';
+  var rangeType = 'input[type=range]:not(.custom-range):not(.multi-range)';
   var thumbHtml = '<span class="thumb"><span class="value"></span></span>';
   var rangeMousedown = false;
   var left;
@@ -17906,6 +17957,25 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         }
       }
     }, {
+      key: "debounce",
+      value: function debounce(func, wait, immediate) {
+        var timeout;
+        return function () {
+          var context = this,
+              args = arguments;
+
+          var later = function later() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+          };
+
+          var callNow = immediate && !timeout;
+          clearTimeout(timeout);
+          timeout = setTimeout(later, wait);
+          if (callNow) func.apply(context, args);
+        };
+      }
+    }, {
       key: "_removeMaterialWrapper",
       value: function _removeMaterialWrapper() {
         var currentUuid = this.$nativeSelect.data('select-id');
@@ -17992,6 +18062,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         var placeholder = this.$nativeSelect.attr('searchable');
         this.$searchInput = $("<span class=\"search-wrap ml-2\"><div class=\"md-form mt-0\"><input type=\"text\" class=\"search form-control w-100 d-block\" placeholder=\"".concat(placeholder, "\"></div></span>"));
         this.$materialOptionsList.append(this.$searchInput);
+        this.$searchInput.on("click", function (e) {
+          e.stopPropagation();
+        });
       }
     }, {
       key: "appendToggleAllCheckbox",
@@ -18077,7 +18150,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         MaterialSelect.mutationObservers.push(observer);
         var $saveSelectBtn = this.$nativeSelect.parent().find('button.btn-save');
         $saveSelectBtn.on('click', this._onSaveSelectBtnClick);
-        this.$materialSelect.on('focus', this._onMaterialSelectFocus.bind(this));
+        this.$materialSelect.on('focus', this.debounce(this._onMaterialSelectFocus.bind(this), 300));
         this.$materialSelect.on('click', this._onMaterialSelectClick.bind(this));
         this.$materialSelect.on('blur', this._onMaterialSelectBlur.bind(this));
         this.$materialSelect.on('keydown', this._onMaterialSelectKeydown.bind(this));
@@ -18237,7 +18310,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }
     }, {
       key: "_onToggleAllClick",
-      value: function _onToggleAllClick() {
+      value: function _onToggleAllClick(e) {
         var _this4 = this;
 
         var checkbox = $(this.$toggleAll).find('input[type="checkbox"]').first();
@@ -18275,6 +18348,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         this._triggerChangeOnNativeSelect();
 
         this.$nativeSelect.removeData('stop-refresh');
+        e.stopPropagation();
       }
     }, {
       key: "_onMaterialSelectKeydown",
@@ -19942,7 +20016,7 @@ jQuery('select').siblings('input.select-dropdown').on('mousedown', function (e) 
 
 var initPhotoSwipeFromDOM = function (gallerySelector) {
 
-    // parse slide data (url, title, size ...) from DOM elements
+    // parse slide data (url, title, size ...) from DOM elements 
     // (children of gallerySelector)
     var parseThumbnailElements = function (el) {
         var thumbElements = el.childNodes,
@@ -19957,7 +20031,7 @@ var initPhotoSwipeFromDOM = function (gallerySelector) {
 
             figureEl = thumbElements[i]; // <figure> element
 
-            // include only element nodes
+            // include only element nodes 
             if (figureEl.nodeType !== 1) {
                 continue;
             }
@@ -20102,7 +20176,7 @@ var initPhotoSwipeFromDOM = function (gallerySelector) {
         // PhotoSwipe opened from URL
         if (fromURL) {
             if (options.galleryPIDs) {
-                // parse real index when custom PIDs are used
+                // parse real index when custom PIDs are used 
                 // http://photoswipe.com/documentation/faq.html#custom-pid-in-url
                 for (var j = 0; j < items.length; j++) {
                     if (items[j].pid == index) {
@@ -23640,94 +23714,182 @@ module.exports = g;
 /******/ ]);
 "use strict";
 
-$.fn.mdbAutocomplete = function (options) {
-  var defaults = {
-    data: {},
-    dataColor: '',
-    xColor: '',
-    xBlurColor: '#ced4da',
-    inputFocus: '1px solid #4285f4',
-    inputBlur: '1px solid #ced4da',
-    inputFocusShadow: '0 1px 0 0 #4285f4',
-    inputBlurShadow: ''
-  };
-  var ENTER_CHAR_CODE = 13;
-  options = $.extend(defaults, options);
-  return this.each(function (index, ev) {
-    var $input = $(ev);
-    var $autocomplete;
-    var data = options.data;
-    var dataColor = options.dataColor;
-    var xColor = options.xColor;
-    var xBlurColor = options.xBlurColor;
-    var inputFocus = options.inputFocus;
-    var inputBlur = options.inputBlur;
-    var inputFocusShadow = options.inputFocusShadow;
-    var inputBlurShadow = options.inputBlurShadow;
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-    if (Object.keys(data).length) {
-      $autocomplete = $('<ul class="mdb-autocomplete-wrap"></ul>');
-      $autocomplete.insertAfter($input);
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+(function ($) {
+  var INPUT_DATA = {};
+  var DATA_COLOR = '';
+  var BUTTON_X_COLOR = '';
+  var BUTTON_X_BLUR_COLOR = '#ced4da';
+  var INPUT_FOCUS = '1px solid #4285f4';
+  var INPUT_BLUR = '1px solid #ced4da';
+  var INPUT_FOCUS_SHADOW = '0 1px 0 0 #4285f4';
+  var INPUT_BLUR_SHADOW = '';
+  var ENTER_CHAR_CODE = 13;
+
+  var mdbAutocomplete =
+  /*#__PURE__*/
+  function () {
+    function mdbAutocomplete(input, options) {
+      _classCallCheck(this, mdbAutocomplete);
+
+      this.defaults = {
+        data: INPUT_DATA,
+        dataColor: DATA_COLOR,
+        xColor: BUTTON_X_COLOR,
+        xBlurColor: BUTTON_X_BLUR_COLOR,
+        inputFocus: INPUT_FOCUS,
+        inputBlur: INPUT_BLUR,
+        inputFocusShadow: INPUT_FOCUS_SHADOW,
+        inputBlurShadow: INPUT_BLUR_SHADOW
+      };
+      this.$input = input;
+      this.options = this.assignOptions(options);
+      this.$clearButton = $('.mdb-autocomplete-clear');
+      this.$autocompleteWrap = $('<ul class="mdb-autocomplete-wrap"></ul>');
+      this.init();
     }
 
-    $input.on('focus', function () {
-      $input.css('border-bottom', inputFocus);
-      $input.css('box-shadow', inputFocusShadow);
-    });
-    $input.on('blur', function () {
-      $input.css('border-bottom', inputBlur);
-      $input.css('box-shadow', inputBlurShadow);
-    });
-    $input.on('keyup', function (e) {
-      var $inputValue = $input.val();
-      $autocomplete.empty();
-
-      if ($inputValue.length) {
-        for (var item in data) {
-          if (data[item].toLowerCase().indexOf($inputValue.toLowerCase()) !== -1) {
-            var option = $("<li>".concat(data[item], "</li>"));
-            $autocomplete.append(option);
-          }
+    _createClass(mdbAutocomplete, [{
+      key: "init",
+      value: function init() {
+        this.setData();
+        this.inputFocus();
+        this.inputBlur();
+        this.inputKeyupData();
+        this.inputLiClick();
+        this.clearAutocomplete();
+      }
+    }, {
+      key: "assignOptions",
+      value: function assignOptions(newOptions) {
+        return $.extend({}, this.defaults, newOptions);
+      }
+    }, {
+      key: "setData",
+      value: function setData() {
+        if (Object.keys(this.options.data).length) {
+          this.$autocompleteWrap.insertAfter(this.$input);
         }
       }
+    }, {
+      key: "inputFocus",
+      value: function inputFocus() {
+        var _this = this;
 
-      if (e.which === ENTER_CHAR_CODE) {
-        $autocomplete.children(':first').trigger('click');
-        $autocomplete.empty();
+        this.$input.on('focus', function () {
+          _this.$input.css('border-bottom', _this.options.inputFocus);
+
+          _this.$input.css('box-shadow', _this.options.inputFocusShadow);
+        });
       }
+    }, {
+      key: "inputBlur",
+      value: function inputBlur() {
+        var _this2 = this;
 
-      if ($inputValue.length === 0) {
-        $input.parent().find('.mdb-autocomplete-clear').css('visibility', 'hidden');
-      } else {
-        $input.parent().find('.mdb-autocomplete-clear').css('visibility', 'visible');
+        this.$input.on('blur', function () {
+          _this2.$input.css('border-bottom', _this2.options.inputBlur);
+
+          _this2.$input.css('box-shadow', _this2.options.inputBlurShadow);
+        });
       }
+    }, {
+      key: "inputKeyupData",
+      value: function inputKeyupData() {
+        var _this3 = this;
 
-      $('.mdb-autocomplete-wrap li').css('color', dataColor);
-    });
-    $autocomplete.on('click', 'li', function (e) {
-      $input.val($(e.target).text());
-      $autocomplete.empty();
-    });
-    $('.mdb-autocomplete-clear').on('click', function (e) {
-      e.preventDefault();
-      var $this = $(e.currentTarget);
-      $this.parent().find('.mdb-autocomplete').val('');
-      $this.css('visibility', 'hidden');
-      $autocomplete.empty();
-      $this.parent().find('label').removeClass('active');
-    });
-    $('.mdb-autocomplete').on('click keyup', function (e) {
-      e.preventDefault();
-      $(e.target).parent().find('.mdb-autocomplete-clear').find('svg').css('fill', xColor);
-    });
-    $('.mdb-autocomplete').on('blur', function (e) {
-      e.preventDefault();
-      $(e.target).parent().find('.mdb-autocomplete-clear').find('svg').css('fill', xBlurColor);
-    });
-  });
-};
+        this.$input.on('keyup', function (e) {
+          var $inputValue = _this3.$input.val();
 
-$.fn.mdb_autocomplete = $.fn.mdbAutocomplete;
+          _this3.$autocompleteWrap.empty();
+
+          if ($inputValue.length) {
+            for (var item in _this3.options.data) {
+              if (_this3.options.data[item].toLowerCase().indexOf($inputValue.toLowerCase()) !== -1) {
+                var option = $("<li>".concat(_this3.options.data[item], "</li>"));
+
+                _this3.$autocompleteWrap.append(option);
+              }
+            }
+          }
+
+          if (e.which === ENTER_CHAR_CODE) {
+            _this3.$autocompleteWrap.children(':first').trigger('click');
+
+            _this3.$autocompleteWrap.empty();
+          }
+
+          if ($inputValue.length === 0) {
+            _this3.$input.parent().find('.mdb-autocomplete-clear').css('visibility', 'hidden');
+          } else {
+            _this3.$input.parent().find('.mdb-autocomplete-clear').css('visibility', 'visible');
+          }
+
+          _this3.$autocompleteWrap.children().css('color', _this3.options.dataColor);
+        });
+      }
+    }, {
+      key: "inputLiClick",
+      value: function inputLiClick() {
+        var _this4 = this;
+
+        this.$autocompleteWrap.on('click', 'li', function (e) {
+          e.preventDefault();
+
+          _this4.$input.val($(e.target).text());
+
+          _this4.$autocompleteWrap.empty();
+        });
+      }
+    }, {
+      key: "clearAutocomplete",
+      value: function clearAutocomplete() {
+        var _this5 = this;
+
+        this.$clearButton.on('click', function (e) {
+          e.preventDefault();
+          var $this = $(e.currentTarget);
+          $this.parent().find('.mdb-autocomplete').val('');
+          $this.css('visibility', 'hidden');
+
+          _this5.$autocompleteWrap.empty();
+
+          $this.parent().find('label').removeClass('active');
+        });
+      }
+    }, {
+      key: "changeSVGcolors",
+      value: function changeSVGcolors() {
+        if (this.$input.hasClass('mdb-autocomplete')) {
+          this.$input.on('click keyup', function (e) {
+            e.preventDefault();
+            $(e.target).parent().find('.mdb-autocomplete-clear').find('svg').css('fill', xColor);
+          });
+          this.$input.on('blur', function (e) {
+            e.preventDefault();
+            $(e.target).parent().find('.mdb-autocomplete-clear').find('svg').css('fill', xBlurColor);
+          });
+        }
+      }
+    }]);
+
+    return mdbAutocomplete;
+  }();
+
+  $.fn.mdbAutocomplete = function (options) {
+    return this.each(function () {
+      new mdbAutocomplete($(this), options);
+    });
+  }; //deprecated, delete soon
+
+
+  $.fn.mdb_autocomplete = $.fn.mdbAutocomplete;
+})(jQuery);
 /*
     Enhanced Bootstrap Modals
     https://mdbootstrap.com
@@ -23758,6 +23920,17 @@ $.fn.mdb_autocomplete = $.fn.mdbAutocomplete;
 
 "use strict";
 
+var toggler = document.getElementsByClassName("rotate");
+var i;
+
+for (i = 0; i < toggler.length; i++) {
+  toggler[i].addEventListener("click", function () {
+    this.parentElement.querySelector(".nested").classList.toggle("active");
+    this.classList.toggle("down");
+  });
+}
+"use strict";
+
 (function ($) {
   $('.input-default-wrapper').on('change', '.input-default-js', function (e) {
     var $this = $(e.target),
@@ -23771,10 +23944,6 @@ $.fn.mdb_autocomplete = $.fn.mdbAutocomplete;
       fileName = e.target.value.split('\\').pop();
     }
 
-    if (fileName) {
-      $label.find('.span-choose-file').html(fileName);
-    } else {
-      $label.html($label.html());
-    }
+    fileName ? $label.find('.span-choose-file').html(fileName) : $label.html($label.html());
   });
 })(jQuery);
