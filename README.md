@@ -8,11 +8,13 @@
   <p align="center">
     custom, page.
     <br>
-    <a href="https://demonicheart.github.io/demons/">Blog</a>
+    <a href="https://demonicheart.github.io/demons/">🔥 Preview 🔥</a>
   </p>
 </p>
 
 <br>
+
+________
 
 ## Table of contents
 
@@ -21,9 +23,9 @@
 - [Documentation](#documentation)
 - [Copyright and license](#copyright-and-license)
 
+________
 
 ## What's included
-
 
 ```
 demons/
@@ -32,9 +34,6 @@ demons/
 │   ├── mdb-lightbox-ui.html
 │   └── preloader.html
 ├── css/
-│   └── addons/
-│       ├── datatables.css
-│       └── datatables.min.css
 │   ├── animate.css
 │   ├── bootstrap.css
 │   ├── bootstrap.min.css
@@ -47,10 +46,14 @@ demons/
 │   ├── kontaktfonts.css
 │   ├── mdb.css
 │   ├── mdb.min.css
+│   ├── mdb.lite.css
+│   ├── mdb.lite.min.css
 │   ├── style.css
 │   └── webfonts.css
 ├── font/
-│   ├── font-awesome
+│   └── fa5/
+│       ├── css
+│       └── webfonts
 │   ├── glyphicons
 │   └── roboto
 ├── images/
@@ -98,19 +101,21 @@ demons/
 │   ├── bootstrap.scss
 │   ├── bootstrap-grid.scss
 │   ├── bootstrap-reboot.scss
-│   ├── font-awesome.scss
 │   └── style.scss
+└──
 ```
+
+________
 
 ## Quick start
 
-Several quick start options are available:
+|         | Several quick start options are available  |                         |
+|-----------------------------------------|------------------|------------------------------|
+|💎 |- [Download the latest release.](https://github.com/Demonicheart/demons/archive/master.zip)⠀⠀⠀⠀⠀ | ✔️ |
+|💽 |- Clone the repo: `git clone https://github.com/Demonicheart/demons.git`⠀⠀⠀⠀⠀ ⠀⠀⠀⠀⠀ ⠀⠀⠀⠀⠀ ⠀⠀⠀| ✔️ |
+|📑 | Upload and 🌟 | ✔️ |
 
-- [Download the latest release.](https://github.com/Demonicheart/demons/archive/master.zip)
-- Clone the repo: `git clone https://github.com/Demonicheart/demons.git`
-
- Upload and 🌟
-
+________
 
 ## Status
 
@@ -124,7 +129,9 @@ Several quick start options are available:
 ## Documentation
 
 ```
-+  +
+|         | Highlights  |                         |
+|-----------------------------------------|------------------|------------------------------|
+|💎 | Folgt⠀⠀⠀⠀ | ✔️ |
 ```
 
 ## Copyright and license
@@ -132,6 +139,8 @@ Several quick start options are available:
 This project is licensed under the MIT License - see the [![license](https://img.shields.io/packagist/l/doctrine/orm.svg)](LICENSE) file for details
 
 [![Bootstrap](https://img.shields.io/badge/Bootstrap-4-blue.svg)](https://getbootstrap.com/)
+[![MDB](https://img.shields.io/badge/MDB-4.7.7-blue.svg)](https://mdbootstrap.com/)
 [![animate.css](https://img.shields.io/badge/Animate-.css-orange.svg)](https://daneden.github.io/animate.css/)
 [![WOW.js](https://img.shields.io/badge/WOW-.js-orange.svg)](https://github.com/matthieua/WOW)
 [![Granim.js](https://img.shields.io/badge/Granim-.js-orange.svg)](https://github.com/sarcadass/granim.js)
+

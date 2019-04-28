@@ -1,0 +1,70 @@
+/*===================================================================
+-----            ** 11. Accordion +Fontawesome+ **              -----
+===================================================================*/
+.accordion {
+  &.accordion-ds .card {
+    border: 0;
+    background-color: transparent;
+  }
+  .card .card-header a:hover {
+    color: #f44336;
+  }
+  &.accordion-ds .card {
+    .card-header {
+      border: 0;
+      background-color: #f44336;
+      -webkit-transition: .3s;
+      transition: .3s;
+      &:hover {
+        -webkit-transition: .3s;
+        transition: .3s;
+        background-color: #4288CC;
+      }
+      .far {
+        background-color: #fff;
+        border-top-left-radius: 3px;
+      }
+    }
+    .card-body {
+      border-bottom-right-radius: 3px;
+      border-bottom-left-radius: 3px;
+    }
+  }
+}
+
+.accordion-ds {
+  .card {
+    .card-header {
+      border-bottom: 0;
+      padding: 1rem 1.5rem;
+      background: 0 0;
+      .card-title {
+        font-weight: 400;
+      }
+      a {
+        -webkit-transition: ease-in-out .3s;
+        -o-transition: ease-in-out .3s;
+        transition: ease-in-out .3s;
+        &:not(.collapsed) .rotate-icon {
+          -webkit-transform: rotate(180deg);
+          -ms-transform: rotate(180deg);
+          transform: rotate(180deg);
+        }
+      }
+    }
+    .fa-angle-down {
+      float: right;
+    }
+    .card-body {
+      font-size: .9rem;
+      line-height: 1.7;
+      font-weight: 300;
+      color: #626262;
+    }
+  }
+  &.accordion.accordion .card .fa-angle-down {
+    background-color: transparent !important;
+    color: white !important;
+    margin-right: 15px;
+  }
+}
