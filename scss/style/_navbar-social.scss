@@ -4,30 +4,27 @@
 .navbar.navbar-dark .navbar-nav .nav-item .nav-link:hover {
   color: #039be5;
 }
-
 nav li a.active {
   color: #bce0ee !important;
   background-color: #1976d2;
   border-radius: .2rem;
 }
-
 #scrollspy-nav a {
   transition: background-color .3s ease,border .3s ease,color .3s ease,opacity .3s ease-in-out,padding .3s ease;
   * {
     transition: background-color .3s ease,border .3s ease,color .3s ease,opacity .3s ease-in-out,padding .3s ease;
   }
 }
-
 .social_icon li {
   a {
     color: #fff;
     width: 35px;
     height: 35px;
     line-height: 35px;
-    vertical-align: text-top;
+    vertical-align: middle;
     margin: 0 5px;
     padding: 0 5px;
-    font-size: 24px;
+    font-size: 21px;
     display: inline-block;
     overflow: hidden;
     i {
@@ -53,7 +50,7 @@ nav li a.active {
       -webkit-transform: translate3d(0, 0, 0);
       transform: translate3d(0, 0, 0);
       color: #039be5;
-      font-size: 24px;
+      font-size: 21px;
       line-height: 35px;
     }
   }
@@ -63,11 +60,11 @@ nav li a.active {
       display: inline-block;
     }
   }
-  .fa-facebook:after {
-    content: "\f09a";
+  .fa-facebook-f:after {
+    content: "\f39e";
     color: #3b5998;
   }
-  .fa-google-plus:after {
+  .fa-google-plus-g:after {
     content: "\f0d5";
     color: #dd4b39;
   }
@@ -99,25 +96,20 @@ nav li a.active {
     }
   }
 }
-
 .intro-page .navbar:not(.top-nav-collapse) {
   background-color: transparent;
 }
-
 .navbar li a {
   transition: color .5s linear;
 }
-
 .navbar-toggler-right:hover span {
   background: linear-gradient(40deg, #ff6ec4, #7873f5);
 }
-
 .container-fluid > .row.mt-2.mb-1.text-center.wow.fadeIn > div > ul > li > a:hover {
   margin-left: 15px;
   color: #00cffe;
   transition: all 250ms ease-in-out;
 }
-
 .row {
   &:before {
     content: "\20";

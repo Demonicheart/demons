@@ -659,10 +659,10 @@ nav li a.active {
   width: 35px;
   height: 35px;
   line-height: 35px;
-  vertical-align: text-top;
+  vertical-align: middle;
   margin: 0 5px;
   padding: 0 5px;
-  font-size: 24px;
+  font-size: 21px;
   display: inline-block;
   overflow: hidden; }
   .social_icon li a i {
@@ -685,16 +685,16 @@ nav li a.active {
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
     color: #039be5;
-    font-size: 24px;
+    font-size: 21px;
     line-height: 35px; }
 .social_icon li .social_icon li a {
   display: inline-block; }
   .social_icon li .social_icon li a img {
     display: inline-block; }
-.social_icon li .fa-facebook:after {
-  content: "\f09a";
+.social_icon li .fa-facebook-f:after {
+  content: "\f39e";
   color: #3b5998; }
-.social_icon li .fa-google-plus:after {
+.social_icon li .fa-google-plus-g:after {
   content: "\f0d5";
   color: #dd4b39; }
 .social_icon li .fa-twitter:after {
@@ -787,13 +787,13 @@ nav li a.active {
     position: absolute;
     bottom: 8px;
     left: 8px;
-    width: 46px;
-    height: 46px;
-    line-height: 46px;
+    width: 45px;
+    height: 45px;
+    line-height: 45px;
     box-sizing: border-box;
     z-index: 3;
     padding: 0; }
-  .arrow-2 i.fa {
+  .arrow-2 i {
     font-size: 30px;
     vertical-align: middle;
     text-align: center;
@@ -1053,93 +1053,93 @@ ul.social-icons {
   color: #fff;
   text-decoration: none; }
 
-.si.fa-facebook-f {
-  padding: 10px 14px;
-  -o-transition: .5s;
-  -ms-transition: .5s;
-  -moz-transition: .5s;
-  -webkit-transition: .5s;
-  transition: .5s;
-  background-color: #322f30; }
-  .si.fa-facebook-f:hover {
-    background-color: #3b5998; }
-.si.fa-twitter {
-  padding: 10px 12px;
-  -o-transition: .5s;
-  -ms-transition: .5s;
-  -moz-transition: .5s;
-  -webkit-transition: .5s;
-  transition: .5s;
-  background-color: #322f30; }
-  .si.fa-twitter:hover {
-    background-color: #6795de; }
-.si.fa-rss {
-  padding: 10px 14px;
-  -o-transition: .5s;
-  -ms-transition: .5s;
-  -moz-transition: .5s;
-  -webkit-transition: .5s;
-  transition: .5s;
-  background-color: #322f30; }
-  .si.fa-rss:hover {
-    background-color: #eb8231; }
-.si.fa-youtube {
-  padding: 10px 14px;
-  -o-transition: .5s;
-  -ms-transition: .5s;
-  -moz-transition: .5s;
-  -webkit-transition: .5s;
-  transition: .5s;
-  background-color: #322f30; }
-  .si.fa-youtube:hover {
-    background-color: #ed302f; }
-.si.fa-reddit-alien {
-  padding: 10px 14px;
-  -o-transition: .5s;
-  -ms-transition: .5s;
-  -moz-transition: .5s;
-  -webkit-transition: .5s;
-  transition: .5s;
-  background-color: #322f30; }
-  .si.fa-reddit-alien:hover {
-    background-color: #ff4500; }
-.si.fa-github-alt {
-  padding: 10px 14px;
-  -o-transition: .5s;
-  -ms-transition: .5s;
-  -moz-transition: .5s;
-  -webkit-transition: .5s;
-  transition: .5s;
-  background-color: #322f30; }
-  .si.fa-github-alt:hover {
-    background-color: #212121; }
-.si.fa-linkedin {
-  padding: 10px 14px;
-  -o-transition: .5s;
-  -ms-transition: .5s;
-  -moz-transition: .5s;
-  -webkit-transition: .5s;
-  transition: .5s;
-  background-color: #322f30; }
-  .si.fa-linkedin:hover {
-    background-color: #0082ca; }
-.si.fa-google-plus-g {
-  padding: 10px 9px;
-  -o-transition: .5s;
-  -ms-transition: .5s;
-  -moz-transition: .5s;
-  -webkit-transition: .5s;
-  transition: .5s;
-  background-color: #322f30; }
-  .si.fa-google-plus-g:hover {
-    background-color: #dd4b39; }
-.si.fab {
+.si {
   border: 1px solid transparent;
   border-radius: 4px;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); }
-.si:hover {
-  color: #fff;
-  box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15); }
+  .si.fa-facebook-f {
+    padding: 10px 14px;
+    -o-transition: .5s;
+    -ms-transition: .5s;
+    -moz-transition: .5s;
+    -webkit-transition: .5s;
+    transition: .5s;
+    background-color: #322f30; }
+    .si.fa-facebook-f:hover {
+      background-color: #3b5998; }
+  .si.fa-twitter {
+    padding: 10px 12px;
+    -o-transition: .5s;
+    -ms-transition: .5s;
+    -moz-transition: .5s;
+    -webkit-transition: .5s;
+    transition: .5s;
+    background-color: #322f30; }
+    .si.fa-twitter:hover {
+      background-color: #6795de; }
+  .si.fa-rss {
+    padding: 10px 14px;
+    -o-transition: .5s;
+    -ms-transition: .5s;
+    -moz-transition: .5s;
+    -webkit-transition: .5s;
+    transition: .5s;
+    background-color: #322f30; }
+    .si.fa-rss:hover {
+      background-color: #eb8231; }
+  .si.fa-youtube {
+    padding: 10px 14px;
+    -o-transition: .5s;
+    -ms-transition: .5s;
+    -moz-transition: .5s;
+    -webkit-transition: .5s;
+    transition: .5s;
+    background-color: #322f30; }
+    .si.fa-youtube:hover {
+      background-color: #ed302f; }
+  .si.fa-reddit-alien {
+    padding: 10px 14px;
+    -o-transition: .5s;
+    -ms-transition: .5s;
+    -moz-transition: .5s;
+    -webkit-transition: .5s;
+    transition: .5s;
+    background-color: #322f30; }
+    .si.fa-reddit-alien:hover {
+      background-color: #ff4500; }
+  .si.fa-github-alt {
+    padding: 10px 14px;
+    -o-transition: .5s;
+    -ms-transition: .5s;
+    -moz-transition: .5s;
+    -webkit-transition: .5s;
+    transition: .5s;
+    background-color: #322f30; }
+    .si.fa-github-alt:hover {
+      background-color: #212121; }
+  .si.fa-linkedin {
+    padding: 10px 14px;
+    -o-transition: .5s;
+    -ms-transition: .5s;
+    -moz-transition: .5s;
+    -webkit-transition: .5s;
+    transition: .5s;
+    background-color: #322f30; }
+    .si.fa-linkedin:hover {
+      background-color: #0082ca; }
+  .si.fa-google-plus-g {
+    padding: 10px 9px;
+    -o-transition: .5s;
+    -ms-transition: .5s;
+    -moz-transition: .5s;
+    -webkit-transition: .5s;
+    transition: .5s;
+    background-color: #322f30; }
+    .si.fa-google-plus-g:hover {
+      background-color: #dd4b39; }
+  .si:hover {
+    color: #fff;
+    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15); }
 
 /*=========================================================
 -----            ** 14. demon gradient **             -----
@@ -1484,5 +1484,3 @@ footer .list-unstyled li > a {
 ::-moz-selection, ::selection {
   background-color: #f06565;
   color: #fff; }
-
-/*# sourceMappingURL=style.css.map */
