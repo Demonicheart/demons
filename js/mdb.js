@@ -1,6 +1,6 @@
-/*!
+/* !
  * Material Design for Bootstrap 4
- * Version: MDB Pro 4.7.7
+ * Version: MDB Pro 4.8.4
  *
  *
  * Copyright: Material Design for Bootstrap
@@ -15735,21 +15735,43 @@ var _this = void 0;
 })(jQuery);
 // "use strict";
 
+// // 'use strict';
+// var windowLoaded = false;
+// $(window).on('load', function () {
+//   windowLoaded = true;
+// });
 // $(document).ready(function () {
 //   $('body').attr('aria-busy', true);
-//   $('#preloader-markup').load('mdb-addons/preloader.html', function () {
-//     $(window).on('load', function () {
+//   $('#preloader-markup').load('../dev/dist/mdb-addons/preloader.html', function () {
+//     if (windowLoaded) {
 //       $('#mdb-preloader').fadeOut('slow');
 //       $('body').removeAttr('aria-busy');
-//     });
+//     } else {
+//       $(window).on('load', function () {
+//         $('#mdb-preloader').fadeOut('slow');
+//         $('body').removeAttr('aria-busy');
+//       });
+//     }
 //   });
 // });
 "use strict";
+
+// 'use strict';
+var windowLoaded = false;
+$(window).on('load', function () {
+  windowLoaded = true;
+});
 $('body').attr('aria-busy', true);
 $(window).on('load', function() { // makes sure the whole site is loaded
-  $('#status').fadeOut(); // will first fade out the loading animation
-  $('#preloader').delay(350).fadeOut('slow'); // will fade out the white DIV that covers the website.
-  $("body").delay(350).addClass("page-loaded animated fadeIn").removeAttr('aria-busy'); // $('body').delay(350).css({'overflow':'visible'});
+    if (windowLoaded) {
+    // $('#status').fadeOut(); // will first fade out the loading animation
+    $('#preloader').delay(350).fadeOut('slow'); // will fade out the white DIV that covers the website.
+    $("body").delay(350).addClass("page-loaded animated fadeIn").removeAttr('aria-busy'); // $('body').delay(350).css({'overflow':'visible'});
+      } else {
+    // $('#status').fadeOut(); // will first fade out the loading animation
+    $('#preloader').delay(350).fadeOut('slow'); // will fade out the white DIV that covers the website.
+    $("body").delay(350).addClass("page-loaded animated fadeIn").removeAttr('aria-busy'); // $('body').delay(350).css({'overflow':'visible'});
+      }
 });
 "use strict";
 
@@ -16305,7 +16327,6 @@ $('.smooth-scroll').on('click', 'a', function () {
 $('.smooth-scroll a').click(function() {
   $('.navbar-collapse').collapse('hide');
 });
-
 "use strict";
 
 (function ($) {
@@ -16807,12 +16828,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     _createClass(SideNav, [{
       key: "init",
       value: function init() {
-        this.setMENU_WIDTH();
+        this.setMenuWidth();
         this.setMenuTranslation();
         this.closeOnClick();
         this.openOnClick();
         this.bindTouchEvents();
         this.showCloseButton();
+        this.inputOnClick();
       }
     }, {
       key: "bindTouchEvents",
@@ -16820,10 +16842,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         var _this = this;
 
         this.$dragTarget.on('click', function () {
-          _this.removeMenu();
+          return _this.removeMenu();
         });
         this.$elementCloned.on('click', function () {
-          _this.removeMenu();
+          return _this.removeMenu();
         });
         this.$dragTarget.on('touchstart', function (e) {
           _this.lastTouchVelocity.x.startPosition = e.touches[0].clientX;
@@ -16939,7 +16961,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         if (this.options.showOverlay === true) {
           this.$sidenavOverlay = $('<div id="sidenav-overlay"></div>');
           this.$sidenavOverlay.css('opacity', 0).on('click', function () {
-            _this2.removeMenu();
+            return _this2.removeMenu();
           });
           this.$body.append(this.$sidenavOverlay);
         }
@@ -17101,7 +17123,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             $(this).remove();
           }
         });
-        this.$sidenavOverlay = $();
       }
     }, {
       key: "showSidenavOverlay",
@@ -17160,7 +17181,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             });
 
             _this3.$sidenavOverlay.on('click', function () {
-              _this3.removeMenu();
+              return _this3.removeMenu();
+            });
+
+            _this3.$sidenavOverlay.on('touchmove', _this3.touchmoveEventHandler.bind(_this3));
+
+            _this3.$menu.on('touchmove', function (e) {
+              e.preventDefault();
+
+              _this3.$menu.find('.custom-scrollbar').css('padding-bottom', '30px');
             });
           }
         });
@@ -17172,7 +17201,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         if (this.options.closeOnClick === true) {
           this.$menu.on('click', 'a:not(.collapsible-header)', function () {
-            _this4.removeMenu();
+            return _this4.removeMenu();
           });
         }
       }
@@ -17208,6 +17237,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             this.$menu.css('transform', 'translateX(0)');
           }
 
+          this.$menu.find('input[type=text]').on('touchstart', function () {
+            _this5.$menu.addClass('transform-fix-input');
+          });
           $(window).resize(function () {
             if (window.innerWidth > _this5.options.breakpoint) {
               if (_this5.$sidenavOverlay.length) {
@@ -17224,14 +17256,23 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         }
       }
     }, {
-      key: "setMENU_WIDTH",
-      value: function setMENU_WIDTH() {
+      key: "setMenuWidth",
+      value: function setMenuWidth() {
         var $sidenavBg = $("#".concat(this.$menu.attr('id'))).find('> .sidenav-bg');
 
         if (this.options.MENU_WIDTH !== MENU_WIDTH) {
           this.$menu.css('width', this.options.MENU_WIDTH);
           $sidenavBg.css('width', this.options.MENU_WIDTH);
         }
+      }
+    }, {
+      key: "inputOnClick",
+      value: function inputOnClick() {
+        var _this6 = this;
+
+        this.$menu.find('input[type=text]').on('touchstart', function () {
+          return _this6.$menu.css('transform', 'translateX(0)');
+        });
       }
     }, {
       key: "assignOptions",
@@ -17241,7 +17282,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     }, {
       key: "removeMenu",
       value: function removeMenu(restoreMenu) {
-        var _this6 = this;
+        var _this7 = this;
 
         this.$body.css({
           overflow: '',
@@ -17255,23 +17296,18 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           easing: this.options.easingClose,
           complete: function complete() {
             if (restoreMenu === true) {
-              _this6.$menu.removeAttr('style');
+              _this7.$menu.removeAttr('style');
 
-              _this6.$menu.css('width', _this6.options.MENU_WIDTH);
+              _this7.$menu.css('width', _this7.options.MENU_WIDTH);
             }
           }
         });
+
+        if (this.$menu.hasClass('transform-fix-input')) {
+          this.$menu.removeClass('transform-fix-input');
+        }
+
         this.hideSidenavOverlay();
-      }
-    }, {
-      key: "show",
-      value: function show() {
-        this.trigger('click');
-      }
-    }, {
-      key: "hide",
-      value: function hide() {
-        this.trigger('click');
       }
     }]);
 
@@ -17800,10 +17836,10 @@ $.fn.easyPieChart = function(options) {
   var rangeMousedown = false;
   var left;
 
-  var addThumb = function addThumb() {
+  function addThumb() {
     var $thumb = $(thumbHtml);
     $(rangeType).after($thumb);
-  };
+  }
 
   $(document).on('change', rangeType, function () {
     var $thumb = $(this);
@@ -17999,10 +18035,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       this.$materialOptionsList = $("<ul id=\"select-options-".concat(this.uuid, "\" class=\"dropdown-content select-dropdown w-100 ").concat(this.isMultiple ? 'multiple-select-dropdown' : '', "\"></ul>"));
       this.$materialSelectInitialOption = $nativeSelect.find('option:selected').text() || $nativeSelect.find('option:first').text() || '';
       this.$nativeSelectChildren = this.$nativeSelect.children('option, optgroup');
-      this.$materialSelect = $("<input type=\"text\" class=\"".concat(this.options.BSinputText ? 'browser-default custom-select multi-bs-select select-dropdown' : 'select-dropdown', "\" readonly=\"true\" ").concat(this.$nativeSelect.is(':disabled') ? 'disabled' : '', " data-activates=\"select-options-").concat(this.uuid, "\" value=\"\"/>"));
+      this.$materialSelect = $("<input type=\"text\" class=\"".concat(this.options.BSinputText ? 'browser-default custom-select multi-bs-select select-dropdown' : 'select-dropdown', "\" readonly=\"true\" ").concat(this.$nativeSelect.is(' :disabled') ? 'disabled' : '', " data-activates=\"select-options-").concat(this.uuid, "\" value=\"\"/>"));
       this.$dropdownIcon = this.options.BSinputText ? '' : $('<span class="caret">&#9660;</span>');
       this.$searchInput = null;
-      this.$toggleAll = $("<li class=\"select-toggle-all\"><span><input type=\"checkbox\" class=\"form-check-input\"><label>Select all</label></span></li>");
+      this.$toggleAll = $('<li class="select-toggle-all"><span><input type="checkbox" class="form-check-input"><label>Select all</label></span></li>');
       this.mainLabel = this.$nativeSelect.next('.mdb-main-label');
       this.valuesSelected = [];
       this.keyCodes = {
@@ -18079,14 +18115,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         if (this.$materialSelect.hasClass('custom-select') && this.$materialSelect.hasClass('select-dropdown')) {
           this.$materialSelect.css({
-            'display': 'inline-block',
-            'width': '100%',
-            'height': 'calc(1.5em + .75rem + 2px)',
-            'padding': '.375rem 1.75rem .375rem .75rem',
-            'font-size': '1rem',
-            'line-height': '1.5',
-            'background-color': '#fff',
-            'border': '1px solid #ced4da'
+            display: 'inline-block',
+            width: '100%',
+            height: 'calc(1.5em + .75rem + 2px)',
+            padding: '.375rem 1.75rem .375rem .75rem',
+            fontSize: '1rem',
+            lineHeight: '1.5',
+            backgroundColor: '#fff',
+            border: '1px solid #ced4da'
           });
         }
       }
@@ -18187,7 +18223,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         }
 
         this.$materialOptionsList.append(this.$searchInput);
-        this.$searchInput.on("click", function (e) {
+        this.$searchInput.on('click', function (e) {
           e.stopPropagation();
         });
       }
@@ -18305,14 +18341,16 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           if ($select.data('stop-refresh') !== true && (mutation.type === 'childList' || mutation.type === 'attributes' && $(mutation.target).is('option'))) {
             MaterialSelect.clearMutationObservers();
-            $select.materialSelect('destroy');
+            $select.materialSelect({
+              destroy: true
+            });
             $select.materialSelect();
           }
         });
       }
     }, {
       key: "_onSaveSelectBtnClick",
-      value: function _onSaveSelectBtnClick(e) {
+      value: function _onSaveSelectBtnClick() {
         $('input.multi-bs-select').trigger('close');
         this.$materialOptionsList.hide();
         this.$materialSelect.removeClass('active');
@@ -18395,12 +18433,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         var $this = $(e.target);
 
         if ($('ul.select-dropdown').not(this.$materialOptionsList.get(0)).is(':visible')) {
-          $("input.select-dropdown").trigger('close');
+          $('input.select-dropdown').trigger('close');
         }
 
-        if (this.isSearchable && this.$searchInput !== null && this.$materialOptionsList.find('li.active').length === 0) {
-          $this.closest('.mdb-select').find('.search-wrap input.search').focus();
-        }
+        this.mainLabel.addClass('active');
 
         if (!this.$materialOptionsList.is(':visible')) {
           $this.trigger('open', ['focus']);
@@ -18413,13 +18449,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         }
 
         if (!this.isMultiple) {
-          this.mainLabel.addClass('active active-check');
+          this.mainLabel.addClass('active ');
         }
+
+        $(document).find('input.select-dropdown').each(function (i, el) {
+          return $(el).val().length <= 0;
+        }).parent().next('.mdb-main-label').filter(function (i, el) {
+          return $(el).prev().find('input.select-dropdown').val().length <= 0 && !$(el).prev().find('input.select-dropdown').hasClass('active');
+        }).removeClass('active');
       }
     }, {
       key: "_onMaterialSelectClick",
       value: function _onMaterialSelectClick(e) {
-        this.mainLabel.addClass('active-check');
+        this.mainLabel.addClass('active ');
         e.stopPropagation();
       }
     }, {
@@ -18432,13 +18474,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         }
 
         this.$materialOptionsList.find('li.selected').removeClass('selected');
-        this.mainLabel.removeClass('active-check');
-
-        if (this.mainLabel.prev().find('input').hasClass('select-dropdown')) {
-          if (this.mainLabel.prev().find('input.select-dropdown').val() === '') {
-            this.mainLabel.removeClass('active');
-          }
-        }
       }
     }, {
       key: "_onSingleMaterialOptionClick",
@@ -18455,15 +18490,20 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             e.preventDefault();
           }
         }
-
-        this.mainLabel.removeClass('active-check');
       }
     }, {
       key: "_onHTMLClick",
       value: function _onHTMLClick(e) {
         if (!$(e.target).closest("#select-options-".concat(this.uuid)).length && !$(e.target).hasClass('mdb-select') && $("#select-options-".concat(this.uuid)).hasClass('active')) {
           this.$materialSelect.trigger('close');
-          this.mainLabel.removeClass('active-check');
+
+          if (!this.$materialSelect.val().length > 0) {
+            this.mainLabel.removeClass('active');
+          }
+        }
+
+        if (this.isSearchable && this.$searchInput !== null && this.$materialOptionsList.hasClass('active')) {
+          this.$materialOptionsList.find('.search-wrap input.search').focus();
         }
       }
     }, {
@@ -18620,8 +18660,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         if (isLetterSearchable) {
           filterQueryString += letter;
-          var $matchedMaterialOption = this.$materialOptionsList.find('li').filter(function () {
-            return $(this).text().toLowerCase().indexOf(filterQueryString) !== -1;
+          var $matchedMaterialOption = this.$materialOptionsList.find('li').filter(function (index, element) {
+            return $(element).text().toLowerCase().includes(filterQueryString);
           }).first();
 
           if (!this.isMultiple) {
@@ -18732,9 +18772,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         });
         itemsCount >= 5 ? value = "".concat(itemsCount, " ").concat(optionsSelected) : value = value.substring(2);
         value.length === 0 && this.mainLabel.length === 0 ? value = this.$nativeSelect.find('option:disabled').eq(0).text() : null;
-        value.length > 0 && !this.options.BSinputText ? this.mainLabel.addClass('active active-check') : this.mainLabel.removeClass('active');
+        value.length > 0 && !this.options.BSinputText ? this.mainLabel.addClass('active ') : this.mainLabel.removeClass('active');
         this.options.BSinputText ? this.mainLabel.css('top', '-7px') : null;
-        this.$nativeSelect.siblings("".concat(this.options.BSinputText ? "input.multi-bs-select" : "input.select-dropdown")).val(value);
+        this.$nativeSelect.siblings("".concat(this.options.BSinputText ? 'input.multi-bs-select' : 'input.select-dropdown')).val(value);
       }
     }, {
       key: "_randomUUID",
@@ -18776,7 +18816,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
       if (this.data('stop-refresh') !== true && this.hasClass('mdb-select') && this.hasClass('initialized')) {
         MaterialSelect.clearMutationObservers();
-        this.materialSelect('destroy');
+        this.materialSelect({
+          destroy: true
+        });
         var ret = originalVal.call(this, value);
         this.materialSelect();
         return ret;
@@ -18787,3367 +18829,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
   })($.fn.val);
 })(jQuery);
 
-jQuery('select').siblings('input.select-dropdown', 'input.multi-bs-select').on('mousedown', function (e) {
+$('select').siblings('input.select-dropdown', 'input.multi-bs-select').on('mousedown', function (e) {
   if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
     if (e.clientX >= e.target.clientWidth || e.clientY >= e.target.clientHeight) {
       e.preventDefault();
     }
   }
 });
-/*!
- * pickadate.js v3.5.6, 2015/04/20
- * By Amsul, http://amsul.ca
- * Hosted on http://amsul.github.io/pickadate.js
- * Licensed under MIT
- */
-
-(function ( factory ) {
-
-    // AMD.
-    if ( typeof define == 'function' && define.amd )
-        define( 'picker', ['jquery'], factory )
-
-    // Node.js/browserify.
-    else if ( typeof exports == 'object' )
-        module.exports = factory( require('jquery') )
-
-    // Browser globals.
-    else this.Picker = factory( jQuery )
-
-}(function( $ ) {
-
-var $window = $( window )
-var $document = $( document )
-var $html = $( document.documentElement )
-var supportsTransitions = document.documentElement.style.transition != null
-
-
-/**
- * The picker constructor that creates a blank picker.
- */
-function PickerConstructor( ELEMENT, NAME, COMPONENT, OPTIONS ) {
-
-    // If there’s no element, return the picker constructor.
-    if ( !ELEMENT ) return PickerConstructor
-
-
-    var
-        IS_DEFAULT_THEME = false,
-
-
-        // The state of the picker.
-        STATE = {
-            id: ELEMENT.id || 'P' + Math.abs( ~~(Math.random() * new Date()) )
-        },
-
-
-        // Merge the defaults and options passed.
-        SETTINGS = COMPONENT ? $.extend( true, {}, COMPONENT.defaults, OPTIONS ) : OPTIONS || {},
-
-
-        // Merge the default classes with the settings classes.
-        CLASSES = $.extend( {}, PickerConstructor.klasses(), SETTINGS.klass ),
-
-
-        // The element node wrapper into a jQuery object.
-        $ELEMENT = $( ELEMENT ),
-
-
-        // Pseudo picker constructor.
-        PickerInstance = function() {
-            return this.start()
-        },
-
-
-        // The picker prototype.
-        P = PickerInstance.prototype = {
-
-            constructor: PickerInstance,
-
-            $node: $ELEMENT,
-
-
-            /**
-             * Initialize everything
-             */
-            start: function() {
-
-                // If it’s already started, do nothing.
-                if ( STATE && STATE.start ) return P
-
-
-                // Update the picker states.
-                STATE.methods = {}
-                STATE.start = true
-                STATE.open = false
-                STATE.type = ELEMENT.type
-
-
-                // Confirm focus state, convert into text input to remove UA stylings,
-                // and set as readonly to prevent keyboard popup.
-                ELEMENT.autofocus = ELEMENT == getActiveElement()
-                ELEMENT.readOnly = !SETTINGS.editable
-                ELEMENT.id = ELEMENT.id || STATE.id
-                if ( ELEMENT.type != 'text' ) {
-                    ELEMENT.type = 'text'
-                }
-
-
-                // Create a new picker component with the settings.
-                P.component = new COMPONENT(P, SETTINGS)
-
-
-                // Create the picker root and then prepare it.
-                P.$root = $( '<div class="' + CLASSES.picker + '" id="' + ELEMENT.id + '_root" />' )
-                prepareElementRoot()
-
-
-                // Create the picker holder and then prepare it.
-                P.$holder = $( createWrappedComponent() ).appendTo( P.$root )
-                prepareElementHolder()
-
-
-                // If there’s a format for the hidden input element, create the element.
-                if ( SETTINGS.formatSubmit ) {
-                    prepareElementHidden()
-                }
-
-
-                // Prepare the input element.
-                prepareElement()
-
-
-                // Insert the hidden input as specified in the settings.
-                if ( SETTINGS.containerHidden ) $( SETTINGS.containerHidden ).append( P._hidden )
-                else $ELEMENT.after( P._hidden )
-
-
-                // Insert the root as specified in the settings.
-                if ( SETTINGS.container ) $( SETTINGS.container ).append( P.$root )
-                else $ELEMENT.after( P.$root )
-
-
-                // Bind the default component and settings events.
-                P.on({
-                    start: P.component.onStart,
-                    render: P.component.onRender,
-                    stop: P.component.onStop,
-                    open: P.component.onOpen,
-                    close: P.component.onClose,
-                    set: P.component.onSet
-                }).on({
-                    start: SETTINGS.onStart,
-                    render: SETTINGS.onRender,
-                    stop: SETTINGS.onStop,
-                    open: SETTINGS.onOpen,
-                    close: SETTINGS.onClose,
-                    set: SETTINGS.onSet
-                })
-
-
-                // Once we’re all set, check the theme in use.
-                IS_DEFAULT_THEME = isUsingDefaultTheme( P.$holder[0] )
-
-
-                // If the element has autofocus, open the picker.
-                if ( ELEMENT.autofocus ) {
-                    P.open()
-                }
-
-
-                // Trigger queued the “start” and “render” events.
-                return P.trigger( 'start' ).trigger( 'render' )
-            }, //start
-
-
-            /**
-             * Render a new picker
-             */
-            render: function( entireComponent ) {
-
-                // Insert a new component holder in the root or box.
-                if ( entireComponent ) {
-                    P.$holder = $( createWrappedComponent() )
-                    prepareElementHolder()
-                    P.$root.html( P.$holder )
-                }
-                else P.$root.find( '.' + CLASSES.box ).html( P.component.nodes( STATE.open ) )
-
-                // Trigger the queued “render” events.
-                return P.trigger( 'render' )
-            }, //render
-
-
-            /**
-             * Destroy everything
-             */
-            stop: function() {
-
-                // If it’s already stopped, do nothing.
-                if ( !STATE.start ) return P
-
-                // Then close the picker.
-                P.close()
-
-                // Remove the hidden field.
-                if ( P._hidden ) {
-                    P._hidden.parentNode.removeChild( P._hidden )
-                }
-
-                // Remove the root.
-                P.$root.remove()
-
-                // Remove the input class, remove the stored data, and unbind
-                // the events (after a tick for IE - see `P.close`).
-                $ELEMENT.removeClass( CLASSES.input ).removeData( NAME )
-                setTimeout( function() {
-                    $ELEMENT.off( '.' + STATE.id )
-                }, 0)
-
-                // Restore the element state
-                ELEMENT.type = STATE.type
-                ELEMENT.readOnly = false
-
-                // Trigger the queued “stop” events.
-                P.trigger( 'stop' )
-
-                // Reset the picker states.
-                STATE.methods = {}
-                STATE.start = false
-
-                return P
-            }, //stop
-
-
-            /**
-             * Open up the picker
-             */
-            open: function( dontGiveFocus ) {
-
-                // If it’s already open, do nothing.
-                if ( STATE.open ) return P
-
-                // Add the “active” class.
-                $ELEMENT.addClass( CLASSES.active )
-                aria( ELEMENT, 'expanded', true )
-
-                // * A Firefox bug, when `html` has `overflow:hidden`, results in
-                //   killing transitions :(. So add the “opened” state on the next tick.
-                //   Bug: https://bugzilla.mozilla.org/show_bug.cgi?id=625289
-                setTimeout( function() {
-
-                    // Add the “opened” class to the picker root.
-                    P.$root.addClass( CLASSES.opened )
-                    aria( P.$root[0], 'hidden', false )
-
-                }, 0 )
-
-                // If we have to give focus, bind the element and doc events.
-                if ( dontGiveFocus !== false ) {
-
-                    // Set it as open.
-                    STATE.open = true
-
-                    // Prevent the page from scrolling.
-                    if ( IS_DEFAULT_THEME ) {
-                        $html.
-                            css( 'overflow', 'hidden' ).
-                            css( 'padding-right', '+=' + getScrollbarWidth() )
-                    }
-
-                    // Pass focus to the root element’s jQuery object.
-                    focusPickerOnceOpened()
-
-                    // Bind the document events.
-                    $document.on( 'click.' + STATE.id + ' focusin.' + STATE.id, function( event ) {
-
-                        var target = event.target
-
-                        // If the target of the event is not the element, close the picker picker.
-                        // * Don’t worry about clicks or focusins on the root because those don’t bubble up.
-                        //   Also, for Firefox, a click on an `option` element bubbles up directly
-                        //   to the doc. So make sure the target wasn't the doc.
-                        // * In Firefox stopPropagation() doesn’t prevent right-click events from bubbling,
-                        //   which causes the picker to unexpectedly close when right-clicking it. So make
-                        //   sure the event wasn’t a right-click.
-                        if ( target != ELEMENT && target != document && event.which != 3 ) {
-
-                            // If the target was the holder that covers the screen,
-                            // keep the element focused to maintain tabindex.
-                            P.close( target === P.$holder[0] )
-                        }
-
-                    }).on( 'keydown.' + STATE.id, function( event ) {
-
-                        var
-                            // Get the keycode.
-                            keycode = event.keyCode,
-
-                            // Translate that to a selection change.
-                            keycodeToMove = P.component.key[ keycode ],
-
-                            // Grab the target.
-                            target = event.target
-
-
-                        // On escape, close the picker and give focus.
-                        if ( keycode == 27 ) {
-                            P.close( true )
-                        }
-
-
-                        // Check if there is a key movement or “enter” keypress on the element.
-                        else if ( target == P.$holder[0] && ( keycodeToMove || keycode == 13 ) ) {
-
-                            // Prevent the default action to stop page movement.
-                            event.preventDefault()
-
-                            // Trigger the key movement action.
-                            if ( keycodeToMove ) {
-                                PickerConstructor._.trigger( P.component.key.go, P, [ PickerConstructor._.trigger( keycodeToMove ) ] )
-                            }
-
-                            // On “enter”, if the highlighted item isn’t disabled, set the value and close.
-                            else if ( !P.$root.find( '.' + CLASSES.highlighted ).hasClass( CLASSES.disabled ) ) {
-                                P.set( 'select', P.component.item.highlight )
-                                if ( SETTINGS.closeOnSelect ) {
-                                    P.close( true )
-                                }
-                            }
-                        }
-
-
-                        // If the target is within the root and “enter” is pressed,
-                        // prevent the default action and trigger a click on the target instead.
-                        else if ( $.contains( P.$root[0], target ) && keycode == 13 ) {
-                            event.preventDefault()
-                            target.click()
-                        }
-                    })
-                }
-
-                // Trigger the queued “open” events.
-                return P.trigger( 'open' )
-            }, //open
-
-
-            /**
-             * Close the picker
-             */
-            close: function( giveFocus ) {
-
-                // If we need to give focus, do it before changing states.
-                if ( giveFocus ) {
-                    if ( SETTINGS.editable ) {
-                        ELEMENT.focus()
-                    }
-                    else {
-                        // ....ah yes! It would’ve been incomplete without a crazy workaround for IE :|
-                        // The focus is triggered *after* the close has completed - causing it
-                        // to open again. So unbind and rebind the event at the next tick.
-                        P.$holder.off( 'focus.toOpen' ).focus()
-                        setTimeout( function() {
-                            P.$holder.on( 'focus.toOpen', handleFocusToOpenEvent )
-                        }, 0 )
-                    }
-                }
-
-                // Remove the “active” class.
-                $ELEMENT.removeClass( CLASSES.active )
-                aria( ELEMENT, 'expanded', false )
-
-                // * A Firefox bug, when `html` has `overflow:hidden`, results in
-                //   killing transitions :(. So remove the “opened” state on the next tick.
-                //   Bug: https://bugzilla.mozilla.org/show_bug.cgi?id=625289
-                setTimeout( function() {
-
-                    // Remove the “opened” and “focused” class from the picker root.
-                    P.$root.removeClass( CLASSES.opened + ' ' + CLASSES.focused )
-                    aria( P.$root[0], 'hidden', true )
-
-                }, 0 )
-
-                // If it’s already closed, do nothing more.
-                if ( !STATE.open ) return P
-
-                // Set it as closed.
-                STATE.open = false
-
-                // Allow the page to scroll.
-                if ( IS_DEFAULT_THEME ) {
-                    $html.
-                        css( 'overflow', '' ).
-                        css( 'padding-right', '-=' + getScrollbarWidth() )
-                }
-
-                // Unbind the document events.
-                $document.off( '.' + STATE.id )
-
-                // Trigger the queued “close” events.
-                return P.trigger( 'close' )
-            }, //close
-
-
-            /**
-             * Clear the values
-             */
-            clear: function( options ) {
-                return P.set( 'clear', null, options )
-            }, //clear
-
-
-            /**
-             * Set something
-             */
-            set: function( thing, value, options ) {
-
-                var thingItem, thingValue,
-                    thingIsObject = $.isPlainObject( thing ),
-                    thingObject = thingIsObject ? thing : {}
-
-                // Make sure we have usable options.
-                options = thingIsObject && $.isPlainObject( value ) ? value : options || {}
-
-                if ( thing ) {
-
-                    // If the thing isn’t an object, make it one.
-                    if ( !thingIsObject ) {
-                        thingObject[ thing ] = value
-                    }
-
-                    // Go through the things of items to set.
-                    for ( thingItem in thingObject ) {
-
-                        // Grab the value of the thing.
-                        thingValue = thingObject[ thingItem ]
-
-                        // First, if the item exists and there’s a value, set it.
-                        if ( thingItem in P.component.item ) {
-                            if ( thingValue === undefined ) thingValue = null
-                            P.component.set( thingItem, thingValue, options )
-                        }
-
-                        // Then, check to update the element value and broadcast a change.
-                        if ( thingItem == 'select' || thingItem == 'clear' ) {
-                            $ELEMENT.
-                                val( thingItem == 'clear' ? '' : P.get( thingItem, SETTINGS.format ) ).
-                                trigger( 'change' )
-                        }
-                    }
-
-                    // Render a new picker.
-                    P.render()
-                }
-
-                // When the method isn’t muted, trigger queued “set” events and pass the `thingObject`.
-                return options.muted ? P : P.trigger( 'set', thingObject )
-            }, //set
-
-
-            /**
-             * Get something
-             */
-            get: function( thing, format ) {
-
-                // Make sure there’s something to get.
-                thing = thing || 'value'
-
-                // If a picker state exists, return that.
-                if ( STATE[ thing ] != null ) {
-                    return STATE[ thing ]
-                }
-
-                // Return the submission value, if that.
-                if ( thing == 'valueSubmit' ) {
-                    if ( P._hidden ) {
-                        return P._hidden.value
-                    }
-                    thing = 'value'
-                }
-
-                // Return the value, if that.
-                if ( thing == 'value' ) {
-                    return ELEMENT.value
-                }
-
-                // Check if a component item exists, return that.
-                if ( thing in P.component.item ) {
-                    if ( typeof format == 'string' ) {
-                        var thingValue = P.component.get( thing )
-                        return thingValue ?
-                            PickerConstructor._.trigger(
-                                P.component.formats.toString,
-                                P.component,
-                                [ format, thingValue ]
-                            ) : ''
-                    }
-                    return P.component.get( thing )
-                }
-            }, //get
-
-
-
-            /**
-             * Bind events on the things.
-             */
-            on: function( thing, method, internal ) {
-
-                var thingName, thingMethod,
-                    thingIsObject = $.isPlainObject( thing ),
-                    thingObject = thingIsObject ? thing : {}
-
-                if ( thing ) {
-
-                    // If the thing isn’t an object, make it one.
-                    if ( !thingIsObject ) {
-                        thingObject[ thing ] = method
-                    }
-
-                    // Go through the things to bind to.
-                    for ( thingName in thingObject ) {
-
-                        // Grab the method of the thing.
-                        thingMethod = thingObject[ thingName ]
-
-                        // If it was an internal binding, prefix it.
-                        if ( internal ) {
-                            thingName = '_' + thingName
-                        }
-
-                        // Make sure the thing methods collection exists.
-                        STATE.methods[ thingName ] = STATE.methods[ thingName ] || []
-
-                        // Add the method to the relative method collection.
-                        STATE.methods[ thingName ].push( thingMethod )
-                    }
-                }
-
-                return P
-            }, //on
-
-
-
-            /**
-             * Unbind events on the things.
-             */
-            off: function() {
-                var i, thingName,
-                    names = arguments;
-                for ( i = 0, namesCount = names.length; i < namesCount; i += 1 ) {
-                    thingName = names[i]
-                    if ( thingName in STATE.methods ) {
-                        delete STATE.methods[thingName]
-                    }
-                }
-                return P
-            },
-
-
-            /**
-             * Fire off method events.
-             */
-            trigger: function( name, data ) {
-                var _trigger = function( name ) {
-                    var methodList = STATE.methods[ name ]
-                    if ( methodList ) {
-                        methodList.map( function( method ) {
-                            PickerConstructor._.trigger( method, P, [ data ] )
-                        })
-                    }
-                }
-                _trigger( '_' + name )
-                _trigger( name )
-                return P
-            } //trigger
-        } //PickerInstance.prototype
-
-
-    /**
-     * Wrap the picker holder components together.
-     */
-    function createWrappedComponent() {
-
-        // Create a picker wrapper holder
-        return PickerConstructor._.node( 'div',
-
-            // Create a picker wrapper node
-            PickerConstructor._.node( 'div',
-
-                // Create a picker frame
-                PickerConstructor._.node( 'div',
-
-                    // Create a picker box node
-                    PickerConstructor._.node( 'div',
-
-                        // Create the components nodes.
-                        P.component.nodes( STATE.open ),
-
-                        // The picker box class
-                        CLASSES.box
-                    ),
-
-                    // Picker wrap class
-                    CLASSES.wrap
-                ),
-
-                // Picker frame class
-                CLASSES.frame
-            ),
-
-            // Picker holder class
-            CLASSES.holder,
-
-            'tabindex="-1"'
-        ) //endreturn
-    } //createWrappedComponent
-
-    // tkane from https://davidwalsh.name/javascript-debounce-function
-    function debounce(func, wait, immediate) {
-      var timeout;
-      return function() {
-          var context = this, args = arguments;
-          var later = function() {
-              timeout = null;
-              if (!immediate) func.apply(context, args);
-          };
-          var callNow = immediate && !timeout;
-          clearTimeout(timeout);
-          timeout = setTimeout(later, wait);
-          if (callNow) func.apply(context, args);
-      };
-  }
-
-    /**
-     * Prepare the input element with all bindings.
-     */
-    function prepareElement() {
-
-        $ELEMENT.
-
-            // Store the picker data by component name.
-            data(NAME, P).
-
-            // Add the “input” class name.
-            addClass(CLASSES.input).
-
-            // If there’s a `data-value`, update the value of the element.
-            val( $ELEMENT.data('value') ?
-                P.get('select', SETTINGS.format) :
-                ELEMENT.value
-            )
-
-
-        // Only bind keydown events if the element isn’t editable.
-        if ( !SETTINGS.editable ) {
-
-            $ELEMENT.
-
-                // On focus/click, open the picker.
-                on( 'focus.' + STATE.id + ' click.' + STATE.id, debounce(function(event) {
-                    event.preventDefault()
-                    P.open()
-                  }, 100)).
-
-                // Handle keyboard event based on the picker being opened or not.
-                on( 'keydown.' + STATE.id, handleKeydownEvent )
-        }
-
-
-        // Update the aria attributes.
-        aria(ELEMENT, {
-            haspopup: true,
-            expanded: false,
-            readonly: false,
-            owns: ELEMENT.id + '_root'
-        })
-    }
-
-
-    /**
-     * Prepare the root picker element with all bindings.
-     */
-    function prepareElementRoot() {
-        aria( P.$root[0], 'hidden', true )
-    }
-
-
-     /**
-      * Prepare the holder picker element with all bindings.
-      */
-    function prepareElementHolder() {
-
-        P.$holder.
-
-            on({
-
-                // For iOS8.
-                keydown: handleKeydownEvent,
-
-                'focus.toOpen': handleFocusToOpenEvent,
-
-                blur: function() {
-                    // Remove the “target” class.
-                    $ELEMENT.removeClass( CLASSES.target )
-                },
-
-                // When something within the holder is focused, stop from bubbling
-                // to the doc and remove the “focused” state from the root.
-                focusin: function( event ) {
-                    P.$root.removeClass( CLASSES.focused )
-                    event.stopPropagation()
-                },
-
-                // When something within the holder is clicked, stop it
-                // from bubbling to the doc.
-                'mousedown click': function( event ) {
-
-                    var target = event.target
-
-                    // Make sure the target isn’t the root holder so it can bubble up.
-                    if ( target != P.$holder[0] ) {
-
-                        event.stopPropagation()
-
-                        // * For mousedown events, cancel the default action in order to
-                        //   prevent cases where focus is shifted onto external elements
-                        //   when using things like jQuery mobile or MagnificPopup (ref: #249 & #120).
-                        //   Also, for Firefox, don’t prevent action on the `option` element.
-                        if ( event.type == 'mousedown' && !$( target ).is( 'input, select, textarea, button, option' )) {
-
-                            event.preventDefault()
-
-                            // Re-focus onto the holder so that users can click away
-                            // from elements focused within the picker.
-                            P.$holder[0].focus()
-                        }
-                    }
-                }
-
-            }).
-
-            // If there’s a click on an actionable element, carry out the actions.
-            on( 'click', '[data-pick], [data-nav], [data-clear], [data-close]', function() {
-
-                var $target = $( this ),
-                    targetData = $target.data(),
-                    targetDisabled = $target.hasClass( CLASSES.navDisabled ) || $target.hasClass( CLASSES.disabled ),
-
-                    // * For IE, non-focusable elements can be active elements as well
-                    //   (http://stackoverflow.com/a/2684561).
-                    activeElement = getActiveElement()
-                    activeElement = activeElement && ( activeElement.type || activeElement.href )
-
-                // If it’s disabled or nothing inside is actively focused, re-focus the element.
-                if ( targetDisabled || activeElement && !$.contains( P.$root[0], activeElement ) ) {
-                    P.$holder[0].focus()
-                }
-
-                // If something is superficially changed, update the `highlight` based on the `nav`.
-                if ( !targetDisabled && targetData.nav ) {
-                    P.set( 'highlight', P.component.item.highlight, { nav: targetData.nav } )
-                }
-
-                // If something is picked, set `select` then close with focus.
-                else if ( !targetDisabled && 'pick' in targetData ) {
-                    P.set( 'select', targetData.pick )
-                    if ( SETTINGS.closeOnSelect ) {
-                        P.close( true )
-                    }
-                }
-
-                // If a “clear” button is pressed, empty the values and close with focus.
-                else if ( targetData.clear ) {
-                    P.clear()
-                    if ( SETTINGS.closeOnClear ) {
-                        P.close( true )
-                    }
-                }
-
-                else if ( targetData.close ) {
-                    P.close( true )
-                }
-
-            }) //P.$holder
-
-    }
-
-
-     /**
-      * Prepare the hidden input element along with all bindings.
-      */
-    function prepareElementHidden() {
-
-        var name
-
-        if ( SETTINGS.hiddenName === true ) {
-            name = ELEMENT.name
-            ELEMENT.name = ''
-        }
-        else {
-            name = [
-                typeof SETTINGS.hiddenPrefix == 'string' ? SETTINGS.hiddenPrefix : '',
-                typeof SETTINGS.hiddenSuffix == 'string' ? SETTINGS.hiddenSuffix : '_submit'
-            ]
-            name = name[0] + ELEMENT.name + name[1]
-        }
-
-        P._hidden = $(
-            '<input ' +
-            'type=hidden ' +
-
-            // Create the name using the original input’s with a prefix and suffix.
-            'name="' + name + '"' +
-
-            // If the element has a value, set the hidden value as well.
-            (
-                $ELEMENT.data('value') || ELEMENT.value ?
-                    ' value="' + P.get('select', SETTINGS.formatSubmit) + '"' :
-                    ''
-            ) +
-            '>'
-        )[0]
-
-        $ELEMENT.
-
-            // If the value changes, update the hidden input with the correct format.
-            on('change.' + STATE.id, function() {
-                P._hidden.value = ELEMENT.value ?
-                    P.get('select', SETTINGS.formatSubmit) :
-                    ''
-            })
-    }
-
-
-    // Wait for transitions to end before focusing the holder. Otherwise, while
-    // using the `container` option, the view jumps to the container.
-    function focusPickerOnceOpened() {
-
-        if (IS_DEFAULT_THEME && supportsTransitions) {
-            P.$holder.find('.' + CLASSES.frame).one('transitionend', function() {
-                P.$holder[0].focus()
-            })
-        }
-        else {
-            P.$holder[0].focus()
-        }
-    }
-
-
-    function handleFocusToOpenEvent(event) {
-
-        // Stop the event from propagating to the doc.
-        event.stopPropagation()
-
-        // Add the “target” class.
-        $ELEMENT.addClass( CLASSES.target )
-
-        // Add the “focused” class to the root.
-        P.$root.addClass( CLASSES.focused )
-
-        // And then finally open the picker.
-        P.open()
-    }
-
-
-    // For iOS8.
-    function handleKeydownEvent( event ) {
-
-        var keycode = event.keyCode,
-
-            // Check if one of the delete keys was pressed.
-            isKeycodeDelete = /^(8|46)$/.test(keycode)
-
-        // For some reason IE clears the input value on “escape”.
-        if ( keycode == 27 ) {
-            P.close( true )
-            return false
-        }
-
-        // Check if `space` or `delete` was pressed or the picker is closed with a key movement.
-        if ( keycode == 32 || isKeycodeDelete || !STATE.open && P.component.key[keycode] ) {
-
-            // Prevent it from moving the page and bubbling to doc.
-            event.preventDefault()
-            event.stopPropagation()
-
-            // If `delete` was pressed, clear the values and close the picker.
-            // Otherwise open the picker.
-            if ( isKeycodeDelete ) { P.clear().close() }
-            else { P.open() }
-        }
-    }
-
-
-    // Return a new picker instance.
-    return new PickerInstance()
-} //PickerConstructor
-
-
-
-/**
- * The default classes and prefix to use for the HTML classes.
- */
-PickerConstructor.klasses = function( prefix ) {
-    prefix = prefix || 'picker'
-    return {
-
-        picker: prefix,
-        opened: prefix + '--opened',
-        focused: prefix + '--focused',
-
-        input: prefix + '__input',
-        active: prefix + '__input--active',
-        target: prefix + '__input--target',
-
-        holder: prefix + '__holder',
-
-        frame: prefix + '__frame',
-        wrap: prefix + '__wrap',
-
-        box: prefix + '__box'
-    }
-} //PickerConstructor.klasses
-
-
-
-/**
- * Check if the default theme is being used.
- */
-function isUsingDefaultTheme( element ) {
-
-    var theme,
-        prop = 'position'
-
-    // For IE.
-    if ( element.currentStyle ) {
-        theme = element.currentStyle[prop]
-    }
-
-    // For normal browsers.
-    else if ( window.getComputedStyle ) {
-        theme = getComputedStyle( element )[prop]
-    }
-
-    return theme == 'fixed'
-}
-
-
-
-/**
- * Get the width of the browser’s scrollbar.
- * Taken from: https://github.com/VodkaBears/Remodal/blob/master/src/jquery.remodal.js
- */
-function getScrollbarWidth() {
-
-    if ( $html.height() <= $window.height() ) {
-        return 0
-    }
-
-    var $outer = $( '<div style="visibility:hidden;width:100px" />' ).
-        appendTo( 'body' )
-
-    // Get the width without scrollbars.
-    var widthWithoutScroll = $outer[0].offsetWidth
-
-    // Force adding scrollbars.
-    $outer.css( 'overflow', 'scroll' )
-
-    // Add the inner div.
-    var $inner = $( '<div style="width:100%" />' ).appendTo( $outer )
-
-    // Get the width with scrollbars.
-    var widthWithScroll = $inner[0].offsetWidth
-
-    // Remove the divs.
-    $outer.remove()
-
-    // Return the difference between the widths.
-    return widthWithoutScroll - widthWithScroll
-}
-
-
-
-/**
- * PickerConstructor helper methods.
- */
-PickerConstructor._ = {
-
-    /**
-     * Create a group of nodes. Expects:
-     * `
-        {
-            min:    {Integer},
-            max:    {Integer},
-            i:      {Integer},
-            node:   {String},
-            item:   {Function}
-        }
-     * `
-     */
-    group: function( groupObject ) {
-
-        var
-            // Scope for the looped object
-            loopObjectScope,
-
-            // Create the nodes list
-            nodesList = '',
-
-            // The counter starts from the `min`
-            counter = PickerConstructor._.trigger( groupObject.min, groupObject )
-
-
-        // Loop from the `min` to `max`, incrementing by `i`
-        for ( ; counter <= PickerConstructor._.trigger( groupObject.max, groupObject, [ counter ] ); counter += groupObject.i ) {
-
-            // Trigger the `item` function within scope of the object
-            loopObjectScope = PickerConstructor._.trigger( groupObject.item, groupObject, [ counter ] )
-
-            // Splice the subgroup and create nodes out of the sub nodes
-            nodesList += PickerConstructor._.node(
-                groupObject.node,
-                loopObjectScope[ 0 ],   // the node
-                loopObjectScope[ 1 ],   // the classes
-                loopObjectScope[ 2 ]    // the attributes
-            )
-        }
-
-        // Return the list of nodes
-        return nodesList
-    }, //group
-
-
-    /**
-     * Create a dom node string
-     */
-    node: function( wrapper, item, klass, attribute ) {
-
-        // If the item is false-y, just return an empty string
-        if ( !item ) return ''
-
-        // If the item is an array, do a join
-        item = $.isArray( item ) ? item.join( '' ) : item
-
-        // Check for the class
-        klass = klass ? ' class="' + klass + '"' : ''
-
-        // Check for any attributes
-        attribute = attribute ? ' ' + attribute : ''
-
-        // Return the wrapped item
-        return '<' + wrapper + klass + attribute + '>' + item + '</' + wrapper + '>'
-    }, //node
-
-
-    /**
-     * Lead numbers below 10 with a zero.
-     */
-    lead: function( number ) {
-        return ( number < 10 ? '0': '' ) + number
-    },
-
-
-    /**
-     * Trigger a function otherwise return the value.
-     */
-    trigger: function( callback, scope, args ) {
-        return typeof callback == 'function' ? callback.apply( scope, args || [] ) : callback
-    },
-
-
-    /**
-     * If the second character is a digit, length is 2 otherwise 1.
-     */
-    digits: function( string ) {
-        return ( /\d/ ).test( string[ 1 ] ) ? 2 : 1
-    },
-
-
-    /**
-     * Tell if something is a date object.
-     */
-    isDate: function( value ) {
-        return {}.toString.call( value ).indexOf( 'Date' ) > -1 && this.isInteger( value.getDate() )
-    },
-
-
-    /**
-     * Tell if something is an integer.
-     */
-    isInteger: function( value ) {
-        return {}.toString.call( value ).indexOf( 'Number' ) > -1 && value % 1 === 0
-    },
-
-
-    /**
-     * Create ARIA attribute strings.
-     */
-    ariaAttr: ariaAttr
-} //PickerConstructor._
-
-
-
-/**
- * Extend the picker with a component and defaults.
- */
-PickerConstructor.extend = function( name, Component ) {
-
-    // Extend jQuery.
-    $.fn[ name ] = function( options, action ) {
-
-        // Grab the component data.
-        var componentData = this.data( name )
-
-        // If the picker is requested, return the data object.
-        if ( options == 'picker' ) {
-            return componentData
-        }
-
-        // If the component data exists and `options` is a string, carry out the action.
-        if ( componentData && typeof options == 'string' ) {
-            return PickerConstructor._.trigger( componentData[ options ], componentData, [ action ] )
-        }
-
-        // Otherwise go through each matched element and if the component
-        // doesn’t exist, create a new picker using `this` element
-        // and merging the defaults and options with a deep copy.
-        return this.each( function() {
-            var $this = $( this )
-            if ( !$this.data( name ) ) {
-                new PickerConstructor( this, name, Component, options )
-            }
-        })
-    }
-
-    // Set the defaults.
-    $.fn[ name ].defaults = Component.defaults
-} //PickerConstructor.extend
-
-
-
-function aria(element, attribute, value) {
-    if ( $.isPlainObject(attribute) ) {
-        for ( var key in attribute ) {
-            ariaSet(element, key, attribute[key])
-        }
-    }
-    else {
-        ariaSet(element, attribute, value)
-    }
-}
-function ariaSet(element, attribute, value) {
-    element.setAttribute(
-        (attribute == 'role' ? '' : 'aria-') + attribute,
-        value
-    )
-}
-function ariaAttr(attribute, data) {
-    if ( !$.isPlainObject(attribute) ) {
-        attribute = { attribute: data }
-    }
-    data = ''
-    for ( var key in attribute ) {
-        var attr = (key == 'role' ? '' : 'aria-') + key,
-            attrVal = attribute[key]
-        data += attrVal == null ? '' : attr + '="' + attribute[key] + '"'
-    }
-    return data
-}
-
-// IE8 bug throws an error for activeElements within iframes.
-function getActiveElement() {
-    try {
-        return document.activeElement
-    } catch ( err ) { }
-}
-
-
-
-// Expose the picker constructor.
-return PickerConstructor
-
-
-}));
-
-
-
-
-/*!
- * Date picker for pickadate.js v3.5.6
- * http://amsul.github.io/pickadate.js/date.htm
- * https://github.com/amsul/pickadate.js
- */
-
-(function (factory) {
-
-  // AMD.
-  if (typeof define == 'function' && define.amd)
-    define(['picker', 'jquery'], factory)
-
-  // Node.js/browserify.
-  else if (typeof exports == 'object')
-    module.exports = factory(require('./picker.js'), require('jquery'))
-
-  // Browser globals.
-  else factory(Picker, jQuery)
-
-}(function (Picker, $) {
-
-
-  /**
-   * Globals and constants
-   */
-  var DAYS_IN_WEEK = 7,
-    WEEKS_IN_CALENDAR = 6,
-    _ = Picker._
-
-
-
-  /**
-   * The date picker constructor
-   */
-  function DatePicker(picker, settings) {
-
-    var calendar = this,
-      element = picker.$node[0],
-      elementValue = element.value,
-      elementDataValue = picker.$node.data('value'),
-      valueString = elementDataValue || elementValue,
-      formatString = elementDataValue ? settings.formatSubmit : settings.format,
-      isRTL = function () {
-
-        return element.currentStyle ?
-
-          // For IE.
-          element.currentStyle.direction == 'rtl' :
-
-          // For normal browsers.
-          getComputedStyle(picker.$root[0]).direction == 'rtl'
-      }
-
-    calendar.settings = settings
-    calendar.$node = picker.$node
-
-    // The queue of methods that will be used to build item objects.
-    calendar.queue = {
-      min: 'measure create',
-      max: 'measure create',
-      now: 'now create',
-      select: 'parse create validate',
-      highlight: 'parse navigate create validate',
-      view: 'parse create validate viewset',
-      disable: 'deactivate',
-      enable: 'activate'
-    }
-
-    // The component's item object.
-    calendar.item = {}
-
-    calendar.item.clear = null
-    calendar.item.disable = (settings.disable || []).slice(0)
-    calendar.item.enable = -(function (collectionDisabled) {
-      return collectionDisabled[0] === true ? collectionDisabled.shift() : -1
-    })(calendar.item.disable)
-
-    calendar.
-    set('min', settings.min).
-    set('max', settings.max).
-    set('now')
-
-    // When there’s a value, set the `select`, which in turn
-    // also sets the `highlight` and `view`.
-    if (valueString) {
-      calendar.set('select', valueString, {
-        format: formatString,
-        defaultValue: true
-      })
-    }
-
-    // If there’s no value, default to highlighting “today”.
-    else {
-      calendar.
-      set('select', null).
-      set('highlight', calendar.item.now)
-    }
-
-
-    // The keycode to movement mapping.
-    calendar.key = {
-      40: 7, // Down
-      38: -7, // Up
-      39: function () {
-        return isRTL() ? -1 : 1
-      }, // Right
-      37: function () {
-        return isRTL() ? 1 : -1
-      }, // Left
-      go: function (timeChange) {
-        var highlightedObject = calendar.item.highlight,
-          targetDate = new Date(highlightedObject.year, highlightedObject.month, highlightedObject.date + timeChange)
-        calendar.set(
-          'highlight',
-          targetDate, {
-            interval: timeChange
-          }
-        )
-        this.render()
-      }
-    }
-
-
-    // Bind some picker events.
-    picker.
-    on('render', function () {
-      picker.$root.find('.' + settings.klass.selectMonth).on('change', function () {
-        var value = this.value
-        if (value) {
-          picker.set('highlight', [picker.get('view').year, value, picker.get('highlight').date])
-          picker.$root.find('.' + settings.klass.selectMonth).trigger('focus')
-        }
-      })
-      picker.$root.find('.' + settings.klass.selectYear).on('change', function () {
-        var value = this.value
-        if (value) {
-          picker.set('highlight', [value, picker.get('view').month, picker.get('highlight').date])
-          picker.$root.find('.' + settings.klass.selectYear).trigger('focus')
-        }
-      })
-    }, 1).
-    on('open', function () {
-      var includeToday = ''
-      if (calendar.disabled(calendar.get('now'))) {
-        includeToday = ':not(.' + settings.klass.buttonToday + ')'
-      }
-      picker.$root.find('button' + includeToday + ', select').attr('disabled', false)
-    }, 1).
-    on('close', function () {
-      picker.$root.find('button, select').attr('disabled', true)
-    }, 1)
-
-  } //DatePicker
-
-
-  /**
-   * Set a datepicker item object.
-   */
-  DatePicker.prototype.set = function (type, value, options) {
-
-    var calendar = this,
-      calendarItem = calendar.item
-
-    // If the value is `null` just set it immediately.
-    if (value === null) {
-      if (type == 'clear') type = 'select'
-      calendarItem[type] = value
-      return calendar
-    }
-
-    // Otherwise go through the queue of methods, and invoke the functions.
-    // Update this as the time unit, and set the final value as this item.
-    // * In the case of `enable`, keep the queue but set `disable` instead.
-    //   And in the case of `flip`, keep the queue but set `enable` instead.
-    calendarItem[(type == 'enable' ? 'disable' : type == 'flip' ? 'enable' : type)] = calendar.queue[type].split(' ').map(function (method) {
-      value = calendar[method](type, value, options)
-      return value
-    }).pop()
-
-    // Check if we need to cascade through more updates.
-    if (type == 'select') {
-      calendar.set('highlight', calendarItem.select, options)
-    } else if (type == 'highlight') {
-      calendar.set('view', calendarItem.highlight, options)
-    } else if (type.match(/^(flip|min|max|disable|enable)$/)) {
-      if (calendarItem.select && calendar.disabled(calendarItem.select)) {
-        calendar.set('select', calendarItem.select, options)
-      }
-      if (calendarItem.highlight && calendar.disabled(calendarItem.highlight)) {
-        calendar.set('highlight', calendarItem.highlight, options)
-      }
-    }
-
-    return calendar
-  } //DatePicker.prototype.set
-
-
-  /**
-   * Get a datepicker item object.
-   */
-  DatePicker.prototype.get = function (type) {
-    return this.item[type]
-  } //DatePicker.prototype.get
-
-
-  /**
-   * Create a picker date object.
-   */
-  DatePicker.prototype.create = function (type, value, options) {
-
-    var isInfiniteValue,
-      calendar = this
-
-    // If there’s no value, use the type as the value.
-    value = value === undefined ? type : value
-
-
-    // If it’s infinity, update the value.
-    if (value == -Infinity || value == Infinity) {
-      isInfiniteValue = value
-    }
-
-    // If it’s an object, use the native date object.
-    else if ($.isPlainObject(value) && _.isInteger(value.pick)) {
-      value = value.obj
-    }
-
-    // If it’s an array, convert it into a date and make sure
-    // that it’s a valid date – otherwise default to today.
-    else if ($.isArray(value)) {
-      value = new Date(value[0], value[1], value[2])
-      value = _.isDate(value) ? value : calendar.create().obj
-    }
-
-    // If it’s a number or date object, make a normalized date.
-    else if (_.isInteger(value) || _.isDate(value)) {
-      value = calendar.normalize(new Date(value), options)
-    }
-
-    // If it’s a literal true or any other case, set it to now.
-    else /*if ( value === true )*/ {
-      value = calendar.now(type, value, options)
-    }
-
-    // Return the compiled object.
-    return {
-      year: isInfiniteValue || value.getFullYear(),
-      month: isInfiniteValue || value.getMonth(),
-      date: isInfiniteValue || value.getDate(),
-      day: isInfiniteValue || value.getDay(),
-      obj: isInfiniteValue || value,
-      pick: isInfiniteValue || value.getTime()
-    }
-  } //DatePicker.prototype.create
-
-
-  /**
-   * Create a range limit object using an array, date object,
-   * literal “true”, or integer relative to another time.
-   */
-  DatePicker.prototype.createRange = function (from, to) {
-
-    var calendar = this,
-      createDate = function (date) {
-        if (date === true || $.isArray(date) || _.isDate(date)) {
-          return calendar.create(date)
-        }
-        return date
-      }
-
-    // Create objects if possible.
-    if (!_.isInteger(from)) {
-      from = createDate(from)
-    }
-    if (!_.isInteger(to)) {
-      to = createDate(to)
-    }
-
-    // Create relative dates.
-    if (_.isInteger(from) && $.isPlainObject(to)) {
-      from = [to.year, to.month, to.date + from];
-    } else if (_.isInteger(to) && $.isPlainObject(from)) {
-      to = [from.year, from.month, from.date + to];
-    }
-
-    return {
-      from: createDate(from),
-      to: createDate(to)
-    }
-  } //DatePicker.prototype.createRange
-
-
-  /**
-   * Check if a date unit falls within a date range object.
-   */
-  DatePicker.prototype.withinRange = function (range, dateUnit) {
-    range = this.createRange(range.from, range.to)
-    return dateUnit.pick >= range.from.pick && dateUnit.pick <= range.to.pick
-  }
-
-
-  /**
-   * Check if two date range objects overlap.
-   */
-  DatePicker.prototype.overlapRanges = function (one, two) {
-
-    var calendar = this
-
-    // Convert the ranges into comparable dates.
-    one = calendar.createRange(one.from, one.to)
-    two = calendar.createRange(two.from, two.to)
-
-    return calendar.withinRange(one, two.from) || calendar.withinRange(one, two.to) ||
-      calendar.withinRange(two, one.from) || calendar.withinRange(two, one.to)
-  }
-
-
-  /**
-   * Get the date today.
-   */
-  DatePicker.prototype.now = function (type, value, options) {
-    value = new Date()
-    if (options && options.rel) {
-      value.setDate(value.getDate() + options.rel)
-    }
-    return this.normalize(value, options)
-  }
-
-
-  /**
-   * Navigate to next/prev month.
-   */
-  DatePicker.prototype.navigate = function (type, value, options) {
-
-    var targetDateObject,
-      targetYear,
-      targetMonth,
-      targetDate,
-      isTargetArray = $.isArray(value),
-      isTargetObject = $.isPlainObject(value),
-      viewsetObject = this.item.view
-    /*,
-            safety = 100*/
-
-
-    if (isTargetArray || isTargetObject) {
-
-      if (isTargetObject) {
-        targetYear = value.year
-        targetMonth = value.month
-        targetDate = value.date
-      } else {
-        targetYear = +value[0]
-        targetMonth = +value[1]
-        targetDate = +value[2]
-      }
-
-      // If we’re navigating months but the view is in a different
-      // month, navigate to the view’s year and month.
-      if (options && options.nav && viewsetObject && viewsetObject.month !== targetMonth) {
-        targetYear = viewsetObject.year
-        targetMonth = viewsetObject.month
-      }
-
-      // Figure out the expected target year and month.
-      targetDateObject = new Date(targetYear, targetMonth + (options && options.nav ? options.nav : 0), 1)
-      targetYear = targetDateObject.getFullYear()
-      targetMonth = targetDateObject.getMonth()
-
-      // If the month we’re going to doesn’t have enough days,
-      // keep decreasing the date until we reach the month’s last date.
-      while ( /*safety &&*/ new Date(targetYear, targetMonth, targetDate).getMonth() !== targetMonth) {
-        targetDate -= 1
-        /*safety -= 1
-        if ( !safety ) {
-            throw 'Fell into an infinite loop while navigating to ' + new Date( targetYear, targetMonth, targetDate ) + '.'
-        }*/
-      }
-
-      value = [targetYear, targetMonth, targetDate]
-    }
-
-    return value
-  } //DatePicker.prototype.navigate
-
-
-  /**
-   * Normalize a date by setting the hours to midnight.
-   */
-  DatePicker.prototype.normalize = function (value /*, options*/ ) {
-    value.setHours(0, 0, 0, 0)
-    return value
-  }
-
-
-  /**
-   * Measure the range of dates.
-   */
-  DatePicker.prototype.measure = function (type, value /*, options*/ ) {
-
-    var calendar = this
-
-    // If it’s anything false-y, remove the limits.
-    if (!value) {
-      value = type == 'min' ? -Infinity : Infinity
-    }
-
-    // If it’s a string, parse it.
-    else if (typeof value == 'string') {
-      value = calendar.parse(type, value)
-    }
-
-    // If it's an integer, get a date relative to today.
-    else if (_.isInteger(value)) {
-      value = calendar.now(type, value, {
-        rel: value
-      })
-    }
-
-    return value
-  } ///DatePicker.prototype.measure
-
-
-  /**
-   * Create a viewset object based on navigation.
-   */
-  DatePicker.prototype.viewset = function (type, dateObject /*, options*/ ) {
-    return this.create([dateObject.year, dateObject.month, 1])
-  }
-
-
-  /**
-   * Validate a date as enabled and shift if needed.
-   */
-  DatePicker.prototype.validate = function (type, dateObject, options) {
-
-    var calendar = this,
-
-      // Keep a reference to the original date.
-      originalDateObject = dateObject,
-
-      // Make sure we have an interval.
-      interval = options && options.interval ? options.interval : 1,
-
-      // Check if the calendar enabled dates are inverted.
-      isFlippedBase = calendar.item.enable === -1,
-
-      // Check if we have any enabled dates after/before now.
-      hasEnabledBeforeTarget, hasEnabledAfterTarget,
-
-      // The min & max limits.
-      minLimitObject = calendar.item.min,
-      maxLimitObject = calendar.item.max,
-
-      // Check if we’ve reached the limit during shifting.
-      reachedMin, reachedMax,
-
-      // Check if the calendar is inverted and at least one weekday is enabled.
-      hasEnabledWeekdays = isFlippedBase && calendar.item.disable.filter(function (value) {
-
-        // If there’s a date, check where it is relative to the target.
-        if ($.isArray(value)) {
-          var dateTime = calendar.create(value).pick
-          if (dateTime < dateObject.pick) hasEnabledBeforeTarget = true
-          else if (dateTime > dateObject.pick) hasEnabledAfterTarget = true
-        }
-
-        // Return only integers for enabled weekdays.
-        return _.isInteger(value)
-      }).length
-    /*,
-
-            safety = 100*/
-
-
-
-    // Cases to validate for:
-    // [1] Not inverted and date disabled.
-    // [2] Inverted and some dates enabled.
-    // [3] Not inverted and out of range.
-    //
-    // Cases to **not** validate for:
-    // • Navigating months.
-    // • Not inverted and date enabled.
-    // • Inverted and all dates disabled.
-    // • ..and anything else.
-    if (!options || (!options.nav && !options.defaultValue))
-      if (
-        /* 1 */
-        (!isFlippedBase && calendar.disabled(dateObject)) ||
-        /* 2 */
-        (isFlippedBase && calendar.disabled(dateObject) && (hasEnabledWeekdays || hasEnabledBeforeTarget || hasEnabledAfterTarget)) ||
-        /* 3 */
-        (!isFlippedBase && (dateObject.pick <= minLimitObject.pick || dateObject.pick >= maxLimitObject.pick))
-      ) {
-
-
-        // When inverted, flip the direction if there aren’t any enabled weekdays
-        // and there are no enabled dates in the direction of the interval.
-        if (isFlippedBase && !hasEnabledWeekdays && ((!hasEnabledAfterTarget && interval > 0) || (!hasEnabledBeforeTarget && interval < 0))) {
-          interval *= -1
-        }
-
-
-        // Keep looping until we reach an enabled date.
-        while ( /*safety &&*/ calendar.disabled(dateObject)) {
-
-          /*safety -= 1
-          if ( !safety ) {
-              throw 'Fell into an infinite loop while validating ' + dateObject.obj + '.'
-          }*/
-
-
-          // If we’ve looped into the next/prev month with a large interval, return to the original date and flatten the interval.
-          if (Math.abs(interval) > 1 && (dateObject.month < originalDateObject.month || dateObject.month > originalDateObject.month)) {
-            dateObject = originalDateObject
-            interval = interval > 0 ? 1 : -1
-          }
-
-
-          // If we’ve reached the min/max limit, reverse the direction, flatten the interval and set it to the limit.
-          if (dateObject.pick <= minLimitObject.pick) {
-            reachedMin = true
-            interval = 1
-            dateObject = calendar.create([
-              minLimitObject.year,
-              minLimitObject.month,
-              minLimitObject.date + (dateObject.pick === minLimitObject.pick ? 0 : -1)
-            ])
-          } else if (dateObject.pick >= maxLimitObject.pick) {
-            reachedMax = true
-            interval = -1
-            dateObject = calendar.create([
-              maxLimitObject.year,
-              maxLimitObject.month,
-              maxLimitObject.date + (dateObject.pick === maxLimitObject.pick ? 0 : 1)
-            ])
-          }
-
-
-          // If we’ve reached both limits, just break out of the loop.
-          if (reachedMin && reachedMax) {
-            break
-          }
-
-
-          // Finally, create the shifted date using the interval and keep looping.
-          dateObject = calendar.create([dateObject.year, dateObject.month, dateObject.date + interval])
-        }
-
-      } //endif
-
-
-    // Return the date object settled on.
-    return dateObject
-  } //DatePicker.prototype.validate
-
-
-  /**
-   * Check if a date is disabled.
-   */
-  DatePicker.prototype.disabled = function (dateToVerify) {
-
-    var
-      calendar = this,
-
-      // Filter through the disabled dates to check if this is one.
-      isDisabledMatch = calendar.item.disable.filter(function (dateToDisable) {
-
-        // If the date is a number, match the weekday with 0index and `firstDay` check.
-        if (_.isInteger(dateToDisable)) {
-          return dateToVerify.day === (calendar.settings.firstDay ? dateToDisable : dateToDisable - 1) % 7
-        }
-
-        // If it’s an array or a native JS date, create and match the exact date.
-        if ($.isArray(dateToDisable) || _.isDate(dateToDisable)) {
-          return dateToVerify.pick === calendar.create(dateToDisable).pick
-        }
-
-        // If it’s an object, match a date within the “from” and “to” range.
-        if ($.isPlainObject(dateToDisable)) {
-          return calendar.withinRange(dateToDisable, dateToVerify)
-        }
-      })
-
-    // If this date matches a disabled date, confirm it’s not inverted.
-    isDisabledMatch = isDisabledMatch.length && !isDisabledMatch.filter(function (dateToDisable) {
-      return $.isArray(dateToDisable) && dateToDisable[3] == 'inverted' ||
-        $.isPlainObject(dateToDisable) && dateToDisable.inverted
-    }).length
-
-    // Check the calendar “enabled” flag and respectively flip the
-    // disabled state. Then also check if it’s beyond the min/max limits.
-    return calendar.item.enable === -1 ? !isDisabledMatch : isDisabledMatch ||
-      dateToVerify.pick < calendar.item.min.pick ||
-      dateToVerify.pick > calendar.item.max.pick
-
-  } //DatePicker.prototype.disabled
-
-
-  /**
-   * Parse a string into a usable type.
-   */
-  DatePicker.prototype.parse = function (type, value, options) {
-
-    var calendar = this,
-      parsingObject = {}
-
-    // If it’s already parsed, we’re good.
-    if (!value || typeof value != 'string') {
-      return value
-    }
-
-    // We need a `.format` to parse the value with.
-    if (!(options && options.format)) {
-      options = options || {}
-      options.format = calendar.settings.format
-    }
-
-    // Convert the format into an array and then map through it.
-    calendar.formats.toArray(options.format).map(function (label) {
-
-      var
-        // Grab the formatting label.
-        formattingLabel = calendar.formats[label],
-
-        // The format length is from the formatting label function or the
-        // label length without the escaping exclamation (!) mark.
-        formatLength = formattingLabel ? _.trigger(formattingLabel, calendar, [value, parsingObject]) : label.replace(/^!/, '').length
-
-      // If there's a format label, split the value up to the format length.
-      // Then add it to the parsing object with appropriate label.
-      if (formattingLabel) {
-        parsingObject[label] = value.substr(0, formatLength)
-      }
-
-      // Update the value as the substring from format length to end.
-      value = value.substr(formatLength)
-    })
-
-    // Compensate for month 0index.
-    return [
-      parsingObject.yyyy || parsingObject.yy,
-      +(parsingObject.mm || parsingObject.m) - 1,
-      parsingObject.dd || parsingObject.d
-    ]
-  } //DatePicker.prototype.parse
-
-
-  /**
-   * Various formats to display the object in.
-   */
-  DatePicker.prototype.formats = (function () {
-
-    // Return the length of the first word in a collection.
-    function getWordLengthFromCollection(string, collection, dateObject) {
-
-      // Grab the first word from the string.
-      // Regex pattern from http://stackoverflow.com/q/150033
-      var word = string.match(/[^\x00-\x7F]+|\w+/)[0]
-
-      // If there's no month index, add it to the date object
-      if (!dateObject.mm && !dateObject.m) {
-        dateObject.m = collection.indexOf(word) + 1
-      }
-
-      // Return the length of the word.
-      return word.length
-    }
-
-    // Get the length of the first word in a string.
-    function getFirstWordLength(string) {
-      return string.match(/\w+/)[0].length
-    }
-
-    return {
-
-      d: function (string, dateObject) {
-
-        // If there's string, then get the digits length.
-        // Otherwise return the selected date.
-        return string ? _.digits(string) : dateObject.date
-      },
-      dd: function (string, dateObject) {
-
-        // If there's a string, then the length is always 2.
-        // Otherwise return the selected date with a leading zero.
-        return string ? 2 : _.lead(dateObject.date)
-      },
-      ddd: function (string, dateObject) {
-
-        // If there's a string, then get the length of the first word.
-        // Otherwise return the short selected weekday.
-        return string ? getFirstWordLength(string) : this.settings.weekdaysShort[dateObject.day]
-      },
-      dddd: function (string, dateObject) {
-
-        // If there's a string, then get the length of the first word.
-        // Otherwise return the full selected weekday.
-        return string ? getFirstWordLength(string) : this.settings.weekdaysFull[dateObject.day]
-      },
-      m: function (string, dateObject) {
-
-        // If there's a string, then get the length of the digits
-        // Otherwise return the selected month with 0index compensation.
-        return string ? _.digits(string) : dateObject.month + 1
-      },
-      mm: function (string, dateObject) {
-
-        // If there's a string, then the length is always 2.
-        // Otherwise return the selected month with 0index and leading zero.
-        return string ? 2 : _.lead(dateObject.month + 1)
-      },
-      mmm: function (string, dateObject) {
-
-        var collection = this.settings.monthsShort
-
-        // If there's a string, get length of the relevant month from the short
-        // months collection. Otherwise return the selected month from that collection.
-        return string ? getWordLengthFromCollection(string, collection, dateObject) : collection[dateObject.month]
-      },
-      mmmm: function (string, dateObject) {
-
-        var collection = this.settings.monthsFull
-
-        // If there's a string, get length of the relevant month from the full
-        // months collection. Otherwise return the selected month from that collection.
-        return string ? getWordLengthFromCollection(string, collection, dateObject) : collection[dateObject.month]
-      },
-      yy: function (string, dateObject) {
-
-        // If there's a string, then the length is always 2.
-        // Otherwise return the selected year by slicing out the first 2 digits.
-        return string ? 2 : ('' + dateObject.year).slice(2)
-      },
-      yyyy: function (string, dateObject) {
-
-        // If there's a string, then the length is always 4.
-        // Otherwise return the selected year.
-        return string ? 4 : dateObject.year
-      },
-
-      // Create an array by splitting the formatting string passed.
-      toArray: function (formatString) {
-        return formatString.split(/(d{1,4}|m{1,4}|y{4}|yy|!.)/g)
-      },
-
-      // Format an object into a string using the formatting options.
-      toString: function (formatString, itemObject) {
-        var calendar = this
-        return calendar.formats.toArray(formatString).map(function (label) {
-          return _.trigger(calendar.formats[label], calendar, [0, itemObject]) || label.replace(/^!/, '')
-        }).join('')
-      }
-    }
-  })() //DatePicker.prototype.formats
-
-
-
-
-  /**
-   * Check if two date units are the exact.
-   */
-  DatePicker.prototype.isDateExact = function (one, two) {
-
-    var calendar = this
-
-    // When we’re working with weekdays, do a direct comparison.
-    if (
-      (_.isInteger(one) && _.isInteger(two)) ||
-      (typeof one == 'boolean' && typeof two == 'boolean')
-    ) {
-      return one === two
-    }
-
-    // When we’re working with date representations, compare the “pick” value.
-    if (
-      (_.isDate(one) || $.isArray(one)) && (_.isDate(two) || $.isArray(two))
-    ) {
-      return calendar.create(one).pick === calendar.create(two).pick
-    }
-
-    // When we’re working with range objects, compare the “from” and “to”.
-    if ($.isPlainObject(one) && $.isPlainObject(two)) {
-      return calendar.isDateExact(one.from, two.from) && calendar.isDateExact(one.to, two.to)
-    }
-
-    return false
-  }
-
-
-  /**
-   * Check if two date units overlap.
-   */
-  DatePicker.prototype.isDateOverlap = function (one, two) {
-
-    var calendar = this,
-      firstDay = calendar.settings.firstDay ? 1 : 0
-
-    // When we’re working with a weekday index, compare the days.
-    if (_.isInteger(one) && (_.isDate(two) || $.isArray(two))) {
-      one = one % 7 + firstDay
-      return one === calendar.create(two).day + 1
-    }
-    if (_.isInteger(two) && (_.isDate(one) || $.isArray(one))) {
-      two = two % 7 + firstDay
-      return two === calendar.create(one).day + 1
-    }
-
-    // When we’re working with range objects, check if the ranges overlap.
-    if ($.isPlainObject(one) && $.isPlainObject(two)) {
-      return calendar.overlapRanges(one, two)
-    }
-
-    return false
-  }
-
-
-  /**
-   * Flip the “enabled” state.
-   */
-  DatePicker.prototype.flipEnable = function (val) {
-    var itemObject = this.item
-    itemObject.enable = val || (itemObject.enable == -1 ? 1 : -1)
-  }
-
-
-  /**
-   * Mark a collection of dates as “disabled”.
-   */
-  DatePicker.prototype.deactivate = function (type, datesToDisable) {
-
-    var calendar = this,
-      disabledItems = calendar.item.disable.slice(0)
-
-
-    // If we’re flipping, that’s all we need to do.
-    if (datesToDisable == 'flip') {
-      calendar.flipEnable()
-    } else if (datesToDisable === false) {
-      calendar.flipEnable(1)
-      disabledItems = []
-    } else if (datesToDisable === true) {
-      calendar.flipEnable(-1)
-      disabledItems = []
-    }
-
-    // Otherwise go through the dates to disable.
-    else {
-
-      datesToDisable.map(function (unitToDisable) {
-
-        var matchFound
-
-        // When we have disabled items, check for matches.
-        // If something is matched, immediately break out.
-        for (var index = 0; index < disabledItems.length; index += 1) {
-          if (calendar.isDateExact(unitToDisable, disabledItems[index])) {
-            matchFound = true
-            break
-          }
-        }
-
-        // If nothing was found, add the validated unit to the collection.
-        if (!matchFound) {
-          if (
-            _.isInteger(unitToDisable) ||
-            _.isDate(unitToDisable) ||
-            $.isArray(unitToDisable) ||
-            ($.isPlainObject(unitToDisable) && unitToDisable.from && unitToDisable.to)
-          ) {
-            disabledItems.push(unitToDisable)
-          }
-        }
-      })
-    }
-
-    // Return the updated collection.
-    return disabledItems
-  } //DatePicker.prototype.deactivate
-
-
-  /**
-   * Mark a collection of dates as “enabled”.
-   */
-  DatePicker.prototype.activate = function (type, datesToEnable) {
-
-    var calendar = this,
-      disabledItems = calendar.item.disable,
-      disabledItemsCount = disabledItems.length
-
-    // If we’re flipping, that’s all we need to do.
-    if (datesToEnable == 'flip') {
-      calendar.flipEnable()
-    } else if (datesToEnable === true) {
-      calendar.flipEnable(1)
-      disabledItems = []
-    } else if (datesToEnable === false) {
-      calendar.flipEnable(-1)
-      disabledItems = []
-    }
-
-    // Otherwise go through the disabled dates.
-    else {
-
-      datesToEnable.map(function (unitToEnable) {
-
-        var matchFound,
-          disabledUnit,
-          index,
-          isExactRange
-
-        // Go through the disabled items and try to find a match.
-        for (index = 0; index < disabledItemsCount; index += 1) {
-
-          disabledUnit = disabledItems[index]
-
-          // When an exact match is found, remove it from the collection.
-          if (calendar.isDateExact(disabledUnit, unitToEnable)) {
-            matchFound = disabledItems[index] = null
-            isExactRange = true
-            break
-          }
-
-          // When an overlapped match is found, add the “inverted” state to it.
-          else if (calendar.isDateOverlap(disabledUnit, unitToEnable)) {
-            if ($.isPlainObject(unitToEnable)) {
-              unitToEnable.inverted = true
-              matchFound = unitToEnable
-            } else if ($.isArray(unitToEnable)) {
-              matchFound = unitToEnable
-              if (!matchFound[3]) matchFound.push('inverted')
-            } else if (_.isDate(unitToEnable)) {
-              matchFound = [unitToEnable.getFullYear(), unitToEnable.getMonth(), unitToEnable.getDate(), 'inverted']
-            }
-            break
-          }
-        }
-
-        // If a match was found, remove a previous duplicate entry.
-        if (matchFound)
-          for (index = 0; index < disabledItemsCount; index += 1) {
-            if (calendar.isDateExact(disabledItems[index], unitToEnable)) {
-              disabledItems[index] = null
-              break
-            }
-          }
-
-        // In the event that we’re dealing with an exact range of dates,
-        // make sure there are no “inverted” dates because of it.
-        if (isExactRange)
-          for (index = 0; index < disabledItemsCount; index += 1) {
-            if (calendar.isDateOverlap(disabledItems[index], unitToEnable)) {
-              disabledItems[index] = null
-              break
-            }
-          }
-
-        // If something is still matched, add it into the collection.
-        if (matchFound) {
-          disabledItems.push(matchFound)
-        }
-      })
-    }
-
-    // Return the updated collection.
-    return disabledItems.filter(function (val) {
-      return val != null
-    })
-  } //DatePicker.prototype.activate
-
-
-  /**
-   * Create a string for the nodes in the picker.
-   */
-  DatePicker.prototype.nodes = function (isOpen) {
-
-    var
-      calendar = this,
-      settings = calendar.settings,
-      calendarItem = calendar.item,
-      nowObject = calendarItem.now,
-      selectedObject = calendarItem.select,
-      highlightedObject = calendarItem.highlight,
-      viewsetObject = calendarItem.view,
-      disabledCollection = calendarItem.disable,
-      minLimitObject = calendarItem.min,
-      maxLimitObject = calendarItem.max,
-
-
-      // Create the calendar table head using a copy of weekday labels collection.
-      // * We do a copy so we don't mutate the original array.
-      tableHead = (function (collection, fullCollection) {
-
-        // If the first day should be Monday, move Sunday to the end.
-        if (settings.firstDay) {
-          collection.push(collection.shift())
-          fullCollection.push(fullCollection.shift())
-        }
-
-        // Create and return the table head group.
-        return _.node(
-          'thead',
-          _.node(
-            'tr',
-            _.group({
-              min: 0,
-              max: DAYS_IN_WEEK - 1,
-              i: 1,
-              node: 'th',
-              item: function (counter) {
-                return [
-                  collection[counter],
-                  settings.klass.weekdays,
-                  'scope=col title="' + fullCollection[counter] + '"'
-                ]
-              }
-            })
-          )
-        ) //endreturn
-      })((settings.showWeekdaysFull ? settings.weekdaysFull : settings.weekdaysShort).slice(0), settings.weekdaysFull.slice(0)), //tableHead
-
-
-      // Create the nav for next/prev month.
-      createMonthNav = function (next) {
-
-        // Otherwise, return the created month tag.
-        return _.node(
-          'div',
-          ' ',
-          settings.klass['nav' + (next ? 'Next' : 'Prev')] + (
-
-            // If the focused month is outside the range, disabled the button.
-            (next && viewsetObject.year >= maxLimitObject.year && viewsetObject.month >= maxLimitObject.month) ||
-            (!next && viewsetObject.year <= minLimitObject.year && viewsetObject.month <= minLimitObject.month) ?
-            ' ' + settings.klass.navDisabled : ''
-          ),
-          'data-nav=' + (next || -1) + ' ' +
-          _.ariaAttr({
-            role: 'button',
-            controls: calendar.$node[0].id + '_table'
-          }) + ' ' +
-          'title="' + (next ? settings.labelMonthNext : settings.labelMonthPrev) + '"'
-        ) //endreturn
-      }, //createMonthNav
-
-
-      // Create the month label.
-      createMonthLabel = function () {
-
-        var monthsCollection = settings.showMonthsShort ? settings.monthsShort : settings.monthsFull
-
-        // If there are months to select, add a dropdown menu.
-        if (settings.selectMonths) {
-
-          return _.node('select',
-            _.group({
-              min: 0,
-              max: 11,
-              i: 1,
-              node: 'option',
-              item: function (loopedMonth) {
-
-                return [
-
-                  // The looped month and no classes.
-                  monthsCollection[loopedMonth], 0,
-
-                  // Set the value and selected index.
-                  'value=' + loopedMonth +
-                  (viewsetObject.month == loopedMonth ? ' selected' : '') +
-                  (
-                    (
-                      (viewsetObject.year == minLimitObject.year && loopedMonth < minLimitObject.month) ||
-                      (viewsetObject.year == maxLimitObject.year && loopedMonth > maxLimitObject.month)
-                    ) ?
-                    ' disabled' : ''
-                  )
-                ]
-              }
-            }),
-            settings.klass.selectMonth, (isOpen ? '' : 'disabled') + ' ' +
-            _.ariaAttr({
-              controls: calendar.$node[0].id + '_table'
-            }) + ' ' +
-            'title="' + settings.labelMonthSelect + '"'
-          )
-        }
-
-        // If there's a need for a month selector
-        return _.node('div', monthsCollection[viewsetObject.month], settings.klass.month)
-      }, //createMonthLabel
-
-
-      // Create the year label.
-      createYearLabel = function () {
-
-        var focusedYear = viewsetObject.year,
-
-          // If years selector is set to a literal "true", set it to 5. Otherwise
-          // divide in half to get half before and half after focused year.
-          numberYears = settings.selectYears === true ? 5 : ~~(settings.selectYears / 2)
-
-        // If there are years to select, add a dropdown menu.
-        if (numberYears) {
-
-          var
-            minYear = minLimitObject.year,
-            maxYear = maxLimitObject.year,
-            lowestYear = focusedYear - numberYears,
-            highestYear = focusedYear + numberYears
-
-          // If the min year is greater than the lowest year, increase the highest year
-          // by the difference and set the lowest year to the min year.
-          if (minYear > lowestYear) {
-            highestYear += minYear - lowestYear
-            lowestYear = minYear
-          }
-
-          // If the max year is less than the highest year, decrease the lowest year
-          // by the lower of the two: available and needed years. Then set the
-          // highest year to the max year.
-          if (maxYear < highestYear) {
-
-            var availableYears = lowestYear - minYear,
-              neededYears = highestYear - maxYear
-
-            lowestYear -= availableYears > neededYears ? neededYears : availableYears
-            highestYear = maxYear
-          }
-
-          return _.node('select',
-            _.group({
-              min: lowestYear,
-              max: highestYear,
-              i: 1,
-              node: 'option',
-              item: function (loopedYear) {
-                return [
-
-                  // The looped year and no classes.
-                  loopedYear, 0,
-
-                  // Set the value and selected index.
-                  'value=' + loopedYear + (focusedYear == loopedYear ? ' selected' : '')
-                ]
-              }
-            }),
-            settings.klass.selectYear, (isOpen ? '' : 'disabled') + ' ' + _.ariaAttr({
-              controls: calendar.$node[0].id + '_table'
-            }) + ' ' +
-            'title="' + settings.labelYearSelect + '"'
-          )
-        }
-
-        // Otherwise just return the year focused
-        return _.node('div', focusedYear, settings.klass.year)
-      } //createYearLabel
-
-
-    // Create and return the entire calendar.
-    return _.node(
-        'div', (settings.selectYears ? createYearLabel() + createMonthLabel() : createMonthLabel() + createYearLabel()) +
-        createMonthNav() + createMonthNav(1),
-        settings.klass.header
-      ) + _.node(
-        'table',
-        tableHead +
-        _.node(
-          'tbody',
-          _.group({
-            min: 0,
-            max: WEEKS_IN_CALENDAR - 1,
-            i: 1,
-            node: 'tr',
-            item: function (rowCounter) {
-
-              // If Monday is the first day and the month starts on Sunday, shift the date back a week.
-              var shiftDateBy = settings.firstDay && calendar.create([viewsetObject.year, viewsetObject.month, 1]).day === 0 ? -7 : 0
-
-              return [
-                _.group({
-                  min: DAYS_IN_WEEK * rowCounter - viewsetObject.day + shiftDateBy + 1, // Add 1 for weekday 0index
-                  max: function () {
-                    return this.min + DAYS_IN_WEEK - 1
-                  },
-                  i: 1,
-                  node: 'td',
-                  item: function (targetDate) {
-
-                    // Convert the time date from a relative date to a target date.
-                    targetDate = calendar.create([viewsetObject.year, viewsetObject.month, targetDate + (settings.firstDay ? 1 : 0)])
-
-                    var isSelected = selectedObject && selectedObject.pick == targetDate.pick,
-                      isHighlighted = highlightedObject && highlightedObject.pick == targetDate.pick,
-                      isDisabled = disabledCollection && calendar.disabled(targetDate) || targetDate.pick < minLimitObject.pick || targetDate.pick > maxLimitObject.pick,
-                      formattedDate = _.trigger(calendar.formats.toString, calendar, [settings.format, targetDate])
-
-                    return [
-                      _.node(
-                        'div',
-                        targetDate.date, (function (klasses) {
-
-                          // Add the `infocus` or `outfocus` classes based on month in view.
-                          klasses.push(viewsetObject.month == targetDate.month ? settings.klass.infocus : settings.klass.outfocus)
-
-                          // Add the `today` class if needed.
-                          if (nowObject.pick == targetDate.pick) {
-                            klasses.push(settings.klass.now)
-                          }
-
-                          // Add the `selected` class if something's selected and the time matches.
-                          if (isSelected) {
-                            klasses.push(settings.klass.selected)
-                          }
-
-                          // Add the `highlighted` class if something's highlighted and the time matches.
-                          if (isHighlighted) {
-                            klasses.push(settings.klass.highlighted)
-                          }
-
-                          // Add the `disabled` class if something's disabled and the object matches.
-                          if (isDisabled) {
-                            klasses.push(settings.klass.disabled)
-                          }
-
-                          return klasses.join(' ')
-                        })([settings.klass.day]),
-                        'data-pick=' + targetDate.pick + ' ' + _.ariaAttr({
-                          role: 'gridcell',
-                          label: formattedDate,
-                          selected: isSelected && calendar.$node.val() === formattedDate ? true : null,
-                          activedescendant: isHighlighted ? true : null,
-                          disabled: isDisabled ? true : null
-                        })
-                      ),
-                      '',
-                      _.ariaAttr({
-                        role: 'presentation'
-                      })
-                    ] //endreturn
-                  }
-                })
-              ] //endreturn
-            }
-          })
-        ),
-        settings.klass.table,
-        'id="' + calendar.$node[0].id + '_table' + '" ' + _.ariaAttr({
-          role: 'grid',
-          controls: calendar.$node[0].id,
-          readonly: true
-        })
-      ) +
-
-      // * For Firefox forms to submit, make sure to set the buttons’ `type` attributes as “button”.
-      _.node(
-        'div',
-        _.node('button', settings.today, settings.klass.buttonToday,
-          'type=button data-pick=' + nowObject.pick +
-          (isOpen && !calendar.disabled(nowObject) ? '' : ' disabled') + ' ' +
-          _.ariaAttr({
-            controls: calendar.$node[0].id
-          })) +
-        _.node('button', settings.clear, settings.klass.buttonClear,
-          'type=button data-clear=1' +
-          (isOpen ? '' : ' disabled') + ' ' +
-          _.ariaAttr({
-            controls: calendar.$node[0].id
-          })) +
-        _.node('button', settings.close, settings.klass.buttonClose,
-          'type=button data-close=true ' +
-          (isOpen ? '' : ' disabled') + ' ' +
-          _.ariaAttr({
-            controls: calendar.$node[0].id
-          })),
-        settings.klass.footer
-      ) //endreturn
-  } //DatePicker.prototype.nodes
-
-
-
-
-  /**
-   * The date picker defaults.
-   */
-  DatePicker.defaults = (function (prefix) {
-
-    return {
-
-      // The title label to use for the month nav buttons
-      labelMonthNext: 'Next month',
-      labelMonthPrev: 'Previous month',
-
-      // The title label to use for the dropdown selectors
-      labelMonthSelect: 'Select a month',
-      labelYearSelect: 'Select a year',
-
-      // Months and weekdays
-      monthsFull: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-      monthsShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-      weekdaysFull: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-      weekdaysShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-
-      // Today and clear
-      today: 'Today',
-      clear: 'Clear',
-      close: 'Close',
-
-      // Picker close behavior
-      closeOnSelect: true,
-      closeOnClear: true,
-
-      // The format to show on the `input` element
-      format: 'd mmmm, yyyy',
-
-      // Classes
-      klass: {
-
-        table: prefix + 'table',
-
-        header: prefix + 'header',
-
-        navPrev: prefix + 'nav--prev',
-        navNext: prefix + 'nav--next',
-        navDisabled: prefix + 'nav--disabled',
-
-        month: prefix + 'month',
-        year: prefix + 'year',
-
-        selectMonth: prefix + 'select--month',
-        selectYear: prefix + 'select--year',
-
-        weekdays: prefix + 'weekday',
-
-        day: prefix + 'day',
-        disabled: prefix + 'day--disabled',
-        selected: prefix + 'day--selected',
-        highlighted: prefix + 'day--highlighted',
-        now: prefix + 'day--today',
-        infocus: prefix + 'day--infocus',
-        outfocus: prefix + 'day--outfocus',
-
-        footer: prefix + 'footer',
-
-        buttonClear: prefix + 'button--clear',
-        buttonToday: prefix + 'button--today',
-        buttonClose: prefix + 'button--close'
-      }
-    }
-  })(Picker.klasses().picker + '__')
-
-
-
-
-
-  /**
-   * Extend the picker to add the date picker.
-   */
-  Picker.extend('pickadate', DatePicker)
-
-
-}));
-
-$.extend($.fn.pickadate.defaults, {
-  selectMonths: true, // Creates a dropdown to control month
-  selectYears: 15, // Creates a dropdown of 15 years to control year,
-
-  onRender: function () {
-    var $pickerInstance = this.$root;
-
-    var year = this.get('highlight', 'yyyy');
-    var day = this.get('highlight', 'dd');
-    var month = this.get('highlight', 'mmm');
-    var labelday = this.get('highlight', 'dddd');
-
-    $pickerInstance.find('.picker__header').prepend('<div class="picker__date-display"><div class="picker__weekday-display">' + labelday + '</div><div class="picker__month-display"><div>' + month + '</div></div><div class="picker__day-display"><div>' + day + '</div></div><div    class="picker__year-display"><div>' + year + '</div></div></div>');
-  }
-});
-
-/*!
- * ClockPicker v0.0.7 (http://weareoutman.github.io/clockpicker/)
- * Copyright 2014 Wang Shenwei.
- * Licensed under MIT (https://github.com/weareoutman/clockpicker/blob/gh-pages/LICENSE)
- *
- * Further modified
- * Copyright 2015 Ching Yaw Hao.
- */
-
-;(function(){
-	var $ = window.jQuery,
-			$win = $(window),
-			$doc = $(document);
-
-	// Can I use inline svg ?
-	var svgNS = 'http://www.w3.org/2000/svg',
-		  svgSupported = 'SVGAngle' in window && (function() {
-			  var supported,
-				el = document.createElement('div');
-				el.innerHTML = '<svg/>';
-				supported = (el.firstChild && el.firstChild.namespaceURI) == svgNS;
-				el.innerHTML = '';
-				return supported;
-			})();
-
-	// Can I use transition ?
-	var transitionSupported = (function() {
-		var style = document.createElement('div').style;
-		return 'transition' in style ||
-					 'WebkitTransition' in style ||
-				   'MozTransition' in style ||
-					 'msTransition' in style ||
-					 'OTransition' in style;
-	})();
-
-	// Listen touch events in touch screen device, instead of mouse events in desktop.
-	var touchSupported = 'ontouchstart' in window,
-			mousedownEvent = 'mousedown' + ( touchSupported ? ' touchstart' : ''),
-			mousemoveEvent = 'mousemove.clockpicker' + ( touchSupported ? ' touchmove.clockpicker' : ''),
-			mouseupEvent = 'mouseup.clockpicker' + ( touchSupported ? ' touchend.clockpicker' : '');
-
-	// Vibrate the device if supported
-	var vibrate = navigator.vibrate ? 'vibrate' : navigator.webkitVibrate ? 'webkitVibrate' : null;
-
-	function createSvgElement(name) {
-		return document.createElementNS(svgNS, name);
-	}
-
-  function debounce(func, wait, immediate) {
-    var timeout;
-    return function() {
-        var context = this, args = arguments;
-        var later = function() {
-            timeout = null;
-            if (!immediate) func.apply(context, args);
-        };
-        var callNow = immediate && !timeout;
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-        if (callNow) func.apply(context, args);
-    };
-}
-
-	function leadingZero(num) {
-		return (num < 10 ? '0' : '') + num;
-	}
-
-	// Get a unique id
-	var idCounter = 0;
-	function uniqueId(prefix) {
-		var id = ++idCounter + '';
-		return prefix ? prefix + id : id;
-	}
-
-	// Clock size
-	var dialRadius = 135,
-			outerRadius = 110,
-			// innerRadius = 80 on 12 hour clock
-			innerRadius = 80,
-			tickRadius = 20,
-			diameter = dialRadius * 2,
-			duration = transitionSupported ? 350 : 1;
-
-	// Popover template
-	var tpl = [
-		'<div class="clockpicker picker">',
-			'<div class="picker__holder">',
-				'<div class="picker__frame">',
-					'<div class="picker__wrap">',
-						'<div class="picker__box">',
-							'<div class="picker__date-display">',
-								'<div class="clockpicker-display">',
-									'<div class="clockpicker-display-column">',
-										'<span class="clockpicker-span-hours text-primary"></span>',
-										':',
-										'<span class="clockpicker-span-minutes"></span>',
-									'</div>',
-									'<div class="clockpicker-display-column clockpicker-display-am-pm">',
-										'<div class="clockpicker-span-am-pm"></div>',
-									'</div>',
-								'</div>',
-							'</div>',
-							'<div class="picker__calendar-container">',
-								'<div class="clockpicker-plate">',
-									'<div class="clockpicker-canvas"></div>',
-									'<div class="clockpicker-dial clockpicker-hours"></div>',
-									'<div class="clockpicker-dial clockpicker-minutes clockpicker-dial-out"></div>',
-								'</div>',
-								'<div class="clockpicker-am-pm-block">',
-								'</div>',
-							'</div>',
-							'<div class="picker__footer">',
-							'</div>',
-						'</div>',
-					'</div>',
-				'</div>',
-			'</div>',
-		'</div>'
-	].join('');
-
-	// ClockPicker
-	function ClockPicker(element, options) {
-		var popover = $(tpl),
-				plate = popover.find('.clockpicker-plate'),
-				holder = popover.find('.picker__holder'),
-				hoursView = popover.find('.clockpicker-hours'),
-				minutesView = popover.find('.clockpicker-minutes'),
-				amPmBlock = popover.find('.clockpicker-am-pm-block'),
-				isInput = element.prop('tagName') === 'INPUT',
-        input = isInput ? element : element.find('input'),
-        isHTML5 = input.prop('type') === 'time',
-				label = $("label[for=" + input.attr("id") + "]"),
-				self = this,
-				timer;
-
-		this.id = uniqueId('cp');
-		this.element = element;
-		this.holder = holder;
-		this.options = options;
-		this.isAppended = false;
-		this.isShown = false;
-		this.currentView = 'hours';
-		this.isInput = isInput;
-		this.input = input;
-		this.label = label;
-		this.popover = popover;
-		this.plate = plate;
-		this.hoursView = hoursView;
-		this.minutesView = minutesView;
-		this.amPmBlock = amPmBlock;
-		this.spanHours = popover.find('.clockpicker-span-hours');
-		this.spanMinutes = popover.find('.clockpicker-span-minutes');
-		this.spanAmPm = popover.find('.clockpicker-span-am-pm');
-		this.footer = popover.find('.picker__footer');
-		this.amOrPm = "";
-
-		// Setup for for 12 hour clock if option is selected
-		if (options.twelvehour) {
-			var  amPmButtonsTemplate = [
-				'<div class="clockpicker-am-pm-block">',
-					'<button type="button" class="btn-floating btn-flat clockpicker-button clockpicker-am-button">',
-						'AM',
-					'</button>',
-					'<button type="button" class="btn-floating btn-flat clockpicker-button clockpicker-pm-button">',
-						'PM',
-					'</button>',
-				'</div>'
-			].join('');
-
-			var amPmButtons = $(amPmButtonsTemplate);
-
-			if (!options.ampmclickable) {
-				$('<button type="button" class="btn-floating btn-flat clockpicker-button am-button" tabindex="1">' + "AM" + '</button>').on("click", function() {
-					self.amOrPm = "AM";
-					self.amPmBlock.children('.pm-button').removeClass('active');
-					self.amPmBlock.children('.am-button').addClass('active');
-					self.spanAmPm.empty().append('AM');
-				}).appendTo(this.amPmBlock);
-				$('<button type="button" class="btn-floating btn-flat clockpicker-button pm-button" tabindex="2">' + "PM" + '</button>').on("click", function() {
-					self.amOrPm = 'PM';
-					self.amPmBlock.children('.am-button').removeClass('active');
-					self.amPmBlock.children('.pm-button').addClass('active');
-					self.spanAmPm.empty().append('PM');
-				}).appendTo(this.amPmBlock);
-			}
-			else {
-				this.spanAmPm.empty();
-				$('<div id="click-am">AM</div>').on("click", function() {
-					self.spanAmPm.children('#click-am').addClass("text-primary");
-					self.spanAmPm.children('#click-pm').removeClass("text-primary");
-					self.amOrPm = "AM";
-				}).appendTo(this.spanAmPm);
-				$('<div id="click-pm">PM</div>').on("click", function() {
-					self.spanAmPm.children('#click-pm').addClass("text-primary");
-					self.spanAmPm.children('#click-am').removeClass("text-primary");
-					self.amOrPm = 'PM';
-				}).appendTo(this.spanAmPm);
-			}
-		}
-
-		if(options.darktheme)
-			popover.addClass('darktheme');
-
-			// If autoclose is not setted, append a button
-		$('<button type="button" class="btn btn-flat clockpicker-button" tabindex="' + (options.twelvehour? '3' : '1') + '">' + options.donetext + '</button>').click($.proxy(this.done, this)).appendTo(this.footer);
-
-		$('<button type="button" class="btn btn-flat clockpicker-button" tabindex="' + (options.twelvehour? '4' : '2') + '">' + options.cleartext + '</button>').click($.proxy(this.clearInput, this)).appendTo(this.footer);
-		this.spanHours.click($.proxy(this.toggleView, this, 'hours'));
-		this.spanMinutes.click($.proxy(this.toggleView, this, 'minutes'));
-
-		// Show or toggle
-		input.on('focus.clockpicker click.clockpicker', debounce( $.proxy(this.show, this), 100));
-
-		// Build ticks
-		var tickTpl = $('<div class="clockpicker-tick"></div>'),
-				i, tick, radian, radius;
-
-		// Hours view
-    if (options.twelvehour) {
-      for (i = 0; i < 12; i += options.hourstep) {
-          tick = tickTpl.clone();
-          radian = i / 6 * Math.PI;
-          radius = outerRadius;
-          tick.css('font-size', '140%');
-          tick.css({
-              left: dialRadius + Math.sin(radian) * radius - tickRadius,
-              top: dialRadius - Math.cos(radian) * radius - tickRadius
-          });
-          tick.html(i === 0 ? 12 : i);
-          hoursView.append(tick);
-          tick.on(mousedownEvent, mousedown);
-      }
-		} else {
-      for (i = 0; i < 24; i += options.hourstep) {
-        tick = tickTpl.clone();
-        radian = i / 6 * Math.PI;
-        var inner = i > 0 && i < 13;
-        radius = inner ? innerRadius : outerRadius;
-        tick.css({
-            left: dialRadius + Math.sin(radian) * radius - tickRadius,
-            top: dialRadius - Math.cos(radian) * radius - tickRadius
-        });
-        if (inner) {
-            tick.css('font-size', '120%');
-        }
-        tick.html(i === 0 ? '00' : i);
-        hoursView.append(tick);
-        tick.on(mousedownEvent, mousedown);
-			}
-		}
-
-    // Minutes view
-    var incrementValue = Math.max(options.minutestep, 5);
-    for (i = 0; i < 60; i += incrementValue) {
-      for (i = 0; i < 60; i += 5) {
-        tick = tickTpl.clone();
-        radian = i / 30 * Math.PI;
-        tick.css({
-          left: dialRadius + Math.sin(radian) * outerRadius - tickRadius,
-          top: dialRadius - Math.cos(radian) * outerRadius - tickRadius
-        });
-        tick.css('font-size', '140%');
-        tick.html(leadingZero(i));
-        minutesView.append(tick);
-        tick.on(mousedownEvent, mousedown);
-      }
-    }
-
-		// Clicking on minutes view space
-		plate.on(mousedownEvent, function(e) {
-			if ($(e.target).closest('.clockpicker-tick').length === 0)
-				mousedown(e, true);
-		});
-
-		// Mousedown or touchstart
-		function mousedown(e, space) {
-			var offset = plate.offset(),
-					isTouch = /^touch/.test(e.type),
-					x0 = offset.left + dialRadius,
-					y0 = offset.top + dialRadius,
-					dx = (isTouch ? e.originalEvent.touches[0] : e).pageX - x0,
-					dy = (isTouch ? e.originalEvent.touches[0] : e).pageY - y0,
-					z = Math.sqrt(dx * dx + dy * dy),
-					moved = false;
-
-			// When clicking on minutes view space, check the mouse position
-			if (space && (z < outerRadius - tickRadius || z > outerRadius + tickRadius))
-				return;
-			e.preventDefault();
-
-			// Set cursor style of body after 200ms
-			var movingTimer = setTimeout(function(){
-				self.popover.addClass('clockpicker-moving');
-			}, 200);
-
-			// Place the canvas to top
-			if (svgSupported)
-				plate.append(self.canvas);
-
-			// Clock
-			self.setHand(dx, dy, !space, true);
-
-			// Mousemove on document
-			$doc.off(mousemoveEvent).on(mousemoveEvent, function(e){
-				e.preventDefault();
-				var isTouch = /^touch/.test(e.type),
-						x = (isTouch ? e.originalEvent.touches[0] : e).pageX - x0,
-						y = (isTouch ? e.originalEvent.touches[0] : e).pageY - y0;
-				if (! moved && x === dx && y === dy)
-					// Clicking in chrome on windows will trigger a mousemove event
-					return;
-				moved = true;
-				self.setHand(x, y, false, true);
-			});
-
-			// Mouseup on document
-			$doc.off(mouseupEvent).on(mouseupEvent, function(e) {
-				$doc.off(mouseupEvent);
-				e.preventDefault();
-				var isTouch = /^touch/.test(e.type),
-						x = (isTouch ? e.originalEvent.changedTouches[0] : e).pageX - x0,
-						y = (isTouch ? e.originalEvent.changedTouches[0] : e).pageY - y0;
-				if ((space || moved) && x === dx && y === dy)
-					self.setHand(x, y);
-				if (self.currentView === 'hours')
-					self.toggleView('minutes', duration / 2);
-				else
-					if (options.autoclose) {
-						self.minutesView.addClass('clockpicker-dial-out');
-						setTimeout(function(){
-							self.done();
-						}, duration / 2);
-					}
-				plate.prepend(canvas);
-
-				// Reset cursor style of body
-				clearTimeout(movingTimer);
-				self.popover.removeClass('clockpicker-moving');
-
-				// Unbind mousemove event
-				$doc.off(mousemoveEvent);
-			});
-		}
-
-		if (svgSupported) {
-			// Draw clock hands and others
-			var canvas = popover.find('.clockpicker-canvas'),
-					svg = createSvgElement('svg');
-			svg.setAttribute('class', 'clockpicker-svg');
-			svg.setAttribute('width', diameter);
-			svg.setAttribute('height', diameter);
-			var g = createSvgElement('g');
-			g.setAttribute('transform', 'translate(' + dialRadius + ',' + dialRadius + ')');
-			var bearing = createSvgElement('circle');
-			bearing.setAttribute('class', 'clockpicker-canvas-bearing');
-			bearing.setAttribute('cx', 0);
-			bearing.setAttribute('cy', 0);
-			bearing.setAttribute('r', 2);
-			var hand = createSvgElement('line');
-			hand.setAttribute('x1', 0);
-      hand.setAttribute('y1', 0);
-			var bg = createSvgElement('circle');
-			bg.setAttribute('class', 'clockpicker-canvas-bg');
-			bg.setAttribute('r', tickRadius);
-			var fg = createSvgElement('circle');
-			fg.setAttribute('class', 'clockpicker-canvas-fg');
-			fg.setAttribute('r', 5);
-			g.appendChild(hand);
-			g.appendChild(bg);
-			g.appendChild(fg);
-			g.appendChild(bearing);
-			svg.appendChild(g);
-			canvas.append(svg);
-
-			this.hand = hand;
-			this.bg = bg;
-			this.fg = fg;
-			this.bearing = bearing;
-			this.g = g;
-			this.canvas = canvas;
-		}
-
-		raiseCallback(this.options.init);
-	}
-
-	function raiseCallback(callbackFunction) {
-		if(callbackFunction && typeof callbackFunction === "function")
-			callbackFunction();
-	}
-
-	// Default options
-	ClockPicker.DEFAULTS = {
-		'default': '',         // default time, 'now' or '13:14' e.g.
-		fromnow: 0,            // set default time to * milliseconds from now (using with default = 'now')
-    donetext: 'Done',      // done button text
-    cleartext: 'Clear',    // clear button text
-		autoclose: false,      // auto close when minute is selected
-		ampmclickable: false,  // set am/pm button on itself
-		darktheme: false,			 // set to dark theme
-		twelvehour: false,     // change to 12 hour AM/PM clock from 24 hour
-    vibrate: true,         // vibrate the device when dragging clock hand
-    hourstep: 1,           // allow to multi increment the hour
-    minutestep: 1,         // allow to multi increment the minute
-    ampmSubmit: false,     // allow submit with AM and PM buttons instead of the minute selection/picker
-	};
-
-	// Show or hide popover
-	ClockPicker.prototype.toggle = function() {
-		this[this.isShown ? 'hide' : 'show']();
-	};
-
-	// Set popover position
-	ClockPicker.prototype.locate = function() {
-		var element = this.element,
-				popover = this.popover,
-				offset = element.offset(),
-				width = element.outerWidth(),
-				height = element.outerHeight(),
-				align = this.options.align,
-				self = this;
-
-		popover.show();
-  };
-
-    // The input can be changed by the user
-    // So before we can use this.hours/this.minutes we must update it
-ClockPicker.prototype.parseInputValue = function(){
-  var value = this.input.prop('value') || this.options['default'] || '';
-
-  if (value === 'now') {
-      value = new Date(+ new Date() + this.options.fromnow);
-  }
-  if (value instanceof Date) {
-      value = value.getHours() + ':' + value.getMinutes();
-  }
-
-  value = value.split(':');
-
-  // Minutes can have AM/PM that needs to be removed
-  this.hours = + value[0] || 0;
-  this.minutes = + (value[1] + '').replace(/\D/g, '') || 0;
-
-  this.hours = Math.round(this.hours / this.options.hourstep) * this.options.hourstep;
-  this.minutes = Math.round(this.minutes / this.options.minutestep) * this.options.minutestep;
-
-  if (this.options.twelvehour) {
-      var period = (value[1] + '').replace(/\d+/g, '').toLowerCase();
-      this.amOrPm = this.hours > 12 || period === 'pm' ? 'PM' : 'AM';
-  }
-};
-
-	// Show popover
-	ClockPicker.prototype.show = function(e){
-		// Not show again
-		if (this.isShown) {
-			return;
-		}
-		raiseCallback(this.options.beforeShow);
-		$(':input').each(function() {
-			$(this).attr('tabindex', -1);
-		})
-		var self = this;
-		// Initialize
-		this.input.blur();
-		this.popover.addClass('picker--opened');
-		this.input.addClass('picker__input picker__input--active');
-		$(document.body).css('overflow', 'hidden');
-		if (!this.isAppended) {
-			// Append popover to body
-			this.popover.insertAfter(this.input);
-			if(this.options.twelvehour) {
-				this.amOrPm = 'PM';
-				if(!this.options.ampmclickable) {
-					this.amPmBlock.children('.am-button').removeClass('active');
-					this.amPmBlock.children('.pm-button').addClass('active');
-					this.spanAmPm.empty().append('PM');
-				}
-				else {
-					this.spanAmPm.children('#click-pm').addClass("text-primary");
-					this.spanAmPm.children('#click-am').removeClass("text-primary");
-				}
-			}
-			// Reset position when resize
-			$win.on('resize.clockpicker' + this.id, function() {
-				if (self.isShown) {
-					self.locate();
-				}
-			});
-			this.isAppended = true;
-		}
-		// Get the time
-		this.parseInputValue();
-		this.spanHours.html(leadingZero(this.hours));
-    this.spanMinutes.html(leadingZero(this.minutes));
-
-    if (this.options.twelvehour) {
-      this.spanAmPm.empty().append(this.amOrPm);
-    }
-
-		// Toggle to hours view
-		this.toggleView('hours');
-		// Set position
-		this.locate();
-		this.isShown = true;
-		// Hide when clicking or tabbing on any element except the clock and input
-		$doc.on('click.clockpicker.' + this.id + ' focusin.clockpicker.' + this.id, debounce(function(e) {
-			var target = $(e.target);
-			if (target.closest(self.popover.find('.picker__wrap')).length === 0 && target.closest(self.input).length === 0)
-				self.hide();
-		}, 100));
-		// Hide when ESC is pressed
-		$doc.on('keyup.clockpicker.' + this.id, debounce( function(e){
-			if (e.keyCode === 27)
-				self.hide();
-		},100));
-		raiseCallback(this.options.afterShow);
-	};
-	// Hide popover
-	ClockPicker.prototype.hide = function() {
-		raiseCallback(this.options.beforeHide);
-		this.input.removeClass('picker__input picker__input--active');
-		this.popover.removeClass('picker--opened');
-		$(document.body).css('overflow', 'visible');
-		this.isShown = false;
-		$(':input').each(function(index) {
-			$(this).attr('tabindex', index + 1);
-		});
-		// Unbinding events on document
-		$doc.off('click.clockpicker.' + this.id + ' focusin.clockpicker.' + this.id);
-		$doc.off('keyup.clockpicker.' + this.id);
-		this.popover.hide();
-		raiseCallback(this.options.afterHide);
-	};
-	// Toggle to hours or minutes view
-	ClockPicker.prototype.toggleView = function(view, delay) {
-		var raiseAfterHourSelect = false;
-		if (view === 'minutes' && $(this.hoursView).css("visibility") === "visible") {
-			raiseCallback(this.options.beforeHourSelect);
-			raiseAfterHourSelect = true;
-		}
-		var isHours = view === 'hours',
-				nextView = isHours ? this.hoursView : this.minutesView,
-				hideView = isHours ? this.minutesView : this.hoursView;
-		this.currentView = view;
-
-		this.spanHours.toggleClass('text-primary', isHours);
-		this.spanMinutes.toggleClass('text-primary', ! isHours);
-
-		// Let's make transitions
-		hideView.addClass('clockpicker-dial-out');
-		nextView.css('visibility', 'visible').removeClass('clockpicker-dial-out');
-
-		// Reset clock hand
-		this.resetClock(delay);
-
-		// After transitions ended
-		clearTimeout(this.toggleViewTimer);
-		this.toggleViewTimer = setTimeout(function() {
-			hideView.css('visibility', 'hidden');
-		}, duration);
-
-		if (raiseAfterHourSelect)
-			raiseCallback(this.options.afterHourSelect);
-	};
-
-	// Reset clock hand
-	ClockPicker.prototype.resetClock = function(delay) {
-		var view = this.currentView,
-				value = this[view],
-				isHours = view === 'hours',
-				unit = Math.PI / (isHours ? 6 : 30),
-				radian = value * unit,
-				radius = isHours && value > 0 && value < 13 ? innerRadius : outerRadius,
-				x = Math.sin(radian) * radius,
-				y = - Math.cos(radian) * radius,
-				self = this;
-
-		if(svgSupported && delay) {
-			self.canvas.addClass('clockpicker-canvas-out');
-			setTimeout(function(){
-				self.canvas.removeClass('clockpicker-canvas-out');
-				self.setHand(x, y);
-			}, delay);
-		} else
-			this.setHand(x, y);
-	};
-
-	// Set clock hand to (x, y)
-	ClockPicker.prototype.setHand = function(x, y, roundBy5, dragging) {
-		var radian = Math.atan2(x, - y),
-				isHours = this.currentView === 'hours',
-				z = Math.sqrt(x * x + y * y),
-				options = this.options,
-				inner = isHours && z < (outerRadius + innerRadius) / 2,
-				radius = inner ? innerRadius : outerRadius,
-				unit,
-        value;
-
-        // Calculate the unit
-        if (isHours) {
-            unit = options.hourstep / 6 * Math.PI
-        } else {
-            unit = options.minutestep / 30 * Math.PI
-        }
-
-		if (options.twelvehour)
-			radius = outerRadius;
-
-		// Radian should in range [0, 2PI]
-		if (radian < 0)
-			radian = Math.PI * 2 + radian;
-
-		// Get the round value
-		value = Math.round(radian / unit);
-
-		// Get the round radian
-		radian = value * unit;
-
-		// Correct the hours or minutes
-    if (isHours) {
-      value *= options.hourstep;
-      if (! options.twelvehour && (!inner)==(value>0)) {
-          value += 12;
-      }
-      if (options.twelvehour && value === 0) {
-          value = 12;
-      }
-      if (value === 24) {
-          value = 0;
-      }
-    } else {
-      value *= options.minutestep;
-      if (value === 60) {
-          value = 0;
-      }
-    }
-		if (isHours)
-			this.fg.setAttribute('class', 'clockpicker-canvas-fg');
-		else {
-			if(value % 5 == 0)
-				this.fg.setAttribute('class', 'clockpicker-canvas-fg');
-			else
-				this.fg.setAttribute('class', 'clockpicker-canvas-fg active');
-		}
-
-		// Once hours or minutes changed, vibrate the device
-		if (this[this.currentView] !== value)
-			if (vibrate && this.options.vibrate)
-				// Do not vibrate too frequently
-				if (! this.vibrateTimer) {
-					navigator[vibrate](10);
-					this.vibrateTimer = setTimeout($.proxy(function(){
-						this.vibrateTimer = null;
-					}, this), 100);
-				}
-
-		this[this.currentView] = value;
-		this[isHours ? 'spanHours' : 'spanMinutes'].html(leadingZero(value));
-
-		// If svg is not supported, just add an active class to the tick
-		if (! svgSupported) {
-			this[isHours ? 'hoursView' : 'minutesView'].find('.clockpicker-tick').each(function(){
-				var tick = $(this);
-				tick.toggleClass('active', value === + tick.html());
-			});
-			return;
-		}
-
-		// Place clock hand at the top when dragging
-		if (dragging || (! isHours && value % 5)) {
-			this.g.insertBefore(this.hand, this.bearing);
-			this.g.insertBefore(this.bg, this.fg);
-			this.bg.setAttribute('class', 'clockpicker-canvas-bg clockpicker-canvas-bg-trans');
-		} else {
-			// Or place it at the bottom
-			this.g.insertBefore(this.hand, this.bg);
-			this.g.insertBefore(this.fg, this.bg);
-			this.bg.setAttribute('class', 'clockpicker-canvas-bg');
-		}
-
-		// Set clock hand and others' position
-    var cx = Math.sin(radian) * radius,
-      cy = - Math.cos(radian) * radius;
-    this.hand.setAttribute('x2', cx);
-    this.hand.setAttribute('y2', cy);
-    this.bg.setAttribute('cx', cx);
-    this.bg.setAttribute('cy', cy);
-    this.fg.setAttribute('cx', cx);
-    this.fg.setAttribute('cy', cy);
-  };
-
-  	// Clear clock text
-  ClockPicker.prototype.clearInput = function() {
-		this.input.val('');
-		this.hide();
-
-		if(this.options.afterDone && typeof this.options.afterDone === 'function')
-			this.options.afterDone(this.input, null);
-	};
-
-    // Allow user to get time as Date object
-    ClockPicker.prototype.getTime = function(callback) {
-      this.parseInputValue();
-
-      var hours = this.hours;
-      if (this.options.twelvehour && hours < 12 && this.amOrPm === 'PM') {
-          hours += 12;
-      }
-
-      var selectedTime = new Date();
-      selectedTime.setMinutes(this.minutes)
-      selectedTime.setHours(hours);
-      selectedTime.setSeconds(0);
-
-      return callback && callback.apply(this.element, selectedTime) || selectedTime;
-  }
-
-	// Hours and minutes are selected
-	ClockPicker.prototype.done = function() {
-		raiseCallback(this.options.beforeDone);
-		this.hide();
-		this.label.addClass('active');
-
-		var last = this.input.prop('value'),
-      outHours = this.hours,
-      value = ':' + leadingZero(this.minutes);
-
-    if (this.isHTML5 && this.options.twelvehour) {
-        if (this.hours < 12 && this.amOrPm === 'PM') {
-            outHours += 12;
-        }
-        if (this.hours === 12 && this.amOrPm === 'AM') {
-            outHours = 0;
-        }
-    }
-
-    value = leadingZero(outHours) + value;
-
-    if (!this.isHTML5 && this.options.twelvehour) {
-          value = value + this.amOrPm;
-    }
-
-		this.input.prop('value', value);
-		if(value !== last) {
-			this.input.trigger('change');
-			if(!this.isInput)
-				this.element.trigger('change');
-		}
-
-		if(this.options.autoclose)
-			this.input.trigger('blur');
-
-		raiseCallback(this.options.afterDone);
-	};
-
-	// Remove clockpicker from input
-	ClockPicker.prototype.remove = function() {
-		this.element.removeData('clockpicker');
-		this.input.off('focus.clockpicker click.clockpicker');
-		if (this.isShown)
-			this.hide();
-		if (this.isAppended) {
-			$win.off('resize.clockpicker' + this.id);
-			this.popover.remove();
-		}
-	};
-
-	// Extends $.fn.clockpicker
-	$.fn.pickatime = function(option){
-		var args = Array.prototype.slice.call(arguments, 1);
-		function handleClockPickerRequest(){
-			var $this = $(this),
-					data = $this.data('clockpicker');
-			if (!data) {
-				var options = $.extend({}, ClockPicker.DEFAULTS, $this.data(), typeof option == 'object' && option);
-				$this.data('clockpicker', new ClockPicker($this, options));
-			} else {
-				// Manual operations. show, hide, remove, e.g.
-				if (typeof data[option] === 'function')
-					data[option].apply(data, args);
-			}
-    }
-    // If we explicitly do a call on a single element then we can return the value (if needed)
-    // This allows us, for example, to return the value of getTime
-    if (this.length == 1) {
-      var returnValue = handleClockPickerRequest.apply(this[0]);
-
-      // If we do not have any return value then return the object itself so you can chain
-      return returnValue !== undefined ? returnValue : this;
-    }
-
-    // If we do have a list then we do not care about return values
-    return this.each(handleClockPickerRequest);
-    };
-}());
-
 /*! PhotoSwipe - v4.1.1 - 2015-12-24
  * http://photoswipe.com
  * Copyright (c) 2015 Dmitry Semenov; */
@@ -23963,314 +20651,527 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 !function(t,e){"object"==typeof exports&&"undefined"!=typeof module?module.exports=e():"function"==typeof define&&define.amd?define(e):t.PerfectScrollbar=e()}(this,function(){"use strict";function t(t){return getComputedStyle(t)}function e(t,e){for(var i in e){var r=e[i];"number"==typeof r&&(r+="px"),t.style[i]=r}return t}function i(t){var e=document.createElement("div");return e.className=t,e}function r(t,e){if(!v)throw new Error("No element matching method supported");return v.call(t,e)}function l(t){t.remove?t.remove():t.parentNode&&t.parentNode.removeChild(t)}function n(t,e){return Array.prototype.filter.call(t.children,function(t){return r(t,e)})}function o(t,e){var i=t.element.classList,r=m.state.scrolling(e);i.contains(r)?clearTimeout(Y[e]):i.add(r)}function s(t,e){Y[e]=setTimeout(function(){return t.isAlive&&t.element.classList.remove(m.state.scrolling(e))},t.settings.scrollingThreshold)}function a(t,e){o(t,e),s(t,e)}function c(t){if("function"==typeof window.CustomEvent)return new CustomEvent(t);var e=document.createEvent("CustomEvent");return e.initCustomEvent(t,!1,!1,void 0),e}function h(t,e,i,r,l){var n=i[0],o=i[1],s=i[2],h=i[3],u=i[4],d=i[5];void 0===r&&(r=!0),void 0===l&&(l=!1);var f=t.element;t.reach[h]=null,f[s]<1&&(t.reach[h]="start"),f[s]>t[n]-t[o]-1&&(t.reach[h]="end"),e&&(f.dispatchEvent(c("ps-scroll-"+h)),e<0?f.dispatchEvent(c("ps-scroll-"+u)):e>0&&f.dispatchEvent(c("ps-scroll-"+d)),r&&a(t,h)),t.reach[h]&&(e||l)&&f.dispatchEvent(c("ps-"+h+"-reach-"+t.reach[h]))}function u(t){return parseInt(t,10)||0}function d(t){return r(t,"input,[contenteditable]")||r(t,"select,[contenteditable]")||r(t,"textarea,[contenteditable]")||r(t,"button,[contenteditable]")}function f(e){var i=t(e);return u(i.width)+u(i.paddingLeft)+u(i.paddingRight)+u(i.borderLeftWidth)+u(i.borderRightWidth)}function p(t,e){return t.settings.minScrollbarLength&&(e=Math.max(e,t.settings.minScrollbarLength)),t.settings.maxScrollbarLength&&(e=Math.min(e,t.settings.maxScrollbarLength)),e}function b(t,i){var r={width:i.railXWidth},l=Math.floor(t.scrollTop);i.isRtl?r.left=i.negativeScrollAdjustment+t.scrollLeft+i.containerWidth-i.contentWidth:r.left=t.scrollLeft,i.isScrollbarXUsingBottom?r.bottom=i.scrollbarXBottom-l:r.top=i.scrollbarXTop+l,e(i.scrollbarXRail,r);var n={top:l,height:i.railYHeight};i.isScrollbarYUsingRight?i.isRtl?n.right=i.contentWidth-(i.negativeScrollAdjustment+t.scrollLeft)-i.scrollbarYRight-i.scrollbarYOuterWidth:n.right=i.scrollbarYRight-t.scrollLeft:i.isRtl?n.left=i.negativeScrollAdjustment+t.scrollLeft+2*i.containerWidth-i.contentWidth-i.scrollbarYLeft-i.scrollbarYOuterWidth:n.left=i.scrollbarYLeft+t.scrollLeft,e(i.scrollbarYRail,n),e(i.scrollbarX,{left:i.scrollbarXLeft,width:i.scrollbarXWidth-i.railBorderXWidth}),e(i.scrollbarY,{top:i.scrollbarYTop,height:i.scrollbarYHeight-i.railBorderYWidth})}function g(t,e){function i(e){b[d]=g+Y*(e[a]-v),o(t,f),R(t),e.stopPropagation(),e.preventDefault()}function r(){s(t,f),t[p].classList.remove(m.state.clicking),t.event.unbind(t.ownerDocument,"mousemove",i)}var l=e[0],n=e[1],a=e[2],c=e[3],h=e[4],u=e[5],d=e[6],f=e[7],p=e[8],b=t.element,g=null,v=null,Y=null;t.event.bind(t[h],"mousedown",function(e){g=b[d],v=e[a],Y=(t[n]-t[l])/(t[c]-t[u]),t.event.bind(t.ownerDocument,"mousemove",i),t.event.once(t.ownerDocument,"mouseup",r),t[p].classList.add(m.state.clicking),e.stopPropagation(),e.preventDefault()})}var v="undefined"!=typeof Element&&(Element.prototype.matches||Element.prototype.webkitMatchesSelector||Element.prototype.mozMatchesSelector||Element.prototype.msMatchesSelector),m={main:"ps",element:{thumb:function(t){return"ps__thumb-"+t},rail:function(t){return"ps__rail-"+t},consuming:"ps__child--consume"},state:{focus:"ps--focus",clicking:"ps--clicking",active:function(t){return"ps--active-"+t},scrolling:function(t){return"ps--scrolling-"+t}}},Y={x:null,y:null},X=function(t){this.element=t,this.handlers={}},w={isEmpty:{configurable:!0}};X.prototype.bind=function(t,e){void 0===this.handlers[t]&&(this.handlers[t]=[]),this.handlers[t].push(e),this.element.addEventListener(t,e,!1)},X.prototype.unbind=function(t,e){var i=this;this.handlers[t]=this.handlers[t].filter(function(r){return!(!e||r===e)||(i.element.removeEventListener(t,r,!1),!1)})},X.prototype.unbindAll=function(){var t=this;for(var e in t.handlers)t.unbind(e)},w.isEmpty.get=function(){var t=this;return Object.keys(this.handlers).every(function(e){return 0===t.handlers[e].length})},Object.defineProperties(X.prototype,w);var y=function(){this.eventElements=[]};y.prototype.eventElement=function(t){var e=this.eventElements.filter(function(e){return e.element===t})[0];return e||(e=new X(t),this.eventElements.push(e)),e},y.prototype.bind=function(t,e,i){this.eventElement(t).bind(e,i)},y.prototype.unbind=function(t,e,i){var r=this.eventElement(t);r.unbind(e,i),r.isEmpty&&this.eventElements.splice(this.eventElements.indexOf(r),1)},y.prototype.unbindAll=function(){this.eventElements.forEach(function(t){return t.unbindAll()}),this.eventElements=[]},y.prototype.once=function(t,e,i){var r=this.eventElement(t),l=function(t){r.unbind(e,l),i(t)};r.bind(e,l)};var W=function(t,e,i,r,l){void 0===r&&(r=!0),void 0===l&&(l=!1);var n;if("top"===e)n=["contentHeight","containerHeight","scrollTop","y","up","down"];else{if("left"!==e)throw new Error("A proper axis should be provided");n=["contentWidth","containerWidth","scrollLeft","x","left","right"]}h(t,i,n,r,l)},L={isWebKit:"undefined"!=typeof document&&"WebkitAppearance"in document.documentElement.style,supportsTouch:"undefined"!=typeof window&&("ontouchstart"in window||window.DocumentTouch&&document instanceof window.DocumentTouch),supportsIePointer:"undefined"!=typeof navigator&&navigator.msMaxTouchPoints,isChrome:"undefined"!=typeof navigator&&/Chrome/i.test(navigator&&navigator.userAgent)},R=function(t){var e=t.element,i=Math.floor(e.scrollTop);t.containerWidth=e.clientWidth,t.containerHeight=e.clientHeight,t.contentWidth=e.scrollWidth,t.contentHeight=e.scrollHeight,e.contains(t.scrollbarXRail)||(n(e,m.element.rail("x")).forEach(function(t){return l(t)}),e.appendChild(t.scrollbarXRail)),e.contains(t.scrollbarYRail)||(n(e,m.element.rail("y")).forEach(function(t){return l(t)}),e.appendChild(t.scrollbarYRail)),!t.settings.suppressScrollX&&t.containerWidth+t.settings.scrollXMarginOffset<t.contentWidth?(t.scrollbarXActive=!0,t.railXWidth=t.containerWidth-t.railXMarginWidth,t.railXRatio=t.containerWidth/t.railXWidth,t.scrollbarXWidth=p(t,u(t.railXWidth*t.containerWidth/t.contentWidth)),t.scrollbarXLeft=u((t.negativeScrollAdjustment+e.scrollLeft)*(t.railXWidth-t.scrollbarXWidth)/(t.contentWidth-t.containerWidth))):t.scrollbarXActive=!1,!t.settings.suppressScrollY&&t.containerHeight+t.settings.scrollYMarginOffset<t.contentHeight?(t.scrollbarYActive=!0,t.railYHeight=t.containerHeight-t.railYMarginHeight,t.railYRatio=t.containerHeight/t.railYHeight,t.scrollbarYHeight=p(t,u(t.railYHeight*t.containerHeight/t.contentHeight)),t.scrollbarYTop=u(i*(t.railYHeight-t.scrollbarYHeight)/(t.contentHeight-t.containerHeight))):t.scrollbarYActive=!1,t.scrollbarXLeft>=t.railXWidth-t.scrollbarXWidth&&(t.scrollbarXLeft=t.railXWidth-t.scrollbarXWidth),t.scrollbarYTop>=t.railYHeight-t.scrollbarYHeight&&(t.scrollbarYTop=t.railYHeight-t.scrollbarYHeight),b(e,t),t.scrollbarXActive?e.classList.add(m.state.active("x")):(e.classList.remove(m.state.active("x")),t.scrollbarXWidth=0,t.scrollbarXLeft=0,e.scrollLeft=0),t.scrollbarYActive?e.classList.add(m.state.active("y")):(e.classList.remove(m.state.active("y")),t.scrollbarYHeight=0,t.scrollbarYTop=0,e.scrollTop=0)},T={"click-rail":function(t){t.event.bind(t.scrollbarY,"mousedown",function(t){return t.stopPropagation()}),t.event.bind(t.scrollbarYRail,"mousedown",function(e){var i=e.pageY-window.pageYOffset-t.scrollbarYRail.getBoundingClientRect().top>t.scrollbarYTop?1:-1;t.element.scrollTop+=i*t.containerHeight,R(t),e.stopPropagation()}),t.event.bind(t.scrollbarX,"mousedown",function(t){return t.stopPropagation()}),t.event.bind(t.scrollbarXRail,"mousedown",function(e){var i=e.pageX-window.pageXOffset-t.scrollbarXRail.getBoundingClientRect().left>t.scrollbarXLeft?1:-1;t.element.scrollLeft+=i*t.containerWidth,R(t),e.stopPropagation()})},"drag-thumb":function(t){g(t,["containerWidth","contentWidth","pageX","railXWidth","scrollbarX","scrollbarXWidth","scrollLeft","x","scrollbarXRail"]),g(t,["containerHeight","contentHeight","pageY","railYHeight","scrollbarY","scrollbarYHeight","scrollTop","y","scrollbarYRail"])},keyboard:function(t){function e(e,r){var l=Math.floor(i.scrollTop);if(0===e){if(!t.scrollbarYActive)return!1;if(0===l&&r>0||l>=t.contentHeight-t.containerHeight&&r<0)return!t.settings.wheelPropagation}var n=i.scrollLeft;if(0===r){if(!t.scrollbarXActive)return!1;if(0===n&&e<0||n>=t.contentWidth-t.containerWidth&&e>0)return!t.settings.wheelPropagation}return!0}var i=t.element,l=function(){return r(i,":hover")},n=function(){return r(t.scrollbarX,":focus")||r(t.scrollbarY,":focus")};t.event.bind(t.ownerDocument,"keydown",function(r){if(!(r.isDefaultPrevented&&r.isDefaultPrevented()||r.defaultPrevented)&&(l()||n())){var o=document.activeElement?document.activeElement:t.ownerDocument.activeElement;if(o){if("IFRAME"===o.tagName)o=o.contentDocument.activeElement;else for(;o.shadowRoot;)o=o.shadowRoot.activeElement;if(d(o))return}var s=0,a=0;switch(r.which){case 37:s=r.metaKey?-t.contentWidth:r.altKey?-t.containerWidth:-30;break;case 38:a=r.metaKey?t.contentHeight:r.altKey?t.containerHeight:30;break;case 39:s=r.metaKey?t.contentWidth:r.altKey?t.containerWidth:30;break;case 40:a=r.metaKey?-t.contentHeight:r.altKey?-t.containerHeight:-30;break;case 32:a=r.shiftKey?t.containerHeight:-t.containerHeight;break;case 33:a=t.containerHeight;break;case 34:a=-t.containerHeight;break;case 36:a=t.contentHeight;break;case 35:a=-t.contentHeight;break;default:return}t.settings.suppressScrollX&&0!==s||t.settings.suppressScrollY&&0!==a||(i.scrollTop-=a,i.scrollLeft+=s,R(t),e(s,a)&&r.preventDefault())}})},wheel:function(e){function i(t,i){var r=Math.floor(o.scrollTop),l=0===o.scrollTop,n=r+o.offsetHeight===o.scrollHeight,s=0===o.scrollLeft,a=o.scrollLeft+o.offsetWidth===o.scrollWidth;return!(Math.abs(i)>Math.abs(t)?l||n:s||a)||!e.settings.wheelPropagation}function r(t){var e=t.deltaX,i=-1*t.deltaY;return void 0!==e&&void 0!==i||(e=-1*t.wheelDeltaX/6,i=t.wheelDeltaY/6),t.deltaMode&&1===t.deltaMode&&(e*=10,i*=10),e!==e&&i!==i&&(e=0,i=t.wheelDelta),t.shiftKey?[-i,-e]:[e,i]}function l(e,i,r){if(!L.isWebKit&&o.querySelector("select:focus"))return!0;if(!o.contains(e))return!1;for(var l=e;l&&l!==o;){if(l.classList.contains(m.element.consuming))return!0;var n=t(l);if([n.overflow,n.overflowX,n.overflowY].join("").match(/(scroll|auto)/)){var s=l.scrollHeight-l.clientHeight;if(s>0&&!(0===l.scrollTop&&r>0||l.scrollTop===s&&r<0))return!0;var a=l.scrollWidth-l.clientWidth;if(a>0&&!(0===l.scrollLeft&&i<0||l.scrollLeft===a&&i>0))return!0}l=l.parentNode}return!1}function n(t){var n=r(t),s=n[0],a=n[1];if(!l(t.target,s,a)){var c=!1;e.settings.useBothWheelAxes?e.scrollbarYActive&&!e.scrollbarXActive?(a?o.scrollTop-=a*e.settings.wheelSpeed:o.scrollTop+=s*e.settings.wheelSpeed,c=!0):e.scrollbarXActive&&!e.scrollbarYActive&&(s?o.scrollLeft+=s*e.settings.wheelSpeed:o.scrollLeft-=a*e.settings.wheelSpeed,c=!0):(o.scrollTop-=a*e.settings.wheelSpeed,o.scrollLeft+=s*e.settings.wheelSpeed),R(e),(c=c||i(s,a))&&!t.ctrlKey&&(t.stopPropagation(),t.preventDefault())}}var o=e.element;void 0!==window.onwheel?e.event.bind(o,"wheel",n):void 0!==window.onmousewheel&&e.event.bind(o,"mousewheel",n)},touch:function(e){function i(t,i){var r=Math.floor(h.scrollTop),l=h.scrollLeft,n=Math.abs(t),o=Math.abs(i);if(o>n){if(i<0&&r===e.contentHeight-e.containerHeight||i>0&&0===r)return 0===window.scrollY&&i>0&&L.isChrome}else if(n>o&&(t<0&&l===e.contentWidth-e.containerWidth||t>0&&0===l))return!0;return!0}function r(t,i){h.scrollTop-=i,h.scrollLeft-=t,R(e)}function l(t){return t.targetTouches?t.targetTouches[0]:t}function n(t){return!(t.pointerType&&"pen"===t.pointerType&&0===t.buttons||(!t.targetTouches||1!==t.targetTouches.length)&&(!t.pointerType||"mouse"===t.pointerType||t.pointerType===t.MSPOINTER_TYPE_MOUSE))}function o(t){if(n(t)){var e=l(t);u.pageX=e.pageX,u.pageY=e.pageY,d=(new Date).getTime(),null!==p&&clearInterval(p)}}function s(e,i,r){if(!h.contains(e))return!1;for(var l=e;l&&l!==h;){if(l.classList.contains(m.element.consuming))return!0;var n=t(l);if([n.overflow,n.overflowX,n.overflowY].join("").match(/(scroll|auto)/)){var o=l.scrollHeight-l.clientHeight;if(o>0&&!(0===l.scrollTop&&r>0||l.scrollTop===o&&r<0))return!0;var s=l.scrollLeft-l.clientWidth;if(s>0&&!(0===l.scrollLeft&&i<0||l.scrollLeft===s&&i>0))return!0}l=l.parentNode}return!1}function a(t){if(n(t)){var e=l(t),o={pageX:e.pageX,pageY:e.pageY},a=o.pageX-u.pageX,c=o.pageY-u.pageY;if(s(t.target,a,c))return;r(a,c),u=o;var h=(new Date).getTime(),p=h-d;p>0&&(f.x=a/p,f.y=c/p,d=h),i(a,c)&&t.preventDefault()}}function c(){e.settings.swipeEasing&&(clearInterval(p),p=setInterval(function(){e.isInitialized?clearInterval(p):f.x||f.y?Math.abs(f.x)<.01&&Math.abs(f.y)<.01?clearInterval(p):(r(30*f.x,30*f.y),f.x*=.8,f.y*=.8):clearInterval(p)},10))}if(L.supportsTouch||L.supportsIePointer){var h=e.element,u={},d=0,f={},p=null;L.supportsTouch?(e.event.bind(h,"touchstart",o),e.event.bind(h,"touchmove",a),e.event.bind(h,"touchend",c)):L.supportsIePointer&&(window.PointerEvent?(e.event.bind(h,"pointerdown",o),e.event.bind(h,"pointermove",a),e.event.bind(h,"pointerup",c)):window.MSPointerEvent&&(e.event.bind(h,"MSPointerDown",o),e.event.bind(h,"MSPointerMove",a),e.event.bind(h,"MSPointerUp",c)))}}},H=function(r,l){var n=this;if(void 0===l&&(l={}),"string"==typeof r&&(r=document.querySelector(r)),!r||!r.nodeName)throw new Error("no element is specified to initialize PerfectScrollbar");this.element=r,r.classList.add(m.main),this.settings={handlers:["click-rail","drag-thumb","keyboard","wheel","touch"],maxScrollbarLength:null,minScrollbarLength:null,scrollingThreshold:1e3,scrollXMarginOffset:0,scrollYMarginOffset:0,suppressScrollX:!1,suppressScrollY:!1,swipeEasing:!0,useBothWheelAxes:!1,wheelPropagation:!0,wheelSpeed:1};for(var o in l)n.settings[o]=l[o];this.containerWidth=null,this.containerHeight=null,this.contentWidth=null,this.contentHeight=null;var s=function(){return r.classList.add(m.state.focus)},a=function(){return r.classList.remove(m.state.focus)};this.isRtl="rtl"===t(r).direction,this.isNegativeScroll=function(){var t=r.scrollLeft,e=null;return r.scrollLeft=-1,e=r.scrollLeft<0,r.scrollLeft=t,e}(),this.negativeScrollAdjustment=this.isNegativeScroll?r.scrollWidth-r.clientWidth:0,this.event=new y,this.ownerDocument=r.ownerDocument||document,this.scrollbarXRail=i(m.element.rail("x")),r.appendChild(this.scrollbarXRail),this.scrollbarX=i(m.element.thumb("x")),this.scrollbarXRail.appendChild(this.scrollbarX),this.scrollbarX.setAttribute("tabindex",0),this.event.bind(this.scrollbarX,"focus",s),this.event.bind(this.scrollbarX,"blur",a),this.scrollbarXActive=null,this.scrollbarXWidth=null,this.scrollbarXLeft=null;var c=t(this.scrollbarXRail);this.scrollbarXBottom=parseInt(c.bottom,10),isNaN(this.scrollbarXBottom)?(this.isScrollbarXUsingBottom=!1,this.scrollbarXTop=u(c.top)):this.isScrollbarXUsingBottom=!0,this.railBorderXWidth=u(c.borderLeftWidth)+u(c.borderRightWidth),e(this.scrollbarXRail,{display:"block"}),this.railXMarginWidth=u(c.marginLeft)+u(c.marginRight),e(this.scrollbarXRail,{display:""}),this.railXWidth=null,this.railXRatio=null,this.scrollbarYRail=i(m.element.rail("y")),r.appendChild(this.scrollbarYRail),this.scrollbarY=i(m.element.thumb("y")),this.scrollbarYRail.appendChild(this.scrollbarY),this.scrollbarY.setAttribute("tabindex",0),this.event.bind(this.scrollbarY,"focus",s),this.event.bind(this.scrollbarY,"blur",a),this.scrollbarYActive=null,this.scrollbarYHeight=null,this.scrollbarYTop=null;var h=t(this.scrollbarYRail);this.scrollbarYRight=parseInt(h.right,10),isNaN(this.scrollbarYRight)?(this.isScrollbarYUsingRight=!1,this.scrollbarYLeft=u(h.left)):this.isScrollbarYUsingRight=!0,this.scrollbarYOuterWidth=this.isRtl?f(this.scrollbarY):null,this.railBorderYWidth=u(h.borderTopWidth)+u(h.borderBottomWidth),e(this.scrollbarYRail,{display:"block"}),this.railYMarginHeight=u(h.marginTop)+u(h.marginBottom),e(this.scrollbarYRail,{display:""}),this.railYHeight=null,this.railYRatio=null,this.reach={x:r.scrollLeft<=0?"start":r.scrollLeft>=this.contentWidth-this.containerWidth?"end":null,y:r.scrollTop<=0?"start":r.scrollTop>=this.contentHeight-this.containerHeight?"end":null},this.isAlive=!0,this.settings.handlers.forEach(function(t){return T[t](n)}),this.lastScrollTop=Math.floor(r.scrollTop),this.lastScrollLeft=r.scrollLeft,this.event.bind(this.element,"scroll",function(t){return n.onScroll(t)}),R(this)};return H.prototype.update=function(){this.isAlive&&(this.negativeScrollAdjustment=this.isNegativeScroll?this.element.scrollWidth-this.element.clientWidth:0,e(this.scrollbarXRail,{display:"block"}),e(this.scrollbarYRail,{display:"block"}),this.railXMarginWidth=u(t(this.scrollbarXRail).marginLeft)+u(t(this.scrollbarXRail).marginRight),this.railYMarginHeight=u(t(this.scrollbarYRail).marginTop)+u(t(this.scrollbarYRail).marginBottom),e(this.scrollbarXRail,{display:"none"}),e(this.scrollbarYRail,{display:"none"}),R(this),W(this,"top",0,!1,!0),W(this,"left",0,!1,!0),e(this.scrollbarXRail,{display:""}),e(this.scrollbarYRail,{display:""}))},H.prototype.onScroll=function(t){this.isAlive&&(R(this),W(this,"top",this.element.scrollTop-this.lastScrollTop),W(this,"left",this.element.scrollLeft-this.lastScrollLeft),this.lastScrollTop=Math.floor(this.element.scrollTop),this.lastScrollLeft=this.element.scrollLeft)},H.prototype.destroy=function(){this.isAlive&&(this.event.unbindAll(),l(this.scrollbarX),l(this.scrollbarY),l(this.scrollbarXRail),l(this.scrollbarYRail),this.removePsClasses(),this.element=null,this.scrollbarX=null,this.scrollbarY=null,this.scrollbarXRail=null,this.scrollbarYRail=null,this.isAlive=!1)},H.prototype.removePsClasses=function(){this.element.className=this.element.className.split(" ").filter(function(t){return!t.match(/^ps([-_].+|)$/)}).join(" ")},H});
 "use strict";
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 (function ($) {
-  $(document).ready(function () {
-    $(document).on('click', '.chip .close', function () {
-      var $this = $(this);
+  $(document).on('click', '.chip .close', function () {
+    var $this = $(this);
 
-      if ($this.closest('.chips').data('initialized')) {
-        return;
-      }
+    if ($this.closest('.chips').data('initialized')) {
+      return;
+    }
 
-      $this.closest('.chip').remove();
-    });
+    $this.closest('.chip').remove();
   });
 
-  $.fn.materialChip = function (options) {
-    var _this = this;
+  var MaterialChip =
+  /*#__PURE__*/
+  function () {
+    function MaterialChip(chips, options) {
+      _classCallCheck(this, MaterialChip);
 
-    this.$el = $(this);
-    this.$document = $(document);
-    this.eventsHandled = false;
-    this.defaultOptions = {
-      data: [],
-      placeholder: '',
-      secondaryPlaceholder: ''
-    };
-    this.selectors = {
-      chips: '.chips',
-      chip: '.chip',
-      input: 'input',
-      delete: '.fas',
-      selectedChip: '.selected'
-    };
-    this.keyCodes = {
-      enter: 13,
-      backspace: 8,
-      delete: 46,
-      arrowLeft: 37,
-      arrowRight: 39
-    };
-
-    if (options === 'data') {
-      return this.$el.data('chips');
+      this.chips = chips;
+      this.$document = $(document);
+      this.options = options;
+      this.eventsHandled = false;
+      this.ulWrapper = $('<ul class="chip-ul z-depth-1" tabindex="0"></ul>');
+      this.defaultOptions = {
+        data: [],
+        dataChip: [],
+        placeholder: '',
+        secondaryPlaceholder: ''
+      };
+      this.selectors = {
+        chips: '.chips',
+        chip: '.chip',
+        input: 'input',
+        delete: '.fas',
+        selectedChip: '.selected'
+      };
+      this.keyCodes = {
+        enter: 13,
+        backspace: 8,
+        delete: 46,
+        arrowLeft: 37,
+        arrowRight: 39,
+        comma: 188
+      };
+      this.init();
     }
 
-    if (options === 'options') {
-      return this.$el.data('options');
-    }
+    _createClass(MaterialChip, [{
+      key: "init",
+      value: function init() {
+        var _this = this;
 
-    this.$el.data('options', $.extend({}, this.defaultOptions, options));
+        this.optionsDataStatement();
+        this.assignOptions();
+        this.chips.each(function (index, element) {
+          var $this = $(element);
 
-    this.init = function () {
-      _this.$el.each(function (index, element) {
-        var $this = $(element);
+          if ($this.data('initialized')) {
+            return;
+          }
 
-        if ($this.data('initialized')) {
-          return;
+          var options = $this.data('options');
+
+          if (!options.data || !Array.isArray(options.data)) {
+            options.data = [];
+          }
+
+          $this.data('chips', options.data);
+          $this.data('index', index);
+          $this.data('initialized', true);
+          $this.attr('tabindex', 0);
+
+          if (!$this.hasClass(_this.selectors.chips)) {
+            $this.addClass('chips');
+          }
+
+          _this.renderChips($this);
+        });
+
+        if (!this.eventsHandled) {
+          this.handleEvents();
+          this.eventsHandled = true;
         }
 
-        var options = $this.data('options');
-
-        if (!options.data || !Array.isArray(options.data)) {
-          options.data = [];
+        return this;
+      }
+    }, {
+      key: "optionsDataStatement",
+      value: function optionsDataStatement() {
+        if (this.options === 'data') {
+          return this.chips.data('chips');
         }
 
-        $this.data('chips', options.data);
-        $this.data('index', index);
-        $this.data('initialized', true);
-
-        if (!$this.hasClass(_this.selectors.chips)) {
-          $this.addClass('chips');
+        if (this.options === 'options') {
+          return this.chips.data('options');
         }
 
-        _this.renderChips($this);
-      });
-    };
+        return true;
+      }
+    }, {
+      key: "assignOptions",
+      value: function assignOptions() {
+        this.chips.data('options', $.extend({}, this.defaultOptions, this.options));
+      }
+    }, {
+      key: "handleEvents",
+      value: function handleEvents() {
+        this.handleSelecorChips();
+        this.handleBlurInput();
+        this.handleSelectorChip();
+        this.handleDocumentKeyDown();
+        this.handleDocumentFocusIn();
+        this.handleDocumentFocusOut();
+        this.handleDocumentKeyDownChipsInput();
+        this.handleDocumentClickChipsDelete();
+        this.inputKeyDown();
+        this.renderedLiClick();
+        this.dynamicInputChanges();
+      }
+    }, {
+      key: "handleSelecorChips",
+      value: function handleSelecorChips() {
+        var _this2 = this;
 
-    this.handleEvents = function () {
-      var _this2 = this;
+        this.$document.on('click', this.selectors.chips, function (e) {
+          return $(e.target).find(_this2.selectors.input).focus().addClass('active');
+        });
+      }
+    }, {
+      key: "handleBlurInput",
+      value: function handleBlurInput() {
+        var _this3 = this;
 
-      this.$document.on('click', this.selectors.chips, function (e) {
-        $(e.target).find(_this2.selectors.input).focus();
-      });
-      this.$document.on('click', this.selectors.chip, function (e) {
-        $(_this2.selectors.chip).removeClass('selected');
-        $(e.target).addClass('selected');
-      });
-      this.$document.on('keydown', function (e) {
-        if ($(e.target).is('input, textarea')) {
-          return;
+        this.$document.on('blur', this.selectors.chips, function (e) {
+          setTimeout(function () {
+            return _this3.ulWrapper.removeClass('active').hide();
+          }, 100);
+          $(e.target).removeClass('active');
+          $('.chip.selected').removeClass('selected');
+        });
+      }
+    }, {
+      key: "handleSelectorChip",
+      value: function handleSelectorChip() {
+        this.chips.on('click', '.chip', function () {
+          $('.chip.selected').not(this).removeClass('selected');
+          $(this).toggleClass('selected');
+        });
+      }
+    }, {
+      key: "handleDocumentKeyDown",
+      value: function handleDocumentKeyDown() {
+        var _this4 = this;
+
+        this.chips.on('keydown', function (e) {
+          var $selectedChip = _this4.$document.find(_this4.selectors.chip + _this4.selectors.selectedChip);
+
+          var $chipsWrapper = $selectedChip.closest(_this4.selectors.chips);
+          var siblingsLength = $selectedChip.siblings(_this4.selectors.chip).length;
+
+          if (!$selectedChip.length) {
+            return;
+          }
+
+          var backspacePressed = e.which === _this4.keyCodes.backspace;
+          var deletePressed = e.which === _this4.keyCodes.delete;
+          var leftArrowPressed = e.which === _this4.keyCodes.arrowLeft;
+          var rightArrowPressed = e.which === _this4.keyCodes.arrowRight;
+
+          if (backspacePressed || deletePressed) {
+            e.preventDefault();
+
+            _this4.deleteSelectedChip($chipsWrapper, $selectedChip, siblingsLength);
+          } else if (leftArrowPressed) {
+            _this4.selectLeftChip($chipsWrapper, $selectedChip);
+          } else if (rightArrowPressed) {
+            _this4.selectRightChip($chipsWrapper, $selectedChip, siblingsLength);
+          }
+        });
+      }
+    }, {
+      key: "handleDocumentFocusIn",
+      value: function handleDocumentFocusIn() {
+        var _this5 = this;
+
+        var $chipsInput;
+        var $chips = this.chips;
+
+        if ($chips.hasClass('chips-autocomplete')) {
+          $chipsInput = $chips.children().children('input');
+        } else {
+          $chipsInput = $chips.children('input');
         }
 
-        var $selectedChip = _this2.$document.find(_this2.selectors.chip + _this2.selectors.selectedChip);
+        $chipsInput.on('click', function (e) {
+          var $target = $(e.target);
+          $target.closest(_this5.selectors.chips).addClass('focus');
+          $(_this5.selectors.chip).removeClass('selected');
+          $target.addClass('active');
+        });
+      }
+    }, {
+      key: "handleDocumentFocusOut",
+      value: function handleDocumentFocusOut() {
+        var _this6 = this;
 
-        var $chipsWrapper = $selectedChip.closest(_this2.selectors.chips);
-        var siblingsLength = $selectedChip.siblings(_this2.selectors.chip).length;
+        this.chips.on('focusout', 'input', function (e) {
+          return $(e.target).closest(_this6.selectors.chips).removeClass('focus');
+        });
+      }
+    }, {
+      key: "handleDocumentKeyDownChipsInput",
+      value: function handleDocumentKeyDownChipsInput() {
+        var _this7 = this;
 
-        if (!$selectedChip.length) {
-          return;
+        this.chips.on('keydown', 'input', function (e) {
+          var $target = $(e.target);
+          var $chips = _this7.chips;
+          var $chipsWrapper = $target.closest(_this7.selectors.chips);
+          var chipsIndex = $chipsWrapper.data('index');
+          var chipsLength = $chipsWrapper.children(_this7.selectors.chip).length;
+          var enterPressed = e.which === _this7.keyCodes.enter;
+          var commaPressed = e.which === _this7.keyCodes.comma;
+          var leftArrowPressed = e.which === _this7.keyCodes.arrowLeft;
+          var backspacePressed = e.which === _this7.keyCodes.backspace;
+
+          if ((enterPressed || commaPressed) && !_this7.ulWrapper.find('li').hasClass('selected')) {
+            e.preventDefault();
+
+            _this7.addChip(chipsIndex, {
+              tag: $target.val()
+            }, $chipsWrapper);
+
+            $target.val('');
+            return;
+          }
+
+          var leftArrowOrDeletePressed = e.keyCode === _this7.keyCodes.arrowLeft || e.keyCode === _this7.keyCodes.delete;
+          var isValueEmpty = $target.val() === '';
+
+          if (leftArrowOrDeletePressed && isValueEmpty && chipsLength) {
+            _this7.selectChip(chipsIndex, chipsLength - 1, $chipsWrapper);
+          }
+
+          if (isValueEmpty && $(_this7.selectors.input).hasClass('active')) {
+            if (leftArrowPressed) {
+              _this7.selectChip(chipsIndex, chipsLength - 1, $chipsWrapper);
+            }
+          } else {
+            $chips.find('.chip').removeClass('selected');
+          }
+
+          var $thisChips = $chips.find('.chip-position-wrapper').children('.chip');
+          var $thisChipsLast = $chips.find('.chip-position-wrapper .chip').last().index();
+
+          if (isValueEmpty && backspacePressed && (!$thisChips.hasClass('selected') || !$chips.find('.chip').hasClass('selected')) && $chips.hasClass('chips') && !$chips.hasClass('chips-initial') && !$chips.hasClass('chips-placeholder')) {
+            _this7.deleteChip($chipsWrapper.data('index'), $thisChipsLast, $chipsWrapper);
+          }
+
+          if (isValueEmpty && backspacePressed && !$chips.find('.chip').hasClass('selected') && $chips.hasClass('chips') && ($chips.hasClass('chips-initial') || $chips.hasClass('chips-placeholder'))) {
+            _this7.deleteChip($chipsWrapper.data('index'), $thisChipsLast, $chipsWrapper);
+          }
+        });
+      }
+    }, {
+      key: "handleDocumentClickChipsDelete",
+      value: function handleDocumentClickChipsDelete() {
+        var _this8 = this;
+
+        this.chips.on('click', '.chip .fas', function (e) {
+          var $target = $(e.target);
+          var $chip = $target.parent($(_this8.chips));
+          var $chipsWrapper;
+
+          if ($chip.parents().eq(1).hasClass('chips-autocomplete')) {
+            $chipsWrapper = $chip.parents().eq(1);
+          } else if (!$chip.parent().hasClass('chips-autocomplete') && !$chip.parents().eq(1).hasClass('chips-autocomplete')) {
+            $chipsWrapper = $chip.parents().eq(0);
+          } else if ($chip.parent().hasClass('chips-initial') && $chip.parent().hasClass('chips-autocomplete')) {
+            $chipsWrapper = $chip.parents().eq(0);
+          }
+
+          _this8.deleteChip($chipsWrapper.data('index'), $chip.index(), $chipsWrapper);
+
+          $chipsWrapper.find('input').focus();
+        });
+      }
+    }, {
+      key: "inputKeyDown",
+      value: function inputKeyDown() {
+        var _this9 = this;
+
+        var $ulWrapper = this.ulWrapper;
+        var dataChip = this.options.dataChip;
+        var $thisChips = this.chips;
+        var $input = $thisChips.children('.chip-position-wrapper').children('input');
+        $input.on('keyup', function (e) {
+          var $inputValue = $input.val();
+          $ulWrapper.empty();
+
+          if ($inputValue.length) {
+            for (var item in dataChip) {
+              if (dataChip[item].toLowerCase().includes($inputValue.toLowerCase())) {
+                $thisChips.children('.chip-position-wrapper').append($ulWrapper.append($("<li>".concat(dataChip[item], "</li>"))));
+              }
+            }
+          }
+
+          if (e.which === _this9.keyCodes.enter) {
+            $ulWrapper.empty();
+            $ulWrapper.remove();
+          }
+
+          $inputValue.length === 0 ? $ulWrapper.removeClass('active').hide() : $ulWrapper.addClass('active').show();
+        });
+      }
+    }, {
+      key: "dynamicInputChanges",
+      value: function dynamicInputChanges() {
+        var dataChip = this.options.dataChip;
+
+        if (dataChip !== undefined) {
+          this.chips.children('.chip-position-wrapper').children('input').on('change', function (e) {
+            var $targetVal = $(e.target).val();
+
+            if (!dataChip.includes($targetVal)) {
+              dataChip.push($targetVal);
+              dataChip.sort();
+            }
+          });
         }
+      }
+    }, {
+      key: "renderedLiClick",
+      value: function renderedLiClick() {
+        var _this10 = this;
 
-        var backspacePressed = e.which === _this2.keyCodes.backspace;
-        var deletePressed = e.which === _this2.keyCodes.delete;
-        var leftArrowPressed = e.which === _this2.keyCodes.arrowLeft;
-        var rightArrowPressed = e.which === _this2.keyCodes.arrowRight;
-
-        if (backspacePressed || deletePressed) {
+        this.chips.on('click', 'li', function (e) {
           e.preventDefault();
+          var $target = $(e.target);
+          var $chipsWrapper = $target.closest($(_this10.selectors.chips));
+          var chipsIndex = $chipsWrapper.data('index');
 
-          _this2.deleteSelectedChip($chipsWrapper, $selectedChip, siblingsLength);
-        } else if (leftArrowPressed) {
-          _this2.selectLeftChip($chipsWrapper, $selectedChip);
-        } else if (rightArrowPressed) {
-          _this2.selectRightChip($chipsWrapper, $selectedChip, siblingsLength);
-        }
-      });
-      this.$document.on('focusin', "".concat(this.selectors.chips, " ").concat(this.selectors.input), function (e) {
-        $(e.target).closest(_this2.selectors.chips).addClass('focus');
-        $(_this2.selectors.chip).removeClass('selected');
-      });
-      this.$document.on('focusout', "".concat(this.selectors.chips, " ").concat(this.selectors.input), function (e) {
-        $(e.target).closest(_this2.selectors.chips).removeClass('focus');
-      });
-      this.$document.on('keydown', "".concat(this.selectors.chips, " ").concat(this.selectors.input), function (e) {
-        var $target = $(e.target);
-        var $chipsWrapper = $target.closest(_this2.selectors.chips);
-        var chipsIndex = $chipsWrapper.data('index');
-        var chipsLength = $chipsWrapper.children(_this2.selectors.chip).length;
-        var enterPressed = e.which === _this2.keyCodes.enter;
-
-        if (enterPressed) {
-          e.preventDefault();
-
-          _this2.addChip(chipsIndex, {
-            tag: $target.val()
+          _this10.addChip(chipsIndex, {
+            tag: $target.text()
           }, $chipsWrapper);
 
-          $target.val('');
+          _this10.chips.children('.chip-position-wrapper').children('input').val('');
+
+          _this10.ulWrapper.remove();
+        });
+      }
+    }, {
+      key: "deleteSelectedChip",
+      value: function deleteSelectedChip($chipsWrapper, $selectedChip, siblingsLength) {
+        var chipsIndex = $chipsWrapper.data('index');
+        var chipIndex = $selectedChip.index();
+        this.deleteChip(chipsIndex, chipIndex, $chipsWrapper);
+        var selectIndex = null;
+
+        if (chipIndex < siblingsLength - 1) {
+          selectIndex = chipIndex;
+        } else if (chipIndex === siblingsLength || chipIndex === siblingsLength - 1) {
+          selectIndex = siblingsLength - 1;
+        }
+
+        if (selectIndex < 0) {
+          selectIndex = null;
+        }
+
+        if (selectIndex !== null) {
+          this.selectChip(chipsIndex, selectIndex, $chipsWrapper);
+        }
+
+        if (!siblingsLength) {
+          $chipsWrapper.find('input').focus();
+        }
+      }
+    }, {
+      key: "selectLeftChip",
+      value: function selectLeftChip($chipsWrapper, $selectedChip) {
+        var chipIndex = $selectedChip.index() - 1;
+
+        if (chipIndex < 0) {
           return;
         }
 
-        var leftArrowOrDeletePressed = e.keyCode === _this2.keyCodes.arrowLeft || e.keyCode === _this2.keyCodes.delete;
-        var isValueEmpty = $target.val() === '';
+        $(this.selectors.chip).removeClass('selected');
+        this.selectChip($chipsWrapper.data('index'), chipIndex, $chipsWrapper);
+      }
+    }, {
+      key: "selectRightChip",
+      value: function selectRightChip($chipsWrapper, $selectedChip, siblingsLength) {
+        var chipIndex = $selectedChip.index() + 1;
+        $(this.selectors.chip).removeClass('selected');
 
-        if (leftArrowOrDeletePressed && isValueEmpty && chipsLength) {
-          _this2.selectChip(chipsIndex, chipsLength - 1, $chipsWrapper);
-
-          $target.blur();
+        if (chipIndex > siblingsLength) {
+          $chipsWrapper.find('input').focus();
+          return;
         }
-      });
-      this.$document.on('click', "".concat(this.selectors.chips, " ").concat(this.selectors.delete), function (e) {
-        var $target = $(e.target);
-        var $chipsWrapper = $target.closest(_this2.selectors.chips);
-        var $chip = $target.closest(_this2.selectors.chip);
-        e.stopPropagation();
 
-        _this2.deleteChip($chipsWrapper.data('index'), $chip.index(), $chipsWrapper);
-
-        $chipsWrapper.find('input').focus();
-      });
-    };
-
-    this.deleteSelectedChip = function ($chipsWrapper, $selectedChip, siblingsLength) {
-      var chipsIndex = $chipsWrapper.data('index');
-      var chipIndex = $selectedChip.index();
-
-      _this.deleteChip(chipsIndex, chipIndex, $chipsWrapper);
-
-      var selectIndex = null;
-
-      if (chipIndex < siblingsLength - 1) {
-        selectIndex = chipIndex;
-      } else if (chipIndex === siblingsLength || chipIndex === siblingsLength - 1) {
-        selectIndex = siblingsLength - 1;
+        this.selectChip($chipsWrapper.data('index'), chipIndex, $chipsWrapper);
       }
+    }, {
+      key: "renderChips",
+      value: function renderChips($chipsWrapper) {
+        var _this11 = this;
 
-      if (selectIndex < 0) {
-        selectIndex = null;
+        var html = '';
+        $chipsWrapper.data('chips').forEach(function (elem) {
+          html += _this11.getSingleChipHtml(elem);
+        });
+
+        if ($chipsWrapper.hasClass('chips-autocomplete')) {
+          html += '<span class="chip-position-wrapper position-relative"><input class="input" placeholder=""></span>';
+        } else {
+          html += '<input class="input" placeholder="">';
+        }
+
+        $chipsWrapper.html(html);
+        this.setPlaceholder($chipsWrapper);
       }
+    }, {
+      key: "getSingleChipHtml",
+      value: function getSingleChipHtml(elem) {
+        if (!elem.tag) {
+          return '';
+        }
 
-      if (selectIndex !== null) {
-        _this.selectChip(chipsIndex, selectIndex, $chipsWrapper);
+        var html = "<div class=\"chip\">".concat(elem.tag);
+
+        if (elem.image) {
+          html += " <img src=\"".concat(elem.image, "\"> ");
+        }
+
+        html += '<i class="close fas fa-times"></i>';
+        html += '</div>';
+        return html;
       }
+    }, {
+      key: "setPlaceholder",
+      value: function setPlaceholder($chips) {
+        var options = $chips.data('options');
 
-      if (!siblingsLength) {
-        $chipsWrapper.find('input').focus();
-      }
-    };
-
-    this.selectLeftChip = function ($chipsWrapper, $selectedChip) {
-      var chipIndex = $selectedChip.index() - 1;
-
-      if (chipIndex < 0) {
-        return;
-      }
-
-      $(_this.selectors.chip).removeClass('selected');
-
-      _this.selectChip($chipsWrapper.data('index'), chipIndex, $chipsWrapper);
-    };
-
-    this.selectRightChip = function ($chipsWrapper, $selectedChip, siblingsLength) {
-      var chipIndex = $selectedChip.index() + 1;
-      $(_this.selectors.chip).removeClass('selected');
-
-      if (chipIndex > siblingsLength) {
-        $chipsWrapper.find('input').focus();
-        return;
-      }
-
-      _this.selectChip($chipsWrapper.data('index'), chipIndex, $chipsWrapper);
-    };
-
-    this.renderChips = function ($chipsWrapper) {
-      var html = '';
-      $chipsWrapper.data('chips').forEach(function (elem) {
-        html += _this.getSingleChipHtml(elem);
-      });
-      html += '<input class="input" placeholder="">';
-      $chipsWrapper.html(html);
-
-      _this.setPlaceholder($chipsWrapper);
-    };
-
-    this.getSingleChipHtml = function (elem) {
-      if (!elem.tag) {
-        return '';
-      }
-
-      var html = "<div class=\"chip\">".concat(elem.tag);
-
-      if (elem.image) {
-        html += " <img src=\"".concat(elem.image, "\"> ");
-      }
-
-      html += '<i class="close fas fa-times"></i>';
-      html += '</div>';
-      return html;
-    };
-
-    this.setPlaceholder = function ($chips) {
-      var options = $chips.data('options');
-
-      if ($chips.data('chips').length && options.placeholder) {
-        $chips.find('input').prop('placeholder', options.placeholder);
-      } else if (!$chips.data('chips').length && options.secondaryPlaceholder) {
-        $chips.find('input').prop('placeholder', options.secondaryPlaceholder);
-      }
-    };
-
-    this.isValid = function ($chipsWrapper, elem) {
-      var chips = $chipsWrapper.data('chips');
-
-      for (var i = 0; i < chips.length; i++) {
-        if (chips[i].tag === elem.tag) {
-          return false;
+        if ($chips.data('chips').length && options.placeholder) {
+          $chips.find('input').prop('placeholder', options.placeholder);
+        } else if (!$chips.data('chips').length && options.secondaryPlaceholder) {
+          $chips.find('input').prop('placeholder', options.secondaryPlaceholder);
         }
       }
+    }, {
+      key: "isValid",
+      value: function isValid($chipsWrapper, elem) {
+        var chips = $chipsWrapper.data('chips');
 
-      return elem.tag !== '';
-    };
+        for (var i = 0; i < chips.length; i++) {
+          if (chips[i].tag === elem.tag) {
+            return false;
+          }
+        }
 
-    this.addChip = function (chipsIndex, elem, $chipsWrapper) {
-      if (!_this.isValid($chipsWrapper, elem)) {
-        return;
+        return elem.tag !== '';
       }
+    }, {
+      key: "addChip",
+      value: function addChip(chipsIndex, elem, $chipsWrapper) {
+        if (!this.isValid($chipsWrapper, elem)) {
+          return;
+        }
 
-      var chipHtml = _this.getSingleChipHtml(elem);
+        var $chipHtml = $(this.getSingleChipHtml(elem));
+        $chipsWrapper.data('chips').push(elem);
 
-      $chipsWrapper.data('chips').push(elem);
-      $(chipHtml).insertBefore($chipsWrapper.find('input'));
-      $chipsWrapper.trigger('chip.add', elem);
+        if ($chipsWrapper.hasClass('chips-autocomplete') && $chipsWrapper.hasClass('chips-initial') && $chipsWrapper.find('.chip').length > 0) {
+          $chipHtml.insertAfter($chipsWrapper.find('.chip').last());
+        } else {
+          $chipHtml.insertBefore($chipsWrapper.find('input'));
+        }
 
-      _this.setPlaceholder($chipsWrapper);
-    };
-
-    this.deleteChip = function (chipsIndex, chipIndex, $chipsWrapper) {
-      var chip = $chipsWrapper.data('chips')[chipIndex];
-      $chipsWrapper.find('.chip').eq(chipIndex).remove();
-      $chipsWrapper.data('chips').splice(chipIndex, 1);
-      $chipsWrapper.trigger('chip.delete', chip);
-
-      _this.setPlaceholder($chipsWrapper);
-    };
-
-    this.selectChip = function (chipsIndex, chipIndex, $chipsWrapper) {
-      var $chip = $chipsWrapper.find('.chip').eq(chipIndex);
-
-      if ($chip && $chip.hasClass('selected') === false) {
-        $chip.addClass('selected');
-        $chipsWrapper.trigger('chip.select', $chipsWrapper.data('chips')[chipIndex]);
+        $chipsWrapper.trigger('chip.add', elem);
+        this.setPlaceholder($chipsWrapper);
       }
-    };
+    }, {
+      key: "deleteChip",
+      value: function deleteChip(chipsIndex, chipIndex, $chipsWrapper) {
+        var chip = $chipsWrapper.data('chips')[chipIndex];
+        $chipsWrapper.find('.chip').eq(chipIndex).remove();
+        $chipsWrapper.data('chips').splice(chipIndex, 1);
+        $chipsWrapper.trigger('chip.delete', chip);
+        this.setPlaceholder($chipsWrapper);
+      }
+    }, {
+      key: "selectChip",
+      value: function selectChip(chipsIndex, chipIndex, $chipsWrapper) {
+        var $chip = $chipsWrapper.find('.chip').eq(chipIndex);
 
-    this.getChipsElement = function (index, $chipsWrapper) {
-      return $chipsWrapper.eq(index);
-    };
+        if ($chip && $chip.hasClass('selected') === false) {
+          $chip.addClass('selected');
+          $chipsWrapper.trigger('chip.select', $chipsWrapper.data('chips')[chipIndex]);
+        }
+      }
+    }, {
+      key: "getChipsElement",
+      value: function getChipsElement(index, $chipsWrapper) {
+        return $chipsWrapper.eq(index);
+      }
+    }]);
 
-    this.init();
+    return MaterialChip;
+  }();
 
-    if (!this.eventsHandled) {
-      this.handleEvents();
-      this.eventsHandled = true;
-    }
-
-    return this;
-  }; // Deprecated. To be deleted in future releases
-
-
-  $.fn.material_chip = $.fn.materialChip;
+  $.fn.materialChip = function (options) {
+    return this.each(function () {
+      new MaterialChip($(this), options);
+    });
+  };
 })(jQuery);
 /*! npm.im/object-fit-images 3.2.4 */
 var objectFitImages = (function () {
@@ -26966,15 +23867,19 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 (function ($) {
-  var INPUT_DATA = {};
-  var DATA_COLOR = '';
-  var BUTTON_X_COLOR = '';
-  var BUTTON_X_BLUR_COLOR = '#ced4da';
-  var INPUT_FOCUS = '1px solid #4285f4';
-  var INPUT_BLUR = '1px solid #ced4da';
-  var INPUT_FOCUS_SHADOW = '0 1px 0 0 #4285f4';
-  var INPUT_BLUR_SHADOW = '';
-  var ENTER_CHAR_CODE = 13;
+  var inputData = {};
+  var dataColor = '';
+  var buttonCloseColor = '';
+  var buttonCloseBlurColor = '#ced4da';
+  var inputFocus = '1px solid #4285f4';
+  var inputBlur = '1px solid #ced4da';
+  var inputFocusShadow = '0 1px 0 0 #4285f4';
+  var inputBlurShadow = '';
+  var enterCharCode = 13;
+  var arrowUpCharCode = 38;
+  var arrowDownCharCode = 40;
+  var count = -1;
+  var nextScrollHeight = -45;
 
   var mdbAutocomplete =
   /*#__PURE__*/
@@ -26983,14 +23888,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _classCallCheck(this, mdbAutocomplete);
 
       this.defaults = {
-        data: INPUT_DATA,
-        dataColor: DATA_COLOR,
-        xColor: BUTTON_X_COLOR,
-        xBlurColor: BUTTON_X_BLUR_COLOR,
-        inputFocus: INPUT_FOCUS,
-        inputBlur: INPUT_BLUR,
-        inputFocusShadow: INPUT_FOCUS_SHADOW,
-        inputBlurShadow: INPUT_BLUR_SHADOW
+        data: inputData,
+        dataColor: dataColor,
+        closeColor: buttonCloseColor,
+        closeBlurColor: buttonCloseBlurColor,
+        inputFocus: inputFocus,
+        inputBlur: inputBlur,
+        inputFocusShadow: inputFocusShadow,
+        inputBlurShadow: inputBlurShadow
       };
       this.$input = input;
       this.options = this.assignOptions(options);
@@ -27011,8 +23916,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }
     }, {
       key: "assignOptions",
-      value: function assignOptions(newOptions) {
-        return $.extend({}, this.defaults, newOptions);
+      value: function assignOptions(options) {
+        return $.extend({}, this.defaults, options);
       }
     }, {
       key: "setData",
@@ -27049,6 +23954,22 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         var _this3 = this;
 
         this.$input.on('keyup', function (e) {
+          if (e.which === enterCharCode) {
+            if (!_this3.options.data.includes(_this3.$input.val())) {
+              _this3.options.data.push(_this3.$input.val());
+            }
+
+            _this3.$autocompleteWrap.find('.selected').trigger('click');
+
+            _this3.$autocompleteWrap.empty();
+
+            _this3.inputBlur();
+
+            count = -1;
+            nextScrollHeight = -45;
+            return count;
+          }
+
           var $inputValue = _this3.$input.val();
 
           _this3.$autocompleteWrap.empty();
@@ -27061,21 +23982,51 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                 _this3.$autocompleteWrap.append(option);
               }
             }
-          }
 
-          if (e.which === ENTER_CHAR_CODE) {
-            _this3.$autocompleteWrap.children(':first').trigger('click');
+            var $ulList = _this3.$autocompleteWrap;
 
-            _this3.$autocompleteWrap.empty();
-          }
+            var $ulItems = _this3.$autocompleteWrap.find('li');
 
-          if ($inputValue.length === 0) {
-            _this3.$input.parent().find('.mdb-autocomplete-clear').css('visibility', 'hidden');
+            var nextItemHeight = $ulItems.eq(count).outerHeight();
+            var previousItemHeight = $ulItems.eq(count - 1).outerHeight();
+
+            if (e.which === arrowDownCharCode) {
+              if (count > $ulItems.length - 2) {
+                count = -1;
+                $ulItems.scrollTop(0);
+                nextScrollHeight = -45;
+                return;
+              } else {
+                count++;
+              }
+
+              nextScrollHeight += nextItemHeight;
+              $ulList.scrollTop(nextScrollHeight);
+              $ulItems.eq(count).addClass('selected');
+            } else if (e.which === arrowUpCharCode) {
+              if (count < 1) {
+                count = $ulItems.length;
+                $ulList.scrollTop($ulList.prop('scrollHeight'));
+                nextScrollHeight = $ulList.prop('scrollHeight') - nextItemHeight;
+              } else {
+                count--;
+              }
+
+              nextScrollHeight -= previousItemHeight;
+              $ulList.scrollTop(nextScrollHeight);
+              $ulItems.eq(count).addClass('selected');
+            }
+
+            if ($inputValue.length === 0) {
+              _this3.$clearButton.css('visibility', 'hidden');
+            } else {
+              _this3.$clearButton.css('visibility', 'visible');
+            }
+
+            _this3.$autocompleteWrap.children().css('color', _this3.options.dataColor);
           } else {
-            _this3.$input.parent().find('.mdb-autocomplete-clear').css('visibility', 'visible');
+            _this3.$clearButton.css('visibility', 'hidden');
           }
-
-          _this3.$autocompleteWrap.children().css('color', _this3.options.dataColor);
         });
       }
     }, {
@@ -27097,6 +24048,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         var _this5 = this;
 
         this.$clearButton.on('click', function (e) {
+          count = -1;
+          nextScrollHeight = -45;
           e.preventDefault();
           var $this = $(e.currentTarget);
           $this.parent().find('.mdb-autocomplete').val('');
@@ -27110,14 +24063,16 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     }, {
       key: "changeSVGcolors",
       value: function changeSVGcolors() {
+        var _this6 = this;
+
         if (this.$input.hasClass('mdb-autocomplete')) {
           this.$input.on('click keyup', function (e) {
             e.preventDefault();
-            $(e.target).parent().find('.mdb-autocomplete-clear').find('svg').css('fill', xColor);
+            $(e.target).parent().find('.mdb-autocomplete-clear').find('svg').css('fill', _this6.options.closeColor);
           });
           this.$input.on('blur', function (e) {
             e.preventDefault();
-            $(e.target).parent().find('.mdb-autocomplete-clear').find('svg').css('fill', xBlurColor);
+            $(e.target).parent().find('.mdb-autocomplete-clear').find('svg').css('fill', _this6.options.closeBlurColor);
           });
         }
       }
@@ -27130,10 +24085,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     return this.each(function () {
       new mdbAutocomplete($(this), options);
     });
-  }; //deprecated, delete soon
-
-
-  $.fn.mdb_autocomplete = $.fn.mdbAutocomplete;
+  };
 })(jQuery);
 /*
     Enhanced Bootstrap Modals
@@ -27174,21 +24126,194 @@ for (i = 0; i < toggler.length; i++) {
     this.classList.toggle("down");
   });
 }
-"use strict";
 
 (function ($) {
-  $('.input-default-wrapper').on('change', '.input-default-js', function (e) {
-    var $this = $(e.target),
-        $label = $this.next('label'),
-        $files = $this[0].files;
-    var fileName = '';
-
-    if ($files && $files.length > 1) {
-      fileName = ($this.attr('data-multiple-target') || '').replace('{target}', $files.length);
-    } else if (e.target.value) {
-      fileName = e.target.value.split('\\').pop();
-    }
-
-    fileName ? $label.find('.span-choose-file').html(fileName) : $label.html($label.html());
+  var $allPanels = $('.treeview-animated .nested').hide();
+  var $elements = $('.treeview-animated-element');
+  $('.closed').click(function () {
+    $this = $(this);
+    $target = $this.siblings('.treeview-animated .nested');
+    $pointer = $this.children('.treeview-animated .fa-angle-right');
+    $this.toggleClass('open');
+    $pointer.toggleClass('down');
+    !$target.hasClass('active') ? $target.addClass('active').slideDown() : $target.removeClass('active').slideUp();
+    return false;
+  });
+  $elements.click(function () {
+    $this = $(this);
+    $this.hasClass('opened') ? $this.removeClass('opened') : ($elements.removeClass('opened'), $this.addClass('opened'));
   });
 })(jQuery);
+/*!
+ * bsCustomFileInput v1.3.2 (https://github.com/Johann-S/bs-custom-file-input)
+ * Copyright 2018 - 2019 Johann-S <johann.servoire@gmail.com>
+ * Licensed under MIT (https://github.com/Johann-S/bs-custom-file-input/blob/master/LICENSE)
+ */
+(function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+    typeof define === 'function' && define.amd ? define(factory) :
+    (global = global || self, global.bsCustomFileInput = factory());
+}(this, function () {
+  'use strict';
+
+  var Selector = {
+    CUSTOMFILE: '.custom-file input[type="file"]',
+    CUSTOMFILELABEL: '.custom-file-label',
+    FORM: 'form',
+    INPUT: 'input'
+  };
+
+  var textNodeType = 3;
+
+  var getDefaultText = function getDefaultText(input) {
+    var defaultText = '';
+    var label = input.parentNode.querySelector(Selector.CUSTOMFILELABEL);
+
+    if (label) {
+      defaultText = label.innerHTML;
+    }
+
+    return defaultText;
+  };
+
+  var findFirstChildNode = function findFirstChildNode(element) {
+    if (element.childNodes.length > 0) {
+      var childNodes = [].slice.call(element.childNodes);
+
+      for (var i = 0; i < childNodes.length; i++) {
+        var node = childNodes[i];
+
+        if (node.nodeType !== textNodeType) {
+          return node;
+        }
+      }
+    }
+
+    return element;
+  };
+
+  var restoreDefaultText = function restoreDefaultText(input) {
+    var defaultText = input.bsCustomFileInput.defaultText;
+    var label = input.parentNode.querySelector(Selector.CUSTOMFILELABEL);
+
+    if (label) {
+      var element = findFirstChildNode(label);
+      element.innerHTML = defaultText;
+    }
+  };
+
+  var fileApi = !!window.File;
+  var FAKE_PATH = 'fakepath';
+  var FAKE_PATH_SEPARATOR = '\\';
+
+  var getSelectedFiles = function getSelectedFiles(input) {
+    if (input.hasAttribute('multiple') && fileApi) {
+      return [].slice.call(input.files).map(function (file) {
+        return file.name;
+      }).join(', ');
+    }
+
+    if (input.value.indexOf(FAKE_PATH) !== -1) {
+      var splittedValue = input.value.split(FAKE_PATH_SEPARATOR);
+      return splittedValue[splittedValue.length - 1];
+    }
+
+    return input.value;
+  };
+
+  function handleInputChange() {
+    var label = this.parentNode.querySelector(Selector.CUSTOMFILELABEL);
+
+    if (label) {
+      var element = findFirstChildNode(label);
+      var inputValue = getSelectedFiles(this);
+
+      if (inputValue.length) {
+        element.innerHTML = inputValue;
+      } else {
+        restoreDefaultText(this);
+      }
+    }
+  }
+
+  function handleFormReset() {
+    var customFileList = [].slice.call(this.querySelectorAll(Selector.INPUT)).filter(function (input) {
+      return !!input.bsCustomFileInput;
+    });
+
+    for (var i = 0, len = customFileList.length; i < len; i++) {
+      restoreDefaultText(customFileList[i]);
+    }
+  }
+
+  var customProperty = 'bsCustomFileInput';
+  var Event = {
+    FORMRESET: 'reset',
+    INPUTCHANGE: 'change'
+  };
+  var bsCustomFileInput = {
+    init: function init(inputSelector, formSelector) {
+      if (inputSelector === void 0) {
+        inputSelector = Selector.CUSTOMFILE;
+      }
+
+      if (formSelector === void 0) {
+        formSelector = Selector.FORM;
+      }
+
+      var customFileInputList = [].slice.call(document.querySelectorAll(inputSelector));
+      var formList = [].slice.call(document.querySelectorAll(formSelector));
+
+      for (var i = 0, len = customFileInputList.length; i < len; i++) {
+        var input = customFileInputList[i];
+        Object.defineProperty(input, customProperty, {
+          value: {
+            defaultText: getDefaultText(input)
+          },
+          writable: true
+        });
+        handleInputChange.call(input);
+        input.addEventListener(Event.INPUTCHANGE, handleInputChange);
+      }
+
+      for (var _i = 0, _len = formList.length; _i < _len; _i++) {
+        formList[_i].addEventListener(Event.FORMRESET, handleFormReset);
+
+        Object.defineProperty(formList[_i], customProperty, {
+          value: true,
+          writable: true
+        });
+      }
+    },
+    destroy: function destroy() {
+      var formList = [].slice.call(document.querySelectorAll(Selector.FORM)).filter(function (form) {
+        return !!form.bsCustomFileInput;
+      });
+      var customFileInputList = [].slice.call(document.querySelectorAll(Selector.INPUT)).filter(function (input) {
+        return !!input.bsCustomFileInput;
+      });
+
+      for (var i = 0, len = customFileInputList.length; i < len; i++) {
+        var input = customFileInputList[i];
+        restoreDefaultText(input);
+        input[customProperty] = undefined;
+        input.removeEventListener(Event.INPUTCHANGE, handleInputChange);
+      }
+
+      for (var _i2 = 0, _len2 = formList.length; _i2 < _len2; _i2++) {
+        formList[_i2].removeEventListener(Event.FORMRESET, handleFormReset);
+
+        formList[_i2][customProperty] = undefined;
+      }
+    }
+  };
+
+  return bsCustomFileInput;
+
+}));
+//# sourceMappingURL=bs-custom-file-input.js.map
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  bsCustomFileInput.init()
+});
