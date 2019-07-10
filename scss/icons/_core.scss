@@ -1,6 +1,13 @@
 // Base Class Definition
 // -------------------------
 
+.fa:before, .fal:before, .far:before, .fas:before {
+  font-family: 'FontAwesome5';
+}
+.fab:before {
+  font-family: 'FontAwesome5Brands';
+}
+
 .#{$fa-css-prefix},
 .fas,
 .far,
