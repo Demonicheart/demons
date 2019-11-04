@@ -72,8 +72,7 @@ $(function () { $("#myModal").on("shown.bs.modal",function(){$("#myInput").focus
 
 
 /* ========================== select ========================= */
-$(function () { $(".mdb-select").material_select()});
-
+$(function () { $(".mdb-select").materialSelect()});
 /* ====================  Toogle--Tooltip  ==================== */
 $(function () { $('[data-toggle="tooltip"]').tooltip() });
 
@@ -180,6 +179,6 @@ if (isAndroid) {
 $('select.form-control').removeClass('form-control').css('width', '100%')}});
 
  /* ===================== console -- log ===================== */
-new WOW().init();console.log('%c 📑 page ★ loaded 🎌 ', 'color: #303f9f; font-weight: bold;');
+new WOW().init();console.log('%c 📑 page ★ loaded 🎌 ', 'color: #303f9f; font-family: sans-serif;font-weight: 700;text-shadow: #000 1px 1px;');
 /*$('head').append('<link href="style2.css" rel="stylesheet" />');*/
 /* setTimeout(function(){new WOW().init();}*/

@@ -1299,8 +1299,9 @@ h1.method1 {
 .intro-page .navbar:not(.top-nav-collapse) {
   background-color: transparent !important; }
 
-html, body, header, .jarallax {
-  height: 100%; }
+.full-height, .jarallax, body, header, html {
+    height:100%;height:100vh;
+}
 
 @media (min-width: 560px) and (max-width: 740px) {
   html, body, header, .jarallax {

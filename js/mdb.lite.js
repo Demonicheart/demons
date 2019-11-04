@@ -1,6 +1,6 @@
 /* !
  * Material Design for Bootstrap 4
- * Version: MDB Lite 4.8.4
+ * Version: MDB Lite 4.8.11
  *
  *
  * Copyright: Material Design for Bootstrap
@@ -439,215 +439,125 @@ document.addEventListener("DOMContentLoaded", function () {
   bsCustomFileInput.init()
 });
 
-'use strict';
+"use strict";
 
 var WOW;
 
 (function ($) {
-
   WOW = function WOW() {
-
     return {
-
       init: function init() {
-
         var animationName = [];
-
+        var $selector = $('.wow');
+        var defaultOffset = 100;
         var once = 1;
 
         function mdbWow() {
-
           var windowHeight = window.innerHeight;
           var scroll = window.scrollY;
+          $selector.each(function () {
+            var $this = $(this);
+            var index = $this.index('.wow');
+            var iteration = $this.data('wow-iteration');
+            var duration = $this.data('wow-duration');
+            var delay = $this.data('wow-delay');
+            var removeTime = $this.css('animation-duration').slice(0, -1) * 1000;
 
-          $('.wow').each(function () {
-
-            if ($(this).css('visibility') == 'visible') {
+            if ($this.css('visibility') === 'visible') {
               return;
             }
 
-            if (windowHeight + scroll - 100 > getOffset(this) && scroll < getOffset(this) || windowHeight + scroll - 100 > getOffset(this) + $(this).height() && scroll < getOffset(this) + $(this).height() || windowHeight + scroll == $(document).height() && getOffset(this) + 100 > $(document).height()) {
-
-              var index = $(this).index('.wow');
-
-              var delay = $(this).attr('data-wow-delay');
-
+            if (windowHeight + scroll - defaultOffset > getOffset(this) && scroll < getOffset(this) || windowHeight + scroll - defaultOffset > getOffset(this) + $this.height() && scroll < getOffset(this) + $this.height() || windowHeight + scroll === $(document).height() && getOffset(this) + defaultOffset > $(document).height()) {
               if (delay) {
-
-                delay = $(this).attr('data-wow-delay').slice(0, -1
-
-                );
-                var self = this;
-
-                var timeout = parseFloat(delay) * 1000;
-
-                $(self).addClass('animated');
-                $(self).css({
-                  'visibility': 'visible'
-                });
-                $(self).css({
-                  'animation-delay': delay
-                });
-                $(self).css({
-                  'animation-name': animationName[index]
-                });
-
-                var removeTime = $(this).css('animation-duration').slice(0, -1) * 1000;
-
-                if ($(this).attr('data-wow-delay')) {
-
-                  removeTime += $(this).attr('data-wow-delay').slice(0, -1) * 1000;
-                }
-
-                var self = this;
-
-                setTimeout(function () {
-
-                  $(self).removeClass('animated');
-                }, removeTime);
-              } else {
-
-                $(this).addClass('animated');
-                $(this).css({
-                  'visibility': 'visible'
-                });
-                $(this).css({
-                  'animation-name': animationName[index]
-                });
-
-                var removeTime = $(this).css('animation-duration').slice(0, -1) * 1000;
-
-                var self = this;
-
-                setTimeout(function () {
-
-                  $(self).removeClass('animated');
-                }, removeTime);
+                delay = $this.data('wow-delay').slice(0, -1);
+                removeTime += $this.data('wow-delay') ? $this.data('wow-delay').slice(0, -1) * 1000 : false;
               }
+
+              if (duration) {
+                duration = $this.data('wow-duration').slice(0, -1);
+                removeTime = $this.css('animation-duration').slice(0, -1) * 1000 + $this.data('wow-duration').slice(0, -1) * 1000;
+              }
+
+              setTimeout(function () {
+                return $this.removeClass('animated');
+              }, removeTime);
+              $this.addClass('animated');
+              $this.css({
+                visibility: 'visible',
+                'animation-name': animationName[index],
+                'animation-iteration-count': iteration ? iteration : 1,
+                'animation-duration': duration ? duration : false,
+                'animation-delay': delay ? "".concat(delay, "s") : false
+              });
             }
           });
         }
 
         function appear() {
-
-          $('.wow').each(function () {
-
-            var index = $(this).index('.wow');
-
-            var delay = $(this).attr('data-wow-delay');
-
-            if (delay) {
-
-              delay = $(this).attr('data-wow-delay').slice(0, -1);
-
-              var timeout = parseFloat(delay) * 1000;
-
-              $(this).addClass('animated');
-              $(this).css({
-                'visibility': 'visible'
-              });
-              $(this).css({
-                'animation-delay': delay + 's'
-              });
-              $(this).css({
-                'animation-name': animationName[index]
-              });
-            } else {
-
-              $(this).addClass('animated');
-              $(this).css({
-                'visibility': 'visible'
-              });
-              $(this).css({
-                'animation-name': animationName[index]
-              });
-            }
+          $selector.each(function () {
+            var $this = $(this);
+            var index = $this.index('.wow');
+            var iteration = $this.data('wow-iteration');
+            var duration = $this.data('wow-duration');
+            var delay = $this.data('wow-delay');
+            delay = delay ? $this.data('wow-delay').slice(0, -1) : false;
+            $this.addClass('animated');
+            $this.css({
+              visibility: 'visible',
+              'animation-name': animationName[index],
+              'animation-iteration-count': iteration ? iteration : 1,
+              'animation-duration': duration ? duration : false,
+              'animation-delay': delay ? "".concat(delay, "s") : false
+            });
           });
         }
 
         function hide() {
-
           var windowHeight = window.innerHeight;
           var scroll = window.scrollY;
-
           $('.wow.animated').each(function () {
+            var $this = $(this);
 
-            if (windowHeight + scroll - 100 > getOffset(this) && scroll > getOffset(this) + 100 || windowHeight + scroll - 100 < getOffset(this) && scroll < getOffset(this) + 100 || getOffset(this) + $(this).height > $(document).height() - 100) {
-
-              $(this).removeClass('animated');
-              $(this).css({
-                'animation-name': 'none'
+            if (windowHeight + scroll - defaultOffset > getOffset(this) && scroll > getOffset(this) + defaultOffset || windowHeight + scroll - defaultOffset < getOffset(this) && scroll < getOffset(this) + defaultOffset || getOffset(this) + $this.height > $(document).height() - defaultOffset) {
+              $this.removeClass('animated');
+              $this.css({
+                'animation-name': 'none',
+                visibility: 'hidden'
               });
-              $(this).css({
-                'visibility': 'hidden'
-              });
-            } else {
-
-              var removeTime = $(this).css('animation-duration').slice(0, -1) * 1000;
-
-              if ($(this).attr('data-wow-delay')) {
-
-                removeTime += $(this).attr('data-wow-delay').slice(0, -1) * 1000;
-              }
-
-              var self = this;
-
-              setTimeout(function () {
-
-                $(self).removeClass('animated');
-              }, removeTime);
             }
           });
-
           mdbWow();
-
           once--;
         }
 
         function getOffset(elem) {
-
           var box = elem.getBoundingClientRect();
-
           var body = document.body;
           var docEl = document.documentElement;
-
           var scrollTop = window.pageYOffset || docEl.scrollTop || body.scrollTop;
-
           var clientTop = docEl.clientTop || body.clientTop || 0;
-
           var top = box.top + scrollTop - clientTop;
-
           return Math.round(top);
         }
 
-        $('.wow').each(function () {
-
-          $(this).css({
-            'visibility': 'hidden'
-          });
-          animationName[$(this).index('.wow')] = $(this).css('animation-name');
-          $(this).css({
+        $selector.each(function () {
+          var $this = $(this);
+          animationName[$this.index('.wow')] = $this.css('animation-name');
+          $this.css({
+            visibility: 'hidden',
             'animation-name': 'none'
           });
         });
-
         $(window).scroll(function () {
-
-          if (once) {
-
-            hide();
-          } else {
-
-            mdbWow();
-          }
+          return once ? hide() : mdbWow();
         });
-
         appear();
       }
     };
   };
-})(jQuery);
 
+  return WOW;
+})(jQuery);
 "use strict";
 
 (function ($) {
@@ -673,600 +583,607 @@ var WOW;
  * https://github.com/fians/Waves/blob/master/LICENSE
  */
 
-;(function(window, factory) {
-    'use strict';
 
-    // AMD. Register as an anonymous module.  Wrap in function so we have access
-    // to root via `this`.
-    if (typeof define === 'function' && define.amd) {
-        define([], function() {
-            window.Waves = factory.call(window);
-            return window.Waves;
-        });
+(function (window, factory) {
+  'use strict';
+
+  // AMD. Register as an anonymous module.  Wrap in function so we have access
+  // to root via `this`.
+  if (typeof define === 'function' && define.amd) {
+    define([], function () {
+      window.Waves = factory.call(window);
+      return window.Waves;
+    });
+  }
+
+  // Node. Does not work with strict CommonJS, but only CommonJS-like
+  // environments that support module.exports, like Node.
+  else if (typeof exports === 'object') {
+    module.exports = factory.call(window);
+  }
+
+  // Browser globals.
+  else {
+    window.Waves = factory.call(window);
+  }
+})(typeof window === 'object' ? window : this, function () {
+  'use strict';
+
+  var Waves = Waves || {};
+  var $$ = document.querySelectorAll.bind(document);
+  var toString = Object.prototype.toString;
+  var isTouchAvailable = 'ontouchstart' in window;
+
+
+  // Find exact position of element
+  function isWindow(obj) {
+    return obj !== null && obj === obj.window;
+  }
+
+  function getWindow(elem) {
+    return isWindow(elem) ? elem : elem.nodeType === 9 && elem.defaultView;
+  }
+
+  function isObject(value) {
+    var type = typeof value;
+    return type === 'function' || type === 'object' && !!value;
+  }
+
+  function isDOMNode(obj) {
+    return isObject(obj) && obj.nodeType > 0;
+  }
+
+  function getWavesElements(nodes) {
+    var stringRepr = toString.call(nodes);
+
+    if (stringRepr === '[object String]') {
+      return $$(nodes);
+    } else if (isObject(nodes) && /^\[object (Array|HTMLCollection|NodeList|Object)\]$/.test(stringRepr) && nodes.hasOwnProperty('length')) {
+      return nodes;
+    } else if (isDOMNode(nodes)) {
+      return [nodes];
     }
 
-    // Node. Does not work with strict CommonJS, but only CommonJS-like
-    // environments that support module.exports, like Node.
-    else if (typeof exports === 'object') {
-        module.exports = factory.call(window);
+    return [];
+  }
+
+  function offset(elem) {
+    var docElem, win,
+      box = {
+        top: 0,
+        left: 0
+      },
+      doc = elem && elem.ownerDocument;
+
+    docElem = doc.documentElement;
+
+    if (typeof elem.getBoundingClientRect !== typeof undefined) {
+      box = elem.getBoundingClientRect();
+    }
+    win = getWindow(doc);
+    return {
+      top: box.top + win.pageYOffset - docElem.clientTop,
+      left: box.left + win.pageXOffset - docElem.clientLeft
+    };
+  }
+
+  function convertStyle(styleObj) {
+    var style = '';
+
+    for (var prop in styleObj) {
+      if (styleObj.hasOwnProperty(prop)) {
+        style += (prop + ':' + styleObj[prop] + ';');
+      }
     }
 
-    // Browser globals.
-    else {
-        window.Waves = factory.call(window);
+    return style;
+  }
+
+  var Effect = {
+
+    // Effect duration
+    duration: 750,
+
+    // Effect delay (check for scroll before showing effect)
+    delay: 200,
+
+    show: function (e, element, velocity) {
+
+      // Disable right click
+      if (e.button === 2) {
+        return false;
+      }
+
+      element = element || this;
+
+      // Create ripple
+      var ripple = document.createElement('div');
+      ripple.className = 'waves-ripple waves-rippling';
+      element.appendChild(ripple);
+
+      // Get click coordinate and element width
+      var pos = offset(element);
+      var relativeY = 0;
+      var relativeX = 0;
+      // Support for touch devices
+      if ('touches' in e && e.touches.length) {
+        relativeY = (e.touches[0].pageY - pos.top);
+        relativeX = (e.touches[0].pageX - pos.left);
+      }
+      //Normal case
+      else {
+        relativeY = (e.pageY - pos.top);
+        relativeX = (e.pageX - pos.left);
+      }
+      // Support for synthetic events
+      relativeX = relativeX >= 0 ? relativeX : 0;
+      relativeY = relativeY >= 0 ? relativeY : 0;
+
+      var scale = 'scale(' + ((element.clientWidth / 100) * 3) + ')';
+      var translate = 'translate(0,0)';
+
+      if (velocity) {
+        translate = 'translate(' + (velocity.x) + 'px, ' + (velocity.y) + 'px)';
+      }
+
+      // Attach data to element
+      ripple.setAttribute('data-hold', Date.now());
+      ripple.setAttribute('data-x', relativeX);
+      ripple.setAttribute('data-y', relativeY);
+      ripple.setAttribute('data-scale', scale);
+      ripple.setAttribute('data-translate', translate);
+
+      // Set ripple position
+      var rippleStyle = {
+        top: relativeY + 'px',
+        left: relativeX + 'px'
+      };
+
+      ripple.classList.add('waves-notransition');
+      ripple.setAttribute('style', convertStyle(rippleStyle));
+      ripple.classList.remove('waves-notransition');
+
+      // Scale the ripple
+      rippleStyle['-webkit-transform'] = scale + ' ' + translate;
+      rippleStyle['-moz-transform'] = scale + ' ' + translate;
+      rippleStyle['-ms-transform'] = scale + ' ' + translate;
+      rippleStyle['-o-transform'] = scale + ' ' + translate;
+      rippleStyle.transform = scale + ' ' + translate;
+      rippleStyle.opacity = '1';
+
+      var duration = e.type === 'mousemove' ? 2500 : Effect.duration;
+      rippleStyle['-webkit-transition-duration'] = duration + 'ms';
+      rippleStyle['-moz-transition-duration'] = duration + 'ms';
+      rippleStyle['-o-transition-duration'] = duration + 'ms';
+      rippleStyle['transition-duration'] = duration + 'ms';
+
+      ripple.setAttribute('style', convertStyle(rippleStyle));
+    },
+
+    hide: function (e, element) {
+      element = element || this;
+
+      var ripples = element.getElementsByClassName('waves-rippling');
+
+      for (var i = 0, len = ripples.length; i < len; i++) {
+        removeRipple(e, element, ripples[i]);
+      }
+
+      if (isTouchAvailable) {
+        element.removeEventListener('touchend', Effect.hide);
+        element.removeEventListener('touchcancel', Effect.hide);
+      }
+
+      element.removeEventListener('mouseup', Effect.hide);
+      element.removeEventListener('mouseleave', Effect.hide);
     }
-})(typeof global === 'object' ? global : this, function() {
-    'use strict';
+  };
 
-    var Waves            = Waves || {};
-    var $$               = document.querySelectorAll.bind(document);
-    var toString         = Object.prototype.toString;
-    var isTouchAvailable = 'ontouchstart' in window;
+  /**
+   * Collection of wrapper for HTML element that only have single tag
+   * like <input> and <img>
+   */
+  var TagWrapper = {
 
+    // Wrap <input> tag so it can perform the effect
+    input: function (element) {
 
-    // Find exact position of element
-    function isWindow(obj) {
-        return obj !== null && obj === obj.window;
+      var parent = element.parentNode;
+
+      // If input already have parent just pass through
+      if (parent.tagName.toLowerCase() === 'span' && parent.classList.contains('waves-effect')) {
+        return;
+      }
+
+      // Put element class and style to the specified parent
+      var wrapper = document.createElement('span');
+      wrapper.className = 'waves-input-wrapper';
+      // element.className = 'waves-button-input';
+
+      // Put element as child
+      parent.replaceChild(wrapper, element);
+      wrapper.appendChild(element);
+
+    },
+
+    // Wrap <img> tag so it can perform the effect
+    img: function (element) {
+
+      var parent = element.parentNode;
+
+      // If input already have parent just pass through
+      if (parent.tagName.toLowerCase() === 'i' && parent.classList.contains('waves-effect')) {
+        return;
+      }
+
+      // Put element as child
+      var wrapper = document.createElement('i');
+      parent.replaceChild(wrapper, element);
+      wrapper.appendChild(element);
+
+    }
+  };
+
+  /**
+   * Hide the effect and remove the ripple. Must be
+   * a separate function to pass the JSLint...
+   */
+  function removeRipple(e, el, ripple) {
+
+    // Check if the ripple still exist
+    if (!ripple) {
+      return;
     }
 
-    function getWindow(elem) {
-        return isWindow(elem) ? elem : elem.nodeType === 9 && elem.defaultView;
+    ripple.classList.remove('waves-rippling');
+
+    var relativeX = ripple.getAttribute('data-x');
+    var relativeY = ripple.getAttribute('data-y');
+    var scale = ripple.getAttribute('data-scale');
+    var translate = ripple.getAttribute('data-translate');
+
+    // Get delay beetween mousedown and mouse leave
+    var diff = Date.now() - Number(ripple.getAttribute('data-hold'));
+    var delay = 350 - diff;
+
+    if (delay < 0) {
+      delay = 0;
     }
 
-    function isObject(value) {
-        var type = typeof value;
-        return type === 'function' || type === 'object' && !!value;
+    if (e.type === 'mousemove') {
+      delay = 150;
     }
 
-    function isDOMNode(obj) {
-        return isObject(obj) && obj.nodeType > 0;
-    }
+    // Fade out ripple after delay
+    var duration = e.type === 'mousemove' ? 2500 : Effect.duration;
 
-    function getWavesElements(nodes) {
-        var stringRepr = toString.call(nodes);
+    setTimeout(function () {
 
-        if (stringRepr === '[object String]') {
-            return $$(nodes);
-        } else if (isObject(nodes) && /^\[object (Array|HTMLCollection|NodeList|Object)\]$/.test(stringRepr) && nodes.hasOwnProperty('length')) {
-            return nodes;
-        } else if (isDOMNode(nodes)) {
-            return [nodes];
+      var style = {
+        top: relativeY + 'px',
+        left: relativeX + 'px',
+        opacity: '0',
+
+        // Duration
+        '-webkit-transition-duration': duration + 'ms',
+        '-moz-transition-duration': duration + 'ms',
+        '-o-transition-duration': duration + 'ms',
+        'transition-duration': duration + 'ms',
+        '-webkit-transform': scale + ' ' + translate,
+        '-moz-transform': scale + ' ' + translate,
+        '-ms-transform': scale + ' ' + translate,
+        '-o-transform': scale + ' ' + translate,
+        'transform': scale + ' ' + translate
+      };
+
+      ripple.setAttribute('style', convertStyle(style));
+
+      setTimeout(function () {
+        try {
+          el.removeChild(ripple);
+        } catch (e) {
+          return false;
         }
+      }, duration);
 
-        return [];
+    }, delay);
+  }
+
+
+  /**
+   * Disable mousedown event for 500ms during and after touch
+   */
+  var TouchHandler = {
+
+    /* uses an integer rather than bool so there's no issues with
+     * needing to clear timeouts if another touch event occurred
+     * within the 500ms. Cannot mouseup between touchstart and
+     * touchend, nor in the 500ms after touchend. */
+    touches: 0,
+
+    allowEvent: function (e) {
+
+      var allow = true;
+
+      if (/^(mousedown|mousemove)$/.test(e.type) && TouchHandler.touches) {
+        allow = false;
+      }
+
+      return allow;
+    },
+    registerEvent: function (e) {
+      var eType = e.type;
+
+      if (eType === 'touchstart') {
+
+        TouchHandler.touches += 1; // push
+
+      } else if (/^(touchend|touchcancel)$/.test(eType)) {
+
+        setTimeout(function () {
+          if (TouchHandler.touches) {
+            TouchHandler.touches -= 1; // pop after 500ms
+          }
+        }, 500);
+
+      }
+    }
+  };
+
+
+  /**
+   * Delegated click handler for .waves-effect element.
+   * returns null when .waves-effect element not in "click tree"
+   */
+  function getWavesEffectElement(e) {
+
+    if (TouchHandler.allowEvent(e) === false) {
+      return null;
     }
 
-    function offset(elem) {
-        var docElem, win,
-            box = { top: 0, left: 0 },
-            doc = elem && elem.ownerDocument;
+    var element = null;
+    var target = e.target || e.srcElement;
 
-        docElem = doc.documentElement;
+    while (target.parentElement) {
+      if ((!(target instanceof SVGElement)) && target.classList.contains('waves-effect')) {
+        element = target;
+        break;
+      }
+      target = target.parentElement;
+    }
 
-        if (typeof elem.getBoundingClientRect !== typeof undefined) {
-            box = elem.getBoundingClientRect();
-        }
-        win = getWindow(doc);
-        return {
-            top: box.top + win.pageYOffset - docElem.clientTop,
-            left: box.left + win.pageXOffset - docElem.clientLeft
+    return element;
+  }
+
+  /**
+   * Bubble the click and show effect if .waves-effect elem was found
+   */
+  function showEffect(e) {
+
+    // Disable effect if element has "disabled" property on it
+    // In some cases, the event is not triggered by the current element
+    // if (e.target.getAttribute('disabled') !== null) {
+    //     return;
+    // }
+
+    var element = getWavesEffectElement(e);
+
+    if (element !== null) {
+
+      // Make it sure the element has either disabled property, disabled attribute or 'disabled' class
+      if (element.disabled || element.getAttribute('disabled') || element.classList.contains('disabled')) {
+        return;
+      }
+
+      TouchHandler.registerEvent(e);
+
+      if (e.type === 'touchstart' && Effect.delay) {
+
+        var hidden = false;
+
+        var timer = setTimeout(function () {
+          timer = null;
+          Effect.show(e, element);
+        }, Effect.delay);
+
+        var hideEffect = function (hideEvent) {
+
+          // if touch hasn't moved, and effect not yet started: start effect now
+          if (timer) {
+            clearTimeout(timer);
+            timer = null;
+            Effect.show(e, element);
+          }
+          if (!hidden) {
+            hidden = true;
+            Effect.hide(hideEvent, element);
+          }
+
+          removeListeners();
         };
-    }
 
-    function convertStyle(styleObj) {
-        var style = '';
-
-        for (var prop in styleObj) {
-            if (styleObj.hasOwnProperty(prop)) {
-                style += (prop + ':' + styleObj[prop] + ';');
-            }
-        }
-
-        return style;
-    }
-
-    var Effect = {
-
-        // Effect duration
-        duration: 750,
-
-        // Effect delay (check for scroll before showing effect)
-        delay: 200,
-
-        show: function(e, element, velocity) {
-
-            // Disable right click
-            if (e.button === 2) {
-                return false;
-            }
-
-            element = element || this;
-
-            // Create ripple
-            var ripple = document.createElement('div');
-            ripple.className = 'waves-ripple waves-rippling';
-            element.appendChild(ripple);
-
-            // Get click coordinate and element width
-            var pos       = offset(element);
-            var relativeY = 0;
-            var relativeX = 0;
-            // Support for touch devices
-            if('touches' in e && e.touches.length) {
-                relativeY   = (e.touches[0].pageY - pos.top);
-                relativeX   = (e.touches[0].pageX - pos.left);
-            }
-            //Normal case
-            else {
-                relativeY   = (e.pageY - pos.top);
-                relativeX   = (e.pageX - pos.left);
-            }
-            // Support for synthetic events
-            relativeX = relativeX >= 0 ? relativeX : 0;
-            relativeY = relativeY >= 0 ? relativeY : 0;
-
-            var scale     = 'scale(' + ((element.clientWidth / 100) * 3) + ')';
-            var translate = 'translate(0,0)';
-
-            if (velocity) {
-                translate = 'translate(' + (velocity.x) + 'px, ' + (velocity.y) + 'px)';
-            }
-
-            // Attach data to element
-            ripple.setAttribute('data-hold', Date.now());
-            ripple.setAttribute('data-x', relativeX);
-            ripple.setAttribute('data-y', relativeY);
-            ripple.setAttribute('data-scale', scale);
-            ripple.setAttribute('data-translate', translate);
-
-            // Set ripple position
-            var rippleStyle = {
-                top: relativeY + 'px',
-                left: relativeX + 'px'
-            };
-
-            ripple.classList.add('waves-notransition');
-            ripple.setAttribute('style', convertStyle(rippleStyle));
-            ripple.classList.remove('waves-notransition');
-
-            // Scale the ripple
-            rippleStyle['-webkit-transform'] = scale + ' ' + translate;
-            rippleStyle['-moz-transform'] = scale + ' ' + translate;
-            rippleStyle['-ms-transform'] = scale + ' ' + translate;
-            rippleStyle['-o-transform'] = scale + ' ' + translate;
-            rippleStyle.transform = scale + ' ' + translate;
-            rippleStyle.opacity = '1';
-
-            var duration = e.type === 'mousemove' ? 2500 : Effect.duration;
-            rippleStyle['-webkit-transition-duration'] = duration + 'ms';
-            rippleStyle['-moz-transition-duration']    = duration + 'ms';
-            rippleStyle['-o-transition-duration']      = duration + 'ms';
-            rippleStyle['transition-duration']         = duration + 'ms';
-
-            ripple.setAttribute('style', convertStyle(rippleStyle));
-        },
-
-        hide: function(e, element) {
-            element = element || this;
-
-            var ripples = element.getElementsByClassName('waves-rippling');
-
-            for (var i = 0, len = ripples.length; i < len; i++) {
-                removeRipple(e, element, ripples[i]);
-            }
-
-            if (isTouchAvailable) {
-                element.removeEventListener('touchend', Effect.hide);
-                element.removeEventListener('touchcancel', Effect.hide);
-            }
-
-            element.removeEventListener('mouseup', Effect.hide);
-            element.removeEventListener('mouseleave', Effect.hide);
-        }
-    };
-
-    /**
-     * Collection of wrapper for HTML element that only have single tag
-     * like <input> and <img>
-     */
-    var TagWrapper = {
-
-        // Wrap <input> tag so it can perform the effect
-        input: function(element) {
-
-            var parent = element.parentNode;
-
-            // If input already have parent just pass through
-            if (parent.tagName.toLowerCase() === 'span' && parent.classList.contains('waves-effect')) {
-                return;
-            }
-
-            // Put element class and style to the specified parent
-            var wrapper       = document.createElement('span');
-            wrapper.className = 'waves-input-wrapper';
-            // element.className = 'waves-button-input';
-
-            // Put element as child
-            parent.replaceChild(wrapper, element);
-            wrapper.appendChild(element);
-
-        },
-
-        // Wrap <img> tag so it can perform the effect
-        img: function(element) {
-
-            var parent = element.parentNode;
-
-            // If input already have parent just pass through
-            if (parent.tagName.toLowerCase() === 'i' && parent.classList.contains('waves-effect')) {
-                return;
-            }
-
-            // Put element as child
-            var wrapper  = document.createElement('i');
-            parent.replaceChild(wrapper, element);
-            wrapper.appendChild(element);
-
-        }
-    };
-
-    /**
-     * Hide the effect and remove the ripple. Must be
-     * a separate function to pass the JSLint...
-     */
-    function removeRipple(e, el, ripple) {
-
-        // Check if the ripple still exist
-        if (!ripple) {
-            return;
-        }
-
-        ripple.classList.remove('waves-rippling');
-
-        var relativeX = ripple.getAttribute('data-x');
-        var relativeY = ripple.getAttribute('data-y');
-        var scale     = ripple.getAttribute('data-scale');
-        var translate = ripple.getAttribute('data-translate');
-
-        // Get delay beetween mousedown and mouse leave
-        var diff = Date.now() - Number(ripple.getAttribute('data-hold'));
-        var delay = 350 - diff;
-
-        if (delay < 0) {
-            delay = 0;
-        }
-
-        if (e.type === 'mousemove') {
-            delay = 150;
-        }
-
-        // Fade out ripple after delay
-        var duration = e.type === 'mousemove' ? 2500 : Effect.duration;
-
-        setTimeout(function() {
-
-            var style = {
-                top: relativeY + 'px',
-                left: relativeX + 'px',
-                opacity: '0',
-
-                // Duration
-                '-webkit-transition-duration': duration + 'ms',
-                '-moz-transition-duration': duration + 'ms',
-                '-o-transition-duration': duration + 'ms',
-                'transition-duration': duration + 'ms',
-                '-webkit-transform': scale + ' ' + translate,
-                '-moz-transform': scale + ' ' + translate,
-                '-ms-transform': scale + ' ' + translate,
-                '-o-transform': scale + ' ' + translate,
-                'transform': scale + ' ' + translate
-            };
-
-            ripple.setAttribute('style', convertStyle(style));
-
-            setTimeout(function() {
-                try {
-                    el.removeChild(ripple);
-                } catch (e) {
-                    return false;
-                }
-            }, duration);
-
-        }, delay);
-    }
-
-
-    /**
-     * Disable mousedown event for 500ms during and after touch
-     */
-    var TouchHandler = {
-
-        /* uses an integer rather than bool so there's no issues with
-         * needing to clear timeouts if another touch event occurred
-         * within the 500ms. Cannot mouseup between touchstart and
-         * touchend, nor in the 500ms after touchend. */
-        touches: 0,
-
-        allowEvent: function(e) {
-
-            var allow = true;
-
-            if (/^(mousedown|mousemove)$/.test(e.type) && TouchHandler.touches) {
-                allow = false;
-            }
-
-            return allow;
-        },
-        registerEvent: function(e) {
-            var eType = e.type;
-
-            if (eType === 'touchstart') {
-
-                TouchHandler.touches += 1; // push
-
-            } else if (/^(touchend|touchcancel)$/.test(eType)) {
-
-                setTimeout(function() {
-                    if (TouchHandler.touches) {
-                        TouchHandler.touches -= 1; // pop after 500ms
-                    }
-                }, 500);
-
-            }
-        }
-    };
-
-
-    /**
-     * Delegated click handler for .waves-effect element.
-     * returns null when .waves-effect element not in "click tree"
-     */
-    function getWavesEffectElement(e) {
-
-        if (TouchHandler.allowEvent(e) === false) {
-            return null;
-        }
-
-        var element = null;
-        var target = e.target || e.srcElement;
-
-        while (target.parentElement) {
-            if ( (!(target instanceof SVGElement)) && target.classList.contains('waves-effect')) {
-                element = target;
-                break;
-            }
-            target = target.parentElement;
-        }
-
-        return element;
-    }
-
-    /**
-     * Bubble the click and show effect if .waves-effect elem was found
-     */
-    function showEffect(e) {
-
-        // Disable effect if element has "disabled" property on it
-        // In some cases, the event is not triggered by the current element
-        // if (e.target.getAttribute('disabled') !== null) {
-        //     return;
-        // }
-
-        var element = getWavesEffectElement(e);
-
-        if (element !== null) {
-
-            // Make it sure the element has either disabled property, disabled attribute or 'disabled' class
-            if (element.disabled || element.getAttribute('disabled') || element.classList.contains('disabled')) {
-                return;
-            }
-
-            TouchHandler.registerEvent(e);
-
-            if (e.type === 'touchstart' && Effect.delay) {
-
-                var hidden = false;
-
-                var timer = setTimeout(function () {
-                    timer = null;
-                    Effect.show(e, element);
-                }, Effect.delay);
-
-                var hideEffect = function(hideEvent) {
-
-                    // if touch hasn't moved, and effect not yet started: start effect now
-                    if (timer) {
-                        clearTimeout(timer);
-                        timer = null;
-                        Effect.show(e, element);
-                    }
-                    if (!hidden) {
-                        hidden = true;
-                        Effect.hide(hideEvent, element);
-                    }
-
-                    removeListeners();
-                };
-
-                var touchMove = function(moveEvent) {
-                    if (timer) {
-                        clearTimeout(timer);
-                        timer = null;
-                    }
-                    hideEffect(moveEvent);
-
-                    removeListeners();
-                };
-
-                element.addEventListener('touchmove', touchMove, false);
-                element.addEventListener('touchend', hideEffect, false);
-                element.addEventListener('touchcancel', hideEffect, false);
-
-                var removeListeners = function() {
-                    element.removeEventListener('touchmove', touchMove);
-                    element.removeEventListener('touchend', hideEffect);
-                    element.removeEventListener('touchcancel', hideEffect);
-                };
-            } else {
-
-                Effect.show(e, element);
-
-                if (isTouchAvailable) {
-                    element.addEventListener('touchend', Effect.hide, false);
-                    element.addEventListener('touchcancel', Effect.hide, false);
-                }
-
-                element.addEventListener('mouseup', Effect.hide, false);
-                element.addEventListener('mouseleave', Effect.hide, false);
-            }
-        }
-    }
-
-    Waves.init = function(options) {
-        var body = document.body;
-
-        options = options || {};
-
-        if ('duration' in options) {
-            Effect.duration = options.duration;
-        }
-
-        if ('delay' in options) {
-            Effect.delay = options.delay;
-        }
+        var touchMove = function (moveEvent) {
+          if (timer) {
+            clearTimeout(timer);
+            timer = null;
+          }
+          hideEffect(moveEvent);
+
+          removeListeners();
+        };
+
+        element.addEventListener('touchmove', touchMove, false);
+        element.addEventListener('touchend', hideEffect, false);
+        element.addEventListener('touchcancel', hideEffect, false);
+
+        var removeListeners = function () {
+          element.removeEventListener('touchmove', touchMove);
+          element.removeEventListener('touchend', hideEffect);
+          element.removeEventListener('touchcancel', hideEffect);
+        };
+      } else {
+
+        Effect.show(e, element);
 
         if (isTouchAvailable) {
-            body.addEventListener('touchstart', showEffect, false);
-            body.addEventListener('touchcancel', TouchHandler.registerEvent, false);
-            body.addEventListener('touchend', TouchHandler.registerEvent, false);
+          element.addEventListener('touchend', Effect.hide, false);
+          element.addEventListener('touchcancel', Effect.hide, false);
         }
 
-        body.addEventListener('mousedown', showEffect, false);
-    };
+        element.addEventListener('mouseup', Effect.hide, false);
+        element.addEventListener('mouseleave', Effect.hide, false);
+      }
+    }
+  }
+
+  Waves.init = function (options) {
+    var body = document.body;
+
+    options = options || {};
+
+    if ('duration' in options) {
+      Effect.duration = options.duration;
+    }
+
+    if ('delay' in options) {
+      Effect.delay = options.delay;
+    }
+
+    if (isTouchAvailable) {
+      body.addEventListener('touchstart', showEffect, false);
+      body.addEventListener('touchcancel', TouchHandler.registerEvent, false);
+      body.addEventListener('touchend', TouchHandler.registerEvent, false);
+    }
+
+    body.addEventListener('mousedown', showEffect, false);
+  };
 
 
-    /**
-     * Attach Waves to dynamically loaded inputs, or add .waves-effect and other
-     * waves classes to a set of elements. Set drag to true if the ripple mouseover
-     * or skimming effect should be applied to the elements.
-     */
-    Waves.attach = function(elements, classes) {
+  /**
+   * Attach Waves to dynamically loaded inputs, or add .waves-effect and other
+   * waves classes to a set of elements. Set drag to true if the ripple mouseover
+   * or skimming effect should be applied to the elements.
+   */
+  Waves.attach = function (elements, classes) {
 
-        elements = getWavesElements(elements);
+    elements = getWavesElements(elements);
 
-        if (toString.call(classes) === '[object Array]') {
-            classes = classes.join(' ');
-        }
+    if (toString.call(classes) === '[object Array]') {
+      classes = classes.join(' ');
+    }
 
-        classes = classes ? ' ' + classes : '';
+    classes = classes ? ' ' + classes : '';
 
-        var element, tagName;
+    var element, tagName;
 
-        for (var i = 0, len = elements.length; i < len; i++) {
+    for (var i = 0, len = elements.length; i < len; i++) {
 
-            element = elements[i];
-            tagName = element.tagName.toLowerCase();
+      element = elements[i];
+      tagName = element.tagName.toLowerCase();
 
-            if (['input', 'img'].indexOf(tagName) !== -1) {
-                TagWrapper[tagName](element);
-                element = element.parentElement;
-            }
+      if (['input', 'img'].indexOf(tagName) !== -1) {
+        TagWrapper[tagName](element);
+        element = element.parentElement;
+      }
 
-            if (element.className.indexOf('waves-effect') === -1) {
-                element.className += ' waves-effect' + classes;
-            }
-        }
-    };
-
-
-    /**
-     * Cause a ripple to appear in an element via code.
-     */
-    Waves.ripple = function(elements, options) {
-        elements = getWavesElements(elements);
-        var elementsLen = elements.length;
-
-        options          = options || {};
-        options.wait     = options.wait || 0;
-        options.position = options.position || null; // default = centre of element
+      if (element.className.indexOf('waves-effect') === -1) {
+        element.className += ' waves-effect' + classes;
+      }
+    }
+  };
 
 
-        if (elementsLen) {
-            var element, pos, off, centre = {}, i = 0;
-            var mousedown = {
-                type: 'mousedown',
-                button: 1
-            };
-            var hideRipple = function(mouseup, element) {
-                return function() {
-                    Effect.hide(mouseup, element);
-                };
-            };
+  /**
+   * Cause a ripple to appear in an element via code.
+   */
+  Waves.ripple = function (elements, options) {
+    elements = getWavesElements(elements);
+    var elementsLen = elements.length;
 
-            for (; i < elementsLen; i++) {
-                element = elements[i];
-                pos = options.position || {
-                    x: element.clientWidth / 2,
-                    y: element.clientHeight / 2
-                };
+    options = options || {};
+    options.wait = options.wait || 0;
+    options.position = options.position || null; // default = centre of element
 
-                off      = offset(element);
-                centre.x = off.left + pos.x;
-                centre.y = off.top + pos.y;
 
-                mousedown.pageX = centre.x;
-                mousedown.pageY = centre.y;
+    if (elementsLen) {
+      var element, pos, off, centre = {},
+        i = 0;
+      var mousedown = {
+        type: 'mousedown',
+        button: 1
+      };
+      var hideRipple = function (mouseup, element) {
+        return function () {
+          Effect.hide(mouseup, element);
+        };
+      };
 
-                Effect.show(mousedown, element);
-
-                if (options.wait >= 0 && options.wait !== null) {
-                    var mouseup = {
-                        type: 'mouseup',
-                        button: 1
-                    };
-
-                    setTimeout(hideRipple(mouseup, element), options.wait);
-                }
-            }
-        }
-    };
-
-    /**
-     * Remove all ripples from an element.
-     */
-    Waves.calm = function(elements) {
-        elements = getWavesElements(elements);
-        var mouseup = {
-            type: 'mouseup',
-            button: 1
+      for (; i < elementsLen; i++) {
+        element = elements[i];
+        pos = options.position || {
+          x: element.clientWidth / 2,
+          y: element.clientHeight / 2
         };
 
-        for (var i = 0, len = elements.length; i < len; i++) {
-            Effect.hide(mouseup, elements[i]);
+        off = offset(element);
+        centre.x = off.left + pos.x;
+        centre.y = off.top + pos.y;
+
+        mousedown.pageX = centre.x;
+        mousedown.pageY = centre.y;
+
+        Effect.show(mousedown, element);
+
+        if (options.wait >= 0 && options.wait !== null) {
+          var mouseup = {
+            type: 'mouseup',
+            button: 1
+          };
+
+          setTimeout(hideRipple(mouseup, element), options.wait);
         }
+      }
+    }
+  };
+
+  /**
+   * Remove all ripples from an element.
+   */
+  Waves.calm = function (elements) {
+    elements = getWavesElements(elements);
+    var mouseup = {
+      type: 'mouseup',
+      button: 1
     };
 
-    /**
-     * Deprecated API fallback
-     */
-    Waves.displayEffect = function(options) {
-        console.error('Waves.displayEffect() has been deprecated and will be removed in future version. Please use Waves.init() to initialize Waves effect');
-        Waves.init(options);
-    };
+    for (var i = 0, len = elements.length; i < len; i++) {
+      Effect.hide(mouseup, elements[i]);
+    }
+  };
 
-    return Waves;
+  /**
+   * Deprecated API fallback
+   */
+  Waves.displayEffect = function (options) {
+    console.error('Waves.displayEffect() has been deprecated and will be removed in future version. Please use Waves.init() to initialize Waves effect');
+    Waves.init(options);
+  };
+
+  return Waves;
+});
+$(document).ready(function () {
+  //Initialization
+  Waves.attach('.btn:not(.btn-flat), .btn-floating', ['waves-light']);
+  Waves.attach('.btn-flat', ['waves-effect']);
+  Waves.attach('.chip', ['waves-effect']);
+  Waves.attach('.view a .mask', ['waves-light']);
+  Waves.attach('.waves-light', ['waves-light']);
+  Waves.attach('.navbar-nav a:not(.navbar-brand), .nav-icons li a, .nav-tabs .nav-item:not(.dropdown)', ['waves-light']);
+  Waves.attach('.pager li a', ['waves-light']);
+  Waves.attach('.pagination .page-item .page-link', ['waves-effect']);
+  Waves.init();
 });
 
-//Initialization
-Waves.attach('.btn:not(.btn-flat), .btn-floating', ['waves-light']);
-Waves.attach('.btn-flat', ['waves-effect']);
-Waves.attach('.chip', ['waves-effect']);
-Waves.attach('.view a .mask', ['waves-light']);
-Waves.attach('.waves-light', ['waves-light']);
-Waves.attach('.navbar-nav a:not(.navbar-brand), .nav-icons li a, .nav-tabs .nav-item:not(.dropdown)', ['waves-light']);
-Waves.attach('.pager li a', ['waves-light']);
-Waves.attach('.pagination .page-item .page-link', ['waves-effect']);
-Waves.init();
 "use strict";
 
 var _this = void 0;
@@ -1440,16 +1357,17 @@ var _this = void 0;
   $(textAreaSelector).each(textAreaAutoResize);
   $body.on('keyup keydown', textAreaSelector, textAreaAutoResize);
 })(jQuery);
-// "use strict";
+"use strict";
 
-// // 'use strict';
-// var windowLoaded = false;
-// $(window).on('load', function () {
-//   windowLoaded = true;
-// });
+// 'use strict';
+// var loader_path = '../dev/dist/mdb-addons/preloader.html';
+var windowLoaded = false;
+$(window).on('load', function () {
+  windowLoaded = true;
+});
 // $(document).ready(function () {
 //   $('body').attr('aria-busy', true);
-//   $('#preloader-markup').load('../dev/dist/mdb-addons/preloader.html', function () {
+//   $('#preloader-markup').load(loader_path, function () {
 //     if (windowLoaded) {
 //       $('#mdb-preloader').fadeOut('slow');
 //       $('body').removeAttr('aria-busy');
@@ -1461,13 +1379,6 @@ var _this = void 0;
 //     }
 //   });
 // });
-"use strict";
-
-// 'use strict';
-var windowLoaded = false;
-$(window).on('load', function () {
-  windowLoaded = true;
-});
 $('body').attr('aria-busy', true);
 $(window).on('load', function() { // makes sure the whole site is loaded
     if (windowLoaded) {
@@ -2036,6 +1947,10 @@ $('.smooth-scroll a').click(function() {
 });
 "use strict";
 
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 (function ($) {
   $.fn.scrollTo = function (elem) {
     $(this).scrollTop($(this).scrollTop() - $(this).offset().top + $(elem).offset().top);
@@ -2043,9 +1958,76 @@ $('.smooth-scroll a').click(function() {
   };
 
   $.fn.dropdown = function (option) {
+    var options = $.extend({}, $.fn.dropdown.defaults, option);
+
+    function updatePosition(origin, activates) {
+      // Offscreen detection
+      var windowHeight = window.innerHeight;
+      var originHeight = origin.innerHeight();
+      var offsetLeft = origin.offset().left;
+      var offsetTop = origin.offset().top - $(window).scrollTop();
+      var currAlignment = options.alignment;
+      var gutterSpacing = 0;
+      var leftPosition = 0; // Below Origin
+
+      var verticalOffset = 0;
+
+      if (options.belowOrigin === true) {
+        verticalOffset = originHeight;
+      } // Check for scrolling positioned container.
+
+
+      var scrollOffset = 0;
+      var wrapper = origin.parent();
+
+      if (!wrapper.is('body') && wrapper[0].scrollHeight > wrapper[0].clientHeight) {
+        scrollOffset = wrapper[0].scrollTop;
+      }
+
+      if (offsetLeft + activates.innerWidth() > $(window).width()) {
+        // Dropdown goes past screen on right, force right alignment
+        currAlignment = 'right';
+      } else if (offsetLeft - activates.innerWidth() + origin.innerWidth() < 0) {
+        // Dropdown goes past screen on left, force left alignment
+        currAlignment = 'left';
+      } // Vertical bottom offscreen detection
+
+
+      if (offsetTop + activates.innerHeight() > windowHeight) {
+        // If going upwards still goes offscreen, just crop height of dropdown.
+        if (offsetTop + originHeight - activates.innerHeight() < 0) {
+          var adjustedHeight = windowHeight - offsetTop - verticalOffset;
+          activates.css('max-height', adjustedHeight);
+        } else {
+          // Flow upwards.
+          if (!verticalOffset) {
+            verticalOffset += originHeight;
+          }
+
+          verticalOffset -= activates.innerHeight();
+        }
+      } // Handle edge alignment
+
+
+      if (currAlignment === 'left') {
+        gutterSpacing = options.gutter;
+        leftPosition = origin.position().left + gutterSpacing;
+      } else if (currAlignment === 'right') {
+        var offsetRight = origin.position().left + origin.outerWidth() - activates.outerWidth();
+        gutterSpacing = -options.gutter;
+        leftPosition = offsetRight + gutterSpacing;
+      } // Position dropdown
+
+
+      activates.css({
+        position: 'absolute',
+        top: origin.position().top + verticalOffset + scrollOffset,
+        left: leftPosition
+      });
+    }
+
     this.each(function () {
       var origin = $(this);
-      var options = $.extend({}, $.fn.dropdown.defaults, option);
       var isFocused = false; // Dropdown menu
 
       var activates = $("#".concat(origin.attr('data-activates')));
@@ -2078,6 +2060,14 @@ $('.smooth-scroll a').click(function() {
         if (origin.data('alignment') !== undefined) {
           options.alignment = origin.data('alignment');
         }
+
+        if (origin.data('maxheight') !== undefined) {
+          options.maxHeight = origin.data('maxheight');
+        }
+
+        if (origin.data('resetscroll') !== undefined) {
+          options.resetScroll = origin.data('resetscroll') === 'true';
+        }
       }
 
       updateOptions(); // Attach dropdown to its activator
@@ -2104,71 +2094,9 @@ $('.smooth-scroll a').click(function() {
           activates.css('width', origin.outerWidth());
         } else {
           activates.css('white-space', 'nowrap');
-        } // Offscreen detection
-
-
-        var windowHeight = window.innerHeight;
-        var originHeight = origin.innerHeight();
-        var offsetLeft = origin.offset().left;
-        var offsetTop = origin.offset().top - $(window).scrollTop();
-        var currAlignment = options.alignment;
-        var gutterSpacing = 0;
-        var leftPosition = 0; // Below Origin
-
-        var verticalOffset = 0;
-
-        if (options.belowOrigin === true) {
-          verticalOffset = originHeight;
-        } // Check for scrolling positioned container.
-
-
-        var scrollOffset = 0;
-        var wrapper = origin.parent();
-
-        if (!wrapper.is('body') && wrapper[0].scrollHeight > wrapper[0].clientHeight) {
-          scrollOffset = wrapper[0].scrollTop;
         }
 
-        if (offsetLeft + activates.innerWidth() > $(window).width()) {
-          // Dropdown goes past screen on right, force right alignment
-          currAlignment = 'right';
-        } else if (offsetLeft - activates.innerWidth() + origin.innerWidth() < 0) {
-          // Dropdown goes past screen on left, force left alignment
-          currAlignment = 'left';
-        } // Vertical bottom offscreen detection
-
-
-        if (offsetTop + activates.innerHeight() > windowHeight) {
-          // If going upwards still goes offscreen, just crop height of dropdown.
-          if (offsetTop + originHeight - activates.innerHeight() < 0) {
-            var adjustedHeight = windowHeight - offsetTop - verticalOffset;
-            activates.css('max-height', adjustedHeight);
-          } else {
-            // Flow upwards.
-            if (!verticalOffset) {
-              verticalOffset += originHeight;
-            }
-
-            verticalOffset -= activates.innerHeight();
-          }
-        } // Handle edge alignment
-
-
-        if (currAlignment === 'left') {
-          gutterSpacing = options.gutter;
-          leftPosition = origin.position().left + gutterSpacing;
-        } else if (currAlignment === 'right') {
-          var offsetRight = origin.position().left + origin.outerWidth() - activates.outerWidth();
-          gutterSpacing = -options.gutter;
-          leftPosition = offsetRight + gutterSpacing;
-        } // Position dropdown
-
-
-        activates.css({
-          position: 'absolute',
-          top: origin.position().top + verticalOffset + scrollOffset,
-          left: leftPosition
-        }); // Show dropdown
+        updatePosition(origin, activates); // Show dropdown
 
         activates.stop(true, true).css('opacity', 0).slideDown({
           queue: false,
@@ -2177,10 +2105,11 @@ $('.smooth-scroll a').click(function() {
           complete: function complete() {
             $(this).css('height', '');
           }
-        }).animate({
-          opacity: 1,
+        }).animate(_objectSpread({
+          opacity: 1
+        }, options.resetScroll && {
           scrollTop: 0
-        }, {
+        }), {
           queue: false,
           duration: options.inDuration,
           easing: 'easeOutSine'
@@ -2194,7 +2123,7 @@ $('.smooth-scroll a').click(function() {
         activates.removeClass('active');
         origin.removeClass('active');
         setTimeout(function () {
-          activates.css('max-height', '');
+          activates.css('max-height', options.maxHeight);
         }, options.outDuration);
       } // Hover
 
@@ -2263,6 +2192,9 @@ $('.smooth-scroll a').click(function() {
       });
       origin.on('close', hideDropdown);
     });
+    return {
+      updatePosition: updatePosition
+    };
   };
 
   $.fn.dropdown.defaults = {
@@ -2272,7 +2204,9 @@ $('.smooth-scroll a').click(function() {
     hover: false,
     gutter: 0,
     belowOrigin: false,
-    alignment: 'left'
+    alignment: 'left',
+    maxHeight: '',
+    resetScroll: true
   };
   $('.dropdown-button').dropdown();
 
@@ -2388,6 +2322,16 @@ dropdownSelectors.on({
       });
     }
   }
+});
+$('.multi-level-dropdown .dropdown-submenu > a').on("mouseenter", function (e) {
+  var submenu = $(this);
+  $('.multi-level-dropdown .dropdown-submenu .dropdown-menu').removeClass('show');
+  submenu.next('.dropdown-menu').addClass('show');
+  e.stopPropagation();
+});
+$('.multi-level-dropdown .dropdown').on("hidden.bs.dropdown", function () {
+  // hide any open menus when parent closes
+  $('.multi-level-dropdown .dropdown-menu.show').removeClass('show');
 });
 "use strict";
 
@@ -2859,14 +2803,16 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           e.preventDefault();
 
           if (_this3.menuOut === true) {
-            _this3.menuOut = false;
-
             _this3.removeMenu();
           } else {
-            if (_this3.options.showOverlay === true) {
-              _this3.$sidenavOverlay = $('<div id="sidenav-overlay"></div>');
+            _this3.menuOut = true;
 
-              _this3.$body.append(_this3.$sidenavOverlay);
+            if (_this3.options.showOverlay === true) {
+              if (!$('#sidenav-overlay').length) {
+                _this3.$sidenavOverlay = $('<div id="sidenav-overlay"></div>');
+
+                _this3.$body.append(_this3.$sidenavOverlay);
+              }
             } else {
               _this3.showCloseButton();
             }
@@ -2879,13 +2825,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               translateX = [0, _this3.options.MENU_WIDTH];
             }
 
-            _this3.$menu.velocity({
-              translateX: translateX
-            }, {
-              duration: _this3.options.timeDurationOpen,
-              queue: false,
-              easing: _this3.options.easingOpen
-            });
+            if (_this3.$menu.css('transform') !== 'matrix(1, 0, 0, 1, 0, 0)') {
+              _this3.$menu.velocity({
+                translateX: translateX
+              }, {
+                duration: _this3.options.timeDurationOpen,
+                queue: false,
+                easing: _this3.options.easingOpen
+              });
+            }
 
             _this3.$sidenavOverlay.on('click', function () {
               return _this3.removeMenu();
@@ -2898,6 +2846,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
               _this3.$menu.find('.custom-scrollbar').css('padding-bottom', '30px');
             });
+
+            _this3.menuOut = true;
           }
         });
       }
@@ -2910,6 +2860,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           this.$menu.on('click', 'a:not(.collapsible-header)', function () {
             return _this4.removeMenu();
           });
+
+          if (this.$menu.css('transform') === 'translateX(0)') {
+            this.click(function () {
+              return _this4.removeMenu();
+            });
+          }
         }
       }
     }, {
@@ -3015,6 +2971,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         }
 
         this.hideSidenavOverlay();
+        this.menuOut = false;
       }
     }]);
 
@@ -3028,14 +2985,29 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
   };
 })(jQuery);
 
-$(function () {
-  $("#toggle").click(function () {
-    if ($("#slide-out").hasClass('slim')) {
-      $("#slide-out").removeClass('slim');
-      $(".sv-slim-icon").removeClass('fa-angle-double-right').addClass('fa-angle-double-left');
+$(function ($) {
+  $('#toggle').click(function () {
+    if ($('#slide-out').hasClass('slim')) {
+      $('#slide-out').removeClass('slim');
+      $('.sv-slim-icon').removeClass('fa-angle-double-right').addClass('fa-angle-double-left');
+      $('.fixed-sn .double-nav').css({
+        'transition': 'all .3s ease-in-out',
+        'padding-left': '15.9rem'
+      });
+      $('.fixed-sn main').css({
+        'transition': 'all .3s ease-in-out',
+        'padding-left': '15rem'
+      });
+      $('.fixed-sn footer').css({
+        'transition': 'all .3s ease-in-out',
+        'padding-left': '15rem'
+      });
     } else {
-      $("#slide-out").addClass('slim');
-      $(".sv-slim-icon").removeClass('fa-angle-double-left').addClass('fa-angle-double-right');
+      $('#slide-out').addClass('slim');
+      $('.sv-slim-icon').removeClass('fa-angle-double-left').addClass('fa-angle-double-right');
+      $('.fixed-sn .double-nav').css('padding-left', '4.6rem');
+      $('.fixed-sn main').css('padding-left', '3.7rem');
+      $('.fixed-sn footer').css('padding-left', '3.7rem');
     }
   });
 });
@@ -3327,582 +3299,554 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-(function ($) {
-  var MaterialSelect =
-  /*#__PURE__*/
-  function () {
-    function MaterialSelect($nativeSelect, options) {
-      _classCallCheck(this, MaterialSelect);
+// eslint-disable-next-line no-unused-vars
+var MaterialSelectViewRenderer =
+/*#__PURE__*/
+function () {
+  function MaterialSelectViewRenderer(view) {
+    _classCallCheck(this, MaterialSelectViewRenderer);
 
-      this.$nativeSelect = $nativeSelect;
-      this.defaults = {
-        destroy: false,
-        nativeID: null,
-        BSsearchIn: false,
-        BSinputText: false,
-        fasClasses: '',
-        farClasses: '',
-        fabClasses: '',
-        copyClassesOption: false,
-        language: {
-          active: false,
-          pl: {
-            selectAll: 'Wybierz wszystko',
-            optionsSelected: 'wybranych opcji'
-          },
-          in: {
-            selectAll: 'Pilih semuanya',
-            optionsSelected: 'opsi yang dipilih'
-          },
-          fr: {
-            selectAll: 'Tout choisir',
-            optionsSelected: 'options sélectionnées'
-          },
-          ge: {
-            selectAll: 'Wähle alles aus',
-            optionsSelected: 'ausgewählte Optionen'
-          },
-          ar: {
-            selectAll: 'اختر كل شيء',
-            optionsSelected: 'الخيارات المحددة'
-          }
-        }
-      };
-      this.options = this.assignOptions(options);
-      this.isMultiple = Boolean(this.$nativeSelect.attr('multiple'));
-      this.isSearchable = Boolean(this.$nativeSelect.attr('searchable'));
-      this.isRequired = Boolean(this.$nativeSelect.attr('required'));
-      this.uuid = this.options.nativeID !== null && this.options.nativeID !== '' && this.options.nativeID !== undefined && typeof this.options.nativeID === 'string' ? this.options.nativeID : this._randomUUID();
-      this.$selectWrapper = $('<div class="select-wrapper"></div>');
-      this.$materialOptionsList = $("<ul id=\"select-options-".concat(this.uuid, "\" class=\"dropdown-content select-dropdown w-100 ").concat(this.isMultiple ? 'multiple-select-dropdown' : '', "\"></ul>"));
-      this.$materialSelectInitialOption = $nativeSelect.find('option:selected').text() || $nativeSelect.find('option:first').text() || '';
-      this.$nativeSelectChildren = this.$nativeSelect.children('option, optgroup');
-      this.$materialSelect = $("<input type=\"text\" class=\"".concat(this.options.BSinputText ? 'browser-default custom-select multi-bs-select select-dropdown' : 'select-dropdown', "\" readonly=\"true\" ").concat(this.$nativeSelect.is(' :disabled') ? 'disabled' : '', " data-activates=\"select-options-").concat(this.uuid, "\" value=\"\"/>"));
-      this.$dropdownIcon = this.options.BSinputText ? '' : $('<span class="caret">&#9660;</span>');
-      this.$searchInput = null;
-      this.$toggleAll = $('<li class="select-toggle-all"><span><input type="checkbox" class="form-check-input"><label>Select all</label></span></li>');
-      this.mainLabel = this.$nativeSelect.next('.mdb-main-label');
-      this.valuesSelected = [];
-      this.keyCodes = {
-        tab: 9,
-        esc: 27,
-        enter: 13,
-        arrowUp: 38,
-        arrowDown: 40
-      };
-      MaterialSelect.mutationObservers = [];
+    this.view = view;
+  }
+
+  _createClass(MaterialSelectViewRenderer, [{
+    key: "destroy",
+    value: function destroy() {
+      var currentUuid = this.view.$nativeSelect.data('select-id');
+      this.view.$nativeSelect.data('select-id', null).removeClass('initialized');
+      this.view.$nativeSelect.parent().find('span.caret').remove();
+      this.view.$nativeSelect.parent().find('input').remove();
+      this.view.$nativeSelect.unwrap();
+      $("ul#select-options-".concat(currentUuid)).remove();
     }
+  }, {
+    key: "render",
+    value: function render() {
+      this.setWrapperClasses();
+      this.setMaterialSelectInitialValue();
+      this.view.$nativeSelect.data('select-id', this.view.properties.id);
+      this.view.$nativeSelect.before(this.view.$selectWrapper);
+      this.appendDropdownIcon();
+      this.appendMaterialSelect();
+      this.appendMaterialOptionsList();
+      this.appendNativeSelect();
+      this.appendSelectLabel();
+      this.appendCustomTemplateParts();
 
-    _createClass(MaterialSelect, [{
-      key: "assignOptions",
-      value: function assignOptions(newOptions) {
-        return $.extend({}, this.defaults, newOptions);
+      if (this.shouldValidate) {
+        this.appendValidationFeedbackElements();
       }
-    }, {
-      key: "init",
-      value: function init() {
-        var alreadyInitialized = Boolean(this.$nativeSelect.data('select-id'));
 
-        if (alreadyInitialized) {
-          this._removeMaterialWrapper();
+      if (this.isRequired) {
+        this.enableValidation();
+      }
+
+      if (!this.isDisabled) {
+        this.setMaterialOptionsListMaxHeight();
+        this.view.dropdown = this.view.$materialSelect.dropdown({
+          hover: false,
+          closeOnClick: false,
+          resetScroll: false
+        });
+      }
+
+      if (this.shouldInheritTabindex) {
+        this.view.$materialSelect.attr('tabindex', this.view.$nativeSelect.attr('tabindex'));
+      }
+
+      if (this.isDefaultMaterialInput) {
+        this.view.$mainLabel.css('top', '-7px');
+      }
+
+      if (this.isCustomSelect) {
+        this.view.$materialSelect.css({
+          display: 'inline-block',
+          width: '100%',
+          height: 'calc(1.5em + .75rem + 2px)',
+          padding: '.375rem 1.75rem .375rem .75rem',
+          fontSize: '1rem',
+          lineHeight: '1.5',
+          backgroundColor: '#fff',
+          border: '1px solid #ced4da'
+        });
+      }
+
+      this.addAccessibilityAttributes();
+      this.markInitialized();
+    }
+  }, {
+    key: "setWrapperClasses",
+    value: function setWrapperClasses() {
+      if (this.isDefaultMaterialInput) {
+        this.view.$selectWrapper.addClass(this.view.$nativeSelect.attr('class').split(' ').filter(function (el) {
+          return el !== 'md-form';
+        }).join(' ')).css({
+          marginTop: '1.5rem',
+          marginBottom: '1.5rem'
+        });
+      } else {
+        this.view.$selectWrapper.addClass(this.view.$nativeSelect.attr('class'));
+      }
+    }
+  }, {
+    key: "setMaterialSelectInitialValue",
+    value: function setMaterialSelectInitialValue() {
+      if (!this.view.options.placeholder) {
+        var sanitizedLabelHtml = this.view.$materialSelectInitialOption.replace(/"/g, '&quot;').replace(/  +/g, ' ').trim();
+        this.view.$materialSelect.val(sanitizedLabelHtml);
+      } else {
+        this.view.$materialSelect.attr('placeholder', this.view.options.placeholder);
+
+        if (!this.view.$nativeSelect.find('option[value=""][selected][disabled][data-mdb-placeholder]').length) {
+          this.view.$nativeSelect.prepend('<option value="" selected disabled data-mdb-placeholder></option>');
         }
+      }
+    }
+  }, {
+    key: "appendDropdownIcon",
+    value: function appendDropdownIcon() {
+      if (this.isDisabled) {
+        this.view.$dropdownIcon.addClass('disabled');
+      }
 
-        if (this.options.destroy) {
-          this.$nativeSelect.data('select-id', null).removeClass('initialized');
-          return;
-        }
+      this.view.$selectWrapper.append(this.view.$dropdownIcon);
+    }
+  }, {
+    key: "appendMaterialSelect",
+    value: function appendMaterialSelect() {
+      this.view.$selectWrapper.append(this.view.$materialSelect);
+    }
+  }, {
+    key: "appendMaterialOptionsList",
+    value: function appendMaterialOptionsList() {
+      if (this.isSearchable) {
+        this.appendSearchInputOption();
+      }
 
-        if (this.options.BSsearchIn || this.options.BSinputText) {
-          this.$selectWrapper.addClass(this.$nativeSelect.attr('class').split(' ').filter(function (el) {
-            return el !== 'md-form';
-          }).join(' ')).css({
-            marginTop: '1.5rem',
-            marginBottom: '1.5rem'
+      if (this.isEditable && this.isSearchable) {
+        this.appendAddOptionBtn();
+      }
+
+      this.buildMaterialOptions();
+
+      if (this.isMultiple) {
+        this.appendToggleAllCheckbox();
+      }
+
+      this.view.$selectWrapper.append(this.view.$materialOptionsList);
+    }
+  }, {
+    key: "appendNativeSelect",
+    value: function appendNativeSelect() {
+      this.view.$nativeSelect.appendTo(this.view.$selectWrapper);
+    }
+  }, {
+    key: "appendSelectLabel",
+    value: function appendSelectLabel() {
+      if (this.view.$materialSelect.val() || this.view.options.placeholder) {
+        this.view.$mainLabel.addClass('active');
+      }
+
+      this.view.$mainLabel[this.isDisabled ? 'addClass' : 'removeClass']('disabled');
+      this.view.$mainLabel.appendTo(this.view.$selectWrapper);
+    }
+  }, {
+    key: "appendCustomTemplateParts",
+    value: function appendCustomTemplateParts() {
+      var _this = this;
+
+      this.view.$customTemplateParts.each(function (_, element) {
+        var $templatePart = $(element);
+        $templatePart.appendTo(_this.view.$materialOptionsList).wrap('<li></li>');
+      });
+      this.view.$btnSave.appendTo(this.view.$materialOptionsList); // @Depreciated
+    }
+  }, {
+    key: "appendValidationFeedbackElements",
+    value: function appendValidationFeedbackElements() {
+      this.view.$validFeedback.insertAfter(this.view.$selectWrapper);
+      this.view.$invalidFeedback.insertAfter(this.view.$selectWrapper);
+    }
+  }, {
+    key: "enableValidation",
+    value: function enableValidation() {
+      this.view.$nativeSelect.css({
+        position: 'absolute',
+        top: '1rem',
+        left: '0',
+        height: '0',
+        width: '0',
+        opacity: '0',
+        padding: '0',
+        'pointer-events': 'none'
+      });
+
+      if (this.view.$nativeSelect.attr('style').indexOf('inline!important') === -1) {
+        this.view.$nativeSelect.attr('style', "".concat(this.view.$nativeSelect.attr('style'), " display: inline!important;"));
+      }
+
+      this.view.$nativeSelect.attr('tabindex', -1);
+      this.view.$nativeSelect.data('inherit-tabindex', false);
+    }
+  }, {
+    key: "setMaterialOptionsListMaxHeight",
+    value: function setMaterialOptionsListMaxHeight() {
+      var multiplier = this.view.options.visibleOptions;
+      var additionalHeight = 0;
+      this.view.$materialOptionsList.show();
+      var $materialOptions = this.view.$materialOptionsList.find('li').not('.disabled');
+      var optionHeight = $materialOptions.first().height();
+      var optionsCount = $materialOptions.length;
+
+      if (this.isSearchable) {
+        additionalHeight += this.view.$searchInput.height();
+      }
+
+      if (this.isMultiple) {
+        additionalHeight += this.view.$toggleAll.height();
+      }
+
+      this.view.$materialOptionsList.hide();
+
+      if (multiplier >= 0 && multiplier < optionsCount) {
+        var maxHeight = optionHeight * multiplier + additionalHeight;
+        this.view.$materialOptionsList.css('max-height', maxHeight);
+        this.view.$materialSelect.data('maxheight', maxHeight);
+      }
+    }
+  }, {
+    key: "addAccessibilityAttributes",
+    value: function addAccessibilityAttributes() {
+      this.view.$materialSelect.attr({
+        role: this.isSearchable ? 'combobox' : 'listbox',
+        'aria-multiselectable': this.isMultiple,
+        'aria-disabled': this.isDisabled,
+        'aria-required': this.isRequired,
+        'aria-labelledby': this.view.$mainLabel.attr('id'),
+        'aria-haspopup': true,
+        'aria-expanded': false
+      });
+
+      if (this.view.$searchInput) {
+        this.view.$searchInput.attr('role', 'searchbox');
+      }
+
+      this.view.$materialOptionsList.find('li').each(function () {
+        var $this = $(this);
+        $this.attr({
+          role: 'option',
+          'aria-selected': $this.hasClass('active'),
+          'aria-disabled': $this.hasClass('disabled')
+        });
+      });
+    }
+  }, {
+    key: "markInitialized",
+    value: function markInitialized() {
+      this.view.$nativeSelect.addClass('initialized');
+    }
+  }, {
+    key: "appendSearchInputOption",
+    value: function appendSearchInputOption() {
+      var placeholder = this.view.$nativeSelect.attr('searchable');
+      var divClass = this.isDefaultMaterialInput ? '' : 'md-form';
+      var inputClass = this.isDefaultMaterialInput ? 'select-default mb-2' : '';
+      this.view.$searchInput = $("<span class=\"search-wrap ml-2\"><div class=\"".concat(divClass, " mt-0\"><input type=\"text\" class=\"search w-100 d-block ").concat(inputClass, "\" tabindex=\"-1\" placeholder=\"").concat(placeholder, "\"></div></span>"));
+      this.view.$materialOptionsList.append(this.view.$searchInput);
+      this.view.$searchInput.on('click', function (e) {
+        return e.stopPropagation();
+      });
+    }
+  }, {
+    key: "appendAddOptionBtn",
+    value: function appendAddOptionBtn() {
+      this.view.$searchInput.append(this.view.$addOptionBtn);
+      this.view.$addOptionBtn.on('click', this.addNewOption.bind(this));
+    }
+  }, {
+    key: "buildMaterialOptions",
+    value: function buildMaterialOptions() {
+      var _this2 = this;
+
+      this.view.$nativeSelectChildren.each(function (index, option) {
+        var $this = $(option);
+
+        if ($this.is('option')) {
+          _this2.buildSingleOption($this, _this2.isMultiple ? 'multiple' : '');
+        } else if ($this.is('optgroup')) {
+          var $materialOptgroup = $("<li class=\"optgroup\"><span>".concat($this.attr('label'), "</span></li>"));
+
+          _this2.view.$materialOptionsList.append($materialOptgroup);
+
+          var $optgroupOptions = $this.children('option');
+          $optgroupOptions.each(function (index, optgroupOption) {
+            _this2.buildSingleOption($(optgroupOption), 'optgroup-option');
           });
-        } else {
-          this.$selectWrapper.addClass(this.$nativeSelect.attr('class'));
         }
+      });
+    }
+  }, {
+    key: "appendToggleAllCheckbox",
+    value: function appendToggleAllCheckbox() {
+      var firstOption = this.view.$materialOptionsList.find('li').first();
 
-        this.$nativeSelect.data('select-id', this.uuid);
-        var sanitizedLabelHtml = this.$materialSelectInitialOption.replace(/"/g, '&quot;').replace(/  +/g, ' ').trim();
-        this.mainLabel.length === 0 ? this.$materialSelect.val(sanitizedLabelHtml) : this.mainLabel.text();
-        this.renderMaterialSelect();
-        this.bindEvents();
-
-        if (this.isRequired) {
-          this.enableValidation();
-        }
-
-        if (this.options.language.active && this.$toggleAll) {
-          if (this.options.language.pl) {
-            this.$toggleAll.find('label').text(this.options.language.pl.selectAll ? this.options.language.pl.selectAll : this.defaults.language.pl.selectAll);
-          }
-
-          if (this.options.language.fr) {
-            this.$toggleAll.find('label').text(this.options.language.fr.selectAll ? this.options.language.fr.selectAll : this.defaults.language.fr.selectAll);
-          }
-
-          if (this.options.language.ge) {
-            this.$toggleAll.find('label').text(this.options.language.ge.selectAll ? this.options.language.ge.selectAll : this.defaults.language.ge.selectAll);
-          }
-
-          if (this.options.language.ar) {
-            this.$toggleAll.find('label').text(this.options.language.ar.selectAll ? this.options.language.ar.selectAll : this.defaults.language.ar.selectAll);
-          }
-
-          if (this.options.language.in) {
-            this.$toggleAll.find('label').text(this.options.language.in.selectAll ? this.options.language.in.selectAll : this.defaults.language.in.selectAll);
-          }
-        }
-
-        if (this.$materialSelect.hasClass('custom-select') && this.$materialSelect.hasClass('select-dropdown')) {
-          this.$materialSelect.css({
-            display: 'inline-block',
-            width: '100%',
-            height: 'calc(1.5em + .75rem + 2px)',
-            padding: '.375rem 1.75rem .375rem .75rem',
-            fontSize: '1rem',
-            lineHeight: '1.5',
-            backgroundColor: '#fff',
-            border: '1px solid #ced4da'
-          });
-        }
+      if (firstOption.hasClass('disabled') && firstOption.find('input').prop('disabled')) {
+        firstOption.after(this.view.$toggleAll);
+      } else {
+        this.view.$materialOptionsList.find('li').first().before(this.view.$toggleAll);
       }
-    }, {
-      key: "_removeMaterialWrapper",
-      value: function _removeMaterialWrapper() {
-        var currentUuid = this.$nativeSelect.data('select-id');
-        this.$nativeSelect.parent().find('span.caret').remove();
-        this.$nativeSelect.parent().find('input').remove();
-        this.$nativeSelect.unwrap();
-        $("ul#select-options-".concat(currentUuid)).remove();
-      }
-    }, {
-      key: "renderMaterialSelect",
-      value: function renderMaterialSelect() {
-        var _this = this;
+    }
+  }, {
+    key: "addNewOption",
+    value: function addNewOption() {
+      var val = this.view.$searchInput.find('input').val();
+      var $newOption = $("<option value=\"".concat(val.toLowerCase(), "\" selected>").concat(val, "</option>")).prop('selected', true);
 
-        this.$nativeSelect.before(this.$selectWrapper);
-        this.appendDropdownIcon();
-        this.appendMaterialSelect();
-        this.appendMaterialOptionsList();
-        this.appendNativeSelect();
-        this.appendSaveSelectButton();
-
-        if (!this.$nativeSelect.is(':disabled')) {
-          this.$materialSelect.dropdown({
-            hover: false,
-            closeOnClick: false
-          });
-        }
-
-        if (this.$nativeSelect.data('inherit-tabindex') !== false) {
-          this.$materialSelect.attr('tabindex', this.$nativeSelect.attr('tabindex'));
-        }
-
-        if (this.isMultiple) {
-          this.$nativeSelect.find('option:selected:not(:disabled)').each(function (i, element) {
-            var index = element.index;
-
-            _this._toggleSelectedValue(index);
-
-            _this.$materialOptionsList.find('li:not(.optgroup):not(.select-toggle-all)').eq(index).find(':checkbox').prop('checked', true);
-          });
-        } else {
-          var index = this.$nativeSelect.find('option:selected').index();
-          this.$materialOptionsList.find('li').eq(index).addClass('active');
-        }
-
-        this.$nativeSelect.addClass('initialized');
-
-        if (this.options.BSinputText) {
-          this.mainLabel.css('top', '-7px');
-        }
-      }
-    }, {
-      key: "appendDropdownIcon",
-      value: function appendDropdownIcon() {
-        if (this.$nativeSelect.is(':disabled')) {
-          this.$dropdownIcon.addClass('disabled');
-        }
-
-        this.$selectWrapper.append(this.$dropdownIcon);
-      }
-    }, {
-      key: "appendMaterialSelect",
-      value: function appendMaterialSelect() {
-        this.$selectWrapper.append(this.$materialSelect);
-      }
-    }, {
-      key: "appendMaterialOptionsList",
-      value: function appendMaterialOptionsList() {
-        if (this.isSearchable) {
-          this.appendSearchInputOption();
-        }
-
-        this.buildMaterialOptions();
-
-        if (this.isMultiple) {
-          this.appendToggleAllCheckbox();
-        }
-
-        this.$selectWrapper.append(this.$materialOptionsList);
-      }
-    }, {
-      key: "appendNativeSelect",
-      value: function appendNativeSelect() {
-        this.$nativeSelect.appendTo(this.$selectWrapper);
-      }
-    }, {
-      key: "appendSearchInputOption",
-      value: function appendSearchInputOption() {
-        var placeholder = this.$nativeSelect.attr('searchable');
-
-        if (this.options.BSsearchIn) {
-          this.$searchInput = $("<span class=\"search-wrap ml-2\"><div class=\"mt-0\"><input type=\"text\" class=\"search form-control mb-2 w-100 d-block select-default\" placeholder=\"".concat(placeholder, "\"></div></span>"));
-        } else {
-          this.$searchInput = $("<span class=\"search-wrap ml-2\"><div class=\"md-form mt-0\"><input type=\"text\" class=\"search form-control w-100 d-block\" placeholder=\"".concat(placeholder, "\"></div></span>"));
-        }
-
-        this.$materialOptionsList.append(this.$searchInput);
-        this.$searchInput.on('click', function (e) {
-          e.stopPropagation();
+      if (!this.isMultiple) {
+        this.view.$nativeSelectChildren.each(function (index, option) {
+          $(option).attr('selected', false);
         });
       }
-    }, {
-      key: "appendToggleAllCheckbox",
-      value: function appendToggleAllCheckbox() {
-        this.$materialOptionsList.find('li.disabled').first().after(this.$toggleAll);
+
+      this.view.$nativeSelect.append($newOption);
+    }
+  }, {
+    key: "buildSingleOption",
+    value: function buildSingleOption($nativeSelectChild, type) {
+      var disabled = $nativeSelectChild.is(':disabled') ? 'disabled' : '';
+      var active = $nativeSelectChild.is(':selected') ? 'active' : '';
+      var optgroupClass = type === 'optgroup-option' ? 'optgroup-option' : '';
+      var iconUrl = $nativeSelectChild.data('icon');
+      var fas = $nativeSelectChild.data('fas') ? "<i class=\"fa-pull-right m-2 fas fa-".concat($nativeSelectChild.data('fas'), " ").concat(this.view.options.fasClasses, "\"></i> ") : '';
+      var far = $nativeSelectChild.data('far') ? "<i class=\"fa-pull-right m-2 far fa-".concat($nativeSelectChild.data('far'), " ").concat(this.view.options.farClasses, "\"></i> ") : '';
+      var fab = $nativeSelectChild.data('fab') ? "<i class=\"fa-pull-right m-2 fab fa-".concat($nativeSelectChild.data('fab'), " ").concat(this.view.options.fabClasses, "\"></i> ") : '';
+      var classes = $nativeSelectChild.attr('class');
+      var iconHtml = iconUrl ? "<img alt=\"\" src=\"".concat(iconUrl, "\" class=\"").concat(classes, "\">") : '';
+      var checkboxHtml = this.isMultiple ? "<input type=\"checkbox\" class=\"form-check-input\" ".concat(disabled, "/><label></label>") : '';
+      this.view.$materialOptionsList.append($("<li class=\"".concat(disabled, " ").concat(active, " ").concat(optgroupClass, " ").concat(this.view.options.copyClassesOption ? classes : '', " \">").concat(iconHtml, "<span class=\"filtrable\">").concat(checkboxHtml, " ").concat($nativeSelectChild.html(), " ").concat(fas, " ").concat(far, " ").concat(fab, "</span></li>")));
+    }
+  }, {
+    key: "shouldValidate",
+    get: function get() {
+      return this.view.options.validate;
+    }
+  }, {
+    key: "shouldInheritTabindex",
+    get: function get() {
+      return this.view.$nativeSelect.data('inherit-tabindex') !== false;
+    }
+  }, {
+    key: "isMultiple",
+    get: function get() {
+      return this.view.isMultiple;
+    }
+  }, {
+    key: "isSearchable",
+    get: function get() {
+      return this.view.isSearchable;
+    }
+  }, {
+    key: "isRequired",
+    get: function get() {
+      return this.view.isRequired;
+    }
+  }, {
+    key: "isEditable",
+    get: function get() {
+      return this.view.isEditable;
+    }
+  }, {
+    key: "isDisabled",
+    get: function get() {
+      return this.view.isDisabled;
+    }
+  }, {
+    key: "isDefaultMaterialInput",
+    get: function get() {
+      return this.view.options.defaultMaterialInput;
+    }
+  }, {
+    key: "isCustomSelect",
+    get: function get() {
+      return this.view.$materialSelect.hasClass('custom-select') && this.view.$materialSelect.hasClass('select-dropdown');
+    }
+  }]);
+
+  return MaterialSelectViewRenderer;
+}();
+"use strict";
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+// eslint-disable-next-line no-unused-vars
+var MaterialSelectView =
+/*#__PURE__*/
+function () {
+  // eslint-disable-next-line object-curly-newline
+  function MaterialSelectView($nativeSelect, _ref) {
+    var {
+      options: options,
+      properties: {
+        id: id
       }
-    }, {
-      key: "appendSaveSelectButton",
-      value: function appendSaveSelectButton() {
-        this.$selectWrapper.parent().find('button.btn-save').appendTo(this.$materialOptionsList);
-      }
-    }, {
-      key: "buildMaterialOptions",
-      value: function buildMaterialOptions() {
-        var _this2 = this;
+    } = _ref;
 
-        this.$nativeSelectChildren.each(function (index, option) {
-          var $this = $(option);
+    _classCallCheck(this, MaterialSelectView);
 
-          if ($this.is('option')) {
-            _this2.buildSingleOption($this, _this2.isMultiple ? 'multiple' : '');
-          } else if ($this.is('optgroup')) {
-            var $materialOptgroup = $("<li class=\"optgroup\"><span>".concat($this.attr('label'), "</span></li>"));
+    this.properties = {
+      id: id,
+      isMultiple: Boolean($nativeSelect.attr('multiple')),
+      isSearchable: Boolean($nativeSelect.attr('searchable')),
+      isRequired: Boolean($nativeSelect.attr('required')),
+      isEditable: Boolean($nativeSelect.attr('editable'))
+    };
+    this.options = this._copyOptions(options);
+    this.$nativeSelect = $nativeSelect;
+    this.$selectWrapper = $('<div class="select-wrapper"></div>');
+    this.$materialOptionsList = $("<ul id=\"select-options-".concat(this.properties.id, "\" class=\"dropdown-content select-dropdown w-100 ").concat(this.properties.isMultiple ? 'multiple-select-dropdown' : '', "\"></ul>"));
+    this.$materialSelectInitialOption = $nativeSelect.find('option:selected').text() || $nativeSelect.find('option:first').text() || '';
+    this.$nativeSelectChildren = this.$nativeSelect.children('option, optgroup');
+    this.$materialSelect = $("<input type=\"text\" class=\"".concat(this.options.defaultMaterialInput ? 'browser-default custom-select multi-bs-select select-dropdown form-control' : 'select-dropdown form-control', "\" ").concat(!this.options.validate && 'readonly="true"', " required=\"").concat(this.options.validate ? 'true' : 'false', "\" ").concat(this.$nativeSelect.is(' :disabled') ? 'disabled' : '', " data-activates=\"select-options-").concat(this.properties.id, "\" value=\"\"/>"));
+    this.$dropdownIcon = this.options.defaultMaterialInput ? '' : $('<span class="caret">&#9660;</span>');
+    this.$searchInput = null;
+    this.$noSearchResultsInfo = $("<li><span><i>".concat(this.options.labels.noSearchResults, "</i></span></li>"));
+    this.$toggleAll = $("<li class=\"select-toggle-all\"><span><input type=\"checkbox\" class=\"form-check-input\"><label>".concat(this.options.labels.selectAll, "</label></span></li>"));
+    this.$addOptionBtn = $('<i class="select-add-option fas fa-plus"></i>');
+    this.$mainLabel = this._jQueryFallback(this.$nativeSelect.next('label.mdb-main-label'), $("label[for='".concat(this.properties.id, "']")));
+    this.$customTemplateParts = this._jQueryFallback(this.$nativeSelect.nextUntil('select', '.mdb-select-template-part'), $("[data-mdb-select-template-part-for='".concat(this.properties.id, "']")));
+    this.$btnSave = this.$nativeSelect.nextUntil('select', '.btn-save'); // @Depreciated
 
-            _this2.$materialOptionsList.append($materialOptgroup);
+    this.$validFeedback = $("<div class=\"valid-feedback\">".concat(this.options.labels.validFeedback, "</div>"));
+    this.$invalidFeedback = $("<div class=\"invalid-feedback\">".concat(this.options.labels.invalidFeedback, "</div>"));
+    this.keyCodes = {
+      tab: 9,
+      esc: 27,
+      enter: 13,
+      arrowUp: 38,
+      arrowDown: 40
+    }; // eslint-disable-next-line no-undef
 
-            var $optgroupOptions = $this.children('option');
-            $optgroupOptions.each(function (index, optgroupOption) {
-              _this2.buildSingleOption($(optgroupOption), 'optgroup-option');
-            });
-          }
+    this.renderer = new MaterialSelectViewRenderer(this);
+    this.dropdown = null;
+  }
+
+  _createClass(MaterialSelectView, [{
+    key: "destroy",
+    value: function destroy() {
+      this.renderer.destroy();
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      this.renderer.render();
+    }
+  }, {
+    key: "selectPreselectedOptions",
+    value: function selectPreselectedOptions(handler) {
+      var _this = this;
+
+      if (this.isMultiple) {
+        this.$nativeSelect.find('option:selected:not(:disabled)').each(function (i, element) {
+          var index = element.index;
+
+          _this.$materialOptionsList.find('li:not(.optgroup):not(.select-toggle-all)').eq(index).addClass('selected active').find(':checkbox').prop('checked', true);
+
+          handler(index);
         });
-      }
-    }, {
-      key: "buildSingleOption",
-      value: function buildSingleOption($nativeSelectChild, type) {
-        var disabled = $nativeSelectChild.is(':disabled') ? 'disabled' : '';
-        var optgroupClass = type === 'optgroup-option' ? 'optgroup-option' : '';
-        var iconUrl = $nativeSelectChild.data('icon');
-        var fas = $nativeSelectChild.data('fas') ? "<i class=\"fa-pull-right m-2 fas fa-".concat($nativeSelectChild.data('fas'), " ").concat([...this.options.fasClasses].join(''), "\"></i> ") : '';
-        var far = $nativeSelectChild.data('far') ? "<i class=\"fa-pull-right m-2 far fa-".concat($nativeSelectChild.data('far'), " ").concat([...this.options.farClasses].join(''), "\"></i> ") : '';
-        var fab = $nativeSelectChild.data('fab') ? "<i class=\"fa-pull-right m-2 fab fa-".concat($nativeSelectChild.data('fab'), " ").concat([...this.options.fabClasses].join(''), "\"></i> ") : '';
-        var classes = $nativeSelectChild.attr('class');
-        var iconHtml = iconUrl ? "<img alt=\"\" src=\"".concat(iconUrl, "\" class=\"").concat(classes, "\">") : '';
-        var checkboxHtml = this.isMultiple ? "<input type=\"checkbox\" class=\"form-check-input\" ".concat(disabled, "/><label></label>") : '';
-        this.$materialOptionsList.append($("<li class=\"".concat(disabled, " ").concat(optgroupClass, " ").concat(this.options.copyClassesOption ? classes : '', " \">").concat(iconHtml, "<span class=\"filtrable\">").concat(checkboxHtml, " ").concat($nativeSelectChild.html(), " ").concat(fas, " ").concat(far, " ").concat(fab, "</span></li>")));
-      }
-    }, {
-      key: "enableValidation",
-      value: function enableValidation() {
-        this.$nativeSelect.css({
-          position: 'absolute',
-          top: '1rem',
-          left: '0',
-          height: '0',
-          width: '0',
-          opacity: '0',
-          padding: '0',
-          'pointer-events': 'none'
-        });
+      } else {
+        var $preselectedOption = this.$nativeSelect.find('option:selected').first();
+        var indexOfPreselectedOption = this.$nativeSelect.find('option').index($preselectedOption.get(0));
 
-        if (this.$nativeSelect.attr('style').indexOf('inline!important') === -1) {
-          this.$nativeSelect.attr('style', "".concat(this.$nativeSelect.attr('style'), " display: inline!important;"));
-        }
-
-        this.$nativeSelect.attr('tabindex', -1);
-        this.$nativeSelect.data('inherit-tabindex', false);
-      }
-    }, {
-      key: "bindEvents",
-      value: function bindEvents() {
-        var _this3 = this;
-
-        var config = {
-          attributes: true,
-          childList: true,
-          characterData: true,
-          subtree: true
-        };
-        var observer = new MutationObserver(this._onMutationObserverChange.bind(this));
-        observer.observe(this.$nativeSelect.get(0), config);
-        observer.customId = this.uuid;
-        observer.customStatus = 'observing';
-        MaterialSelect.clearMutationObservers();
-        MaterialSelect.mutationObservers.push(observer);
-        var $saveSelectBtn = this.$nativeSelect.parent().find('button.btn-save');
-        $saveSelectBtn.on('click', this._onSaveSelectBtnClick.bind(this));
-        this.$materialSelect.on('focus', this._onMaterialSelectFocus.bind(this));
-        this.$materialSelect.on('click', this._onMaterialSelectClick.bind(this));
-        this.$materialSelect.on('blur', this._onMaterialSelectBlur.bind(this));
-        this.$materialSelect.on('keydown', this._onMaterialSelectKeydown.bind(this));
-        this.$toggleAll.on('click', this._onToggleAllClick.bind(this));
-        this.$materialOptionsList.on('mousedown', this._onEachMaterialOptionMousedown.bind(this));
-        this.$materialOptionsList.find('li:not(.optgroup)').not(this.$toggleAll).each(function (materialOptionIndex, materialOption) {
-          $(materialOption).on('click', _this3._onEachMaterialOptionClick.bind(_this3, materialOptionIndex, materialOption));
-        });
-
-        if (!this.isMultiple && this.isSearchable) {
-          this.$materialOptionsList.find('li').on('click', this._onSingleMaterialOptionClick.bind(this));
-        }
-
-        if (this.isSearchable) {
-          this.$searchInput.find('.search').on('keyup', this._onSearchInputKeyup);
-        }
-
-        $('html').on('click', this._onHTMLClick.bind(this));
-      }
-    }, {
-      key: "_onMutationObserverChange",
-      value: function _onMutationObserverChange(mutationsList) {
-        mutationsList.forEach(function (mutation) {
-          var $select = $(mutation.target).closest('select');
-
-          if ($select.data('stop-refresh') !== true && (mutation.type === 'childList' || mutation.type === 'attributes' && $(mutation.target).is('option'))) {
-            MaterialSelect.clearMutationObservers();
-            $select.materialSelect({
-              destroy: true
-            });
-            $select.materialSelect();
-          }
-        });
-      }
-    }, {
-      key: "_onSaveSelectBtnClick",
-      value: function _onSaveSelectBtnClick() {
-        $('input.multi-bs-select').trigger('close');
-        this.$materialOptionsList.hide();
-        this.$materialSelect.removeClass('active');
-      }
-    }, {
-      key: "_onEachMaterialOptionClick",
-      value: function _onEachMaterialOptionClick(materialOptionIndex, materialOption, e) {
-        e.stopPropagation();
-        var $this = $(materialOption);
-
-        if ($this.hasClass('disabled') || $this.hasClass('optgroup')) {
-          return;
-        }
-
-        var selected = true;
-
-        if (this.isMultiple) {
-          $this.find('input[type="checkbox"]').prop('checked', function (index, oldPropertyValue) {
-            return !oldPropertyValue;
-          });
-          var hasOptgroup = Boolean(this.$nativeSelect.find('optgroup').length);
-          var thisIndex = this._isToggleAllPresent() ? $this.index() - 1 : $this.index();
-
-          if (this.isSearchable && hasOptgroup) {
-            selected = this._toggleSelectedValue(thisIndex - $this.prevAll('.optgroup').length - 1);
-          } else if (this.isSearchable) {
-            selected = this._toggleSelectedValue(thisIndex - 1);
-          } else if (hasOptgroup) {
-            selected = this._toggleSelectedValue(thisIndex - $this.prevAll('.optgroup').length);
-          } else {
-            selected = this._toggleSelectedValue(thisIndex);
-          }
-
-          if (this._isToggleAllPresent()) {
-            this._updateToggleAllOption();
-          }
-
-          this.$materialSelect.trigger('focus');
-        } else {
-          this.$materialOptionsList.find('li').removeClass('active');
-          $this.toggleClass('active');
-          this.$materialSelect.val($this.text().replace(/  +/g, ' ').trim());
-          this.$materialSelect.trigger('close');
-        }
-
-        this._selectSingleOption($this);
-
-        this.$nativeSelect.data('stop-refresh', true);
-        this.$nativeSelect.find('option').eq(materialOptionIndex).prop('selected', selected);
-        this.$nativeSelect.removeData('stop-refresh');
-
-        this._triggerChangeOnNativeSelect();
-
-        if (this.mainLabel.prev().find('input').hasClass('select-dropdown')) {
-          if (this.mainLabel.prev().find('input.select-dropdown').val().length > 0) {
-            this.mainLabel.addClass('active');
-          }
-        }
-
-        if (typeof this.options === 'function') {
-          this.options();
-        }
-
-        if ($this.hasClass('li-added')) {
-          this.$materialOptionsList.append(this.buildSingleOption($this, ''));
+        if ($preselectedOption.get(0) && $preselectedOption.attr('disabled') !== 'disabled') {
+          handler(indexOfPreselectedOption);
         }
       }
-    }, {
-      key: "_triggerChangeOnNativeSelect",
-      value: function _triggerChangeOnNativeSelect() {
-        var keyboardEvt = new KeyboardEvent('change', {
-          bubbles: true,
-          cancelable: true
-        });
-        this.$nativeSelect.get(0).dispatchEvent(keyboardEvt);
-      }
-    }, {
-      key: "_onMaterialSelectFocus",
-      value: function _onMaterialSelectFocus(e) {
+    }
+  }, {
+    key: "bindMaterialSelectFocus",
+    value: function bindMaterialSelectFocus() {
+      var _this2 = this;
+
+      this.$materialSelect.on('focus', function (e) {
         var $this = $(e.target);
 
-        if ($('ul.select-dropdown').not(this.$materialOptionsList.get(0)).is(':visible')) {
+        if ($('ul.select-dropdown').not(_this2.$materialOptionsList.get(0)).is(':visible')) {
           $('input.select-dropdown').trigger('close');
         }
 
-        this.mainLabel.addClass('active');
+        _this2.$mainLabel.addClass('active');
 
-        if (!this.$materialOptionsList.is(':visible')) {
+        if (!_this2.$materialOptionsList.is(':visible')) {
           $this.trigger('open', ['focus']);
           var label = $this.val();
-          var $selectedOption = this.$materialOptionsList.find('li').filter(function () {
+
+          var $selectedOption = _this2.$materialOptionsList.find('li').filter(function () {
             return $(this).text().toLowerCase() === label.toLowerCase();
-          })[0];
+          }).get(0);
 
-          this._selectSingleOption($selectedOption);
+          _this2._selectSingleOption($selectedOption);
+
+          _this2._updateDropdownScrollTop();
         }
 
-        if (!this.isMultiple) {
-          this.mainLabel.addClass('active ');
+        if (!_this2.isMultiple) {
+          _this2.$mainLabel.addClass('active');
         }
+      });
+    }
+  }, {
+    key: "bindMaterialSelectClick",
+    value: function bindMaterialSelectClick() {
+      var _this3 = this;
 
-        $(document).find('input.select-dropdown').each(function (i, el) {
-          return $(el).val().length <= 0;
-        }).parent().next('.mdb-main-label').filter(function (i, el) {
-          return $(el).prev().find('input.select-dropdown').val().length <= 0 && !$(el).prev().find('input.select-dropdown').hasClass('active');
-        }).removeClass('active');
-      }
-    }, {
-      key: "_onMaterialSelectClick",
-      value: function _onMaterialSelectClick(e) {
-        this.mainLabel.addClass('active ');
+      this.$materialSelect.on('mousedown', function (e) {
+        if (e.which === 3) {
+          e.preventDefault();
+        }
+      });
+      this.$materialSelect.on('click', function (e) {
+        _this3.$mainLabel.addClass('active');
+
         e.stopPropagation();
-      }
-    }, {
-      key: "_onMaterialSelectBlur",
-      value: function _onMaterialSelectBlur(e) {
+      });
+    }
+  }, {
+    key: "bindMaterialSelectBlur",
+    value: function bindMaterialSelectBlur() {
+      var _this4 = this;
+
+      this.$materialSelect.on('blur', function (e) {
         var $this = $(e);
 
-        if (!this.isMultiple && !this.isSearchable) {
+        if (!_this4.isMultiple && !_this4.isSearchable) {
           $this.trigger('close');
         }
 
-        this.$materialOptionsList.find('li.selected').removeClass('selected');
-      }
-    }, {
-      key: "_onSingleMaterialOptionClick",
-      value: function _onSingleMaterialOptionClick() {
-        this.$materialSelect.trigger('close');
-      }
-    }, {
-      key: "_onEachMaterialOptionMousedown",
-      value: function _onEachMaterialOptionMousedown(e) {
-        var option = e.target;
+        _this4.$materialOptionsList.find('li.selected').removeClass('selected');
+      });
+    }
+  }, {
+    key: "bindMaterialSelectKeydown",
+    value: function bindMaterialSelectKeydown() {
+      var _this5 = this;
 
-        if ($('.modal-content').find(this.$materialOptionsList).length) {
-          if (option.scrollHeight > option.offsetHeight) {
-            e.preventDefault();
-          }
-        }
-      }
-    }, {
-      key: "_onHTMLClick",
-      value: function _onHTMLClick(e) {
-        if (!$(e.target).closest("#select-options-".concat(this.uuid)).length && !$(e.target).hasClass('mdb-select') && $("#select-options-".concat(this.uuid)).hasClass('active')) {
-          this.$materialSelect.trigger('close');
-
-          if (!this.$materialSelect.val().length > 0) {
-            this.mainLabel.removeClass('active');
-          }
-        }
-
-        if (this.isSearchable && this.$searchInput !== null && this.$materialOptionsList.hasClass('active')) {
-          this.$materialOptionsList.find('.search-wrap input.search').focus();
-        }
-      }
-    }, {
-      key: "_onToggleAllClick",
-      value: function _onToggleAllClick(e) {
-        var _this4 = this;
-
-        var checkbox = $(this.$toggleAll).find('input[type="checkbox"]').first();
-        var state = !$(checkbox).prop('checked');
-        $(checkbox).prop('checked', state);
-        this.$materialOptionsList.find('li:not(.optgroup):not(.disabled):not(.select-toggle-all)').each(function (materialOptionIndex, materialOption) {
-          var $optionCheckbox = $(materialOption).find('input[type="checkbox"]');
-
-          if (state && $optionCheckbox.is(':checked') || !state && !$optionCheckbox.is(':checked')) {
-            return;
-          }
-
-          if (_this4._isToggleAllPresent()) {
-            materialOptionIndex++;
-          }
-
-          $optionCheckbox.prop('checked', state);
-
-          _this4.$nativeSelect.find('option').eq(materialOptionIndex).prop('selected', state);
-
-          if (state) {
-            $(materialOption).removeClass('active');
-          } else {
-            $(materialOption).addClass('active');
-          }
-
-          _this4._toggleSelectedValue(materialOptionIndex);
-
-          _this4._selectOption(materialOption);
-
-          _this4._setValueToMaterialSelect();
-        });
-        this.$nativeSelect.data('stop-refresh', true);
-
-        this._triggerChangeOnNativeSelect();
-
-        this.$nativeSelect.removeData('stop-refresh');
-        e.stopPropagation();
-      }
-    }, {
-      key: "_onMaterialSelectKeydown",
-      value: function _onMaterialSelectKeydown(e) {
+      this.$materialSelect.on('keydown', function (e) {
         var $this = $(e.target);
-        var isTab = e.which === this.keyCodes.tab;
-        var isEsc = e.which === this.keyCodes.esc;
-        var isEnter = e.which === this.keyCodes.enter;
-        var isArrowUp = e.which === this.keyCodes.arrowUp;
-        var isArrowDown = e.which === this.keyCodes.arrowDown;
-        var isMaterialSelectVisible = this.$materialOptionsList.is(':visible');
+        var isTab = e.which === _this5.keyCodes.tab;
+        var isEsc = e.which === _this5.keyCodes.esc;
+        var isEnter = e.which === _this5.keyCodes.enter;
+        var isEnterWithShift = isEnter && e.shiftKey;
+        var isArrowUp = e.which === _this5.keyCodes.arrowUp;
+        var isArrowDown = e.which === _this5.keyCodes.arrowDown;
+
+        var isMaterialSelectVisible = _this5.$materialOptionsList.is(':visible');
 
         if (isTab) {
-          this._handleTabKey($this);
+          _this5._handleTabKey($this);
 
           return;
         } else if (isArrowDown && !isMaterialSelectVisible) {
@@ -3913,90 +3857,433 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         }
 
         e.preventDefault();
+        /* eslint-disable consistent-return */
+
+        switch (true) {
+          case isEnterWithShift:
+            return _this5._handleEnterWithShiftKey($this);
+
+          case isEnter:
+            return _this5._handleEnterKey($this);
+
+          case isArrowDown || isArrowUp:
+            return _this5._handleArrowUpDownKey(e.which);
+
+          case isEsc:
+            return _this5._handleEscKey($this);
+
+          default:
+            return _this5._handleLetterKey(e);
+        }
+        /* eslint-disable consistent-return */
+
+      });
+    }
+  }, {
+    key: "bindMaterialSelectDropdownToggle",
+    value: function bindMaterialSelectDropdownToggle() {
+      var _this6 = this;
+
+      this.$materialSelect.on('open', function () {
+        return _this6.$materialSelect.attr('aria-expanded', 'true');
+      });
+      this.$materialSelect.on('close', function () {
+        return _this6.$materialSelect.attr('aria-expanded', 'false');
+      });
+    }
+  }, {
+    key: "bindToggleAllClick",
+    value: function bindToggleAllClick(handler) {
+      var _this7 = this;
+
+      this.$toggleAll.on('click', function (e) {
+        var checkbox = $(_this7.$toggleAll).find('input[type="checkbox"]').first();
+        var currentState = Boolean($(checkbox).prop('checked'));
+        var isToggleChecked = !currentState;
+        $(checkbox).prop('checked', !currentState);
+
+        _this7.$materialOptionsList.find('li:not(.optgroup):not(.select-toggle-all)').each(function (materialOptionIndex, materialOption) {
+          var $materialOption = $(materialOption);
+          var $optionCheckbox = $materialOption.find('input[type="checkbox"]');
+          $materialOption.attr('aria-selected', isToggleChecked);
+
+          if (isToggleChecked && $optionCheckbox.is(':checked') || !isToggleChecked && !$optionCheckbox.is(':checked') || $(materialOption).is(':hidden') || $(materialOption).is('.disabled')) {
+            return;
+          }
+
+          $optionCheckbox.prop('checked', isToggleChecked);
+
+          _this7.$nativeSelect.find('option').eq(materialOptionIndex).prop('selected', isToggleChecked);
+
+          $materialOption.toggleClass('active');
+
+          _this7._selectOption(materialOption);
+
+          handler(materialOptionIndex);
+        });
+
+        _this7.$nativeSelect.data('stop-refresh', true);
+
+        _this7._triggerChangeOnNativeSelect();
+
+        _this7.$nativeSelect.removeData('stop-refresh');
+
+        e.stopPropagation();
+      });
+    }
+  }, {
+    key: "bindMaterialOptionMousedown",
+    value: function bindMaterialOptionMousedown() {
+      var _this8 = this;
+
+      this.$materialOptionsList.on('mousedown', function (e) {
+        var option = e.target;
+        var inModal = $('.modal-content').find(_this8.$materialOptionsList).length;
+
+        if (inModal && option.scrollHeight > option.offsetHeight) {
+          e.preventDefault();
+        }
+      });
+    }
+  }, {
+    key: "bindMaterialOptionClick",
+    value: function bindMaterialOptionClick(handler) {
+      var _this9 = this;
+
+      this.$materialOptionsList.find('li:not(.optgroup)').not(this.$toggleAll).each(function (materialOptionIndex, materialOption) {
+        $(materialOption).on('click', function (e) {
+          e.stopPropagation();
+          var $this = $(materialOption);
+
+          if ($this.hasClass('disabled') || $this.hasClass('optgroup')) {
+            return;
+          }
+
+          var selected = true;
+
+          if (_this9.isMultiple) {
+            $this.find('input[type="checkbox"]').prop('checked', function (index, oldPropertyValue) {
+              return !oldPropertyValue;
+            });
+            var hasOptgroup = Boolean(_this9.$nativeSelect.find('optgroup').length);
+            var thisIndex = _this9._isToggleAllPresent() ? $this.index() - 1 : $this.index();
+            /* eslint-disable max-statements-per-line */
+
+            switch (true) {
+              case _this9.isSearchable && hasOptgroup:
+                selected = handler(thisIndex - $this.prevAll('.optgroup').length - 1);
+                break;
+
+              case _this9.isSearchable:
+                selected = handler(thisIndex - 1);
+                break;
+
+              case hasOptgroup:
+                selected = handler(thisIndex - $this.prevAll('.optgroup').length);
+                break;
+
+              default:
+                selected = handler(thisIndex);
+                break;
+            }
+            /* eslint-disable max-statements-per-line */
+
+
+            if (_this9._isToggleAllPresent()) {
+              _this9._updateToggleAllOption();
+            }
+
+            _this9.$materialSelect.trigger('focus');
+          } else {
+            _this9.$materialOptionsList.find('li').removeClass('active').attr('aria-selected', 'false');
+
+            _this9.$materialSelect.val($this.text().replace(/  +/g, ' ').trim());
+
+            _this9.$materialSelect.trigger('close');
+          }
+
+          $this.toggleClass('active');
+          var ariaSelected = $this.attr('aria-selected');
+          $this.attr('aria-selected', ariaSelected === 'true' ? 'false' : 'true');
+
+          _this9._selectSingleOption($this);
+
+          _this9.$nativeSelect.data('stop-refresh', true);
+
+          _this9.$nativeSelect.find('option').eq(materialOptionIndex).prop('selected', selected);
+
+          _this9.$nativeSelect.removeData('stop-refresh');
+
+          _this9._triggerChangeOnNativeSelect();
+
+          if (_this9.$materialSelect.val()) {
+            _this9.$mainLabel.addClass('active');
+          }
+
+          if ($this.hasClass('li-added')) {
+            _this9.renderer.buildSingleOption($this, '');
+          }
+        });
+      });
+    }
+  }, {
+    key: "bindSingleMaterialOptionClick",
+    value: function bindSingleMaterialOptionClick() {
+      var _this10 = this;
+
+      this.$materialOptionsList.find('li').on('click', function () {
+        _this10.$materialSelect.trigger('close');
+      });
+    }
+  }, {
+    key: "bindSearchInputKeyup",
+    value: function bindSearchInputKeyup() {
+      var _this11 = this;
+
+      this.$searchInput.find('.search').on('keyup', function (e) {
+        var $this = $(e.target);
+        var isTab = e.which === _this11.keyCodes.tab;
+        var isEsc = e.which === _this11.keyCodes.esc;
+        var isEnter = e.which === _this11.keyCodes.enter;
+        var isEnterWithShift = isEnter && e.shiftKey;
+        var isArrowUp = e.which === _this11.keyCodes.arrowUp;
+        var isArrowDown = e.which === _this11.keyCodes.arrowDown;
+
+        if (isArrowDown || isTab || isEsc || isArrowUp) {
+          _this11.$materialSelect.focus();
+
+          _this11._handleArrowUpDownKey(e.which);
+
+          return;
+        }
+
+        var $ul = $this.closest('ul');
+        var searchValue = $this.val();
+        var $options = $ul.find('li span.filtrable');
+        var isOptionInList = false;
+        $options.each(function () {
+          var $option = $(this);
+
+          if (typeof this.outerHTML === 'string') {
+            var liValue = this.textContent.toLowerCase();
+
+            if (liValue.includes(searchValue.toLowerCase())) {
+              $option.show().parent().show();
+            } else {
+              $option.hide().parent().hide();
+            }
+
+            if (liValue.trim() === searchValue.toLowerCase()) {
+              isOptionInList = true;
+            }
+          }
+        });
 
         if (isEnter) {
-          this._handleEnterKey($this);
-        } else if (isArrowDown) {
-          this._handleArrowDownKey();
-        } else if (isArrowUp) {
-          this._handleArrowUpKey();
-        } else if (isEsc) {
-          this._handleEscKey($this);
+          if (_this11.isEditable && !isOptionInList) {
+            _this11.renderer.addNewOption();
+
+            return;
+          }
+
+          if (isEnterWithShift) {
+            _this11._handleEnterWithShiftKey($this);
+          }
+
+          _this11.$materialSelect.trigger('open');
+
+          return;
+        }
+
+        _this11.$addOptionBtn[searchValue && _this11.isEditable && !isOptionInList ? 'show' : 'hide']();
+
+        var anyOptionMatch = $options.filter(function (_, e) {
+          return $(e).is(':visible') && !$(e).parent().hasClass('disabled');
+        }).length !== 0;
+
+        if (!anyOptionMatch) {
+          _this11.$toggleAll.hide();
+
+          _this11.$materialOptionsList.append(_this11.$noSearchResultsInfo);
         } else {
-          this._handleLetterKey(e);
-        }
-      }
-    }, {
-      key: "_handleTabKey",
-      value: function _handleTabKey(materialSelect) {
-        this._handleEscKey(materialSelect);
-      }
-    }, {
-      key: "_handleEnterKey",
-      value: function _handleEnterKey(materialSelect) {
-        var $activeOption = this.$materialOptionsList.find('li.selected:not(.disabled)');
-        $activeOption.trigger('click').addClass('active');
+          _this11.$toggleAll.show();
 
-        if (!this.isMultiple) {
-          $(materialSelect).trigger('close');
-        }
-      }
-    }, {
-      key: "_handleArrowDownKey",
-      value: function _handleArrowDownKey() {
-        var $firstOption = this.$materialOptionsList.find('li').not('.disabled').first();
-        var $lastOption = this.$materialOptionsList.find('li').not('.disabled').last();
-        var anySelected = this.$materialOptionsList.find('li.selected').length > 0;
-        var $currentOption = anySelected ? this.$materialOptionsList.find('li.selected') : $firstOption;
-        var $matchedMaterialOption = $currentOption.is($lastOption) || !anySelected ? $currentOption : $currentOption.next('li:not(.disabled)');
+          _this11.$materialOptionsList.find(_this11.$noSearchResultsInfo).remove();
 
-        this._selectSingleOption($matchedMaterialOption);
-
-        if (!$matchedMaterialOption.find('input').is(':checked')) {
-          $matchedMaterialOption.removeClass('active');
+          _this11._updateToggleAllOption();
         }
 
-        if (!$matchedMaterialOption.prev().hasClass('selected') && !$matchedMaterialOption.prev().find('input').is(':checked')) {
-          $matchedMaterialOption.prev().removeClass('active');
+        _this11.dropdown.updatePosition(_this11.$materialSelect, _this11.$materialOptionsList);
+      });
+    }
+  }, {
+    key: "bindHtmlClick",
+    value: function bindHtmlClick() {
+      var _this12 = this;
+
+      $('html').on('click', function (e) {
+        if (!$(e.target).closest("#select-options-".concat(_this12.properties.id)).length && !$(e.target).hasClass('mdb-select') && $("#select-options-".concat(_this12.properties.id)).hasClass('active')) {
+          _this12.$materialSelect.trigger('close');
+
+          if (!_this12.$materialSelect.val() && !_this12.options.placeholder) {
+            _this12.$mainLabel.removeClass('active');
+          }
         }
 
-        $matchedMaterialOption.addClass('active');
+        if (_this12.isSearchable && _this12.$searchInput !== null && _this12.$materialOptionsList.hasClass('active')) {
+          _this12.$materialOptionsList.find('.search-wrap input.search').focus();
+        }
+      });
+    }
+  }, {
+    key: "bindMobileDevicesMousedown",
+    value: function bindMobileDevicesMousedown() {
+      $('select').siblings('input.select-dropdown', 'input.multi-bs-select').on('mousedown', function (e) {
+        if (MaterialSelectView.isMobileDevice && (e.clientX >= e.target.clientWidth || e.clientY >= e.target.clientHeight)) {
+          e.preventDefault();
+        }
+      });
+    }
+  }, {
+    key: "bindSaveBtnClick",
+    value: function bindSaveBtnClick() {
+      var _this13 = this;
+
+      // @Depreciated
+      this.$btnSave.on('click', function () {
+        _this13.$materialSelect.trigger('close');
+      });
+    }
+  }, {
+    key: "_isToggleAllPresent",
+    value: function _isToggleAllPresent() {
+      return this.$materialOptionsList.find(this.$toggleAll).length;
+    }
+  }, {
+    key: "_updateToggleAllOption",
+    value: function _updateToggleAllOption() {
+      var $allOptionsButToggleAll = this.$materialOptionsList.find('li').not('.select-toggle-all, .disabled, :hidden').find('[type=checkbox]');
+      var $checkedOptionsButToggleAll = $allOptionsButToggleAll.filter(':checked');
+      var isToggleAllChecked = this.$toggleAll.find('[type=checkbox]').is(':checked');
+
+      if ($checkedOptionsButToggleAll.length === $allOptionsButToggleAll.length && !isToggleAllChecked) {
+        this.$toggleAll.find('[type=checkbox]').prop('checked', true);
+      } else if ($checkedOptionsButToggleAll.length < $allOptionsButToggleAll.length && isToggleAllChecked) {
+        this.$toggleAll.find('[type=checkbox]').prop('checked', false);
       }
-    }, {
-      key: "_handleArrowUpKey",
-      value: function _handleArrowUpKey() {
-        var $firstOption = this.$materialOptionsList.find('li').not('.disabled').first();
-        var $lastOption = this.$materialOptionsList.find('li').not('.disabled').last();
-        var anySelected = this.$materialOptionsList.find('li.selected').length > 0;
-        var $currentOption = anySelected ? this.$materialOptionsList.find('li.selected') : $lastOption;
-        var $matchedMaterialOption = $currentOption.is($firstOption) || !anySelected ? $currentOption : $currentOption.prev('li:not(.disabled)');
+    }
+  }, {
+    key: "_handleTabKey",
+    value: function _handleTabKey($materialSelect) {
+      this._handleEscKey($materialSelect);
+    }
+  }, {
+    key: "_handleEnterWithShiftKey",
+    value: function _handleEnterWithShiftKey($materialSelect) {
+      if (!this.isMultiple) {
+        this._handleEnterKey($materialSelect);
+      } else {
+        this.$toggleAll.trigger('click');
+      }
+    }
+  }, {
+    key: "_handleEnterKey",
+    value: function _handleEnterKey($materialSelect) {
+      var $activeOption = this.$materialOptionsList.find('li.selected:not(.disabled)');
+      $activeOption.trigger('click').addClass('active');
 
-        this._selectSingleOption($matchedMaterialOption);
+      if (!this.isMultiple) {
+        $materialSelect.trigger('close');
+      }
+    }
+  }, {
+    key: "_handleArrowUpDownKey",
+    value: function _handleArrowUpDownKey(keyCode) {
+      var _this14 = this;
 
-        if (!$matchedMaterialOption.find('input').is(':checked')) {
-          $matchedMaterialOption.removeClass('active');
+      var $availableOptions = this.$materialOptionsList.find('li:visible').not('.disabled, .select-toggle-all');
+      var $firstOption = $availableOptions.first();
+      var $lastOption = $availableOptions.last();
+      var anySelected = this.$materialOptionsList.find('li.selected').length > 0;
+      var $matchedMaterialOption = null;
+      var $activeOption = null;
+      var isArrowUp = keyCode === this.keyCodes.arrowUp;
+
+      if (isArrowUp) {
+        var $currentOption = anySelected ? this.$materialOptionsList.find('li.selected').first() : $lastOption;
+        var $prevOption = $currentOption.prev('li:visible:not(.disabled, .select-toggle-all)');
+        $activeOption = $prevOption;
+        $availableOptions.each(function (key, el) {
+          if ($(el).hasClass(_this14.options.keyboardActiveClass)) {
+            $prevOption = $availableOptions.eq(key - 1);
+            $activeOption = $availableOptions.eq(key);
+          }
+        });
+        $matchedMaterialOption = $currentOption.is($firstOption) || !anySelected ? $currentOption : $prevOption;
+      } else {
+        var _$currentOption = anySelected ? this.$materialOptionsList.find('li.selected').first() : $firstOption;
+
+        var $nextOption = _$currentOption.next('li:visible:not(.disabled, .select-toggle-all)');
+
+        $activeOption = $nextOption;
+        $availableOptions.each(function (key, el) {
+          if ($(el).hasClass(_this14.options.keyboardActiveClass)) {
+            $nextOption = $availableOptions.eq(key + 1);
+            $activeOption = $availableOptions.eq(key);
+          }
+        });
+        $matchedMaterialOption = _$currentOption.is($lastOption) || !anySelected ? _$currentOption : $nextOption;
+      }
+
+      this._selectSingleOption($matchedMaterialOption);
+
+      this._removeKeyboardActiveClass();
+
+      if (!$matchedMaterialOption.find('input').is(':checked')) {
+        $matchedMaterialOption.removeClass(this.options.keyboardActiveClass);
+      }
+
+      if (!$activeOption.hasClass('selected') && !$activeOption.find('input').is(':checked') && this.isMultiple) {
+        $activeOption.removeClass('active', this.options.keyboardActiveClass);
+      }
+
+      $matchedMaterialOption.addClass(this.options.keyboardActiveClass);
+
+      if ($matchedMaterialOption.position()) {
+        this.$materialOptionsList.scrollTop(this.$materialOptionsList.scrollTop() + $matchedMaterialOption.position().top);
+      }
+    }
+  }, {
+    key: "_handleEscKey",
+    value: function _handleEscKey($materialSelect) {
+      this._removeKeyboardActiveClass();
+
+      $materialSelect.trigger('close');
+    }
+  }, {
+    key: "_handleLetterKey",
+    value: function _handleLetterKey(e) {
+      var _this15 = this;
+
+      this._removeKeyboardActiveClass();
+
+      if (this.isSearchable) {
+        var isLetter = e.which > 46 && e.which < 91;
+        var isNumber = e.which > 93 && e.which < 106;
+        var isBackspace = e.which === 8;
+
+        if (isLetter || isNumber) {
+          this.$searchInput.find('input').val(e.key).focus();
         }
 
-        if (!$matchedMaterialOption.next().hasClass('selected') && !$matchedMaterialOption.next().find('input').is(':checked')) {
-          $matchedMaterialOption.next().removeClass('active');
+        if (isBackspace) {
+          this.$searchInput.find('input').val('').focus();
         }
-
-        $matchedMaterialOption.addClass('active');
-      }
-    }, {
-      key: "_handleEscKey",
-      value: function _handleEscKey(materialSelect) {
-        $(materialSelect).trigger('close');
-      }
-    }, {
-      key: "_handleLetterKey",
-      value: function _handleLetterKey(e) {
-        var _this5 = this;
-
+      } else {
         var filterQueryString = '';
         var letter = String.fromCharCode(e.which).toLowerCase();
         var nonLetters = Object.keys(this.keyCodes).map(function (key) {
-          return _this5.keyCodes[key];
+          return _this15.keyCodes[key];
         });
         var isLetterSearchable = letter && nonLetters.indexOf(e.which) === -1;
 
@@ -4015,118 +4302,307 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           this._selectSingleOption($matchedMaterialOption);
         }
       }
+    }
+  }, {
+    key: "_removeKeyboardActiveClass",
+    value: function _removeKeyboardActiveClass() {
+      this.$materialOptionsList.find('li').removeClass(this.options.keyboardActiveClass);
+    }
+  }, {
+    key: "_triggerChangeOnNativeSelect",
+    value: function _triggerChangeOnNativeSelect() {
+      var keyboardEvt = new KeyboardEvent('change', {
+        bubbles: true,
+        cancelable: true
+      });
+      this.$nativeSelect.get(0).dispatchEvent(keyboardEvt);
+    }
+  }, {
+    key: "_selectSingleOption",
+    value: function _selectSingleOption(newOption) {
+      this.$materialOptionsList.find('li.selected').removeClass('selected');
+
+      this._selectOption(newOption);
+    }
+  }, {
+    key: "_updateDropdownScrollTop",
+    value: function _updateDropdownScrollTop() {
+      var $preselected = this.$materialOptionsList.find('li.active').first();
+
+      if ($preselected.length) {
+        this.$materialOptionsList.scrollTo($preselected);
+      } else {
+        this.$materialOptionsList.scrollTop(0);
+      }
+    }
+  }, {
+    key: "_selectOption",
+    value: function _selectOption(newOption) {
+      var option = $(newOption);
+      option.addClass('selected');
+    }
+  }, {
+    key: "_copyOptions",
+    value: function _copyOptions(options) {
+      return $.extend({}, options);
+    }
+  }, {
+    key: "_jQueryFallback",
+    value: function _jQueryFallback() {
+      var $lastElem = null;
+
+      for (var i = 0; i < arguments.length; i++) {
+        $lastElem = i < 0 || arguments.length <= i ? undefined : arguments[i];
+
+        if ($lastElem.length) {
+          return $lastElem;
+        }
+      }
+
+      return $lastElem;
+    }
+  }, {
+    key: "isMultiple",
+    get: function get() {
+      return this.properties.isMultiple;
+    }
+  }, {
+    key: "isSearchable",
+    get: function get() {
+      return this.properties.isSearchable;
+    }
+  }, {
+    key: "isRequired",
+    get: function get() {
+      return this.properties.isRequired;
+    }
+  }, {
+    key: "isEditable",
+    get: function get() {
+      return this.properties.isEditable;
+    }
+  }, {
+    key: "isDisabled",
+    get: function get() {
+      return this.$nativeSelect.is(':disabled');
+    }
+  }], [{
+    key: "isMobileDevice",
+    get: function get() {
+      return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    }
+  }]);
+
+  return MaterialSelectView;
+}();
+"use strict";
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+jQuery(function ($) {
+  var MaterialSelect =
+  /*#__PURE__*/
+  function () {
+    function MaterialSelect($nativeSelect) {
+      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+      _classCallCheck(this, MaterialSelect);
+
+      this.options = {
+        destroy: this.fallback().or(options.destroy).or(false).value(),
+        validate: this.fallback().or($nativeSelect.attr('data-validate')).or(options.validate).or(false).value(),
+        selectId: this.fallback().or($nativeSelect.attr('data-native-id')).or(options.selectId).or(null).value(),
+        defaultMaterialInput: this.fallback().or($nativeSelect.attr('data-default-material-input')).or(options.defaultMaterialInput).or(false).value(),
+        fasClasses: this.fallback().or($nativeSelect.attr('data-fas-classes')).or(options.fasClasses).or('').value(),
+        farClasses: this.fallback().or($nativeSelect.attr('data-far-classes')).or(options.farClasses).or('').value(),
+        fabClasses: this.fallback().or($nativeSelect.attr('data-fab-classes')).or(options.fabClasses).or('').value(),
+        copyClassesOption: this.fallback().or($nativeSelect.attr('data-copy-classes-option')).or(options.copyClassesOption).or(false).value(),
+        labels: {
+          selectAll: this.fallback().or($nativeSelect.attr('data-label-select-all')).or((options.labels || {}).selectAll).or('Select all').value(),
+          optionsSelected: this.fallback().or($nativeSelect.attr('data-label-options-selected')).or((options.labels || {}).optionsSelected).or('options selected').value(),
+          validFeedback: this.fallback().or($nativeSelect.attr('data-label-valid-feedback')).or((options.labels || {}).validFeedback).or('Ok').value(),
+          invalidFeedback: this.fallback().or($nativeSelect.attr('data-label-invalid-feedback')).or((options.labels || {}).invalidFeedback).or('Incorrect value').value(),
+          noSearchResults: this.fallback().or($nativeSelect.attr('data-label-no-search-results')).or((options.labels || {}).noSearchResults).or('No results').value()
+        },
+        keyboardActiveClass: this.fallback().or($nativeSelect.attr('data-keyboard-active-class')).or(options.keyboardActiveClass).or('heavy-rain-gradient').value(),
+        placeholder: this.fallback().or($nativeSelect.attr('data-placeholder')).or(options.placeholder).or(null).value(),
+        visibleOptions: this.fallback().or($nativeSelect.attr('data-visible-options')).or(options.visibleOptions).or(5).value(),
+        maxSelectedOptions: this.fallback().or($nativeSelect.attr('data-max-selected-options')).or(options.maxSelectedOptions).or(5).value()
+      };
+      this.uuid = $nativeSelect.attr('id') || this.options.selectId || this._randomUUID(); // eslint-disable-next-line no-undef
+
+      this.view = new MaterialSelectView($nativeSelect, {
+        options: this.options,
+        properties: {
+          id: this.uuid
+        }
+      });
+      this.selectedOptionsIndexes = []; // jQuery indexes; `.eq()` is operating on these
+
+      MaterialSelect.mutationObservers = [];
+    }
+
+    _createClass(MaterialSelect, [{
+      key: "init",
+      value: function init() {
+        var _this = this;
+
+        if (this.options.destroy) {
+          this.view.destroy();
+          return;
+        }
+
+        if (this.isInitialized) {
+          this.view.destroy();
+        }
+
+        this.view.render();
+        this.view.selectPreselectedOptions(function (optionIndex) {
+          return _this._toggleSelectedValue(optionIndex);
+        });
+        this.bindEvents();
+      }
     }, {
-      key: "_onSearchInputKeyup",
-      value: function _onSearchInputKeyup(e) {
-        var $this = $(e.target);
-        var $ul = $this.closest('ul');
-        var searchValue = $this.val();
-        var $options = $ul.find('li span.filtrable');
-        $options.each(function () {
-          var $option = $(this);
+      key: "bindEvents",
+      value: function bindEvents() {
+        var _this2 = this;
 
-          if (typeof this.outerHTML === 'string') {
-            var liValue = this.textContent.toLowerCase();
+        this.bindMutationObserverChange();
+        this.view.bindMaterialSelectFocus();
+        this.view.bindMaterialSelectClick();
+        this.view.bindMaterialSelectBlur();
+        this.view.bindMaterialSelectKeydown();
+        this.view.bindMaterialSelectDropdownToggle();
+        this.view.bindToggleAllClick(function (materialOptionIndex) {
+          return _this2._toggleSelectedValue(materialOptionIndex);
+        });
+        this.view.bindMaterialOptionMousedown();
+        this.view.bindMaterialOptionClick(function (optionIndex) {
+          return _this2._toggleSelectedValue(optionIndex);
+        });
 
-            if (liValue.includes(searchValue.toLowerCase())) {
-              $option.show().parent().show();
-            } else {
-              $option.hide().parent().hide();
-            }
+        if (!this.view.isMultiple && this.view.isSearchable) {
+          this.view.bindSingleMaterialOptionClick();
+        }
+
+        if (this.view.isSearchable) {
+          this.view.bindSearchInputKeyup();
+        }
+
+        this.view.bindHtmlClick();
+        this.view.bindMobileDevicesMousedown();
+        this.view.bindSaveBtnClick(); // @Depreciated
+      }
+    }, {
+      key: "bindMutationObserverChange",
+      value: function bindMutationObserverChange() {
+        var config = {
+          attributes: true,
+          childList: true,
+          characterData: true,
+          subtree: true
+        };
+        var observer = new MutationObserver(this._onMutationObserverChange.bind(this));
+        observer.observe(this.view.$nativeSelect.get(0), config);
+        observer.customId = this.uuid;
+        observer.customStatus = 'observing';
+        MaterialSelect.clearMutationObservers();
+        MaterialSelect.mutationObservers.push(observer);
+      }
+    }, {
+      key: "_onMutationObserverChange",
+      value: function _onMutationObserverChange(mutationsList) {
+        mutationsList.forEach(function (mutation) {
+          var $select = $(mutation.target).closest('select');
+
+          if ($select.data('stop-refresh') !== true && (mutation.type === 'childList' || mutation.type === 'attributes' && $(mutation.target).is('option'))) {
+            MaterialSelect.clearMutationObservers(); // eslint-disable-next-line object-curly-newline
+
+            $select.materialSelect({
+              destroy: true
+            });
+            $select.materialSelect();
           }
         });
       }
     }, {
-      key: "_isToggleAllPresent",
-      value: function _isToggleAllPresent() {
-        return this.$materialOptionsList.find(this.$toggleAll).length;
-      }
-    }, {
-      key: "_updateToggleAllOption",
-      value: function _updateToggleAllOption() {
-        var $allOptionsButToggleAll = this.$materialOptionsList.find('li').not('.select-toggle-all, .disabled').find('[type=checkbox]');
-        var $checkedOptionsButToggleAll = $allOptionsButToggleAll.filter(':checked');
-        var isToggleAllChecked = this.$toggleAll.find('[type=checkbox]').is(':checked');
-
-        if ($checkedOptionsButToggleAll.length === $allOptionsButToggleAll.length && !isToggleAllChecked) {
-          this.$toggleAll.find('[type=checkbox]').prop('checked', true);
-        } else if ($checkedOptionsButToggleAll.length < $allOptionsButToggleAll.length && isToggleAllChecked) {
-          this.$toggleAll.find('[type=checkbox]').prop('checked', false);
-        }
-      }
-    }, {
       key: "_toggleSelectedValue",
       value: function _toggleSelectedValue(optionIndex) {
-        var selectedValueIndex = this.valuesSelected.indexOf(optionIndex);
+        var selectedValueIndex = this.selectedOptionsIndexes.indexOf(optionIndex);
         var isSelected = selectedValueIndex !== -1;
 
         if (!isSelected) {
-          this.valuesSelected.push(optionIndex);
+          this.selectedOptionsIndexes.push(optionIndex);
         } else {
-          this.valuesSelected.splice(selectedValueIndex, 1);
+          this.selectedOptionsIndexes.splice(selectedValueIndex, 1);
         }
 
-        this.$materialOptionsList.find('li:not(.optgroup):not(.select-toggle-all)').eq(optionIndex).toggleClass('active');
-        this.$nativeSelect.find('option').eq(optionIndex).prop('selected', !isSelected);
+        this.view.$nativeSelect.find('option').eq(optionIndex).prop('selected', !isSelected);
 
         this._setValueToMaterialSelect();
 
         return !isSelected;
       }
     }, {
-      key: "_selectSingleOption",
-      value: function _selectSingleOption(newOption) {
-        this.$materialOptionsList.find('li.selected').removeClass('selected');
-
-        this._selectOption(newOption);
-      }
-    }, {
-      key: "_selectOption",
-      value: function _selectOption(newOption) {
-        var option = $(newOption);
-        option.addClass('selected');
-      }
-    }, {
       key: "_setValueToMaterialSelect",
       value: function _setValueToMaterialSelect() {
-        var _this6 = this;
+        var _this3 = this;
 
         var value = '';
-        var optionsSelected = 'options selected';
-        var itemsCount = this.valuesSelected.length;
+        var selectedValuesCount = this.selectedOptionsIndexes.length;
+        this.selectedOptionsIndexes.forEach(function (index) {
+          return value += ", ".concat(_this3.view.$nativeSelect.find('option').eq(index).text().replace(/  +/g, ' ').trim());
+        });
 
-        if (this.options.language.active && this.$toggleAll) {
-          if (this.options.language.pl) {
-            optionsSelected = this.options.language.pl.optionsSelected ? this.options.language.pl.optionsSelected : this.defaults.language.pl.optionsSelected;
-          } else if (this.options.language.fr) {
-            optionsSelected = this.options.language.fr.optionsSelected ? this.options.language.fr.optionsSelected : this.defaults.language.fr.optionsSelected;
-          } else if (this.options.language.ge) {
-            optionsSelected = this.options.language.ge.optionsSelected ? this.options.language.ge.optionsSelected : this.defaults.language.ge.optionsSelected;
-          } else if (this.options.language.ar) {
-            optionsSelected = this.options.language.ar.optionsSelected ? this.options.language.ar.optionsSelected : this.defaults.language.ar.optionsSelected;
-          } else if (this.options.language.in) {
-            optionsSelected = this.options.language.in.optionsSelected ? this.options.language.in.optionsSelected : this.defaults.language.in.optionsSelected;
-          }
+        if (this.options.maxSelectedOptions >= 0 && selectedValuesCount > this.options.maxSelectedOptions) {
+          value = "".concat(selectedValuesCount, " ").concat(this.options.labels.optionsSelected);
+        } else {
+          value = value.substring(2);
         }
 
-        this.valuesSelected.map(function (el) {
-          return value += ", ".concat(_this6.$nativeSelect.find('option').eq(el).text().replace(/  +/g, ' ').trim());
-        });
-        itemsCount >= 5 ? value = "".concat(itemsCount, " ").concat(optionsSelected) : value = value.substring(2);
-        value.length === 0 && this.mainLabel.length === 0 ? value = this.$nativeSelect.find('option:disabled').eq(0).text() : null;
-        value.length > 0 && !this.options.BSinputText ? this.mainLabel.addClass('active ') : this.mainLabel.removeClass('active');
-        this.options.BSinputText ? this.mainLabel.css('top', '-7px') : null;
-        this.$nativeSelect.siblings("".concat(this.options.BSinputText ? 'input.multi-bs-select' : 'input.select-dropdown')).val(value);
+        if (value.length === 0) {
+          value = this.view.$nativeSelect.find('option:disabled').eq(0).text();
+        }
+
+        this.view.$nativeSelect.siblings("".concat(this.options.defaultMaterialInput ? 'input.multi-bs-select' : 'input.select-dropdown')).val(value);
       }
     }, {
       key: "_randomUUID",
       value: function _randomUUID() {
         var d = new Date().getTime();
         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+          // eslint-disable-next-line no-bitwise
           var r = (d + Math.random() * 16) % 16 | 0;
-          d = Math.floor(d / 16);
+          d = Math.floor(d / 16); // eslint-disable-next-line no-bitwise
+
           return (c === 'x' ? r : r & 0x3 | 0x8).toString(16);
         });
+      }
+    }, {
+      key: "fallback",
+      value: function fallback() {
+        return {
+          _value: undefined,
+          or: function or(value) {
+            if (typeof value !== 'undefined' && typeof this._value === 'undefined') {
+              this._value = value;
+            }
+
+            return this;
+          },
+          value: function value() {
+            return this._value;
+          }
+        };
+      }
+    }, {
+      key: "isInitialized",
+      get: function get() {
+        return Boolean(this.view.$nativeSelect.data('select-id')) && this.view.$nativeSelect.hasClass('initialized');
       }
     }], [{
       key: "clearMutationObservers",
@@ -4141,14 +4617,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     return MaterialSelect;
   }();
 
-  $.fn.materialSelect = function (callback) {
+  $.fn.materialSelect = function (options) {
     $(this).not('.browser-default').not('.custom-select').each(function () {
-      var materialSelect = new MaterialSelect($(this), callback);
+      var materialSelect = new MaterialSelect($(this), options);
       materialSelect.init();
     });
   };
-
-  $.fn.material_select = $.fn.materialSelect;
 
   (function (originalVal) {
     $.fn.val = function (value) {
@@ -4169,14 +4643,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       return originalVal.call(this, value);
     };
   })($.fn.val);
-})(jQuery);
-
-$('select').siblings('input.select-dropdown', 'input.multi-bs-select').on('mousedown', function (e) {
-  if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-    if (e.clientX >= e.target.clientWidth || e.clientY >= e.target.clientHeight) {
-      e.preventDefault();
-    }
-  }
 });
 "use strict";
 
@@ -4642,30 +5108,68 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 "use strict";
 
-var toggler = document.getElementsByClassName("rotate");
-var i;
-
-for (i = 0; i < toggler.length; i++) {
-  toggler[i].addEventListener("click", function () {
-    this.parentElement.querySelector(".nested").classList.toggle("active");
-    this.classList.toggle("down");
-  });
-}
-
 (function ($) {
-  var $allPanels = $('.treeview-animated .nested').hide();
-  var $elements = $('.treeview-animated-element');
-  $('.closed').click(function () {
-    $this = $(this);
-    $target = $this.siblings('.treeview-animated .nested');
-    $pointer = $this.children('.treeview-animated .fa-angle-right');
-    $this.toggleClass('open');
-    $pointer.toggleClass('down');
-    !$target.hasClass('active') ? $target.addClass('active').slideDown() : $target.removeClass('active').slideUp();
-    return false;
-  });
-  $elements.click(function () {
-    $this = $(this);
-    $this.hasClass('opened') ? $this.removeClass('opened') : ($elements.removeClass('opened'), $this.addClass('opened'));
-  });
+  $.fn.mdbTreeview = function () {
+    var $this = $(this);
+
+    if ($this.hasClass('treeview')) {
+      var $toggler = $this.find('.rotate');
+      $.each($toggler, function (e) {
+        $($toggler[e]).off('click');
+        $($toggler[e]).on('click', function () {
+          var $this = $(this);
+          $this.siblings('.nested').toggleClass('active');
+          $this.toggleClass('down');
+        });
+      });
+    }
+
+    if ($this.hasClass('treeview-animated')) {
+      var $elements = $this.find('.treeview-animated-element');
+      var $closed = $this.find('.closed');
+      $this.find('.nested').hide();
+      $closed.off('click');
+      $closed.on('click', function () {
+        var $this = $(this);
+        var $target = $this.siblings('.nested');
+        var $pointer = $this.children('.fa-angle-right');
+        $this.toggleClass('open');
+        $pointer.toggleClass('down');
+        !$target.hasClass('active') ? $target.addClass('active').slideDown() : $target.removeClass('active').slideUp();
+        return false;
+      });
+      $elements.off('click');
+      $elements.on('click', function () {
+        var $this = $(this);
+        $this.hasClass('opened') ? $this.removeClass('opened') : ($elements.removeClass('opened'), $this.addClass('opened'));
+      });
+    }
+
+    if ($this.hasClass('treeview-colorful')) {
+      var _$elements = $this.find('.treeview-colorful-element');
+
+      var $header = $this.find('.treeview-colorful-items-header');
+      $this.find('.nested').hide();
+      $header.off('click');
+      $header.on('click', function () {
+        var $this = $(this);
+        var $target = $this.siblings('.nested');
+        var $pointerPlus = $this.children('.fa-plus-circle');
+        var $pointerMinus = $this.children('.fa-minus-circle');
+        $this.toggleClass('open');
+        $pointerPlus.removeClass('fa-plus-circle');
+        $pointerPlus.addClass('fa-minus-circle');
+        $pointerMinus.removeClass('fa-minus-circle');
+        $pointerMinus.addClass('fa-plus-circle');
+        !$target.hasClass('active') ? $target.addClass('active').slideDown() : $target.removeClass('active').slideUp();
+      });
+
+      _$elements.off('click');
+
+      _$elements.on('click', function () {
+        var $this = $(this);
+        $this.hasClass('opened') ? _$elements.removeClass('opened') : (_$elements.removeClass('opened'), $this.addClass('opened'));
+      });
+    }
+  };
 })(jQuery);
