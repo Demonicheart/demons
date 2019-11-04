@@ -1392,7 +1392,7 @@ footer .list-unstyled li > a {
 =========================================================*/
 .scrolltotop {
   cursor: pointer;
-  border: 1px solid #d32f2f;
+  border: 2px solid #d32f2f;
   padding: 8px 11px 10px;
   position: fixed;
   bottom: 1em;
@@ -1408,7 +1408,7 @@ footer .list-unstyled li > a {
   box-shadow: 0 5px 5px 0 rgba(64, 66, 72, 0.25); }
   .scrolltotop:hover {
     color: #1976d2 !important;
-    border: 1px solid #1976d2;
+    border: 2px solid #1976d2;
     opacity: 1;
     transition: all 250ms ease-in-out,opacity .2s linear; }
 
