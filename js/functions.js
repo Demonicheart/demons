@@ -39,8 +39,7 @@ a.stopOnHover&&e.hover(function(){window.clearInterval(k)},function(){k=setInter
 $(function () { $("#myModal").on("shown.bs.modal",function(){$("#myInput").focus()});});
 
 /* ==================  select  ================ */
-$(function () { $(".mdb-select").material_select()});
-
+$(function () { $(".mdb-select").materialSelect()});
 /* ==================  Toogle-Tooltip  ================ */
 $(function () { $('[data-toggle="tooltip"]').tooltip() });
 

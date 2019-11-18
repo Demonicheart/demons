@@ -1205,7 +1205,7 @@ ul.social-icons {
   background-color: #ff8585; }
 
 h1.method1 {
-  background: linear-gradient(right, red, #ff0);
+  background: linear-gradient(to left, red, #ff0);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent; }
 
