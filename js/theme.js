@@ -73,7 +73,7 @@ $(document).ready(function(){
   $(".year").html(a);a=new Date;document.getElementById("dateonly").innerHTML=" "+("0"+a.getDate()).slice(-2)+"."+("0"+(a.getMonth()+1)).slice(-2)+"."+a.getFullYear()+" ";a=new Date;document.getElementById("timeonly").innerHTML=" "+("0"+a.getHours()).slice(-2)+":"+("0"+a.getMinutes()).slice(-2)
 });
 /* =======================  lightbox  ======================== */
-$(function(){$("#mdb-lightbox-ui").load("https://cdn.jsdelivr.net/gh/demonicheart/demons@3/addons/ds-lightbox-ui.html")});
+$(function(){$("#mdb-lightbox-ui").load("https://cdn.jsdelivr.net/gh/demonicheart/demons@4/addons/ds-lightbox-ui.html")});
 /* ===================== contact - form ====================== */
 function validateForm() {
     // var x =  document.getElementById('name').value;
