@@ -575,7 +575,7 @@ h1, h2 {
     font-size: inherit;
     line-height: inherit; }
   .animbrand a:before, .animbrand a:after {
-    font-family: FontAwesome5; }
+    font-family: FontAwesome5;font-weight:400 }
   .animbrand a::before {
     margin-right: 3px;
     content: "\f104";
